@@ -1,10 +1,14 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Outlet } from "react-router-dom";
+import NavBar from "./customer/layouts/NavBar";
 
 function App() {
 	return (
-		<Box>
-			<Text fontSize="large">App</Text>
-		</Box>
+		<>
+			<NavBar />
+			<main>
+				<Outlet />
+			</main>
+		</>
 	);
 }
 
