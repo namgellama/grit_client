@@ -1,4 +1,5 @@
 import { apiSlice } from "../apiSlice";
+import { Category } from "../category/categoryApiSlice";
 import { PRODUCT_URL } from "../constants";
 
 export interface Product {
@@ -14,6 +15,7 @@ export interface Product {
 	createdAt: Date;
 	updateAt: Date;
 	categoryId: string;
+	category: Category;
 }
 
 export interface Color {
@@ -24,9 +26,9 @@ export interface Color {
 
 export const productApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		getProducts: builder.query<Product[], void>({
-			query: () => ({
-				url: PRODUCT_URL,
+		getProducts: builder.query<Product[], string>({
+			query: (categoryId) => ({
+				url: `${PRODUCT_URL}?categoryId=${categoryId}`,
 			}),
 			providesTags: ["Products"],
 		}),
