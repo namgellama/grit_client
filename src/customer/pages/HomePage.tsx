@@ -1,4 +1,5 @@
 import { useGetProductsQuery } from "../../app/product/productApiSlice";
+import CategoryList from "../components/CategoryList";
 import Hero from "../components/Hero";
 
 const HomePage = () => {
@@ -9,6 +10,7 @@ const HomePage = () => {
 	return (
 		<>
 			<Hero />
+			<CategoryList />
 		</>
 	);
 };

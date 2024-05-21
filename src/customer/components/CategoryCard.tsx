@@ -1,0 +1,31 @@
+import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import { Category } from "../../app/category/categoryApiSlice";
+import { Link } from "react-router-dom";
+
+const CategoryCard = ({ category }: { category: Category }) => {
+	return (
+		<Link to={`/categories/${category.id}`}>
+			<Card>
+				<CardBody padding={2}>
+					<Image
+						src={category.image}
+						alt={category.name}
+						width="280px"
+						height="330px"
+						objectFit="cover"
+					/>
+					<Heading
+						pt={2}
+						size="sm"
+						fontWeight="bold"
+						textAlign="center"
+					>
+						{category.name}
+					</Heading>
+				</CardBody>
+			</Card>
+		</Link>
+	);
+};
+
+export default CategoryCard;
