@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 const CategoryCard = ({ category }: { category: Category }) => {
 	return (
 		<Link to={`/categories/${category.id}`}>
-			<Card>
+			<Card
+				_hover={{ transform: "scale(1.01)" }}
+				transition={"transform 0.1s ease-out"}
+			>
 				<CardBody padding={2}>
 					<Image
 						src={category.image}
