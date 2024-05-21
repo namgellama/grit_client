@@ -9,19 +9,19 @@ import {
 	Skeleton,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
-import { useGetProductsQuery } from "../../app/product/productApiSlice";
+import { useGetCategoryQuery } from "../../app/category/categoryApiSlice";
 import ErrorMessage from "../../shared/ErrorMessage";
 
 const CategoryPage = () => {
 	const { id } = useParams();
-	const { data: products, isLoading, error } = useGetProductsQuery(id ?? "");
+	const { data: category, isLoading, error } = useGetCategoryQuery(id ?? "");
 
 	return (
 		<Container maxW="5xl" my={10}>
 			<Flex justifyContent="center">
 				<Skeleton isLoaded={!isLoading} width="300px">
 					<Heading size="lg" textAlign="center" fontFamily="semibold">
-						{products && products[0].category.name}
+						{category?.name}
 					</Heading>
 				</Skeleton>
 			</Flex>
@@ -33,7 +33,7 @@ const CategoryPage = () => {
 							: "Something went wrong"}
 					</ErrorMessage>
 				) : (
-					products?.map((product) => (
+					category?.products.map((product) => (
 						<Skeleton key={product.id} isLoaded={!isLoading}>
 							<Link to={`/categories/${product.id}`}>
 								<Card>
