@@ -7,6 +7,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import HomePage from "./customer/pages/HomePage.tsx";
 import { Provider } from "react-redux";
 import { store } from "./app/store.ts";
+import CategoryPage from "./customer/pages/CategoryPage.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
@@ -16,6 +17,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 					<Routes>
 						<Route path="/" element={<App />}>
 							<Route path="/" element={<HomePage />} />
+							<Route
+								path="/categories/:id"
+								element={<CategoryPage />}
+							/>
 						</Route>
 					</Routes>
 				</Router>

@@ -4,7 +4,7 @@ import { PRODUCT_URL } from "../constants";
 export interface Product {
 	id: string;
 	name: string;
-	color: JSON;
+	color: Color;
 	description: string;
 	image: string;
 	price: number;
@@ -14,6 +14,12 @@ export interface Product {
 	createdAt: Date;
 	updateAt: Date;
 	categoryId: string;
+}
+
+export interface Color {
+	hexColor: string;
+	colorName: string;
+	image: string;
 }
 
 export const productApiSlice = apiSlice.injectEndpoints({
