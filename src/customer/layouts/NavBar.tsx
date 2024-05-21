@@ -15,22 +15,26 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
 	return (
 		<nav>
-			<Box bg="white">
+			<Box bg="white" py={2}>
 				<Container maxW="7xl">
 					<HStack justify="space-between">
-						<HStack spacing={8}>
+						<HStack spacing={5} flex={1}>
 							<Link to="/men">
 								<Text fontWeight="semibold">Men</Text>
 							</Link>
 							<Link to="/women">
 								<Text fontWeight="semibold">Women</Text>
 							</Link>
-							<Link to="/unisex">
-								<Text fontWeight="semibold">Unisex</Text>
+							<Link to="/new">
+								<Text fontWeight="semibold">New Arrivals</Text>
 							</Link>
 						</HStack>
-						<Image src={logo} boxSize="60px" />
-						<HStack>
+						<HStack flex={1} justifyContent="center">
+							<Link to="/">
+								<Image src={logo} boxSize="40px" />
+							</Link>
+						</HStack>
+						<HStack flex={1} justifyContent="end">
 							<IconButton
 								aria-label="Search products"
 								icon={<IoSearch />}
