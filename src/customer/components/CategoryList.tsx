@@ -1,5 +1,6 @@
-import { Container, Heading, HStack } from "@chakra-ui/react";
+import { Container, Heading, HStack, Skeleton } from "@chakra-ui/react";
 import { useGetCategoriesQuery } from "../../app/category/categoryApiSlice";
+import ErrorMessage from "../../shared/ErrorMessage";
 import CategoryCard from "./CategoryCard";
 
 const CategoryList = () => {
@@ -7,17 +8,23 @@ const CategoryList = () => {
 
 	return (
 		<Container my="4rem" maxW="6xl">
-			<Heading size="lg" fontWeight="bold">
-				Shop by Category
-			</Heading>
+			<Skeleton isLoaded={!isLoading} width="300px">
+				<Heading
+					size="lg"
+					fontWeight="bold"
+					display={error ? "none" : "block"}
+				>
+					Shop by Category
+				</Heading>
+			</Skeleton>
 			<HStack spacing={10} mt={10}>
-				{isLoading ? (
-					<p>Loading...</p>
-				) : error ? (
-					<p>An error occurred</p>
+				{error ? (
+					<ErrorMessage>Something went wrong</ErrorMessage>
 				) : (
 					categories?.map((category) => (
-						<CategoryCard key={category.id} category={category} />
+						<Skeleton key={category.id} isLoaded={!isLoading}>
+							<CategoryCard category={category} />
+						</Skeleton>
 					))
 				)}
 			</HStack>
