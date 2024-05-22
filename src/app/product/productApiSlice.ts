@@ -5,7 +5,7 @@ import { PRODUCT_URL } from "../constants";
 export interface Product {
 	id: string;
 	name: string;
-	color: Color;
+	color: Color[];
 	description: string;
 	image: string;
 	price: number;
