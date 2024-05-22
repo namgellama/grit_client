@@ -1,13 +1,14 @@
-import { Container, Heading, HStack, Skeleton } from "@chakra-ui/react";
+import { Heading, HStack, Skeleton } from "@chakra-ui/react";
 import { useGetCategoriesQuery } from "../../app/category/categoryApiSlice";
 import ErrorMessage from "../../shared/ErrorMessage";
+import MyContainer from "../../shared/MyContainer";
 import CategoryCard from "./CategoryCard";
 
 const CategoryList = () => {
 	const { data: categories, isLoading, error } = useGetCategoriesQuery();
 
 	return (
-		<Container my="4rem" maxW="6xl">
+		<MyContainer>
 			<Skeleton isLoaded={!isLoading} width="300px">
 				<Heading
 					size="lg"
@@ -28,7 +29,7 @@ const CategoryList = () => {
 					))
 				)}
 			</HStack>
-		</Container>
+		</MyContainer>
 	);
 };
 
