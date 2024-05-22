@@ -3,10 +3,10 @@ import { Color } from "../../app/product/productApiSlice";
 
 interface Props {
 	color: Color;
-	setCurrentImage: (color: string) => void;
+	handleColorChange: (color: string) => void;
 }
 
-const ColorBox = ({ color, setCurrentImage }: Props) => {
+const ColorBox = ({ color, handleColorChange }: Props) => {
 	return (
 		<Tooltip key={color.hexColor} label={color.colorName}>
 			<Box
@@ -14,7 +14,7 @@ const ColorBox = ({ color, setCurrentImage }: Props) => {
 				h={3}
 				background={color.hexColor}
 				cursor="pointer"
-				onClick={() => setCurrentImage(color.image)}
+				onClick={() => handleColorChange(color.image)}
 			></Box>
 		</Tooltip>
 	);
