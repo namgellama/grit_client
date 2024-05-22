@@ -19,10 +19,10 @@ const NavBar = () => {
 				<Container maxW="7xl">
 					<HStack justify="space-between">
 						<HStack spacing={5} flex={1}>
-							<Link to="/men">
+							<Link to="/products?segment=MEN">
 								<Text fontWeight="semibold">Men</Text>
 							</Link>
-							<Link to="/women">
+							<Link to="/products?segment=WOMEN">
 								<Text fontWeight="semibold">Women</Text>
 							</Link>
 							<Link to="/new">

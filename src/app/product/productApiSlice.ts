@@ -24,12 +24,21 @@ export interface Color {
 	image: string;
 }
 
+interface QueryParams {
+	segment?: string;
+}
+
 export const productApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		getProducts: builder.query<Product[], void>({
-			query: () => ({
-				url: `${PRODUCT_URL}`,
-			}),
+		getProducts: builder.query<Product[], QueryParams>({
+			query: ({ segment }) => {
+				const params = new URLSearchParams();
+				if (segment) params.append("segment", segment.toUpperCase());
+
+				return {
+					url: `${PRODUCT_URL}?${params.toString()}`,
+				};
+			},
 			providesTags: ["Products"],
 		}),
 	}),
