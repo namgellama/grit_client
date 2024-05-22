@@ -1,14 +1,7 @@
-import {
-	Badge,
-	Box,
-	HStack,
-	Image,
-	Text,
-	Tooltip,
-	VStack,
-} from "@chakra-ui/react";
+import { Badge, Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { Product } from "../../app/product/productApiSlice";
+import ColorBox from "./ColorBox";
 
 const ProductCard = ({ product }: { product: Product }) => {
 	return (
@@ -36,10 +29,8 @@ const ProductCard = ({ product }: { product: Product }) => {
 					Rs. {product.price}
 				</Text>
 				<HStack>
-					{product.color.map((c) => (
-						<Tooltip key={c.hexColor} label={c.colorName}>
-							<Box w={3} h={3} background={c.hexColor}></Box>
-						</Tooltip>
+					{product.color.map((color) => (
+						<ColorBox key={color.hexColor} color={color} />
 					))}
 				</HStack>
 			</VStack>
