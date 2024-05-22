@@ -4,7 +4,12 @@ import { Link } from "react-router-dom";
 import { Product } from "../../app/product/productApiSlice";
 import ColorBox from "./ColorBox";
 
-const ProductCard = ({ product }: { product: Product }) => {
+interface Props {
+	product: Product;
+	categoryName?: string;
+}
+
+const ProductCard = ({ product, categoryName }: Props) => {
 	const [currentImage, setCurrentImage] = useState(product.color[0].image);
 	const [currentColorName, setCurrentColorName] = useState(
 		product.color[0].colorName
@@ -31,7 +36,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 				>
 					<Image
 						src={currentImage}
-						alt={product.name}
+						alt={product?.name}
 						w="280px"
 						h="330px"
 						objectFit="cover"
@@ -43,7 +48,9 @@ const ProductCard = ({ product }: { product: Product }) => {
 					<Text fontWeight="bold" fontSize="small">
 						{product.name.toUpperCase()}
 					</Text>
-					<Badge colorScheme="green">{product.category.name}</Badge>
+					<Badge colorScheme="green">
+						{product?.category?.name ?? categoryName}
+					</Badge>
 				</HStack>
 			</Link>
 

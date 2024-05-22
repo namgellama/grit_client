@@ -1,20 +1,13 @@
-import {
-	Card,
-	CardBody,
-	Container,
-	Flex,
-	Heading,
-	HStack,
-	Image,
-	Skeleton,
-} from "@chakra-ui/react";
-import { Link, useParams } from "react-router-dom";
+import { Container, Flex, Heading, HStack, Skeleton } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 import { useGetCategoryQuery } from "../../app/category/categoryApiSlice";
 import ErrorMessage from "../../shared/ErrorMessage";
+import ProductCard from "../components/ProductCard";
 
 const CategoryPage = () => {
 	const { id } = useParams();
 	const { data: category, isLoading, error } = useGetCategoryQuery(id ?? "");
+	const products = category?.products;
 
 	return (
 		<Container maxW="5xl" my={10}>
@@ -33,32 +26,12 @@ const CategoryPage = () => {
 							: "Something went wrong"}
 					</ErrorMessage>
 				) : (
-					category?.products.map((product) => (
+					products?.map((product) => (
 						<Skeleton key={product.id} isLoaded={!isLoading}>
-							<Link to={`/categories/${product.id}`}>
-								<Card>
-									<CardBody padding={2}>
-										<Image
-											src={
-												Object.values(product.color)[0]
-													.image
-											}
-											alt={product.name}
-											width="280px"
-											height="330px"
-											objectFit="cover"
-										/>
-										<Heading
-											pt={2}
-											size="sm"
-											fontWeight="bold"
-											textAlign="center"
-										>
-											{product.name}
-										</Heading>
-									</CardBody>
-								</Card>
-							</Link>
+							<ProductCard
+								product={product}
+								categoryName={category?.name}
+							/>
 						</Skeleton>
 					))
 				)}
