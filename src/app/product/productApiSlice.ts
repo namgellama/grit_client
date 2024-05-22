@@ -26,9 +26,9 @@ export interface Color {
 
 export const productApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		getProducts: builder.query<Product[], string>({
-			query: (categoryId) => ({
-				url: `${PRODUCT_URL}?categoryId=${categoryId}`,
+		getProducts: builder.query<Product[], void>({
+			query: () => ({
+				url: `${PRODUCT_URL}`,
 			}),
 			providesTags: ["Products"],
 		}),
