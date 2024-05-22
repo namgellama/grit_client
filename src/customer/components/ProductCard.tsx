@@ -6,10 +6,14 @@ import ColorBox from "./ColorBox";
 
 const ProductCard = ({ product }: { product: Product }) => {
 	const [currentImage, setCurrentImage] = useState(product.color[0].image);
+	const [currentColorName, setCurrentColorName] = useState(
+		product.color[0].colorName
+	);
 	const [isTransitioning, setIsTransitioning] = useState(false);
 
-	const handleColorChange = (image: string) => {
+	const handleColorChange = (image: string, colorName: string) => {
 		if (currentImage !== image) {
+			setCurrentColorName(colorName);
 			setIsTransitioning(true);
 			setTimeout(() => {
 				setCurrentImage(image);
@@ -52,6 +56,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 						<ColorBox
 							key={color.hexColor}
 							color={color}
+							currentColorName={currentColorName}
 							handleColorChange={handleColorChange}
 						/>
 					))}
