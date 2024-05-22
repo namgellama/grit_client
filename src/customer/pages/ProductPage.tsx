@@ -1,4 +1,4 @@
-import { Flex, Heading, Skeleton } from "@chakra-ui/react";
+import { Flex, Skeleton } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
 import { useGetProductsQuery } from "../../app/product/productApiSlice";
 import ErrorMessage from "../../shared/ErrorMessage";
@@ -17,9 +17,6 @@ const ProductPage = () => {
 
 	return (
 		<MyContainer>
-			<Heading size="md" fontWeight="semibold">
-				All Products
-			</Heading>
 			<Flex
 				flexWrap={"wrap"}
 				justifyContent="space-between"
