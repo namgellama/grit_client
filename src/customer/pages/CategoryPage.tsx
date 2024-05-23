@@ -1,8 +1,9 @@
-import { Container, Flex, Heading, HStack, Skeleton } from "@chakra-ui/react";
+import { Flex, Heading, Skeleton } from "@chakra-ui/react";
+import { SerializedError } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
 import { useGetCategoryQuery } from "../../app/category/categoryApiSlice";
-import ErrorMessage from "../../shared/ErrorMessage";
-import ProductCard from "../components/ProductCard";
+import MyContainer from "../../shared/MyContainer";
+import ProductList from "../components/ProductList";
 
 const CategoryPage = () => {
 	const { id } = useParams();
@@ -10,7 +11,7 @@ const CategoryPage = () => {
 	const products = category?.products;
 
 	return (
-		<Container maxW="5xl" my={10}>
+		<MyContainer>
 			<Flex justifyContent="center">
 				<Skeleton isLoaded={!isLoading} width="300px">
 					<Heading size="lg" textAlign="center" fontFamily="semibold">
@@ -18,25 +19,12 @@ const CategoryPage = () => {
 					</Heading>
 				</Skeleton>
 			</Flex>
-			<HStack gap={10} flexWrap="wrap" my={8}>
-				{error ? (
-					<ErrorMessage>
-						{"data" in error
-							? error.data.message
-							: "Something went wrong"}
-					</ErrorMessage>
-				) : (
-					products?.map((product) => (
-						<Skeleton key={product.id} isLoaded={!isLoading}>
-							<ProductCard
-								product={product}
-								categoryName={category?.name}
-							/>
-						</Skeleton>
-					))
-				)}
-			</HStack>
-		</Container>
+			<ProductList
+				products={products}
+				error={error as SerializedError | Error | undefined}
+				isLoading={isLoading}
+			/>
+		</MyContainer>
 	);
 };
 

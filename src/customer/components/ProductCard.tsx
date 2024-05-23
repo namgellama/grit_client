@@ -58,7 +58,7 @@ const ProductCard = ({ product, categoryName }: Props) => {
 				<Text fontWeight="semibold" fontSize="small">
 					Rs. {product.price}
 				</Text>
-				<HStack justifyContent="start">
+				<HStack justifyContent="start" spacing={3}>
 					{product.color.map((color) => (
 						<ColorBox
 							key={color.hexColor}

@@ -1,9 +1,8 @@
-import { Flex, Skeleton } from "@chakra-ui/react";
+import { SerializedError } from "@reduxjs/toolkit";
 import { useSearchParams } from "react-router-dom";
 import { useGetProductsQuery } from "../../app/product/productApiSlice";
-import ErrorMessage from "../../shared/ErrorMessage";
 import MyContainer from "../../shared/MyContainer";
-import ProductCard from "../components/ProductCard";
+import ProductList from "../components/ProductList";
 
 const ProductPage = () => {
 	const [searchParams] = useSearchParams();
@@ -17,22 +16,11 @@ const ProductPage = () => {
 
 	return (
 		<MyContainer>
-			<Flex
-				flexWrap={"wrap"}
-				justifyContent="space-between"
-				my={10}
-				gap={10}
-			>
-				{error ? (
-					<ErrorMessage>Something went wrong</ErrorMessage>
-				) : (
-					products?.map((product) => (
-						<Skeleton key={product.id} isLoaded={!isLoading}>
-							<ProductCard product={product} />
-						</Skeleton>
-					))
-				)}
-			</Flex>
+			<ProductList
+				products={products}
+				error={error as SerializedError | Error | undefined}
+				isLoading={isLoading}
+			/>
 		</MyContainer>
 	);
 };
