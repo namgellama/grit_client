@@ -13,11 +13,13 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { User } from "../../app/auth/authApiSlice";
+import { useLoginMutation, User } from "../../app/auth/authApiSlice";
 import logo from "../../assets/hero-img.png";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputErrorMessage from "../components/InputErrorMessage";
+import { useAppDispatch } from "../../app/hooks";
+import { setCredentials } from "../../app/auth/authSlice";
 
 const schema = z.object({
 	phoneNumber: z
@@ -37,9 +39,12 @@ const SignInPage = () => {
 	} = useForm<FormFields>({
 		resolver: zodResolver(schema),
 	});
+	const [login] = useLoginMutation();
+	const dispatch = useAppDispatch();
 
-	const onSubmit = (body: Partial<User>) => {
-		console.log(body);
+	const onSubmit = async (body: Partial<User>) => {
+		const data = await login(body).unwrap();
+		dispatch(setCredentials(data));
 	};
 
 	return (
