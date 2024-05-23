@@ -1,11 +1,11 @@
 import { Heading, Skeleton } from "@chakra-ui/react";
 import { SerializedError } from "@reduxjs/toolkit";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { ReactNode } from "react";
-import { Error } from "../../app/apiSlice";
 
 interface Props {
 	isLoading: boolean;
-	error: Error | SerializedError | undefined;
+	error: FetchBaseQueryError | SerializedError | undefined;
 	children: ReactNode;
 }
 

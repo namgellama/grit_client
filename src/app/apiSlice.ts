@@ -1,9 +1,4 @@
-import {
-	BaseQueryFn,
-	FetchArgs,
-	createApi,
-	fetchBaseQuery,
-} from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "./constants";
 
 export interface Error {
@@ -14,7 +9,7 @@ export interface Error {
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: BASE_URL,
-}) as unknown as BaseQueryFn<string | FetchArgs, unknown, Error, {}>;
+});
 
 export const apiSlice = createApi({
 	baseQuery,

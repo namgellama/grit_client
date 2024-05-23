@@ -45,20 +45,25 @@ const ProductCard = ({ product, categoryName }: Props) => {
 					/>
 				</Box>
 				<HStack justifyContent="space-between" w="100%" mt={4} px={1}>
-					<Text fontWeight="bold" fontSize="small">
-						{product.name.toUpperCase()}
+					<Text fontWeight="bold" fontSize="small" letterSpacing={1}>
+						{product.name}
 					</Text>
-					<Badge colorScheme="green">
+					<Badge
+						colorScheme="green"
+						fontSize="x-small"
+						letterSpacing={1}
+						textTransform="capitalize"
+					>
 						{product?.category?.name ?? categoryName}
 					</Badge>
 				</HStack>
 			</Link>
 
-			<VStack px={1} align="start">
-				<Text fontWeight="semibold" fontSize="small">
+			<VStack px={1} align="start" spacing={3.5}>
+				<Text fontWeight="semibold" fontSize="small" letterSpacing={1}>
 					Rs. {product.price}
 				</Text>
-				<HStack justifyContent="start" spacing={3}>
+				<HStack justifyContent="start" spacing={3} px={1}>
 					{product.color.map((color) => (
 						<ColorBox
 							key={color.hexColor}

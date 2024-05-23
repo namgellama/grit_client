@@ -1,12 +1,12 @@
 import { Flex, Skeleton } from "@chakra-ui/react";
 import { SerializedError } from "@reduxjs/toolkit";
-import { Error } from "../../app/apiSlice";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { Product } from "../../app/product/productApiSlice";
 import ErrorMessage from "../../shared/ErrorMessage";
 import ProductCard from "./ProductCard";
 
 interface Props {
-	error: Error | SerializedError | undefined;
+	error: FetchBaseQueryError | SerializedError | undefined;
 	products: Product[] | undefined;
 	isLoading: boolean;
 }
