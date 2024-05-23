@@ -10,7 +10,7 @@ import { FaShoppingBag } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ReactElement, JSXElementConstructor } from "react";
 
 const NavBar = () => {
@@ -34,14 +34,17 @@ const NavBar = () => {
 		{
 			icon: <IoSearch />,
 			label: "Search products",
+			link: "",
 		},
 		{
 			icon: <FaShoppingBag />,
 			label: "Shopping Bag",
+			link: "",
 		},
 		{
 			icon: <FaUser />,
 			label: "User",
+			link: "/login",
 		},
 	];
 
@@ -70,6 +73,7 @@ const NavBar = () => {
 									key={navIcon.label}
 									icon={navIcon.icon}
 									label={navIcon.label}
+									link={navIcon.link}
 								/>
 							))}
 						</HStack>
@@ -93,15 +97,22 @@ const NavLink = ({ path, name }: { path: string; name: string }) => (
 const NavIcon = ({
 	label,
 	icon,
+	link,
 }: {
 	label: string;
 	icon: ReactElement<any, string | JSXElementConstructor<any>>;
-}) => (
-	<IconButton
-		aria-label={label}
-		icon={icon}
-		variant="ghost"
-		borderRadius="100%"
-		_hover={{ background: "inherit" }}
-	/>
-);
+	link: string;
+}) => {
+	const navigate = useNavigate();
+
+	return (
+		<IconButton
+			aria-label={label}
+			icon={icon}
+			variant="ghost"
+			borderRadius="100%"
+			_hover={{ background: "inherit" }}
+			onClick={() => navigate(link)}
+		/>
+	);
+};
