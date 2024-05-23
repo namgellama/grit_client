@@ -17,6 +17,7 @@ import { User } from "../../app/auth/authApiSlice";
 import logo from "../../assets/hero-img.png";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import InputErrorMessage from "../components/InputErrorMessage";
 
 const schema = z.object({
 	phoneNumber: z
@@ -73,9 +74,9 @@ const SignInPage = () => {
 								{...register("phoneNumber")}
 							/>
 							{errors.phoneNumber && (
-								<Text as="p" color="red" mt={1}>
+								<InputErrorMessage>
 									{errors.phoneNumber.message}
-								</Text>
+								</InputErrorMessage>
 							)}
 						</FormControl>
 
@@ -89,9 +90,9 @@ const SignInPage = () => {
 								{...register("password")}
 							/>
 							{errors.password && (
-								<Text as="p" color="red" mt={1}>
+								<InputErrorMessage>
 									{errors.password.message}
-								</Text>
+								</InputErrorMessage>
 							)}
 						</FormControl>
 

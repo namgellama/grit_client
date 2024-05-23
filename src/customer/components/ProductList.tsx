@@ -2,7 +2,7 @@ import { Flex, Skeleton } from "@chakra-ui/react";
 import { SerializedError } from "@reduxjs/toolkit";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { Product } from "../../app/product/productApiSlice";
-import ErrorMessage from "../../shared/ErrorMessage";
+import ErrorMessage from "../../shared/components/ErrorMessage";
 import ProductCard from "./ProductCard";
 
 interface Props {

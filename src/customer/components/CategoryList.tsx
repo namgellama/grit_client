@@ -1,7 +1,7 @@
 import { HStack, Skeleton } from "@chakra-ui/react";
 import { useGetCategoriesQuery } from "../../app/category/categoryApiSlice";
-import ErrorMessage from "../../shared/ErrorMessage";
-import MyContainer from "../../shared/MyContainer";
+import ErrorMessage from "../../shared/components/ErrorMessage";
+import MyContainer from "../../shared/components/MyContainer";
 import CategoryCard from "./CategoryCard";
 import MyHeading from "./MyHeading";
 

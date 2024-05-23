@@ -10,7 +10,7 @@ import { store } from "./app/store.ts";
 import CategoryPage from "./customer/pages/CategoryPage.tsx";
 import ProductPage from "./customer/pages/ProductPage.tsx";
 import theme from "./theme.ts";
-import SignInPage from "./customer/pages/SignInPage.tsx";
+import SignInPage from "./shared/pages/SignInPage.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
