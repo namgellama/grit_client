@@ -1,8 +1,9 @@
-import { Flex, Heading, Skeleton } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { SerializedError } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
 import { useGetCategoryQuery } from "../../app/category/categoryApiSlice";
 import MyContainer from "../../shared/MyContainer";
+import MyHeading from "../components/MyHeading";
 import ProductList from "../components/ProductList";
 
 const CategoryPage = () => {
@@ -13,11 +14,9 @@ const CategoryPage = () => {
 	return (
 		<MyContainer>
 			<Flex justifyContent="center">
-				<Skeleton isLoaded={!isLoading} width="300px">
-					<Heading size="lg" textAlign="center" fontFamily="semibold">
-						{category?.name}
-					</Heading>
-				</Skeleton>
+				<MyHeading isLoading={isLoading} error={error}>
+					{category?.name}
+				</MyHeading>
 			</Flex>
 			<ProductList
 				products={products}
