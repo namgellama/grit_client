@@ -10,7 +10,7 @@ const CategoryList = () => {
 
 	return (
 		<MyContainer>
-			<MyHeading isLoading={isLoading} error={error}>
+			<MyHeading isLoading={isLoading} error={error} showCount={false}>
 				Shop by Category
 			</MyHeading>
 			<HStack spacing={10} mt={10}>

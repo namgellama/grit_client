@@ -14,7 +14,7 @@ interface Props {
 
 const ProductList = ({ error, products, isLoading, categoryName }: Props) => {
 	return (
-		<Flex flexWrap={"wrap"} justifyContent="space-between" my={10} gap={10}>
+		<Flex flexWrap={"wrap"} justifyContent="space-between" my={10} gap={20}>
 			{error ? (
 				<ErrorMessage>Something went wrong</ErrorMessage>
 			) : (

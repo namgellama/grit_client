@@ -1,4 +1,3 @@
-import { Flex } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useGetCategoryQuery } from "../../app/category/categoryApiSlice";
 import MyContainer from "../../shared/MyContainer";
@@ -12,11 +11,14 @@ const CategoryPage = () => {
 
 	return (
 		<MyContainer>
-			<Flex justifyContent="center">
-				<MyHeading isLoading={isLoading} error={error}>
-					{category?.name}
-				</MyHeading>
-			</Flex>
+			<MyHeading
+				isLoading={isLoading}
+				error={error}
+				count={products?.length}
+				showCount={true}
+			>
+				{category?.name}
+			</MyHeading>
 			<ProductList
 				products={products}
 				error={error}

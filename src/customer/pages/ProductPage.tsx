@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { useGetProductsQuery } from "../../app/product/productApiSlice";
 import MyContainer from "../../shared/MyContainer";
 import ProductList from "../components/ProductList";
+import MyHeading from "../components/MyHeading";
 
 const ProductPage = () => {
 	const [searchParams] = useSearchParams();
@@ -15,6 +16,14 @@ const ProductPage = () => {
 
 	return (
 		<MyContainer>
+			<MyHeading
+				isLoading={isLoading}
+				error={error}
+				count={products?.length}
+				showCount={true}
+			>
+				{segment ?? "All Products"}
+			</MyHeading>
 			<ProductList
 				products={products}
 				error={error}
