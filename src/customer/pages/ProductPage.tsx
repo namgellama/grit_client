@@ -7,12 +7,17 @@ import MyHeading from "../components/MyHeading";
 const ProductPage = () => {
 	const [searchParams] = useSearchParams();
 	const segment = searchParams.get("segment");
+	const ageStatus = searchParams.get("ageStatus");
+	const queryParams = {
+		segment: segment ?? undefined,
+		ageStatus: ageStatus ?? undefined,
+	};
 
 	const {
 		data: products,
 		isLoading,
 		error,
-	} = useGetProductsQuery({ segment: segment ?? undefined });
+	} = useGetProductsQuery(queryParams);
 
 	return (
 		<MyContainer>

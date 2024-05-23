@@ -1,3 +1,4 @@
+import { MdSegment } from "react-icons/md";
 import { apiSlice } from "../apiSlice";
 import { Category } from "../category/categoryApiSlice";
 import { PRODUCT_URL } from "../constants";
@@ -26,14 +27,16 @@ export interface Color {
 
 interface QueryParams {
 	segment?: string;
+	ageStatus?: string;
 }
 
 export const productApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getProducts: builder.query<Product[], QueryParams>({
-			query: ({ segment }) => {
+			query: ({ segment, ageStatus }) => {
 				const params = new URLSearchParams();
-				if (segment) params.append("segment", segment.toUpperCase());
+				if (segment) params.append("segment", segment);
+				if (ageStatus) params.append("ageStatus", ageStatus);
 
 				return {
 					url: `${PRODUCT_URL}?${params.toString()}`,

@@ -26,7 +26,7 @@ const NavBar = () => {
 		},
 		{
 			name: "New Arrivals",
-			path: "/products?segment=WOMEN",
+			path: "/products?ageStatus=New",
 		},
 	];
 
