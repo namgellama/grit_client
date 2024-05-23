@@ -1,7 +1,7 @@
 import { apiSlice } from "../apiSlice";
 import { AUTH_URL } from "../constants";
 
-interface User {
+export interface User {
 	id: string;
 	name: string;
 	email?: string;

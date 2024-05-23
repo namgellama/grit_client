@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Container,
 	FormControl,
@@ -7,14 +8,39 @@ import {
 	HStack,
 	Image,
 	Input,
-	VStack,
 	Text,
-	Box,
+	VStack,
 } from "@chakra-ui/react";
-import logo from "../../assets/hero-img.png";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { User } from "../../app/auth/authApiSlice";
+import logo from "../../assets/hero-img.png";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z.object({
+	phoneNumber: z
+		.string()
+		.min(1, "Phone number must be 10 digits.")
+		.max(10, "Phone number must be 10 digits."),
+	password: z.string().min(1, "Password is required."),
+});
+
+type FormFields = z.infer<typeof schema>;
 
 const SignInPage = () => {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+	} = useForm<FormFields>({
+		resolver: zodResolver(schema),
+	});
+
+	const onSubmit = (body: Partial<User>) => {
+		console.log(body);
+	};
+
 	return (
 		<HStack>
 			<Image src={logo} w="50%" h="100vh" objectFit="cover" />
@@ -31,7 +57,12 @@ const SignInPage = () => {
 							</Link>
 						</Text>
 					</Box>
-					<VStack as="form" spacing={7} w="100%">
+					<VStack
+						as="form"
+						spacing={7}
+						w="100%"
+						onSubmit={handleSubmit(onSubmit)}
+					>
 						<FormControl>
 							<FormLabel>Phone Number*</FormLabel>
 							<Input
@@ -39,7 +70,13 @@ const SignInPage = () => {
 								variant="filled"
 								background="white"
 								placeholder="Enter your phone number"
+								{...register("phoneNumber")}
 							/>
+							{errors.phoneNumber && (
+								<Text as="p" color="red" mt={1}>
+									{errors.phoneNumber.message}
+								</Text>
+							)}
 						</FormControl>
 
 						<FormControl>
@@ -49,10 +86,17 @@ const SignInPage = () => {
 								variant="filled"
 								background="white"
 								placeholder="Enter your password"
+								{...register("password")}
 							/>
+							{errors.password && (
+								<Text as="p" color="red" mt={1}>
+									{errors.password.message}
+								</Text>
+							)}
 						</FormControl>
 
 						<Button
+							type="submit"
 							variant="solid"
 							colorScheme="messenger"
 							w="full"
