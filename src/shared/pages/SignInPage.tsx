@@ -8,18 +8,21 @@ import {
 	HStack,
 	Image,
 	Input,
+	Spinner,
 	Text,
+	useToast,
 	VStack,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLoginMutation, User } from "../../app/auth/authApiSlice";
 import logo from "../../assets/hero-img.png";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputErrorMessage from "../components/InputErrorMessage";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setCredentials } from "../../app/auth/authSlice";
+import { useEffect } from "react";
 
 const schema = z.object({
 	phoneNumber: z
@@ -35,16 +38,47 @@ const SignInPage = () => {
 	const {
 		register,
 		handleSubmit,
+		setError,
 		formState: { errors, isSubmitting },
 	} = useForm<FormFields>({
 		resolver: zodResolver(schema),
 	});
 	const [login] = useLoginMutation();
 	const dispatch = useAppDispatch();
+	const { userInfo } = useAppSelector((state) => state.auth);
+	const navigate = useNavigate();
+	const toast = useToast();
+
+	const { search } = useLocation();
+	const sp = new URLSearchParams(search);
+	const redirect = sp.get("redirect") || "/";
+
+	useEffect(() => {
+		if (userInfo) {
+			navigate(redirect);
+		}
+	}, [userInfo, redirect, navigate]);
+
+	useEffect(() => {
+		if (errors.root?.message)
+			toast({
+				title: errors.root.message,
+				duration: 1200,
+				isClosable: true,
+				status: "error",
+				position: "top-right",
+			});
+	}, [errors.root]);
 
 	const onSubmit = async (body: Partial<User>) => {
-		const data = await login(body).unwrap();
-		dispatch(setCredentials(data));
+		try {
+			const data = await login(body).unwrap();
+			dispatch(setCredentials(data));
+		} catch (error) {
+			setError("root", {
+				message: "Invalid phone number or password",
+			});
+		}
 	};
 
 	return (
@@ -106,8 +140,9 @@ const SignInPage = () => {
 							variant="solid"
 							colorScheme="messenger"
 							w="full"
+							disabled={isSubmitting}
 						>
-							Sign In
+							{isSubmitting ? <Spinner /> : "Sign In"}
 						</Button>
 					</VStack>
 				</VStack>
