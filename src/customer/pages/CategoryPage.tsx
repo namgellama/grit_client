@@ -1,5 +1,4 @@
 import { Flex } from "@chakra-ui/react";
-import { SerializedError } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
 import { useGetCategoryQuery } from "../../app/category/categoryApiSlice";
 import MyContainer from "../../shared/MyContainer";
@@ -20,7 +19,7 @@ const CategoryPage = () => {
 			</Flex>
 			<ProductList
 				products={products}
-				error={error as SerializedError | Error | undefined}
+				error={error}
 				isLoading={isLoading}
 			/>
 		</MyContainer>
