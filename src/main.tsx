@@ -9,11 +9,12 @@ import { Provider } from "react-redux";
 import { store } from "./app/store.ts";
 import CategoryPage from "./customer/pages/CategoryPage.tsx";
 import ProductPage from "./customer/pages/ProductPage.tsx";
+import theme from "./theme.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<ChakraProvider>
+			<ChakraProvider theme={theme}>
 				<Router>
 					<Routes>
 						<Route path="/" element={<App />}>
