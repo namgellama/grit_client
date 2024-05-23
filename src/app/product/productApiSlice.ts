@@ -1,4 +1,3 @@
-import { MdSegment } from "react-icons/md";
 import { apiSlice } from "../apiSlice";
 import { Category } from "../category/categoryApiSlice";
 import { PRODUCT_URL } from "../constants";
