@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useLoginMutation, User } from "../../app/auth/authApiSlice";
-import { setCredentials } from "../../app/auth/authSlice";
+import { setUser } from "../../app/auth/authSlice";
 import { useAppDispatch } from "../../app/hooks";
 import { FormFields, loginSchema } from "../../validations/loginValidation";
 import InputErrorMessage from "./InputErrorMessage";
@@ -42,8 +42,8 @@ const SignInForm = () => {
 
 	const onSubmit = async (body: Partial<User>) => {
 		try {
-			const data = await login(body).unwrap();
-			dispatch(setCredentials(data));
+			const token = await login(body).unwrap();
+			dispatch(setUser(token));
 		} catch (error) {
 			setError("root", {
 				message: "Invalid phone number or password",

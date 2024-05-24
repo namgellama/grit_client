@@ -5,13 +5,17 @@ import {
 	IconButton,
 	Image,
 	Text,
+	useToast,
 } from "@chakra-ui/react";
+import { JSXElementConstructor, ReactElement } from "react";
 import { FaShoppingBag } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
-import logo from "../../assets/logo.png";
+import { MdLogout } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import { ReactElement, JSXElementConstructor } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import logo from "../../assets/logo.png";
+import { logout } from "../../app/auth/authSlice";
 
 const NavBar = () => {
 	const navLinks = [
@@ -30,23 +34,14 @@ const NavBar = () => {
 		},
 	];
 
-	const navIcons = [
-		{
-			icon: <IoSearch />,
-			label: "Search products",
-			link: "",
-		},
-		{
-			icon: <FaShoppingBag />,
-			label: "Shopping Bag",
-			link: "",
-		},
-		{
-			icon: <FaUser />,
-			label: "User",
-			link: "/login",
-		},
-	];
+	const { user } = useAppSelector((state) => state.auth);
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
+	const handleLogout = () => {
+		dispatch(logout());
+		navigate("/login");
+	};
 
 	return (
 		<nav>
@@ -68,14 +63,31 @@ const NavBar = () => {
 							</Link>
 						</HStack>
 						<HStack flex={1} justifyContent="end">
-							{navIcons.map((navIcon) => (
-								<NavIcon
-									key={navIcon.label}
-									icon={navIcon.icon}
-									label={navIcon.label}
-									link={navIcon.link}
+							<NavIcon
+								icon={<IoSearch />}
+								label="Search products"
+								link=""
+							/>
+							<NavIcon
+								icon={<FaShoppingBag />}
+								label="Shopping Bag"
+								link=""
+							/>
+							<NavIcon
+								icon={<FaUser />}
+								label="User"
+								link="/login"
+							/>
+							{user && (
+								<IconButton
+									aria-label="Logout"
+									icon={<MdLogout />}
+									variant="ghost"
+									borderRadius="100%"
+									_hover={{ background: "inherit" }}
+									onClick={handleLogout}
 								/>
-							))}
+							)}
 						</HStack>
 					</HStack>
 				</Container>

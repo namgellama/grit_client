@@ -1,13 +1,13 @@
 import { Container, HStack, Image, VStack } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import logo from "../../assets/hero-img.png";
 import SignInForm from "../components/SignInForm";
 import SignInHeader from "../components/SignInHeader";
 
 const SignInPage = () => {
-	const { userInfo } = useAppSelector((state) => state.auth);
+	const { user } = useAppSelector((state) => state.auth);
 	const navigate = useNavigate();
 
 	const { search } = useLocation();
@@ -15,10 +15,10 @@ const SignInPage = () => {
 	const redirect = sp.get("redirect") || "/";
 
 	useEffect(() => {
-		if (userInfo) {
+		if (user) {
 			navigate(redirect);
 		}
-	}, [userInfo, redirect, navigate]);
+	}, [user, redirect, navigate]);
 
 	return (
 		<HStack>
