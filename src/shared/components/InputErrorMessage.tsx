@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 const InputErrorMessage = ({ children }: { children: ReactNode }) => {
 	return (
-		<Text as="p" color="red" mt={1}>
+		<Text as="p" color="red" mt={2} fontSize="small">
 			{children}
 		</Text>
 	);

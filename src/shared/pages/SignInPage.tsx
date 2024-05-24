@@ -1,7 +1,7 @@
 import { Container, HStack, Image, VStack } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 import logo from "../../assets/hero-img.png";
 import SignInForm from "../components/SignInForm";
 import SignInHeader from "../components/SignInHeader";

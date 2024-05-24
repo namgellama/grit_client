@@ -3,13 +3,16 @@ import {
 	FormControl,
 	FormLabel,
 	Input,
+	InputGroup,
+	InputRightElement,
 	Spinner,
 	useToast,
 	VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useLoginMutation, User } from "../../app/auth/authApiSlice";
 import { setUser } from "../../app/auth/authSlice";
 import { useAppDispatch } from "../../app/hooks";
@@ -17,6 +20,8 @@ import { FormFields, loginSchema } from "../../validations/loginValidation";
 import InputErrorMessage from "./InputErrorMessage";
 
 const SignInForm = () => {
+	const [show, setShow] = useState(false);
+	const handleClick = () => setShow(!show);
 	const toast = useToast();
 	const {
 		register,
@@ -76,13 +81,18 @@ const SignInForm = () => {
 
 			<FormControl>
 				<FormLabel>Password*</FormLabel>
-				<Input
-					type="password"
-					variant="filled"
-					background="white"
-					placeholder="Enter your password"
-					{...register("password")}
-				/>
+				<InputGroup>
+					<Input
+						type={show ? "text" : "password"}
+						variant="filled"
+						background="white"
+						placeholder="Enter your password"
+						{...register("password")}
+					/>
+					<InputRightElement cursor="pointer" onClick={handleClick}>
+						{show ? <IoEyeOff /> : <IoEye />}
+					</InputRightElement>
+				</InputGroup>
 				{errors.password && (
 					<InputErrorMessage>
 						{errors.password.message}
