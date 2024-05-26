@@ -2,7 +2,7 @@ import { Badge, Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Product } from "../../app/product/productApiSlice";
-import ColorBox from "./ColorBox";
+import { ColorBox } from "..";
 
 interface Props {
 	product: Product;

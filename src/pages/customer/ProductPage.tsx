@@ -1,9 +1,7 @@
 import { Alert, AlertIcon, AlertTitle } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
 import { useGetProductsQuery } from "../../app/product/productApiSlice";
-import MyContainer from "../../shared/components/MyContainer";
-import MyHeading from "../components/MyHeading";
-import ProductList from "../components/ProductList";
+import { MyContainer, MyHeading, ProductList } from "../../components";
 
 const ProductPage = () => {
 	const [searchParams] = useSearchParams();

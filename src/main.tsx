@@ -5,12 +5,9 @@ import { Provider } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import App from "./App.tsx";
 import { store } from "./app/store.ts";
-import CategoryPage from "./customer/pages/CategoryPage.tsx";
-import HomePage from "./customer/pages/HomePage.tsx";
-import ProductPage from "./customer/pages/ProductPage.tsx";
 import "./index.css";
-import SignInPage from "./shared/pages/SignInPage.tsx";
-import SignUpPage from "./shared/pages/SignUpPage.tsx";
+import { CategoryPage, HomePage, SignInPage, SignUpPage } from "./pages";
+import ProductPage from "./pages/customer/ProductPage.tsx";
 import theme from "./theme.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

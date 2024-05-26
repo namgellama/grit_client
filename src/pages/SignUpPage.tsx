@@ -1,7 +1,6 @@
 import { Container, HStack, Image, VStack } from "@chakra-ui/react";
-import logo from "../../assets/hero-img.png";
-import SignUpForm from "../components/SignUpForm";
-import SignUpHeader from "../components/SignUpHeader";
+import logo from "../assets/hero-img.png";
+import { SignUpForm, SignUpHeader } from "../components";
 
 const SignUpPage = () => {
 	return (

@@ -5,7 +5,6 @@ import {
 	IconButton,
 	Image,
 	Text,
-	useToast,
 } from "@chakra-ui/react";
 import { JSXElementConstructor, ReactElement } from "react";
 import { FaShoppingBag } from "react-icons/fa";
@@ -13,9 +12,9 @@ import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../app/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import logo from "../../assets/logo.png";
-import { logout } from "../../app/auth/authSlice";
 
 const NavBar = () => {
 	const navLinks = [

@@ -1,8 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetCategoryQuery } from "../../app/category/categoryApiSlice";
-import MyContainer from "../../shared/components/MyContainer";
-import MyHeading from "../components/MyHeading";
-import ProductList from "../components/ProductList";
+import { MyContainer, MyHeading, ProductList } from "../../components";
 
 const CategoryPage = () => {
 	const { id } = useParams();

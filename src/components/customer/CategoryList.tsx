@@ -1,9 +1,6 @@
 import { HStack, Skeleton } from "@chakra-ui/react";
 import { useGetCategoriesQuery } from "../../app/category/categoryApiSlice";
-import ErrorMessage from "../../shared/components/ErrorMessage";
-import MyContainer from "../../shared/components/MyContainer";
-import CategoryCard from "./CategoryCard";
-import MyHeading from "./MyHeading";
+import { CategoryCard, ErrorMessage, MyContainer, MyHeading } from "..";
 
 const CategoryList = () => {
 	const { data: categories, isLoading, error } = useGetCategoriesQuery();

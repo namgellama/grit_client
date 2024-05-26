@@ -1,5 +1,4 @@
-import CategoryList from "../components/CategoryList";
-import Hero from "../components/Hero";
+import { Hero, CategoryList } from "../../components";
 
 const HomePage = () => {
 	return (
