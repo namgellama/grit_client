@@ -15,6 +15,14 @@ export interface CurrentUser extends User {
 	token: string;
 }
 
+export interface RegisterRequestDTO {
+	name: string;
+	phoneNumber: string;
+	email?: string;
+	password: string;
+	confirmPassword: string;
+}
+
 export const authApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		login: builder.mutation<CurrentUser, Partial<User>>({
@@ -24,7 +32,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				method: "POST",
 			}),
 		}),
+		register: builder.mutation<User, Partial<RegisterRequestDTO>>({
+			query: (data) => ({
+				url: `${AUTH_URL}/register`,
+				body: data,
+				method: "POST",
+			}),
+		}),
 	}),
 });
 
-export const { useLoginMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation } = authApiSlice;

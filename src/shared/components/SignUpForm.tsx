@@ -13,8 +13,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { useLoginMutation, User } from "../../app/auth/authApiSlice";
-import { useAppDispatch } from "../../app/hooks";
+import { useNavigate } from "react-router-dom";
+import {
+	RegisterRequestDTO,
+	useRegisterMutation,
+} from "../../app/auth/authApiSlice";
 import {
 	FormFields,
 	registerSchema,
@@ -36,8 +39,8 @@ const SignUpForm = () => {
 	} = useForm<FormFields>({
 		resolver: zodResolver(registerSchema),
 	});
-	const [login] = useLoginMutation();
-	const dispatch = useAppDispatch();
+	const [registerUser] = useRegisterMutation();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (errors.root?.message)
@@ -50,15 +53,33 @@ const SignUpForm = () => {
 			});
 	}, [errors.root]);
 
-	const onSubmit = (body: Partial<User>) => {
-		// try {
-		// 	const token = await login(body).unwrap();
-		// 	dispatch(setUser(token));
-		// } catch (error) {
-		// 	setError("root", {
-		// 		message: "Invalid phone number or password",
-		// 	});
-		// }
+	const onSubmit = async (body: Partial<RegisterRequestDTO>) => {
+		const { name, phoneNumber, email, password, confirmPassword } = body;
+
+		if (password !== confirmPassword) {
+			setError("password", {
+				message: "Passwords do not match",
+			});
+			setError("confirmPassword", {
+				message: "Passwords do not match",
+			});
+		}
+
+		try {
+			const userData = {
+				name,
+				phoneNumber,
+				email,
+				password,
+			};
+			const newUser = await registerUser(userData).unwrap();
+
+			if (newUser) navigate("/login");
+		} catch (err: any) {
+			setError("root", {
+				message: err.data.message ?? "Something went wrong.",
+			});
+		}
 	};
 
 	return (
