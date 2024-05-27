@@ -1,30 +1,34 @@
+import {
+	Box,
+	Button,
+	Divider,
+	Flex,
+	Heading,
+	HStack,
+	Image,
+	Skeleton,
+	Text,
+	VStack,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../../app/product/productApiSlice";
 import { ColorBox, ErrorMessage, MyContainer } from "../../components";
-import {
-	Box,
-	HStack,
-	Image,
-	VStack,
-	Text,
-	Flex,
-	Heading,
-	Divider,
-	Skeleton,
-	SkeletonText,
-	Button,
-} from "@chakra-ui/react";
-import { useState } from "react";
 
 const ProductDetailPage = () => {
 	const { id } = useParams();
 
 	const { data: product, isLoading, error } = useGetProductQuery(id ?? "");
 
-	const [currentImage, setCurrentImage] = useState(product?.color[0].image);
-	const [currentColorName, setCurrentColorName] = useState(
-		product?.color[0].colorName
-	);
+	const [currentImage, setCurrentImage] = useState("");
+	const [currentColorName, setCurrentColorName] = useState("");
+
+	useEffect(() => {
+		if (product) {
+			setCurrentImage(product.color[0].image);
+			setCurrentColorName(product.color[0].colorName);
+		}
+	}, [product]);
 
 	const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -98,7 +102,9 @@ const ProductDetailPage = () => {
 									<Flex
 										key={size}
 										border="1px solid"
-										borderColor="gray"
+										borderColor="black"
+										cursor="pointer"
+										_hover={{ borderColor: "gray" }}
 										justify="center"
 										align="center"
 										w="50px"
