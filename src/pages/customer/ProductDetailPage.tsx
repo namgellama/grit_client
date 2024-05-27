@@ -13,7 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../../app/product/productApiSlice";
-import { ColorBox, ErrorMessage, MyContainer } from "../../components";
+import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "../../components";
 
 const ProductDetailPage = () => {
 	const { id } = useParams();
@@ -78,12 +78,13 @@ const ProductDetailPage = () => {
 							<Text>
 								{product?.category.name} | {product?.segment}
 							</Text>
-							<Heading fontSize="x-large">
+							<Heading fontSize="x-large" letterSpacing={1}>
 								{product?.name}
 							</Heading>
 							<Text>Rs. {product?.price}</Text>
 						</VStack>
-						<Divider />
+
+						<Divider borderColor="darkgray" />
 
 						<HStack justifyContent="start" spacing={3} px={1}>
 							{product?.color.map((color) => (
@@ -95,34 +96,24 @@ const ProductDetailPage = () => {
 								/>
 							))}
 						</HStack>
-						<Divider />
+
+						<Divider borderColor="darkgray" />
 
 						<VStack align="start" spacing={5}>
 							<Text>Select a size</Text>
 							<HStack spacing={5}>
 								{product?.sizes.map((size) => (
-									<Flex
+									<SizeBox
 										key={size}
-										border={`2px solid ${
-											selectedSize === size
-												? "gray"
-												: "darkgrey"
-										}`}
-										cursor="pointer"
-										justify="center"
-										align="center"
-										w="50px"
-										h="40px"
-										borderRadius={5}
-										onClick={() => setSelectedSize(size)}
-									>
-										{size}
-									</Flex>
+										size={size}
+										selectedSize={selectedSize}
+										setSelectedSize={setSelectedSize}
+									/>
 								))}
 							</HStack>
 						</VStack>
 
-						<Divider />
+						<Divider borderColor="darkgray" />
 
 						<VStack align="start">
 							<Heading fontSize="x-large" letterSpacing={2}>
