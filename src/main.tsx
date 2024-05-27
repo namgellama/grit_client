@@ -6,7 +6,13 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import App from "./App.tsx";
 import { store } from "./app/store.ts";
 import "./index.css";
-import { CategoryPage, HomePage, SignInPage, SignUpPage } from "./pages";
+import {
+	CategoryPage,
+	HomePage,
+	ProductDetailPage,
+	SignInPage,
+	SignUpPage,
+} from "./pages";
 import ProductPage from "./pages/customer/ProductPage.tsx";
 import theme from "./theme.ts";
 
@@ -19,6 +25,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 						<Route path="/" element={<App />}>
 							<Route path="/" element={<HomePage />} />
 							<Route path="/products" element={<ProductPage />} />
+							<Route
+								path="/products/:id"
+								element={<ProductDetailPage />}
+							/>
 							<Route
 								path="/categories/:id"
 								element={<CategoryPage />}
