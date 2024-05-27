@@ -22,11 +22,13 @@ const ProductDetailPage = () => {
 
 	const [currentImage, setCurrentImage] = useState("");
 	const [currentColorName, setCurrentColorName] = useState("");
+	const [selectedSize, setSelectedSize] = useState("");
 
 	useEffect(() => {
 		if (product) {
 			setCurrentImage(product.color[0].image);
 			setCurrentColorName(product.color[0].colorName);
+			setSelectedSize(product.sizes[0]);
 		}
 	}, [product]);
 
@@ -97,19 +99,22 @@ const ProductDetailPage = () => {
 
 						<VStack align="start" spacing={5}>
 							<Text>Select a size</Text>
-							<HStack>
+							<HStack spacing={5}>
 								{product?.sizes.map((size) => (
 									<Flex
 										key={size}
-										border="1px solid"
-										borderColor="black"
+										border={`2px solid ${
+											selectedSize === size
+												? "gray"
+												: "darkgrey"
+										}`}
 										cursor="pointer"
-										_hover={{ borderColor: "gray" }}
 										justify="center"
 										align="center"
 										w="50px"
 										h="40px"
 										borderRadius={5}
+										onClick={() => setSelectedSize(size)}
 									>
 										{size}
 									</Flex>
