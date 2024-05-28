@@ -1,12 +1,15 @@
 import {
+	Badge,
 	Box,
 	Container,
+	Flex,
 	HStack,
 	IconButton,
 	Image,
 	Text,
 } from "@chakra-ui/react";
 import { JSXElementConstructor, ReactElement } from "react";
+import { useCookies } from "react-cookie";
 import { FaShoppingBag } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
@@ -36,6 +39,7 @@ const NavBar = () => {
 	const { user } = useAppSelector((state) => state.auth);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+	const [cookies] = useCookies(["bagItems"]);
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -67,11 +71,25 @@ const NavBar = () => {
 								label="Search products"
 								link=""
 							/>
-							<NavIcon
-								icon={<FaShoppingBag />}
-								label="Shopping Bag"
-								link=""
-							/>
+							<Flex position="relative">
+								{/* <FaShoppingBag /> */}
+								<NavIcon
+									icon={<FaShoppingBag />}
+									label="Shopping Bag"
+									link=""
+								/>
+								<Badge
+									position="absolute"
+									bottom={4}
+									left={6}
+									borderRadius={50}
+									bg="gold"
+									fontSize="xx-small"
+									as="span"
+								>
+									{cookies.bagItems.length}
+								</Badge>
+							</Flex>
 							<NavIcon
 								icon={<FaUser />}
 								label="User"
