@@ -11,6 +11,7 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../../app/product/productApiSlice";
 import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "../../components";
@@ -23,6 +24,8 @@ const ProductDetailPage = () => {
 	const [currentImage, setCurrentImage] = useState("");
 	const [currentColorName, setCurrentColorName] = useState("");
 	const [selectedSize, setSelectedSize] = useState("");
+	const [isTransitioning, setIsTransitioning] = useState(false);
+	const [cookies, setCookie] = useCookies(["bagItems"]);
 
 	useEffect(() => {
 		if (product) {
@@ -31,8 +34,6 @@ const ProductDetailPage = () => {
 			setSelectedSize(product.sizes[0]);
 		}
 	}, [product]);
-
-	const [isTransitioning, setIsTransitioning] = useState(false);
 
 	const handleColorChange = (image: string, colorName: string) => {
 		if (currentImage !== image) {
@@ -43,6 +44,19 @@ const ProductDetailPage = () => {
 				setIsTransitioning(false);
 			}, 200);
 		}
+	};
+
+	const handleAddToBag = () => {
+		const item = {
+			id,
+			name: product?.name,
+			price: product?.price,
+			size: selectedSize,
+			color: currentColorName,
+			quantity: 1,
+		};
+
+		setCookie("bagItems", [...cookies.bagItems, item]);
 	};
 
 	return (
@@ -124,7 +138,11 @@ const ProductDetailPage = () => {
 							</Text>
 						</VStack>
 
-						<Button w="100%" colorScheme="red">
+						<Button
+							w="100%"
+							colorScheme="red"
+							onClick={handleAddToBag}
+						>
 							Add to Bag
 						</Button>
 					</VStack>

@@ -1,5 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import React from "react";
+import { CookiesProvider } from "react-cookie";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
@@ -18,27 +19,32 @@ import theme from "./theme.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
-		<Provider store={store}>
-			<ChakraProvider theme={theme}>
-				<Router>
-					<Routes>
-						<Route path="/" element={<App />}>
-							<Route path="/" element={<HomePage />} />
-							<Route path="/products" element={<ProductPage />} />
-							<Route
-								path="/products/:id"
-								element={<ProductDetailPage />}
-							/>
-							<Route
-								path="/categories/:id"
-								element={<CategoryPage />}
-							/>
-						</Route>
-						<Route path="/login" element={<SignInPage />} />
-						<Route path="/register" element={<SignUpPage />} />
-					</Routes>
-				</Router>
-			</ChakraProvider>
-		</Provider>
+		<CookiesProvider>
+			<Provider store={store}>
+				<ChakraProvider theme={theme}>
+					<Router>
+						<Routes>
+							<Route path="/" element={<App />}>
+								<Route path="/" element={<HomePage />} />
+								<Route
+									path="/products"
+									element={<ProductPage />}
+								/>
+								<Route
+									path="/products/:id"
+									element={<ProductDetailPage />}
+								/>
+								<Route
+									path="/categories/:id"
+									element={<CategoryPage />}
+								/>
+							</Route>
+							<Route path="/login" element={<SignInPage />} />
+							<Route path="/register" element={<SignUpPage />} />
+						</Routes>
+					</Router>
+				</ChakraProvider>
+			</Provider>
+		</CookiesProvider>
 	</React.StrictMode>
 );
