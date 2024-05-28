@@ -1,24 +1,15 @@
 import {
 	Badge,
 	Box,
-	Button,
 	Container,
-	Drawer,
-	DrawerBody,
-	DrawerCloseButton,
-	DrawerContent,
-	DrawerFooter,
-	DrawerHeader,
-	DrawerOverlay,
 	Flex,
 	HStack,
 	IconButton,
 	Image,
-	Input,
 	Text,
 	useDisclosure,
 } from "@chakra-ui/react";
-import { JSXElementConstructor, ReactElement, useRef } from "react";
+import { JSXElementConstructor, LegacyRef, ReactElement, useRef } from "react";
 import { useCookies } from "react-cookie";
 import { FaShoppingBag } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
@@ -28,6 +19,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import logo from "../../assets/logo.png";
+import BagItemsDrawer from "./BagItemsDrawer";
 
 const NavBar = () => {
 	const navLinks = [
@@ -84,20 +76,12 @@ const NavBar = () => {
 								onClick={() => console.log("hello")}
 							/>
 							<Flex position="relative">
-								<IconButton
+								<NavIcon
 									ref={btnRef}
-									aria-label="Shopping Bag"
 									icon={<FaShoppingBag />}
-									variant="ghost"
-									borderRadius="100%"
-									_hover={{ background: "inherit" }}
+									label="Shopping Bag"
 									onClick={onOpen}
 								/>
-								{/* <NavIcon
-									icon={}
-									label="Shopping Bag"
-									onClick={onClose}
-								/> */}
 								<Badge
 									position="absolute"
 									bottom={4}
@@ -125,30 +109,11 @@ const NavBar = () => {
 						</HStack>
 					</HStack>
 				</Container>
-				<Drawer
+				<BagItemsDrawer
 					isOpen={isOpen}
-					placement="right"
 					onClose={onClose}
-					finalFocusRef={btnRef}
-					size="sm"
-				>
-					<DrawerOverlay />
-					<DrawerContent>
-						<DrawerCloseButton />
-						<DrawerHeader>Create your account</DrawerHeader>
-
-						<DrawerBody>
-							<Input placeholder="Type here..." />
-						</DrawerBody>
-
-						<DrawerFooter>
-							<Button variant="outline" mr={3} onClick={onClose}>
-								Cancel
-							</Button>
-							<Button colorScheme="blue">Save</Button>
-						</DrawerFooter>
-					</DrawerContent>
-				</Drawer>
+					btnRef={btnRef}
+				/>
 			</Box>
 		</nav>
 	);
@@ -165,16 +130,19 @@ const NavLink = ({ path, name }: { path: string; name: string }) => (
 );
 
 const NavIcon = ({
+	ref,
 	label,
 	icon,
 	onClick,
 }: {
+	ref?: LegacyRef<HTMLButtonElement>;
 	label: string;
 	icon: ReactElement<any, string | JSXElementConstructor<any>>;
 	onClick: any;
 }) => {
 	return (
 		<IconButton
+			ref={ref}
 			aria-label={label}
 			icon={icon}
 			variant="ghost"
