@@ -16,10 +16,11 @@ import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+import { BagItemsDrawer } from "..";
 import { logout } from "../../app/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import logo from "../../assets/logo.png";
-import BagItemsDrawer from "./BagItemsDrawer";
+import { BagItem } from "../../interfaces";
 
 const NavBar = () => {
 	const navLinks = [
@@ -41,7 +42,12 @@ const NavBar = () => {
 	const { user } = useAppSelector((state) => state.auth);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const [cookies] = useCookies(["bagItems"]);
+	const [cookies] = useCookies<
+		"bagItems",
+		{
+			bagItems?: BagItem[];
+		}
+	>(["bagItems"]);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -77,22 +83,25 @@ const NavBar = () => {
 							/>
 							<Flex position="relative">
 								<NavIcon
-									ref={btnRef}
+									reference={btnRef}
 									icon={<FaShoppingBag />}
 									label="Shopping Bag"
 									onClick={onOpen}
 								/>
-								<Badge
-									position="absolute"
-									bottom={4}
-									left={6}
-									borderRadius={50}
-									bg="gold"
-									fontSize="xx-small"
-									as="span"
-								>
-									{cookies.bagItems.length}
-								</Badge>
+
+								{cookies.bagItems?.length && (
+									<Badge
+										position="absolute"
+										bottom={4}
+										left={6}
+										borderRadius={50}
+										bg="gold"
+										fontSize="xx-small"
+										as="span"
+									>
+										{cookies.bagItems?.length}
+									</Badge>
+								)}
 							</Flex>
 							<NavLinkIcon
 								icon={<FaUser />}
@@ -130,19 +139,19 @@ const NavLink = ({ path, name }: { path: string; name: string }) => (
 );
 
 const NavIcon = ({
-	ref,
+	reference,
 	label,
 	icon,
 	onClick,
 }: {
-	ref?: LegacyRef<HTMLButtonElement>;
+	reference?: LegacyRef<HTMLButtonElement>;
 	label: string;
 	icon: ReactElement<any, string | JSXElementConstructor<any>>;
 	onClick: any;
 }) => {
 	return (
 		<IconButton
-			ref={ref}
+			ref={reference}
 			aria-label={label}
 			icon={icon}
 			variant="ghost"

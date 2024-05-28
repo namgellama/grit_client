@@ -15,6 +15,7 @@ import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../../app/product/productApiSlice";
 import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "../../components";
+import { BagItem } from "../../interfaces";
 
 const ProductDetailPage = () => {
 	const { id } = useParams();
@@ -25,7 +26,12 @@ const ProductDetailPage = () => {
 	const [currentColorName, setCurrentColorName] = useState("");
 	const [selectedSize, setSelectedSize] = useState("");
 	const [isTransitioning, setIsTransitioning] = useState(false);
-	const [cookies, setCookie] = useCookies(["bagItems"]);
+	const [cookies, setCookie] = useCookies<
+		"bagItems",
+		{
+			bagItems: BagItem[];
+		}
+	>(["bagItems"]);
 
 	useEffect(() => {
 		if (product) {
@@ -53,10 +59,24 @@ const ProductDetailPage = () => {
 			price: product?.price,
 			size: selectedSize,
 			color: currentColorName,
+			image: currentImage,
+			stock: product?.stock,
 			quantity: 1,
 		};
 
-		setCookie("bagItems", [...cookies.bagItems, item]);
+		let bagItems =
+			cookies.bagItems === undefined
+				? [item]
+				: cookies?.bagItems.find(
+						(x) =>
+							x.id === item.id &&
+							x.size === item.size &&
+							x.color === item.color
+				  )
+				? [...cookies.bagItems]
+				: [item, ...cookies.bagItems];
+
+		setCookie("bagItems", bagItems);
 	};
 
 	return (
