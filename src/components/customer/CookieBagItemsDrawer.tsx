@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { ChangeEvent, RefObject, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { useAppSelector } from "../../app/hooks";
 import { BagItem } from "../../interfaces";
 
 interface Props {
@@ -23,7 +24,8 @@ interface Props {
 	btnRef: RefObject<HTMLButtonElement>;
 }
 
-const BagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
+const CookieBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
+	const { user } = useAppSelector((state) => state.auth);
 	const [cookies, setCookie] = useCookies<
 		"bagItems",
 		{
@@ -35,7 +37,7 @@ const BagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 
 	useEffect(() => {
 		if (bagItems) setItems(bagItems);
-	}, [bagItems]);
+	}, [bagItems, user]);
 
 	const handleQuantity = (
 		bagItem: BagItem,
@@ -119,4 +121,4 @@ const BagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 	);
 };
 
-export default BagItemsDrawer;
+export default CookieBagItemsDrawer;

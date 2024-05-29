@@ -16,7 +16,7 @@ import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import { BagItemsDrawer } from "..";
+import { DBBagItemsDrawer, CookieBagItemsDrawer } from "..";
 import { logout } from "../../app/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import logo from "../../assets/logo.png";
@@ -118,11 +118,19 @@ const NavBar = () => {
 						</HStack>
 					</HStack>
 				</Container>
-				<BagItemsDrawer
-					isOpen={isOpen}
-					onClose={onClose}
-					btnRef={btnRef}
-				/>
+				{user ? (
+					<DBBagItemsDrawer
+						isOpen={isOpen}
+						onClose={onClose}
+						btnRef={btnRef}
+					/>
+				) : (
+					<CookieBagItemsDrawer
+						isOpen={isOpen}
+						onClose={onClose}
+						btnRef={btnRef}
+					/>
+				)}
 			</Box>
 		</nav>
 	);

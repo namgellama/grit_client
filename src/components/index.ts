@@ -1,4 +1,5 @@
-export { default as BagItemsDrawer } from "./customer/BagItemsDrawer";
+export { default as CookieBagItemsDrawer } from "./customer/CookieBagItemsDrawer";
+export { default as DBBagItemsDrawer } from "./customer/DBBagItemsDrawer";
 export { default as CategoryCard } from "./customer/CategoryCard";
 export { default as CategoryList } from "./customer/CategoryList";
 export { default as ColorBox } from "./customer/ColorBox";
