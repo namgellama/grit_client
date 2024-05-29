@@ -16,12 +16,14 @@ import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../../app/product/productApiSlice";
 import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "../../components";
 import { BagItem } from "../../interfaces";
+import { useCreateBagItemMutation } from "../../app/bagItem/bagItemApiSlice";
+import { useAppSelector } from "../../app/hooks";
 
 const ProductDetailPage = () => {
 	const { id } = useParams();
 
 	const { data: product, isLoading, error } = useGetProductQuery(id ?? "");
-
+	const { user } = useAppSelector((state) => state.auth);
 	const [currentImage, setCurrentImage] = useState("");
 	const [currentColorName, setCurrentColorName] = useState("");
 	const [selectedSize, setSelectedSize] = useState("");
@@ -32,6 +34,8 @@ const ProductDetailPage = () => {
 			bagItems: BagItem[];
 		}
 	>(["bagItems"]);
+
+	const [addToBag] = useCreateBagItemMutation();
 
 	useEffect(() => {
 		if (product) {
@@ -54,29 +58,37 @@ const ProductDetailPage = () => {
 
 	const handleAddToBag = () => {
 		const item = {
-			id,
-			name: product?.name,
-			price: product?.price,
+			productId: product?.id,
+			unitPrice: product?.price,
 			size: selectedSize,
 			color: currentColorName,
-			image: currentImage,
-			stock: product?.stock,
+			// image: currentImage,
+			// stock: product?.stock,
 			quantity: 1,
+			unitTotalPrice: product?.price,
 		};
 
-		let bagItems =
-			cookies.bagItems === undefined
-				? [item]
-				: cookies?.bagItems.find(
-						(x) =>
-							x.id === item.id &&
-							x.size === item.size &&
-							x.color === item.color
-				  )
-				? [...cookies.bagItems]
-				: [item, ...cookies.bagItems];
+		if (user) {
+			const data = addToBag({
+				data: item,
+				token: user?.token ?? "",
+			}).unwrap();
+			console.log(data);
+		} else {
+			let bagItems =
+				cookies.bagItems === undefined
+					? [item]
+					: cookies?.bagItems.find(
+							(x) =>
+								x.id === item.productId &&
+								x.size === item.size &&
+								x.color === item.color
+					  )
+					? [...cookies.bagItems]
+					: [item, ...cookies.bagItems];
 
-		setCookie("bagItems", bagItems);
+			setCookie("bagItems", bagItems);
+		}
 	};
 
 	return (

@@ -6,6 +6,8 @@ export interface BagItem {
 	productId: string;
 	userId: string;
 	unitPrice: number;
+	quantity: number;
+	unitTotalPrice: number;
 	size: string;
 	color: string;
 	createdAt: Date;
@@ -14,7 +16,7 @@ export interface BagItem {
 
 export const bagItemApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		createCategory: builder.mutation<
+		createBagItem: builder.mutation<
 			BagItem,
 			{ data: Partial<BagItem>; token: string }
 		>({
@@ -30,4 +32,4 @@ export const bagItemApiSlice = apiSlice.injectEndpoints({
 	}),
 });
 
-export const { useCreateCategoryMutation } = bagItemApiSlice;
+export const { useCreateBagItemMutation } = bagItemApiSlice;
