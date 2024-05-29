@@ -57,30 +57,38 @@ const ProductDetailPage = () => {
 	};
 
 	const handleAddToBag = () => {
-		const item = {
-			productId: product?.id,
-			unitPrice: product?.price,
-			size: selectedSize,
-			color: currentColorName,
-			// image: currentImage,
-			// stock: product?.stock,
-			quantity: 1,
-			unitTotalPrice: product?.price,
-		};
-
 		if (user) {
+			const item = {
+				productId: product?.id,
+				unitPrice: product?.price,
+				size: selectedSize,
+				color: currentColorName,
+
+				quantity: 1,
+				unitTotalPrice: product?.price,
+			};
+
 			const data = addToBag({
 				data: item,
 				token: user?.token ?? "",
 			}).unwrap();
-			console.log(data);
 		} else {
+			const item = {
+				id,
+				price: product?.price,
+				size: selectedSize,
+				color: currentColorName,
+				image: currentImage,
+				stock: product?.stock,
+				quantity: 1,
+			};
+
 			let bagItems =
 				cookies.bagItems === undefined
 					? [item]
 					: cookies?.bagItems.find(
 							(x) =>
-								x.id === item.productId &&
+								x.id === item.id &&
 								x.size === item.size &&
 								x.color === item.color
 					  )

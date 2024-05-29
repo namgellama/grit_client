@@ -16,8 +16,9 @@ import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import { DBBagItemsDrawer, CookieBagItemsDrawer } from "..";
+import { CookieBagItemsDrawer, DBBagItemsDrawer } from "..";
 import { logout } from "../../app/auth/authSlice";
+import { useGetBagItemsQuery } from "../../app/bagItem/bagItemApiSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import logo from "../../assets/logo.png";
 import { BagItem } from "../../interfaces";
@@ -50,6 +51,9 @@ const NavBar = () => {
 	>(["bagItems"]);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const btnRef = useRef<HTMLButtonElement>(null);
+	const { data: dbBagItems } = useGetBagItemsQuery(user?.token ?? "", {
+		skip: user === null,
+	});
 
 	const handleLogout = () => {
 		dispatch(logout());
@@ -100,6 +104,20 @@ const NavBar = () => {
 										as="span"
 									>
 										{cookies.bagItems?.length}
+									</Badge>
+								)}
+
+								{dbBagItems?.length && (
+									<Badge
+										position="absolute"
+										bottom={4}
+										left={6}
+										borderRadius={50}
+										bg="gold"
+										fontSize="xx-small"
+										as="span"
+									>
+										{dbBagItems?.length}
 									</Badge>
 								)}
 							</Flex>
