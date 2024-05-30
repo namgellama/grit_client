@@ -17,6 +17,7 @@ import { ChangeEvent, RefObject, useEffect, useState } from "react";
 import {
 	BagItem,
 	useGetBagItemsQuery,
+	useUpdateBagItemMutation,
 } from "../../app/bagItem/bagItemApiSlice";
 import { useAppSelector } from "../../app/hooks";
 
@@ -31,6 +32,7 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 
 	const [items, setItems] = useState<BagItem[]>([]);
 	const { data: bagItems } = useGetBagItemsQuery(user?.token ?? "");
+	const [updateBagItem] = useUpdateBagItemMutation();
 
 	useEffect(() => {
 		if (user && bagItems) {
@@ -44,14 +46,19 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 	) => {
 		const newQuantity = Number(e.target.value);
 
-		const updatedItems = items.map((item) =>
-			item.id === bagItem.id &&
-			item.size === bagItem.size &&
-			item.color === bagItem.color
-				? { ...item, quantity: newQuantity }
-				: item
+		setItems((prevItems) =>
+			prevItems.map((item) =>
+				item.id === bagItem.id
+					? { ...item, quantity: newQuantity }
+					: item
+			)
 		);
-		setItems(updatedItems);
+
+		updateBagItem({
+			id: bagItem.id,
+			data: { quantity: newQuantity },
+			token: user?.token ?? "",
+		});
 	};
 
 	return (
@@ -68,8 +75,8 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 				<DrawerHeader>Create your account</DrawerHeader>
 
 				<DrawerBody>
-					{items?.map((bagItem, index) => (
-						<Flex key={index} my={5} gap={5}>
+					{items?.map((bagItem) => (
+						<Flex key={bagItem.id} my={5} gap={5}>
 							<Image
 								w="120px"
 								h="150px"

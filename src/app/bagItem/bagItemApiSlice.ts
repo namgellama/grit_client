@@ -39,8 +39,24 @@ export const bagItemApiSlice = apiSlice.injectEndpoints({
 				},
 			}),
 		}),
+		updateBagItem: builder.mutation<
+			BagItem,
+			{ id: string; data: Partial<BagItem>; token: string }
+		>({
+			query: ({ id, data, token }) => ({
+				url: `${BAG_ITEM_URL}/${id}`,
+				body: data,
+				method: "PATCH",
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}),
+		}),
 	}),
 });
 
-export const { useGetBagItemsQuery, useCreateBagItemMutation } =
-	bagItemApiSlice;
+export const {
+	useGetBagItemsQuery,
+	useCreateBagItemMutation,
+	useUpdateBagItemMutation,
+} = bagItemApiSlice;
