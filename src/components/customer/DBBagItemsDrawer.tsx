@@ -16,7 +16,8 @@ import {
 	Text,
 	useToast,
 } from "@chakra-ui/react";
-import { ChangeEvent, RefObject, useEffect, useState } from "react";
+import { ChangeEvent, RefObject } from "react";
+import { MdDelete } from "react-icons/md";
 import {
 	BagItem,
 	useDeleteBagItemMutation,
@@ -24,7 +25,6 @@ import {
 	useUpdateBagItemMutation,
 } from "../../app/bagItem/bagItemApiSlice";
 import { useAppSelector } from "../../app/hooks";
-import { MdDelete } from "react-icons/md";
 
 interface Props {
 	isOpen: boolean;
@@ -35,16 +35,9 @@ interface Props {
 const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 	const { user } = useAppSelector((state) => state.auth);
 	const toast = useToast();
-	const [items, setItems] = useState<BagItem[]>([]);
 	const { data: bagItems } = useGetBagItemsQuery(user?.token ?? "");
 	const [updateBagItem] = useUpdateBagItemMutation();
 	const [deleteBagItem] = useDeleteBagItemMutation();
-
-	useEffect(() => {
-		if (user && bagItems) {
-			setItems(bagItems);
-		}
-	}, [bagItems, user]);
 
 	const handleQuantity = async (
 		bagItem: BagItem,
@@ -58,14 +51,6 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 				data: { quantity: newQuantity },
 				token: user?.token ?? "",
 			}).unwrap();
-
-			setItems((prevItems) =>
-				prevItems.map((item) =>
-					item.id === bagItem.id
-						? { ...item, quantity: newQuantity }
-						: item
-				)
-			);
 		} catch (error: any) {
 			toast({
 				title: error.data.message,
@@ -80,7 +65,6 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 	const handleDeleteBagItem = async (id: string) => {
 		try {
 			await deleteBagItem({ id, token: user?.token ?? "" }).unwrap();
-			setItems((prevItems) => prevItems.filter((item) => item.id !== id));
 		} catch (error: any) {
 			toast({
 				title: error.data.message,
@@ -112,7 +96,7 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 				</DrawerHeader>
 
 				<DrawerBody>
-					{items?.map((bagItem) => (
+					{bagItems?.map((bagItem) => (
 						<Flex key={bagItem.id} my={5} gap={5}>
 							<Image
 								w="100px"
