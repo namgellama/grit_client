@@ -25,6 +25,7 @@ export const bagItemApiSlice = apiSlice.injectEndpoints({
 					Authorization: `Bearer ${token}`,
 				},
 			}),
+			providesTags: ["BagItems"],
 		}),
 		createBagItem: builder.mutation<
 			BagItem,
@@ -38,6 +39,7 @@ export const bagItemApiSlice = apiSlice.injectEndpoints({
 					Authorization: `Bearer ${token}`,
 				},
 			}),
+			invalidatesTags: ["BagItems"],
 		}),
 		updateBagItem: builder.mutation<
 			BagItem,
@@ -51,6 +53,7 @@ export const bagItemApiSlice = apiSlice.injectEndpoints({
 					Authorization: `Bearer ${token}`,
 				},
 			}),
+			invalidatesTags: ["BagItems"],
 		}),
 		deleteBagItem: builder.mutation<null, { id: string; token: string }>({
 			query: ({ id, token }) => ({
@@ -60,6 +63,7 @@ export const bagItemApiSlice = apiSlice.injectEndpoints({
 					Authorization: `Bearer ${token}`,
 				},
 			}),
+			invalidatesTags: ["BagItems"],
 		}),
 	}),
 });
