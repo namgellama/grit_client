@@ -8,20 +8,21 @@ import {
 	Image,
 	Skeleton,
 	Text,
+	useToast,
 	VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
+import { useCreateBagItemMutation } from "../../app/bagItem/bagItemApiSlice";
+import { useAppSelector } from "../../app/hooks";
 import { useGetProductQuery } from "../../app/product/productApiSlice";
 import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "../../components";
 import { BagItem } from "../../interfaces";
-import { useCreateBagItemMutation } from "../../app/bagItem/bagItemApiSlice";
-import { useAppSelector } from "../../app/hooks";
 
 const ProductDetailPage = () => {
 	const { id } = useParams();
-
+	const toast = useToast();
 	const { data: product, isLoading, error } = useGetProductQuery(id ?? "");
 	const { user } = useAppSelector((state) => state.auth);
 	const [currentImage, setCurrentImage] = useState("");
@@ -56,7 +57,7 @@ const ProductDetailPage = () => {
 		}
 	};
 
-	const handleAddToBag = () => {
+	const handleAddToBag = async () => {
 		if (user) {
 			const item = {
 				productId: product?.id,
@@ -68,10 +69,20 @@ const ProductDetailPage = () => {
 				unitTotalPrice: product?.price,
 			};
 
-			const data = addToBag({
-				data: item,
-				token: user?.token ?? "",
-			}).unwrap();
+			try {
+				await addToBag({
+					data: item,
+					token: user?.token ?? "",
+				}).unwrap();
+			} catch (error: any) {
+				toast({
+					title: "Something went wrong",
+					duration: 1200,
+					isClosable: true,
+					status: "error",
+					position: "top",
+				});
+			}
 		} else {
 			const item = {
 				id,
