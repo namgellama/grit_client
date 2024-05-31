@@ -14,7 +14,11 @@ import {
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
-import { useCreateBagItemMutation } from "../../app/bagItem/bagItemApiSlice";
+import {
+	useCreateBagItemMutation,
+	useGetBagItemsQuery,
+	useUpdateBagItemMutation,
+} from "../../app/bagItem/bagItemApiSlice";
 import { useAppSelector } from "../../app/hooks";
 import { useGetProductQuery } from "../../app/product/productApiSlice";
 import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "../../components";
@@ -35,8 +39,9 @@ const ProductDetailPage = () => {
 			bagItems: BagItem[];
 		}
 	>(["bagItems"]);
-
+	const { data: bagItems } = useGetBagItemsQuery(user?.token ?? "");
 	const [addToBag] = useCreateBagItemMutation();
+	const [updateBag] = useUpdateBagItemMutation();
 
 	useEffect(() => {
 		if (product) {
@@ -64,16 +69,34 @@ const ProductDetailPage = () => {
 				unitPrice: product?.price,
 				size: selectedSize,
 				color: currentColorName,
-
 				quantity: 1,
 				unitTotalPrice: product?.price,
 			};
 
 			try {
-				await addToBag({
-					data: item,
-					token: user?.token ?? "",
-				}).unwrap();
+				const bagItem = bagItems?.find(
+					(bagItem) =>
+						bagItem.productId === item.productId &&
+						bagItem.size === item.size &&
+						bagItem.color === item.color
+				);
+
+				if (bagItem) {
+					await updateBag({
+						id: bagItem.id,
+						data: {
+							quantity: bagItem.quantity + 1,
+							unitTotalPrice:
+								bagItem.unitPrice * (bagItem.quantity + 1),
+						},
+						token: user?.token ?? "",
+					}).unwrap();
+				} else {
+					await addToBag({
+						data: item,
+						token: user?.token ?? "",
+					}).unwrap();
+				}
 			} catch (error: any) {
 				toast({
 					title: "Something went wrong",
