@@ -48,7 +48,10 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 		try {
 			await updateBagItem({
 				id: bagItem.id,
-				data: { quantity: newQuantity },
+				data: {
+					quantity: newQuantity,
+					unitTotalPrice: bagItem.unitPrice * newQuantity,
+				},
 				token: user?.token ?? "",
 			}).unwrap();
 		} catch (error: any) {
@@ -96,71 +99,101 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 				</DrawerHeader>
 
 				<DrawerBody>
-					{bagItems?.map((bagItem) => (
-						<Flex key={bagItem.id} my={5} gap={5}>
-							<Image
-								w="100px"
-								h="140px"
-								objectFit="cover"
-								src={bagItem.product.color[0].image}
-							/>
-							<Flex
-								direction="column"
-								justify="space-between"
-								w="100%"
-							>
-								<Box>
-									<Text fontSize="small">
-										{bagItem.product.name}
-									</Text>
-									<Text fontSize="small">
-										{bagItem.color} | {bagItem.size}
-									</Text>
-									<Text
-										fontSize="small"
-										fontWeight="semibold"
-									>
-										Rs. {bagItem.unitPrice}
-									</Text>
-								</Box>
-								<HStack pb={3} justify="space-between">
-									<Select
-										value={bagItem.quantity}
-										onChange={(e) =>
-											handleQuantity(bagItem, e)
-										}
-										size="sm"
-										w="70px"
-									>
-										{[
-											...Array(
-												bagItem.product.stock
-											).keys(),
-										].map((x) => (
-											<option key={x + 1} value={x + 1}>
-												{x + 1}
-											</option>
-										))}
-									</Select>
-									<IconButton
-										aria-label="Delete item"
-										isRound={true}
-										icon={<MdDelete />}
-										onClick={() =>
-											handleDeleteBagItem(bagItem.id)
-										}
+					<Flex direction="column" h="100%" justify="space-between">
+						<Flex
+							className="drawer"
+							direction="column"
+							gap={10}
+							pr={5}
+							h="100%"
+							overflowY="scroll"
+						>
+							{bagItems?.map((bagItem) => (
+								<Flex key={bagItem.id} gap={5}>
+									<Image
+										w="160px"
+										h="140px"
+										objectFit="cover"
+										src={bagItem.product.color[0].image}
 									/>
-								</HStack>
-							</Flex>
+									<Flex
+										direction="column"
+										justify="space-between"
+										w="100%"
+									>
+										<Box>
+											<Text fontSize="small">
+												{bagItem.product.name}
+											</Text>
+											<Text fontSize="small">
+												{bagItem.color} | {bagItem.size}
+											</Text>
+											<Text
+												fontSize="small"
+												fontWeight="semibold"
+											>
+												Rs. {bagItem.unitPrice}
+											</Text>
+										</Box>
+										<HStack pb={3} justify="space-between">
+											<Select
+												value={bagItem.quantity}
+												onChange={(e) =>
+													handleQuantity(bagItem, e)
+												}
+												size="sm"
+												w="70px"
+											>
+												{[
+													...Array(
+														bagItem.product.stock
+													).keys(),
+												].map((x) => (
+													<option
+														key={x + 1}
+														value={x + 1}
+													>
+														{x + 1}
+													</option>
+												))}
+											</Select>
+											<IconButton
+												aria-label="Delete item"
+												isRound={true}
+												icon={<MdDelete />}
+												onClick={() =>
+													handleDeleteBagItem(
+														bagItem.id
+													)
+												}
+											/>
+										</HStack>
+									</Flex>
+								</Flex>
+							))}
 						</Flex>
-					))}
+						<Box pt={5}>
+							<HStack justify="space-between">
+								<Text fontSize="small" fontWeight="semibold">
+									Total
+								</Text>
+								<Text fontSize="small" fontWeight="semibold">
+									Rs.{" "}
+									{bagItems?.reduce(
+										(acc, curr) =>
+											(acc += curr.unitTotalPrice),
+										0
+									)}
+								</Text>
+							</HStack>
+						</Box>
+					</Flex>
 				</DrawerBody>
 
 				<DrawerFooter>
-					<Button variant="outline" mr={3} onClick={onClose}>
-						Cancel
+					<Button colorScheme="blue" w="100%">
+						Checkout
 					</Button>
-					<Button colorScheme="blue">Save</Button>
 				</DrawerFooter>
 			</DrawerContent>
 		</Drawer>
