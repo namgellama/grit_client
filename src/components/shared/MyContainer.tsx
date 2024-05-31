@@ -1,9 +1,14 @@
 import { Container } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-const MyContainer = ({ children }: { children: ReactNode }) => {
+interface Props {
+	children: ReactNode;
+	width?: string;
+}
+
+const MyContainer = ({ children, width = "6xl" }: Props) => {
 	return (
-		<Container my="4rem" maxW="6xl">
+		<Container my="4rem" maxW={width}>
 			{children}
 		</Container>
 	);

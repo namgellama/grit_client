@@ -25,6 +25,7 @@ import {
 	useUpdateBagItemMutation,
 } from "../../app/bagItem/bagItemApiSlice";
 import { useAppSelector } from "../../app/hooks";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
 	isOpen: boolean;
@@ -35,6 +36,7 @@ interface Props {
 const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 	const { user } = useAppSelector((state) => state.auth);
 	const toast = useToast();
+	const navigate = useNavigate();
 	const { data: bagItems } = useGetBagItemsQuery(user?.token ?? "");
 	const [updateBagItem] = useUpdateBagItemMutation();
 	const [deleteBagItem] = useDeleteBagItemMutation();
@@ -197,7 +199,11 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 				</DrawerBody>
 
 				<DrawerFooter>
-					<Button colorScheme="blue" w="100%">
+					<Button
+						colorScheme="blue"
+						w="100%"
+						onClick={() => navigate("/checkout")}
+					>
 						Checkout
 					</Button>
 				</DrawerFooter>

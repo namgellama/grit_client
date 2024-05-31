@@ -3,10 +3,11 @@ body {
 }
 
 .drawer::-webkit-scrollbar {
-	display: none;
+	width: 0.2rem;
+	cursor: pointer;
 }
 
-.drawer {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
+.drawer::-webkit-scrollbar-thumb {
+	background: gray;
+	cursor: pointer;
 }

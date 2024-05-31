@@ -1,8 +1,10 @@
-export { default as CookieBagItemsDrawer } from "./customer/CookieBagItemsDrawer";
-export { default as DBBagItemsDrawer } from "./customer/DBBagItemsDrawer";
+export { default as BagItems } from "./customer/BagItems";
 export { default as CategoryCard } from "./customer/CategoryCard";
 export { default as CategoryList } from "./customer/CategoryList";
+export { default as CheckoutForm } from "./customer/CheckoutForm";
 export { default as ColorBox } from "./customer/ColorBox";
+export { default as CookieBagItemsDrawer } from "./customer/CookieBagItemsDrawer";
+export { default as DBBagItemsDrawer } from "./customer/DBBagItemsDrawer";
 export { default as Hero } from "./customer/Hero";
 export { default as NavBar } from "./customer/NavBar";
 export { default as ProductCard } from "./customer/ProductCard";
