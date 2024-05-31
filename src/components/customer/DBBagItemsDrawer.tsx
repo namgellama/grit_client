@@ -114,7 +114,13 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 										w="160px"
 										h="140px"
 										objectFit="cover"
-										src={bagItem.product.color[0].image}
+										src={
+											bagItem.product.color.find(
+												(color) =>
+													color.colorName ===
+													bagItem.color
+											)?.image
+										}
 									/>
 									<Flex
 										direction="column"
