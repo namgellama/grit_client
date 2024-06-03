@@ -1,18 +1,10 @@
 import { apiSlice } from "../apiSlice";
 import { BAG_ITEM_URL } from "../constants";
+import { OrderItem } from "../order/orderApiSlice";
 import { Product } from "../product/productApiSlice";
 
-export interface BagItem {
-	id: string;
-	productId: string;
+export interface BagItem extends OrderItem {
 	userId: string;
-	unitPrice: number;
-	quantity: number;
-	unitTotalPrice: number;
-	size: string;
-	color: string;
-	createdAt: Date;
-	updatedtAt: Date;
 	product: Product;
 }
 

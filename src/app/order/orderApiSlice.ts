@@ -1,7 +1,7 @@
 import { apiSlice } from "../apiSlice";
 import { ORDER_ITEM_URL } from "../constants";
 
-interface OrderItem {
+export interface OrderItem {
 	id: string;
 	quantity: number;
 	unitPrice: number;
@@ -13,8 +13,8 @@ interface OrderItem {
 	productId: string;
 }
 
-interface Address {
-	id: string;
+export interface Address {
+	id?: string;
 	addressLine1: string;
 	addressLine2: string;
 	city: string;

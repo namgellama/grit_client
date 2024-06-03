@@ -1,15 +1,11 @@
-import { Box, HStack, Image, Text, Flex } from "@chakra-ui/react";
-import { useGetBagItemsQuery } from "../../app/bagItem/bagItemApiSlice";
-import { useAppSelector } from "../../app/hooks";
+import { Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import { BagItem } from "../../app/bagItem/bagItemApiSlice";
 
-const BagItems = () => {
-	const { user } = useAppSelector((state) => state.auth);
-	const {
-		data: bagItems,
-		isLoading,
-		error,
-	} = useGetBagItemsQuery(user?.token ?? "");
+interface Props {
+	bagItems: BagItem[];
+}
 
+const BagItems = ({ bagItems }: Props) => {
 	return (
 		<Box flex={1} pl={5}>
 			<Flex direction="column" h="100%" justify="space-between">
