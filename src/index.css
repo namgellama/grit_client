@@ -4,7 +4,6 @@ body {
 
 .drawer::-webkit-scrollbar {
 	width: 0.2rem;
-	cursor: pointer;
 }
 
 .drawer::-webkit-scrollbar-thumb {
