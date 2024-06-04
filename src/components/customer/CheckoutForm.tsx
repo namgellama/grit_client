@@ -6,27 +6,26 @@ import {
 	Heading,
 	Input,
 	Select,
+	Spinner,
+	useToast,
 	VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { CurrentUser } from "../../app/auth/authApiSlice";
 import {
 	BagItem,
 	useDeleteBagItemsMutation,
 } from "../../app/bagItem/bagItemApiSlice";
-import {
-	Address,
-	Order,
-	useCreateOrderMutation,
-} from "../../app/order/orderApiSlice";
+import { Address, useCreateOrderMutation } from "../../app/order/orderApiSlice";
 import { cities, countries } from "../../utilities/data";
 import {
 	deliverySchema,
 	FormFields,
 } from "../../validations/deliveryValidation";
 import InputErrorMessage from "../shared/InputErrorMessage";
-import { CurrentUser, User } from "../../app/auth/authApiSlice";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
 	bagItems: BagItem[];
@@ -38,8 +37,6 @@ const CheckoutForm = ({ bagItems, user }: Props) => {
 		register,
 		handleSubmit,
 		setError,
-		setValue,
-		getValues,
 		formState: { errors, isSubmitting },
 	} = useForm<FormFields>({
 		resolver: zodResolver(deliverySchema),
@@ -48,6 +45,18 @@ const CheckoutForm = ({ bagItems, user }: Props) => {
 	const [createOrder] = useCreateOrderMutation();
 	const [deleteBagItems] = useDeleteBagItemsMutation();
 	const navigate = useNavigate();
+	const toast = useToast();
+
+	useEffect(() => {
+		if (errors.root?.message)
+			toast({
+				title: errors.root.message,
+				duration: 1200,
+				isClosable: true,
+				status: "error",
+				position: "top-right",
+			});
+	}, [errors.root]);
 
 	const onSubmit = async (addressData: Address) => {
 		const totalPrice = bagItems?.reduce(
@@ -179,8 +188,9 @@ const CheckoutForm = ({ bagItems, user }: Props) => {
 					variant="solid"
 					colorScheme="messenger"
 					w="full"
+					disabled={isSubmitting}
 				>
-					Order
+					{isSubmitting ? <Spinner /> : "Order"}
 				</Button>
 			</VStack>
 		</Box>
