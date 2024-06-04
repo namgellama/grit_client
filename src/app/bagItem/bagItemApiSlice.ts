@@ -57,6 +57,16 @@ export const bagItemApiSlice = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ["BagItems"],
 		}),
+		deleteBagItems: builder.mutation<null, string>({
+			query: (token) => ({
+				url: BAG_ITEM_URL,
+				method: "DELETE",
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}),
+			invalidatesTags: ["BagItems"],
+		}),
 	}),
 });
 
@@ -65,4 +75,5 @@ export const {
 	useCreateBagItemMutation,
 	useUpdateBagItemMutation,
 	useDeleteBagItemMutation,
+	useDeleteBagItemsMutation,
 } = bagItemApiSlice;
