@@ -10,7 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { BagItem } from "../../app/bagItem/bagItemApiSlice";
+import {
+	BagItem,
+	useDeleteBagItemsMutation,
+} from "../../app/bagItem/bagItemApiSlice";
 import {
 	Address,
 	Order,
@@ -23,6 +26,7 @@ import {
 } from "../../validations/deliveryValidation";
 import InputErrorMessage from "../shared/InputErrorMessage";
 import { CurrentUser, User } from "../../app/auth/authApiSlice";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
 	bagItems: BagItem[];
@@ -42,6 +46,8 @@ const CheckoutForm = ({ bagItems, user }: Props) => {
 	});
 
 	const [createOrder] = useCreateOrderMutation();
+	const [deleteBagItems] = useDeleteBagItemsMutation();
+	const navigate = useNavigate();
 
 	const onSubmit = async (addressData: Address) => {
 		const totalPrice = bagItems?.reduce(
@@ -53,12 +59,21 @@ const CheckoutForm = ({ bagItems, user }: Props) => {
 			totalPrice,
 			address: addressData,
 		};
-		if (user) {
-			const result = await createOrder({
-				data,
-				token: user?.token,
-			}).unwrap();
-			console.log(result);
+
+		try {
+			if (user) {
+				await createOrder({
+					data,
+					token: user?.token,
+				}).unwrap();
+
+				await deleteBagItems(user?.token).unwrap();
+				navigate("/");
+			}
+		} catch (error) {
+			setError("root", {
+				message: "Something went wrong",
+			});
 		}
 	};
 

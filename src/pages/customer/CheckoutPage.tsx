@@ -1,8 +1,7 @@
 import { Center, Divider, HStack } from "@chakra-ui/react";
-import { BagItems, CheckoutForm, MyContainer } from "../../components";
-import { useCreateOrderMutation } from "../../app/order/orderApiSlice";
-import { useAppSelector } from "../../app/hooks";
 import { useGetBagItemsQuery } from "../../app/bagItem/bagItemApiSlice";
+import { useAppSelector } from "../../app/hooks";
+import { BagItems, CheckoutForm, MyContainer } from "../../components";
 
 const CheckoutPage = () => {
 	const { user } = useAppSelector((state) => state.auth);

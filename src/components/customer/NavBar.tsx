@@ -107,7 +107,7 @@ const NavBar = () => {
 									</Badge>
 								)}
 
-								{dbBagItems?.length && (
+								{dbBagItems?.length! > 0 && (
 									<Badge
 										position="absolute"
 										bottom={4}
