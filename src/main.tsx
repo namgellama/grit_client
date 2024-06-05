@@ -11,6 +11,7 @@ import {
 	CategoryPage,
 	CheckoutPage,
 	HomePage,
+	MyOrdersPage,
 	ProductDetailPage,
 	SignInPage,
 	SignUpPage,
@@ -42,6 +43,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 								<Route
 									path="/checkout"
 									element={<CheckoutPage />}
+								/>
+								<Route
+									path="/orders/mine"
+									element={<MyOrdersPage />}
 								/>
 							</Route>
 							<Route path="/login" element={<SignInPage />} />

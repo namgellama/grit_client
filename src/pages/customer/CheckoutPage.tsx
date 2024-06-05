@@ -88,7 +88,7 @@ const CheckoutPage = () => {
 				}).unwrap();
 
 				await deleteBagItems(user?.token).unwrap();
-				navigate("/");
+				navigate("/orders/mine");
 			}
 		} catch (error) {
 			setError("root", {
