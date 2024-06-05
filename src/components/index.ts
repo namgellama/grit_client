@@ -1,17 +1,18 @@
 export { default as BagItems } from "./customer/BagItems";
 export { default as CategoryCard } from "./customer/CategoryCard";
 export { default as CategoryList } from "./customer/CategoryList";
-export { default as CheckoutForm } from "./customer/CheckoutForm";
 export { default as ColorBox } from "./customer/ColorBox";
 export { default as CookieBagItemsDrawer } from "./customer/CookieBagItemsDrawer";
 export { default as DBBagItems } from "./customer/DBBagItems";
 export { default as DBBagItemsDrawer } from "./customer/DBBagItemsDrawer";
 export { default as DBEmptyBagItems } from "./customer/DBEmptyBagItems";
+export { default as DeliveryForm } from "./customer/DeliveryForm";
 export { default as Hero } from "./customer/Hero";
 export { default as NavBar } from "./customer/NavBar";
 export { default as ProductCard } from "./customer/ProductCard";
 export { default as ProductList } from "./customer/ProductList";
 export { default as SizeBox } from "./customer/SizeBox";
+export { default as PaymentMethods } from "./customer/PaymentMethods";
 
 export { default as ErrorMessage } from "./shared/ErrorMessage";
 export { default as InputErrorMessage } from "./shared/InputErrorMessage";
