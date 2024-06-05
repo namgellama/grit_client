@@ -14,7 +14,7 @@ const BagItems = ({ bagItems }: Props) => {
 					direction="column"
 					gap={5}
 					pr={5}
-					h="50vh"
+					h={bagItems.length > 3 ? "50vh" : "30vh"}
 					overflowY="scroll"
 				>
 					{bagItems?.map((bagItem) => (
