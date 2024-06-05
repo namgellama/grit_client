@@ -14,10 +14,8 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import {
-	RegisterRequestDTO,
-	useRegisterMutation,
-} from "../../app/features/auth/authApiSlice";
+import { useRegisterMutation } from "../../app/features/auth/authApiSlice";
+import { RegisterRequestDTO } from "../../app/interfaces/auth";
 import {
 	FormFields,
 	registerSchema,

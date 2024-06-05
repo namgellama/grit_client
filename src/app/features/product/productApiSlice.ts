@@ -1,6 +1,6 @@
 import { apiSlice } from "../../apiSlice";
-import { Category } from "../category/categoryApiSlice";
 import { PRODUCT_URL } from "../../constants";
+import { Product } from "../../interfaces/product";
 
 interface QueryParams {
 	segment?: string;

@@ -1,5 +1,5 @@
 import { Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
-import { BagItem } from "../../app/features/bagItem/bagItemApiSlice";
+import { BagItem } from "../../app/interfaces/bagItem";
 
 interface Props {
 	bagItems: BagItem[];

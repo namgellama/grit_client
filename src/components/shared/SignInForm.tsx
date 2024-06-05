@@ -14,9 +14,10 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { InputErrorMessage } from "..";
-import { useLoginMutation, User } from "../../app/features/auth/authApiSlice";
+import { useLoginMutation } from "../../app/features/auth/authApiSlice";
 import { setUser } from "../../app/features/auth/authSlice";
 import { useAppDispatch } from "../../app/hooks";
+import { User } from "../../app/interfaces/auth";
 import { FormFields, loginSchema } from "../../validations/loginValidation";
 
 const SignInForm = () => {

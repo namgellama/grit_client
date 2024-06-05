@@ -1,6 +1,6 @@
-import { Order, OrderRequest } from "../../../utilities/interfaces";
 import { apiSlice } from "../../apiSlice";
 import { ORDER_ITEM_URL } from "../../constants";
+import { Order, OrderRequest } from "../../interfaces/order";
 
 export const orderApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({

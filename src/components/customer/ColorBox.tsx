@@ -1,5 +1,5 @@
 import { Box, Tooltip } from "@chakra-ui/react";
-import { Color } from "../../app/features/product/productApiSlice";
+import { Color } from "../../app/interfaces/product";
 
 interface Props {
 	color: Color;
