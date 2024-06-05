@@ -1,6 +1,6 @@
 import { Alert, AlertIcon, AlertTitle } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
-import { useGetProductsQuery } from "../../app/product/productApiSlice";
+import { useGetProductsQuery } from "../../app/features/product/productApiSlice";
 import { MyContainer, MyHeading, ProductList } from "../../components";
 
 const ProductPage = () => {

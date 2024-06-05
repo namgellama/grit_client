@@ -10,12 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { ChangeEvent } from "react";
 import { MdDelete } from "react-icons/md";
-import { CurrentUser } from "../../app/auth/authApiSlice";
+import { CurrentUser } from "../../app/features/auth/authApiSlice";
 import {
 	BagItem,
 	useDeleteBagItemMutation,
 	useUpdateBagItemMutation,
-} from "../../app/bagItem/bagItemApiSlice";
+} from "../../app/features/bagItem/bagItemApiSlice";
 
 interface Props {
 	bagItems: BagItem[];

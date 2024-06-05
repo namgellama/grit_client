@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useGetCategoryQuery } from "../../app/category/categoryApiSlice";
+import { useGetCategoryQuery } from "../../app/features/category/categoryApiSlice";
 import { MyContainer, MyHeading, ProductList } from "../../components";
 
 const CategoryPage = () => {

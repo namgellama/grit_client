@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { RefObject } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetBagItemsQuery } from "../../app/bagItem/bagItemApiSlice";
+import { useGetBagItemsQuery } from "../../app/features/bagItem/bagItemApiSlice";
 import { useAppSelector } from "../../app/hooks";
 import DBBagItems from "./DBBagItems";
 import DBEmptyBagItems from "./DBEmptyBagItems";

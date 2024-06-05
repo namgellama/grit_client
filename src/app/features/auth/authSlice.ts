@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CurrentUser } from "./authApiSlice";
+import { CurrentUser } from "../../interfaces/auth";
 
 interface AuthState {
 	user?: CurrentUser | null;
 }
+
 const localStorageKey = "user";
 const storedUser = localStorage.getItem(localStorageKey);
 

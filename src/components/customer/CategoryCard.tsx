@@ -1,5 +1,5 @@
 import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
-import { Category } from "../../app/category/categoryApiSlice";
+import { Category } from "../../app/features/category/categoryApiSlice";
 import { Link } from "react-router-dom";
 
 const CategoryCard = ({ category }: { category: Category }) => {

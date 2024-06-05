@@ -18,9 +18,9 @@ import {
 	useCreateBagItemMutation,
 	useGetBagItemsQuery,
 	useUpdateBagItemMutation,
-} from "../../app/bagItem/bagItemApiSlice";
+} from "../../app/features/bagItem/bagItemApiSlice";
 import { useAppSelector } from "../../app/hooks";
-import { useGetProductQuery } from "../../app/product/productApiSlice";
+import { useGetProductQuery } from "../../app/features/product/productApiSlice";
 import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "../../components";
 import { BagItem } from "../../interfaces";
 

@@ -1,5 +1,5 @@
 import { HStack, Skeleton } from "@chakra-ui/react";
-import { useGetCategoriesQuery } from "../../app/category/categoryApiSlice";
+import { useGetCategoriesQuery } from "../../app/features/category/categoryApiSlice";
 import { CategoryCard, ErrorMessage, MyContainer, MyHeading } from "..";
 
 const CategoryList = () => {

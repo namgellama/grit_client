@@ -14,9 +14,9 @@ import { useNavigate } from "react-router-dom";
 import {
 	useDeleteBagItemsMutation,
 	useGetBagItemsQuery,
-} from "../../app/bagItem/bagItemApiSlice";
+} from "../../app/features/bagItem/bagItemApiSlice";
+import { useCreateOrderMutation } from "../../app/features/order/orderApiSlice";
 import { useAppSelector } from "../../app/hooks";
-import { useCreateOrderMutation } from "../../app/order/orderApiSlice";
 import {
 	BagItems,
 	DeliveryForm,

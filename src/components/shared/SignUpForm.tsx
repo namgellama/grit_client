@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import {
 	RegisterRequestDTO,
 	useRegisterMutation,
-} from "../../app/auth/authApiSlice";
+} from "../../app/features/auth/authApiSlice";
 import {
 	FormFields,
 	registerSchema,

@@ -1,12 +1,6 @@
-import { apiSlice } from "../apiSlice";
-import { BAG_ITEM_URL } from "../constants";
-import { OrderItem } from "../order/orderApiSlice";
-import { Product } from "../product/productApiSlice";
-
-export interface BagItem extends OrderItem {
-	userId: string;
-	product: Product;
-}
+import { apiSlice } from "../../apiSlice";
+import { BAG_ITEM_URL } from "../../constants";
+import { BagItem } from "../../interfaces/bagItem";
 
 export const bagItemApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({

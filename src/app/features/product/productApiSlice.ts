@@ -1,28 +1,6 @@
-import { apiSlice } from "../apiSlice";
+import { apiSlice } from "../../apiSlice";
 import { Category } from "../category/categoryApiSlice";
-import { PRODUCT_URL } from "../constants";
-
-export interface Product {
-	id: string;
-	name: string;
-	color: Color[];
-	description: string;
-	image: string;
-	price: number;
-	stock: number;
-	sizes: string[];
-	segment: string;
-	createdAt: Date;
-	updateAt: Date;
-	categoryId: string;
-	category: Category;
-}
-
-export interface Color {
-	hexColor: string;
-	colorName: string;
-	image: string;
-}
+import { PRODUCT_URL } from "../../constants";
 
 interface QueryParams {
 	segment?: string;
