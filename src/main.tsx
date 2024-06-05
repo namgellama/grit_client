@@ -15,8 +15,9 @@ import {
 	ProductDetailPage,
 	SignInPage,
 	SignUpPage,
+	ProductPage,
+	MyOrderDetailPage,
 } from "./pages";
-import ProductPage from "./pages/customer/ProductPage.tsx";
 import theme from "./theme.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -47,6 +48,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 								<Route
 									path="/orders/mine"
 									element={<MyOrdersPage />}
+								/>
+								<Route
+									path="/orders/mine/:id"
+									element={<MyOrderDetailPage />}
 								/>
 							</Route>
 							<Route path="/login" element={<SignInPage />} />
