@@ -24,7 +24,9 @@ export interface Address {
 
 export interface Order {
 	id: string;
-	totalPrice: number;
+	subTotal: number;
+	deliveryCharge: number;
+	total: number;
 	status: string;
 	createdAt: Date;
 	updatedAt: Date;
@@ -46,7 +48,9 @@ export interface Payment {
 
 export interface OrderRequest {
 	orderItems: OrderItem[];
-	totalPrice: number;
+	subTotal: number;
+	deliveryCharge: number;
+	total: number;
 	address: Partial<Address>;
 	payment: Partial<Payment>;
 }

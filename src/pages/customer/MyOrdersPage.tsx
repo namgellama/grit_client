@@ -1,19 +1,17 @@
 import {
-	TableContainer,
 	Table,
-	TableCaption,
-	Thead,
-	Tr,
-	Th,
+	TableContainer,
 	Tbody,
 	Td,
-	Tfoot,
+	Th,
+	Thead,
+	Tr,
 } from "@chakra-ui/react";
-import { MyContainer } from "../../components";
-import { useAppSelector } from "../../app/hooks";
-import { useGetMyOrdersQuery } from "../../app/features/order/orderApiSlice";
-import { getStringDate } from "../../utilities/getStringDate";
 import { Link } from "react-router-dom";
+import { useGetMyOrdersQuery } from "../../app/features/order/orderApiSlice";
+import { useAppSelector } from "../../app/hooks";
+import { MyContainer } from "../../components";
+import { getStringDate } from "../../utilities/getStringDate";
 
 const MyOrdersPage = () => {
 	const { user } = useAppSelector((state) => state.auth);
@@ -41,7 +39,7 @@ const MyOrdersPage = () => {
 										{order.id}
 									</Link>
 								</Td>
-								<Td isNumeric>{order.totalPrice}</Td>
+								<Td isNumeric>{order.total}</Td>
 								<Td>{order.status}</Td>
 								<Td>{getStringDate(order.createdAt)}</Td>
 								<Td>{order.payment?.method}</Td>

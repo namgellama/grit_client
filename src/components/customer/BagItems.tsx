@@ -3,9 +3,11 @@ import { BagItem } from "../../app/interfaces/bagItem";
 
 interface Props {
 	bagItems: BagItem[];
+	deliveryCharge: number;
+	total: number;
 }
 
-const BagItems = ({ bagItems }: Props) => {
+const BagItems = ({ bagItems, deliveryCharge, total }: Props) => {
 	return (
 		<Box flex={1} pl={5}>
 			<Flex direction="column" h="100%" justify="space-between">
@@ -80,7 +82,7 @@ const BagItems = ({ bagItems }: Props) => {
 							Delivery
 						</Text>
 						<Text fontSize="small" fontWeight="semibold">
-							Rs. 100
+							Rs. {deliveryCharge}
 						</Text>
 					</HStack>
 					<HStack justify="space-between">
@@ -88,7 +90,7 @@ const BagItems = ({ bagItems }: Props) => {
 							Total
 						</Text>
 						<Text fontSize="small" fontWeight="bold">
-							Rs. 100
+							Rs. {total}
 						</Text>
 					</HStack>
 				</Flex>

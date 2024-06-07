@@ -14,9 +14,10 @@ import InputErrorMessage from "../shared/InputErrorMessage";
 interface Props {
 	register: UseFormRegister<FormFields>;
 	errors: FieldErrors<FormFields>;
+	setDeliveryCharge: (value: number) => void;
 }
 
-const DeliveryForm = ({ register, errors }: Props) => {
+const DeliveryForm = ({ register, errors, setDeliveryCharge }: Props) => {
 	return (
 		<Flex direction="column" w="100%">
 			<Heading fontSize="larger" letterSpacing={1}>
@@ -61,9 +62,15 @@ const DeliveryForm = ({ register, errors }: Props) => {
 					variant="filled"
 					background="white"
 					{...register("city")}
+					onChange={(e) => {
+						const deliveryCharge = cities.find(
+							(city) => city.name === e.target.value
+						)?.value;
+						setDeliveryCharge(deliveryCharge!);
+					}}
 				>
 					{cities.map((city) => (
-						<option key={city}>{city}</option>
+						<option key={city.name}>{city.name}</option>
 					))}
 				</Select>
 				{errors.city && (

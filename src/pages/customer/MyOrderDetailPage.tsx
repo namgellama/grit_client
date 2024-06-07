@@ -54,6 +54,7 @@ const MyOrderDetailPage = () => {
 									alt={orderItem.product.name}
 									w="80px"
 									h="80px"
+									objectFit="cover"
 								/>
 								<HStack justify="space-between" w="100%">
 									<VStack>
@@ -83,9 +84,19 @@ const MyOrderDetailPage = () => {
 							Order Summary
 						</Text>
 						<HStack justify="space-between">
-							<Text>Subtotal</Text>
-							<Text fontWeight="bold">
-								Rs. {order?.totalPrice}
+							<Text fontSize="small">Subtotal</Text>
+							<Text fontSize="small">Rs. {order?.subTotal}</Text>
+						</HStack>
+						<HStack justify="space-between">
+							<Text fontSize="small">Delivery</Text>
+							<Text fontSize="small">
+								Rs. {order?.deliveryCharge}
+							</Text>
+						</HStack>
+						<HStack justify="space-between">
+							<Text fontSize="small">Total</Text>
+							<Text fontSize="small" fontWeight="bold">
+								Rs. {order?.total}
 							</Text>
 						</HStack>
 					</Box>
