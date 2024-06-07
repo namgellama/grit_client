@@ -174,7 +174,12 @@ const ProductDetailPage = () => {
 
 						<Divider borderColor="darkgray" />
 
-						<HStack justifyContent="start" spacing={3} px={1}>
+						<HStack
+							justifyContent="start"
+							spacing={3}
+							px={1}
+							my={2}
+						>
 							{product?.color.map((color) => (
 								<ColorBox
 									key={color.colorName}

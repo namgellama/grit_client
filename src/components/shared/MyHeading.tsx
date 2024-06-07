@@ -9,13 +9,21 @@ interface Props {
 	children: ReactNode;
 	count?: number;
 	showCount: boolean;
+	size?: string;
 }
 
-const MyHeading = ({ isLoading, error, children, count, showCount }: Props) => {
+const MyHeading = ({
+	isLoading,
+	error,
+	children,
+	count,
+	showCount,
+	size = "lg",
+}: Props) => {
 	return (
 		<Skeleton isLoaded={!isLoading} width="400px">
 			<Heading
-				size="lg"
+				size={size}
 				textAlign="left"
 				fontWeight="bold"
 				display={error ? "none" : "flex"}
