@@ -46,7 +46,7 @@ const MyOrderDetailPage = () => {
 
 					<Divider borderColor="gray" my={8} />
 
-					<VStack align="start">
+					<VStack align="start" gap={3}>
 						{order?.orderItems.map((orderItem) => (
 							<HStack key={orderItem.id} w="100%">
 								<Image
@@ -63,7 +63,7 @@ const MyOrderDetailPage = () => {
 									objectFit="cover"
 								/>
 								<HStack justify="space-between" w="100%">
-									<VStack>
+									<VStack align="start">
 										<Text>{orderItem.product.name}</Text>
 										<Text>
 											{orderItem.color} | {orderItem.size}

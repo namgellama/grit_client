@@ -103,13 +103,13 @@ const CheckoutPage = () => {
 
 		try {
 			if (user) {
-				await createOrder({
+				const result = await createOrder({
 					data,
 					token: user?.token,
 				}).unwrap();
 
 				await deleteBagItems(user?.token).unwrap();
-				navigate("/orders/mine");
+				navigate(`/orders/mine/${result.id}`);
 			}
 		} catch (error) {
 			setError("root", {
