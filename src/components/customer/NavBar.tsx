@@ -11,10 +11,9 @@ import {
 } from "@chakra-ui/react";
 import { JSXElementConstructor, LegacyRef, ReactElement, useRef } from "react";
 import { useCookies } from "react-cookie";
-import { FaShoppingBag } from "react-icons/fa";
+import { FaShoppingBag, FaUserCircle } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
-import { MdLogout } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { CookieBagItemsDrawer, DBBagItemsDrawer } from "..";
 import { logout } from "../../app/features/auth/authSlice";
@@ -121,16 +120,21 @@ const NavBar = () => {
 									</Badge>
 								)}
 							</Flex>
-							<NavLinkIcon
-								icon={<FaUser />}
-								label="User"
-								link={user ? "/orders/mine" : "/login"}
-							/>
-							{user && (
-								<NavIcon
-									label="Logout"
-									icon={<MdLogout />}
-									onClick={handleLogout}
+							{user ? (
+								<NavLinkIcon
+									icon={<FaUserCircle fontSize="larger" />}
+									label="User"
+									link={
+										user.role === "Customer"
+											? "/account"
+											: "/dashboard"
+									}
+								/>
+							) : (
+								<NavLinkIcon
+									icon={<FaUser />}
+									label="User"
+									link="/login"
 								/>
 							)}
 						</HStack>

@@ -8,15 +8,17 @@ import App from "./App.tsx";
 import { store } from "./app/store.ts";
 import "./index.css";
 import {
+	AccountPage,
 	CategoryPage,
 	CheckoutPage,
+	DashboardPage,
 	HomePage,
+	MyOrderDetailPage,
 	MyOrdersPage,
 	ProductDetailPage,
+	ProductPage,
 	SignInPage,
 	SignUpPage,
-	ProductPage,
-	MyOrderDetailPage,
 } from "./pages";
 import theme from "./theme.ts";
 
@@ -52,6 +54,16 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 								<Route
 									path="/orders/mine/:id"
 									element={<MyOrderDetailPage />}
+								/>
+								<Route
+									path="/account"
+									element={<AccountPage />}
+								/>
+
+								{/* Admin Routes */}
+								<Route
+									path="/dashboard"
+									element={<DashboardPage />}
 								/>
 							</Route>
 							<Route path="/login" element={<SignInPage />} />
