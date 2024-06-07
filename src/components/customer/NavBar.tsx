@@ -124,7 +124,7 @@ const NavBar = () => {
 							<NavLinkIcon
 								icon={<FaUser />}
 								label="User"
-								link="/login"
+								link={user ? "/orders/mine" : "/login"}
 							/>
 							{user && (
 								<NavIcon

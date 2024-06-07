@@ -1,4 +1,5 @@
 import {
+	Badge,
 	Table,
 	TableContainer,
 	Tbody,
@@ -40,10 +41,18 @@ const MyOrdersPage = () => {
 									</Link>
 								</Td>
 								<Td isNumeric>{order.total}</Td>
-								<Td>{order.status}</Td>
+								<Td>
+									<Badge colorScheme="green" ml={2}>
+										{order?.status}
+									</Badge>
+								</Td>
 								<Td>{getStringDate(order.createdAt)}</Td>
 								<Td>{order.payment?.method}</Td>
-								<Td>{order.payment?.status}</Td>
+								<Td>
+									<Badge colorScheme="green" ml={2}>
+										{order.payment?.status}
+									</Badge>
+								</Td>
 							</Tr>
 						))}
 					</Tbody>
