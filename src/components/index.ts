@@ -8,11 +8,12 @@ export { default as DBBagItemsDrawer } from "./customer/DBBagItemsDrawer";
 export { default as DBEmptyBagItems } from "./customer/DBEmptyBagItems";
 export { default as DeliveryForm } from "./customer/DeliveryForm";
 export { default as Hero } from "./customer/Hero";
+export { default as MyOrders } from "./customer/MyOrders";
 export { default as NavBar } from "./customer/NavBar";
+export { default as PaymentMethods } from "./customer/PaymentMethods";
 export { default as ProductCard } from "./customer/ProductCard";
 export { default as ProductList } from "./customer/ProductList";
 export { default as SizeBox } from "./customer/SizeBox";
-export { default as PaymentMethods } from "./customer/PaymentMethods";
 
 export { default as ErrorMessage } from "./shared/ErrorMessage";
 export { default as InputErrorMessage } from "./shared/InputErrorMessage";

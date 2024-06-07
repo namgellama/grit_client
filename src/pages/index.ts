@@ -6,7 +6,6 @@ export { default as CategoryPage } from "./customer/CategoryPage";
 export { default as CheckoutPage } from "./customer/CheckoutPage";
 export { default as HomePage } from "./customer/HomePage";
 export { default as MyOrderDetailPage } from "./customer/MyOrderDetailPage";
-export { default as MyOrdersPage } from "./customer/MyOrdersPage";
 export { default as ProductDetailPage } from "./customer/ProductDetailPage";
 export { default as ProductPage } from "./customer/ProductPage";
 

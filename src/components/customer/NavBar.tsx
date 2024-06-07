@@ -16,9 +16,8 @@ import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { CookieBagItemsDrawer, DBBagItemsDrawer } from "..";
-import { logout } from "../../app/features/auth/authSlice";
 import { useGetBagItemsQuery } from "../../app/features/bagItem/bagItemApiSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 import logo from "../../assets/logo.png";
 import { BagItem } from "../../interfaces";
 
@@ -40,8 +39,7 @@ const NavBar = () => {
 	];
 
 	const { user } = useAppSelector((state) => state.auth);
-	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
+
 	const [cookies] = useCookies<
 		"bagItems",
 		{
@@ -53,11 +51,6 @@ const NavBar = () => {
 	const { data: dbBagItems } = useGetBagItemsQuery(user?.token ?? "", {
 		skip: user === null,
 	});
-
-	const handleLogout = () => {
-		dispatch(logout());
-		navigate("/login");
-	};
 
 	return (
 		<nav>
