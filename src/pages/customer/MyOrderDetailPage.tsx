@@ -36,6 +36,12 @@ const MyOrderDetailPage = () => {
 							Order Date:{" "}
 							{order && getStringDateTime(order?.createdAt)}
 						</Text>
+						<Text>
+							Order Status:
+							<Badge colorScheme="green" ml={2}>
+								{order?.status}
+							</Badge>
+						</Text>
 					</Flex>
 
 					<Divider borderColor="gray" my={8} />
@@ -64,11 +70,14 @@ const MyOrderDetailPage = () => {
 										</Text>
 									</VStack>
 									<VStack justifySelf="end">
-										<Text fontWeight="bold">
+										<Text
+											fontWeight="bold"
+											fontSize="small"
+										>
 											Rs. {orderItem.unitTotalPrice}
 										</Text>
 										<Text fontSize="small">
-											Rs. {orderItem.unitTotalPrice} x{" "}
+											Rs. {orderItem.unitPrice} x{" "}
 											{orderItem.quantity}
 										</Text>
 									</VStack>
