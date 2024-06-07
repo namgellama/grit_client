@@ -10,3 +10,7 @@ body {
 	background: gray;
 	cursor: pointer;
 }
+
+.scrollbar::-webkit-scrollbar {
+	width: 0.2rem;
+}

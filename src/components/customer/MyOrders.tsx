@@ -1,61 +1,90 @@
 import {
 	Badge,
-	Table,
-	TableContainer,
-	Tbody,
-	Td,
-	Th,
-	Thead,
-	Tr,
+	Box,
+	Button,
+	Flex,
+	HStack,
+	Tag,
+	Text,
+	VStack,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { MdLocationOn } from "react-icons/md";
 import { useGetMyOrdersQuery } from "../../app/features/order/orderApiSlice";
 import { useAppSelector } from "../../app/hooks";
-import { getStringDate } from "../../utilities/getStringDate";
+import { getStringDateTime } from "../../utilities/getStringDate";
+import { useNavigate } from "react-router-dom";
 
 const MyOrders = () => {
 	const { user } = useAppSelector((state) => state.auth);
+	const navigate = useNavigate();
 
 	const { data: orders } = useGetMyOrdersQuery(user?.token || "");
 	return (
-		<TableContainer width="100%">
-			<Table variant="striped">
-				<Thead>
-					<Tr>
-						<Th>Order Id</Th>
-						<Th isNumeric>Total Price</Th>
-						<Th>Status</Th>
-						<Th>Ordered Date</Th>
-						<Th>Payment Method</Th>
-						<Th>Payment Status</Th>
-					</Tr>
-				</Thead>
-				<Tbody>
-					{orders?.map((order) => (
-						<Tr key={order.id}>
-							<Td _hover={{ textDecoration: "underline" }}>
-								<Link to={`/orders/mine/${order.id}`}>
-									{order.id}
-								</Link>
-							</Td>
-							<Td isNumeric>{order.total}</Td>
-							<Td>
-								<Badge colorScheme="green" ml={2}>
-									{order?.status}
+		<HStack w="100%" flexWrap="wrap" justify="space-between" gap={8}>
+			{orders?.map((order) => (
+				<Box key={order.id} w="48%" bg="white" borderRadius={8}>
+					<Box p={4}>
+						<VStack justify="start" align="start">
+							<Text fontSize="small" fontWeight="bold">
+								Order ID: {order.id}
+							</Text>
+							<VStack align="start" w="100%">
+								<Tag fontSize="small">
+									{getStringDateTime(order.createdAt)}
+								</Tag>
+								<Tag>
+									<Flex align="center" gap={1}>
+										<MdLocationOn fontSize="medium" />
+
+										<Text fontSize="small">{`${order.address?.addressLine1}, ${order.address?.city}, ${order.address?.country}`}</Text>
+									</Flex>
+								</Tag>
+								<Badge colorScheme="green" fontSize="x-small">
+									{order.status}
 								</Badge>
-							</Td>
-							<Td>{getStringDate(order.createdAt)}</Td>
-							<Td>{order.payment?.method}</Td>
-							<Td>
-								<Badge colorScheme="green" ml={2}>
-									{order.payment?.status}
-								</Badge>
-							</Td>
-						</Tr>
-					))}
-				</Tbody>
-			</Table>
-		</TableContainer>
+							</VStack>
+						</VStack>
+					</Box>
+					<Box bg="lightgray" p={4} borderBottomRadius={5}>
+						<HStack justify="space-between" w="100%">
+							<VStack align="start">
+								<Text fontSize="small" fontWeight="bold">
+									Rs. {order.total}
+									<Text as="span" fontWeight="normal" ml={2}>
+										({order.orderItems.length} items)
+									</Text>
+								</Text>
+
+								<Flex gap={4} align="center">
+									<Badge
+										bg="gray"
+										px={2}
+										color="white"
+										fontSize="x-small"
+									>
+										{order.payment.method}
+									</Badge>
+									<Badge fontSize="x-small">
+										{order.payment.status}
+									</Badge>
+								</Flex>
+							</VStack>
+							<Button
+								variant="solid"
+								bg="black"
+								color="white"
+								size="sm"
+								onClick={() =>
+									navigate(`/orders/mine/${order.id}`)
+								}
+							>
+								Details
+							</Button>
+						</HStack>
+					</Box>
+				</Box>
+			))}
+		</HStack>
 	);
 };
 
