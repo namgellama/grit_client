@@ -1,3 +1,5 @@
+import { Product } from "./product";
+
 export interface OrderItem {
 	id: string;
 	quantity: number;
@@ -8,6 +10,7 @@ export interface OrderItem {
 	createdAt: Date;
 	updatedAt: Date;
 	productId: string;
+	product: Product;
 }
 
 export interface Address {
