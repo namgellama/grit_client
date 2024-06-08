@@ -5,3 +5,4 @@ export const CATEGORY_URL = "/api/categories";
 export const AUTH_URL = "/api/auth";
 export const BAG_ITEM_URL = "/api/bagItems";
 export const ORDER_URL = "/api/orders";
+export const ADDRESS_URL = "/api/addresses";
