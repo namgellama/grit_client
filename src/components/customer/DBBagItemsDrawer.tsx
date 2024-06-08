@@ -59,7 +59,8 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 				{bagItems?.length! > 0 && (
 					<DrawerFooter>
 						<Button
-							colorScheme="blue"
+							colorScheme="messenger"
+							borderRadius={0}
 							w="100%"
 							onClick={() => {
 								navigate("/checkout");

@@ -229,6 +229,8 @@ const ProductDetailPage = () => {
 						<Button
 							w="100%"
 							colorScheme="red"
+							mt={2}
+							borderRadius={0}
 							onClick={handleAddToBag}
 						>
 							Add to Bag

@@ -72,7 +72,7 @@ const DBBagItems = ({ bagItems, user }: Props) => {
 			<Flex
 				className="scrollbar"
 				direction="column"
-				gap={10}
+				gap={7}
 				pr={5}
 				h="100%"
 				overflowY="scroll"
@@ -81,7 +81,7 @@ const DBBagItems = ({ bagItems, user }: Props) => {
 					<Flex key={bagItem.id} gap={5}>
 						<Image
 							w="160px"
-							h="140px"
+							h="130px"
 							objectFit="cover"
 							src={
 								bagItem.product.color.find(
@@ -94,17 +94,21 @@ const DBBagItems = ({ bagItems, user }: Props) => {
 							justify="space-between"
 							w="100%"
 						>
-							<Box>
-								<Text fontSize="small">
+							<Flex direction="column" gap={0.4}>
+								<Text fontSize="sm" fontWeight="medium">
 									{bagItem.product.name}
 								</Text>
-								<Text fontSize="small">
+								<Text fontSize="xs" color="background.500">
 									{bagItem.color} | {bagItem.size}
 								</Text>
-								<Text fontSize="small" fontWeight="semibold">
+								<Text
+									fontSize="xs"
+									fontWeight="
+								medium"
+								>
 									Rs. {bagItem.unitPrice}
 								</Text>
-							</Box>
+							</Flex>
 							<HStack pb={3} justify="space-between">
 								<Select
 									value={bagItem.quantity}
@@ -135,10 +139,10 @@ const DBBagItems = ({ bagItems, user }: Props) => {
 			</Flex>
 			<Box pt={5}>
 				<HStack justify="space-between">
-					<Text fontSize="small" fontWeight="semibold">
-						Total
+					<Text fontSize="sm" fontWeight="medium">
+						Subtotal
 					</Text>
-					<Text fontSize="small" fontWeight="semibold">
+					<Text fontSize="sm" fontWeight="bold">
 						Rs.{" "}
 						{bagItems?.reduce(
 							(acc, curr) => (acc += curr.unitTotalPrice),
