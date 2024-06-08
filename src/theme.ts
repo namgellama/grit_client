@@ -3,6 +3,13 @@ import "@fontsource/inter";
 import "@fontsource/roboto";
 
 const theme = extendTheme({
+	styles: {
+		global: () => ({
+			body: {
+				bg: "background.50",
+			},
+		}),
+	},
 	fonts: {
 		heading: `Roboto, ${base.fonts.heading}`,
 		body: `Open Sans, ${base.fonts.body}`,
