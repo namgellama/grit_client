@@ -11,14 +11,24 @@ const Profile = () => {
 	} = useGetMyCurrentAddressQuery(user?.token ?? "");
 
 	return (
-		<Box>
-			<HStack gap={4}>
+		<Box flex={1}>
+			<HStack gap={4} bg="white" p={3} borderRadius={5}>
 				<Avatar name={user?.name} src="" bg="black" />
 				<VStack align="start" gap={1}>
-					<Text textTransform="uppercase" fontWeight="bold">
+					<Text
+						textTransform="uppercase"
+						fontWeight="bold"
+						textOverflow="clip"
+						w="230px"
+					>
 						{user?.name}
 					</Text>
-					<Text fontWeight="medium" fontSize="sm">
+					<Text
+						fontWeight="medium"
+						fontSize="sm"
+						textOverflow="clip"
+						w="230px"
+					>
 						{user?.email}
 					</Text>
 					<Text fontWeight="medium" fontSize="sm">
@@ -26,7 +36,8 @@ const Profile = () => {
 					</Text>
 				</VStack>
 			</HStack>
-			<Box my={10}>
+
+			<Box my={3} bg="white" p={3} borderRadius={5}>
 				<Text
 					fontWeight="bold"
 					textTransform="uppercase"
@@ -35,16 +46,10 @@ const Profile = () => {
 					Address Book
 				</Text>
 				<VStack align="start" mt={2} gap={0}>
-					<Text fontSize="sm" fontWeight="medium">
-						{address?.addressLine1}
-					</Text>
-					<Text fontSize="sm" fontWeight="medium">
-						{address?.addressLine2}
-					</Text>
-					<Text fontSize="sm" fontWeight="medium">
-						{address?.city}
-					</Text>
-					<Text fontSize="sm" fontWeight="medium">
+					<Text fontSize="sm">{address?.addressLine1}</Text>
+					<Text fontSize="sm">{address?.addressLine2}</Text>
+					<Text fontSize="sm">{address?.city}</Text>
+					<Text fontSize="sm">
 						{address?.country}{" "}
 						{address?.postalCode && `- ${address?.postalCode}`}
 					</Text>

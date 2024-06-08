@@ -13,23 +13,45 @@ import { useNavigate } from "react-router-dom";
 import { useGetMyOrdersQuery } from "../../app/features/order/orderApiSlice";
 import { useAppSelector } from "../../app/hooks";
 import { getOrderColor, getPaymentColor } from "../../utilities/getColor";
-import { getStringDateTime } from "../../utilities/getStringDate";
+import { getStringDate } from "../../utilities/getStringDate";
 
 const MyOrders = () => {
 	const { user } = useAppSelector((state) => state.auth);
 	const navigate = useNavigate();
 
-	const { data: orders } = useGetMyOrdersQuery(user?.token || "");
+	const {
+		data: orders,
+		isLoading,
+		error,
+	} = useGetMyOrdersQuery(user?.token || "");
 
 	return (
-		<Box>
-			<Text textTransform="uppercase" fontWeight="bold" ml={2} mb={3}>
+		<Box flex={3} bg="white" p={3} borderRadius={5}>
+			<Text
+				textTransform="uppercase"
+				fontWeight="bold"
+				mb={7}
+				ml={3}
+				fontSize="lg"
+			>
 				My Orders
 			</Text>
 
-			<HStack w="100%" flexWrap="wrap" justify="space-between" gap={8}>
+			<HStack
+				w="100%"
+				flexWrap="wrap"
+				justify="space-between"
+				gap={6}
+				px={2}
+			>
 				{orders?.map((order) => (
-					<Box key={order.id} w="48%" bg="white" borderRadius={8}>
+					<Box
+						key={order.id}
+						w="48.5%"
+						bg="background.main"
+						borderRadius={8}
+						boxShadow="0 4px 8px #0000001a, 0 2px 8px #0000001a"
+					>
 						<Box p={4}>
 							<VStack align="start" gap={4}>
 								<HStack justify="space-between" w="100%">
@@ -48,7 +70,7 @@ const MyOrders = () => {
 
 								<HStack justify="space-between" w="100%">
 									<Tag fontSize="small">
-										{getStringDateTime(order.createdAt)}
+										{getStringDate(order.createdAt)}
 									</Tag>
 									<Tag>
 										<Flex align="center" gap={1}>
@@ -81,7 +103,7 @@ const MyOrders = () => {
 						</Box>
 
 						<Box
-							bg="background.100"
+							bg="background.50"
 							py={2}
 							px={4}
 							borderBottomRadius={5}
