@@ -32,7 +32,11 @@ const ProductPage = () => {
 					count={products?.length}
 					showCount={true}
 				>
-					{segment ?? "All Products"}
+					{segment
+						? segment
+						: ageStatus === "New"
+						? "New Arrivals"
+						: "All Products"}
 				</MyHeading>
 			)}
 			<ProductList

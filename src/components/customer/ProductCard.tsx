@@ -45,13 +45,14 @@ const ProductCard = ({ product, categoryName }: Props) => {
 					/>
 				</Box>
 				<HStack justifyContent="space-between" w="100%" mt={4} px={1}>
-					<Text fontWeight="bold" fontSize="small" letterSpacing={1}>
+					<Text fontWeight="semibold" fontSize="sm">
 						{product.name}
 					</Text>
 					<Badge
 						colorScheme="green"
-						fontSize="x-small"
-						letterSpacing={1}
+						fontSize="xxs"
+						fontWeight="medium"
+						letterSpacing={0.5}
 						textTransform="capitalize"
 					>
 						{product?.category?.name ?? categoryName}
@@ -60,7 +61,7 @@ const ProductCard = ({ product, categoryName }: Props) => {
 			</Link>
 
 			<VStack px={1} align="start" spacing={3.5}>
-				<Text fontWeight="semibold" fontSize="small" letterSpacing={1}>
+				<Text fontWeight="semibold" fontSize="sm" letterSpacing={0.5}>
 					Rs. {product.price}
 				</Text>
 				<HStack justifyContent="start" spacing={3} px={1}>

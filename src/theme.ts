@@ -15,6 +15,7 @@ const theme = extendTheme({
 		body: `Open Sans, ${base.fonts.body}`,
 	},
 	fontSizes: {
+		xxs: "0.7rem",
 		xs: "0.75rem",
 		sm: "0.875rem",
 		md: "1rem",
