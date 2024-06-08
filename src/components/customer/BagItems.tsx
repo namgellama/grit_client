@@ -12,7 +12,7 @@ const BagItems = ({ bagItems, deliveryCharge, total }: Props) => {
 		<Box flex={1} pl={5}>
 			<Flex direction="column" h="100%" justify="space-between">
 				<Flex
-					className="drawer"
+					className="scrollbar"
 					direction="column"
 					gap={5}
 					pr={5}
