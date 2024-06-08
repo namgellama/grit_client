@@ -1,16 +1,8 @@
-body {
-	background: #f4f4f4 !important;
-}
-
-.drawer::-webkit-scrollbar {
-	width: 0.2rem;
-}
-
-.drawer::-webkit-scrollbar-thumb {
-	background: gray;
-	cursor: pointer;
-}
-
 .scrollbar::-webkit-scrollbar {
 	width: 0.2rem;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+	background: gray;
+	cursor: pointer;
 }
