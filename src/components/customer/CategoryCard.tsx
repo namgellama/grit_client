@@ -1,4 +1,4 @@
-import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import { Card, CardBody, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { Category } from "../../app/interfaces/category";
 
@@ -17,14 +17,14 @@ const CategoryCard = ({ category }: { category: Category }) => {
 						height="330px"
 						objectFit="cover"
 					/>
-					<Heading
+					<Text
 						pt={2}
 						size="sm"
-						fontWeight="bold"
+						fontWeight="semibold"
 						textAlign="center"
 					>
 						{category.name}
-					</Heading>
+					</Text>
 				</CardBody>
 			</Card>
 		</Link>

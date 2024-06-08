@@ -18,12 +18,12 @@ const MyHeading = ({
 	children,
 	count,
 	showCount,
-	size = "lg",
+	size = "2xl",
 }: Props) => {
 	return (
 		<Skeleton isLoaded={!isLoading} width="400px">
 			<Heading
-				size={size}
+				fontSize={size}
 				textAlign="left"
 				fontWeight="bold"
 				display={error ? "none" : "flex"}
