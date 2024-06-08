@@ -1,12 +1,4 @@
-import {
-	Button,
-	Center,
-	Divider,
-	HStack,
-	Spinner,
-	useToast,
-	VStack,
-} from "@chakra-ui/react";
+import { Button, HStack, Spinner, useToast, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -52,6 +44,10 @@ const CheckoutPage = () => {
 	} = useForm<FormFields>({
 		resolver: zodResolver(checkoutSchema),
 	});
+
+	useEffect(() => {
+		if (bagItems?.length === 0) navigate("/");
+	}, [bagItems, navigate]);
 
 	useEffect(() => {
 		const result = bagItems?.reduce(
@@ -124,9 +120,12 @@ const CheckoutPage = () => {
 				<VStack
 					as="form"
 					flex={1}
-					spacing={7}
-					my={5}
+					gap={9}
 					align="start"
+					bg="background.main"
+					py={8}
+					px={10}
+					borderRadius={5}
 					onSubmit={handleSubmit(onSubmit)}
 				>
 					<DeliveryForm
@@ -147,9 +146,6 @@ const CheckoutPage = () => {
 					</Button>
 				</VStack>
 
-				<Center height="90vh" borderColor="gray">
-					<Divider orientation="vertical" />
-				</Center>
 				<BagItems
 					bagItems={bagItems ?? []}
 					deliveryCharge={deliveryCharge}

@@ -1,8 +1,8 @@
-import { Heading, Radio, RadioGroup, Stack } from "@chakra-ui/react";
-import { paymentMethods } from "../../utilities/data";
-import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { FormFields } from "../../validations/checkoutValidation";
+import { Flex, Heading, Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { InputErrorMessage } from "..";
+import { paymentMethods } from "../../utilities/data";
+import { FormFields } from "../../validations/checkoutValidation";
 
 interface Props {
 	register: UseFormRegister<FormFields>;
@@ -11,8 +11,8 @@ interface Props {
 
 const PaymentMethods = ({ register, errors }: Props) => {
 	return (
-		<>
-			<Heading fontSize="larger" letterSpacing={1}>
+		<Flex direction="column" gap={3}>
+			<Heading fontSize="lg" letterSpacing={1}>
 				Payment Method
 			</Heading>
 			<RadioGroup defaultValue={paymentMethods[0].value}>
@@ -36,7 +36,7 @@ const PaymentMethods = ({ register, errors }: Props) => {
 					)}
 				</Stack>
 			</RadioGroup>
-		</>
+		</Flex>
 	);
 };
 

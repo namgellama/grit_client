@@ -3,6 +3,7 @@ import {
 	FormControl,
 	FormLabel,
 	Heading,
+	HStack,
 	Input,
 	Select,
 } from "@chakra-ui/react";
@@ -19,8 +20,8 @@ interface Props {
 
 const DeliveryForm = ({ register, errors, setDeliveryCharge }: Props) => {
 	return (
-		<Flex direction="column" w="100%">
-			<Heading fontSize="larger" letterSpacing={1}>
+		<Flex direction="column" w="100%" gap={3}>
+			<Heading fontSize="lg" letterSpacing={1}>
 				Delivery
 			</Heading>
 
@@ -29,7 +30,6 @@ const DeliveryForm = ({ register, errors, setDeliveryCharge }: Props) => {
 				<Input
 					type="text"
 					variant="filled"
-					background="white"
 					placeholder="Swoyambhu"
 					{...register("addressLine1")}
 				/>
@@ -45,7 +45,6 @@ const DeliveryForm = ({ register, errors, setDeliveryCharge }: Props) => {
 				<Input
 					type="text"
 					variant="filled"
-					background="white"
 					placeholder="Near Ward no 15"
 					{...register("addressLine2")}
 				/>
@@ -60,7 +59,6 @@ const DeliveryForm = ({ register, errors, setDeliveryCharge }: Props) => {
 				<FormLabel>City*</FormLabel>
 				<Select
 					variant="filled"
-					background="white"
 					{...register("city")}
 					onChange={(e) => {
 						const deliveryCharge = cities.find(
@@ -78,40 +76,39 @@ const DeliveryForm = ({ register, errors, setDeliveryCharge }: Props) => {
 				)}
 			</FormControl>
 
-			<FormControl>
-				<FormLabel>Postal code</FormLabel>
-				<Input
-					type="text"
-					variant="filled"
-					background="white"
-					placeholder="Enter your postal code"
-					{...register("postalCode")}
-				/>
-				{errors.postalCode && (
-					<InputErrorMessage>
-						{errors.postalCode.message}
-					</InputErrorMessage>
-				)}
-			</FormControl>
-
-			<FormControl>
-				<FormLabel>Country*</FormLabel>
-				<Select
-					value="Nepal"
-					variant="filled"
-					background="white"
-					{...register("country")}
-				>
-					{countries.map((country) => (
-						<option key={country}>{country}</option>
-					))}
-				</Select>
-				{errors.country && (
-					<InputErrorMessage>
-						{errors.country.message}
-					</InputErrorMessage>
-				)}
-			</FormControl>
+			<HStack gap={4}>
+				<FormControl flex={2}>
+					<FormLabel>Country*</FormLabel>
+					<Select
+						value="Nepal"
+						variant="filled"
+						{...register("country")}
+					>
+						{countries.map((country) => (
+							<option key={country}>{country}</option>
+						))}
+					</Select>
+					{errors.country && (
+						<InputErrorMessage>
+							{errors.country.message}
+						</InputErrorMessage>
+					)}
+				</FormControl>
+				<FormControl flex={3}>
+					<FormLabel>Postal code</FormLabel>
+					<Input
+						type="text"
+						variant="filled"
+						placeholder="Enter your postal code"
+						{...register("postalCode")}
+					/>
+					{errors.postalCode && (
+						<InputErrorMessage>
+							{errors.postalCode.message}
+						</InputErrorMessage>
+					)}
+				</FormControl>
+			</HStack>
 		</Flex>
 	);
 };

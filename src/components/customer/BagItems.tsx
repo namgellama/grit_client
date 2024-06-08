@@ -1,4 +1,12 @@
-import { Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import {
+	Box,
+	Center,
+	Divider,
+	Flex,
+	HStack,
+	Image,
+	Text,
+} from "@chakra-ui/react";
 import { BagItem } from "../../app/interfaces/bagItem";
 
 interface Props {
@@ -9,13 +17,13 @@ interface Props {
 
 const BagItems = ({ bagItems, deliveryCharge, total }: Props) => {
 	return (
-		<Box flex={1} pl={5}>
+		<Box flex={1} pl={5} bg="background.main" py={8} px={10}>
 			<Flex direction="column" h="100%" justify="space-between">
 				<Flex
 					className="scrollbar"
 					direction="column"
 					gap={5}
-					pr={5}
+					pr={bagItems.length > 4 ? 5 : 0}
 					h={bagItems.length > 3 ? "50vh" : "30vh"}
 					overflowY="scroll"
 				>
@@ -64,12 +72,17 @@ const BagItems = ({ bagItems, deliveryCharge, total }: Props) => {
 						</Flex>
 					))}
 				</Flex>
-				<Flex pt={5} pr={5} direction="column" gap={0.5}>
+
+				<Center borderColor="background.400" my={5}>
+					<Divider orientation="horizontal" />
+				</Center>
+
+				<Flex direction="column" gap={1}>
 					<HStack justify="space-between">
-						<Text fontSize="small" fontWeight="semibold">
+						<Text fontSize="sm" fontWeight="semibold">
 							Subtotal
 						</Text>
-						<Text fontSize="small" fontWeight="semibold">
+						<Text fontSize="sm" fontWeight="semibold">
 							Rs.{" "}
 							{bagItems?.reduce(
 								(acc, curr) => (acc += curr.unitTotalPrice),
@@ -78,18 +91,18 @@ const BagItems = ({ bagItems, deliveryCharge, total }: Props) => {
 						</Text>
 					</HStack>
 					<HStack justify="space-between">
-						<Text fontSize="small" fontWeight="semibold">
+						<Text fontSize="sm" fontWeight="semibold">
 							Delivery
 						</Text>
-						<Text fontSize="small" fontWeight="semibold">
+						<Text fontSize="sm" fontWeight="semibold">
 							Rs. {deliveryCharge}
 						</Text>
 					</HStack>
 					<HStack justify="space-between">
-						<Text fontSize="small" fontWeight="bold">
+						<Text fontSize="sm" fontWeight="bold">
 							Total
 						</Text>
-						<Text fontSize="small" fontWeight="bold">
+						<Text fontSize="sm" fontWeight="bold">
 							Rs. {total}
 						</Text>
 					</HStack>
