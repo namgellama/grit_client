@@ -4,6 +4,7 @@ import {
 	Button,
 	Flex,
 	HStack,
+	Image,
 	Tag,
 	Text,
 	VStack,
@@ -101,6 +102,47 @@ const MyOrders = () => {
 								</HStack>
 							</VStack>
 						</Box>
+
+						<HStack
+							py={order.orderItems.length > 2 ? 4 : 0}
+							px={4}
+							wrap="wrap"
+							justify="space-between"
+							overflowY="scroll"
+							className="scrollbar"
+							h="100px"
+							gap={3}
+						>
+							{order.orderItems.map((orderItem) => (
+								<HStack align="start" w="200px">
+									<Image
+										w="50px"
+										h="60px"
+										objectFit="cover"
+										src={
+											orderItem.product.color.find(
+												(color) =>
+													color.colorName ===
+													orderItem.color
+											)?.image
+										}
+										alt={orderItem.product.name}
+									/>
+									<VStack align="start" gap={0}>
+										<Text fontSize="sm">
+											{orderItem.product.name}
+										</Text>
+										<Text fontSize="sm">
+											{orderItem.size} | {orderItem.color}
+										</Text>
+										<Text fontSize="sm">
+											Rs. {orderItem.unitPrice} x{" "}
+											{orderItem.quantity}
+										</Text>
+									</VStack>
+								</HStack>
+							))}
+						</HStack>
 
 						<Box
 							bg="background.50"
