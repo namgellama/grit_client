@@ -13,7 +13,7 @@ const SizeBox = ({ selectedSize, size, setSelectedSize }: Props) => {
 			cursor="pointer"
 			justify="center"
 			align="center"
-			w="50px"
+			w="45px"
 			h="40px"
 			borderRadius={5}
 			onClick={() => setSelectedSize(size)}

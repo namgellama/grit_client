@@ -3,7 +3,6 @@ import {
 	Button,
 	Divider,
 	Flex,
-	Heading,
 	HStack,
 	Image,
 	Skeleton,
@@ -19,8 +18,8 @@ import {
 	useGetBagItemsQuery,
 	useUpdateBagItemMutation,
 } from "../../app/features/bagItem/bagItemApiSlice";
-import { useAppSelector } from "../../app/hooks";
 import { useGetProductQuery } from "../../app/features/product/productApiSlice";
+import { useAppSelector } from "../../app/hooks";
 import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "../../components";
 import { BagItem } from "../../interfaces";
 
@@ -163,13 +162,19 @@ const ProductDetailPage = () => {
 						px={10}
 					>
 						<VStack alignItems="start">
-							<Text>
+							<Text fontSize="sm" fontWeight="medium">
 								{product?.category.name} | {product?.segment}
 							</Text>
-							<Heading fontSize="x-large" letterSpacing={1}>
+							<Text
+								fontSize="xl"
+								fontWeight="semibold"
+								letterSpacing={0.5}
+							>
 								{product?.name}
-							</Heading>
-							<Text>Rs. {product?.price}</Text>
+							</Text>
+							<Text fontWeight="medium">
+								Rs. {product?.price}
+							</Text>
 						</VStack>
 
 						<Divider borderColor="darkgray" />
@@ -193,7 +198,7 @@ const ProductDetailPage = () => {
 						<Divider borderColor="darkgray" />
 
 						<VStack align="start" spacing={5}>
-							<Text>Select a size</Text>
+							<Text fontSize="sm">Select a size</Text>
 							<HStack spacing={5}>
 								{product?.sizes.map((size) => (
 									<SizeBox
@@ -209,10 +214,14 @@ const ProductDetailPage = () => {
 						<Divider borderColor="darkgray" />
 
 						<VStack align="start">
-							<Heading fontSize="x-large" letterSpacing={2}>
+							<Text
+								fontSize="lg"
+								letterSpacing={1}
+								fontWeight="semibold"
+							>
 								Description
-							</Heading>
-							<Text as="p" textAlign="justify" py={5}>
+							</Text>
+							<Text as="p" textAlign="justify">
 								{product?.description}
 							</Text>
 						</VStack>
