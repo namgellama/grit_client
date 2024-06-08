@@ -4,11 +4,12 @@ import { ReactNode } from "react";
 interface Props {
 	children: ReactNode;
 	width?: string;
+	my?: string | number;
 }
 
-const MyContainer = ({ children, width = "6xl" }: Props) => {
+const MyContainer = ({ children, width = "6xl", my = "4rem" }: Props) => {
 	return (
-		<Container my="4rem" maxW={width}>
+		<Container my={my} maxW={width}>
 			{children}
 		</Container>
 	);
