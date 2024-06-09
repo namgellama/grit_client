@@ -62,7 +62,7 @@ const NavBar = () => {
 	};
 
 	return (
-		<nav>
+		<Box as="nav" position="sticky" top={0} zIndex={5}>
 			<Box bg="white" py={2}>
 				<Container maxW="7xl">
 					<HStack justify="space-between">
@@ -164,7 +164,7 @@ const NavBar = () => {
 					/>
 				)}
 			</Box>
-		</nav>
+		</Box>
 	);
 };
 
