@@ -1,20 +1,21 @@
+import {
+	Badge,
+	Box,
+	Card,
+	CardBody,
+	Divider,
+	Flex,
+	Heading,
+	HStack,
+	Image,
+	Text,
+	VStack,
+} from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useGetMyOrderQuery } from "../../app/features/order/orderApiSlice";
 import { useAppSelector } from "../../app/hooks";
 import { MyContainer } from "../../components";
-import {
-	Heading,
-	HStack,
-	Text,
-	VStack,
-	Image,
-	Divider,
-	Flex,
-	Box,
-	Card,
-	CardBody,
-	Badge,
-} from "@chakra-ui/react";
+import { getOrderColor, getPaymentColor } from "../../utilities/getColor";
 import { getStringDateTime } from "../../utilities/getStringDate";
 
 const MyOrderDetailPage = () => {
@@ -31,24 +32,40 @@ const MyOrderDetailPage = () => {
 			<Card>
 				<CardBody>
 					<Flex direction="column" gap={4}>
-						<Heading fontSize="large">Order ID: {id}</Heading>
-						<Text>
+						<Heading fontSize="md" textTransform="uppercase">
+							Order ID:{" "}
+							<Text as="span" textTransform="none">
+								{id}
+							</Text>
+						</Heading>
+						<Text fontSize="sm" fontWeight="medium">
 							Order Date:{" "}
 							{order && getStringDateTime(order?.createdAt)}
 						</Text>
-						<Text>
+						<Text fontSize="sm" fontWeight="medium">
 							Order Status:
-							<Badge colorScheme="green" ml={2}>
+							<Badge
+								colorScheme={getOrderColor(order?.status!)}
+								ml={2}
+								fontSize="xxs"
+							>
 								{order?.status}
 							</Badge>
 						</Text>
 					</Flex>
 
-					<Divider borderColor="gray" my={8} />
+					<Divider borderColor="background.400" my={8} />
 
-					<VStack align="start" gap={3}>
+					<VStack
+						align="start"
+						gap={5}
+						h={order?.orderItems.length! > 4 ? "400px" : "100%"}
+						overflowY="scroll"
+						className="scrollbar"
+						pr={order?.orderItems.length! > 4 ? 4 : 0}
+					>
 						{order?.orderItems.map((orderItem) => (
-							<HStack key={orderItem.id} w="100%">
+							<HStack key={orderItem.id} w="100%" align="start">
 								<Image
 									src={
 										orderItem.product.color.find(
@@ -58,85 +75,124 @@ const MyOrderDetailPage = () => {
 										)?.image
 									}
 									alt={orderItem.product.name}
-									w="80px"
-									h="80px"
+									w="70px"
+									h="70px"
 									objectFit="cover"
 								/>
-								<HStack justify="space-between" w="100%">
-									<VStack align="start">
-										<Text>{orderItem.product.name}</Text>
-										<Text>
+								<HStack
+									justify="space-between"
+									w="100%"
+									align="end"
+								>
+									<VStack align="start" gap={0.5}>
+										<Text fontSize="sm" fontWeight="medium">
+											{orderItem.product.name}
+										</Text>
+										<Text fontSize="sm" fontWeight="medium">
 											{orderItem.color} | {orderItem.size}
 										</Text>
-									</VStack>
-									<VStack justifySelf="end">
-										<Text
-											fontWeight="bold"
-											fontSize="small"
-										>
-											Rs. {orderItem.unitTotalPrice}
-										</Text>
-										<Text fontSize="small">
+										<Text fontSize="sm" fontWeight="medium">
 											Rs. {orderItem.unitPrice} x{" "}
 											{orderItem.quantity}
 										</Text>
 									</VStack>
+									<Text fontWeight="bold" fontSize="sm">
+										Rs. {orderItem.unitTotalPrice}
+									</Text>
 								</HStack>
 							</HStack>
 						))}
 					</VStack>
 
-					<Divider borderColor="gray" my={8} />
+					<Divider borderColor="background.400" my={8} />
 
-					<Box>
-						<Text fontWeight="bold" mb={2}>
+					<Flex direction="column" gap={0.5}>
+						<Text
+							fontWeight="bold"
+							mb={2}
+							textTransform="uppercase"
+						>
 							Order Summary
 						</Text>
 						<HStack justify="space-between">
-							<Text fontSize="small">Subtotal</Text>
-							<Text fontSize="small">Rs. {order?.subTotal}</Text>
+							<Text fontSize="sm" fontWeight="medium">
+								Subtotal
+							</Text>
+							<Text fontSize="sm" fontWeight="medium">
+								Rs. {order?.subTotal}
+							</Text>
 						</HStack>
 						<HStack justify="space-between">
-							<Text fontSize="small">Delivery</Text>
-							<Text fontSize="small">
+							<Text fontSize="sm" fontWeight="medium">
+								Delivery
+							</Text>
+							<Text fontSize="sm" fontWeight="medium">
 								Rs. {order?.deliveryCharge}
 							</Text>
 						</HStack>
 						<HStack justify="space-between">
-							<Text fontSize="small">Total</Text>
-							<Text fontSize="small" fontWeight="bold">
+							<Text fontSize="sm" fontWeight="bold">
+								Total
+							</Text>
+							<Text fontSize="sm" fontWeight="bold">
 								Rs. {order?.total}
 							</Text>
 						</HStack>
-					</Box>
+					</Flex>
 
-					<Divider borderColor="gray" my={8} />
+					<Divider borderColor="background.400" my={8} />
 
 					<HStack justify="space-between" align="start">
 						<Box>
-							<Text fontWeight="bold" mb={2}>
+							<Text
+								fontWeight="bold"
+								mb={2}
+								textTransform="uppercase"
+							>
 								Payment
 							</Text>
-							<Text>
-								{order?.payment.method}
-								<Badge colorScheme="green" ml={4}>
+							<Text fontSize="sm" fontWeight="medium">
+								Method: {order?.payment.method}
+							</Text>
+							<Text fontSize="sm" fontWeight="medium">
+								Status:
+								<Badge
+									colorScheme={getPaymentColor(
+										order?.payment.status!
+									)}
+									ml={2}
+									fontSize="xxs"
+								>
 									{order?.payment.status}
 								</Badge>
 							</Text>
 						</Box>
 						<Box>
-							<Text fontWeight="bold" mb={2}>
+							<Text
+								fontWeight="bold"
+								mb={2}
+								textTransform="uppercase"
+								textAlign="end"
+							>
 								Delivery
 							</Text>
-							<Text>
+							<Text
+								fontWeight="medium"
+								fontSize="sm"
+								textAlign="end"
+							>
 								{order?.address?.addressLine1},{" "}
 								{order?.address?.addressLine2}
 							</Text>
-							<Text>
+							<Text
+								fontWeight="medium"
+								fontSize="sm"
+								textAlign="end"
+							>
 								{order?.address?.city},{" "}
 								{order?.address?.country}
 								{order?.address?.postalCode &&
-									`- ${order?.address?.postalCode}`}
+									` - ${order?.address?.postalCode}`}
 							</Text>
 						</Box>
 					</HStack>
