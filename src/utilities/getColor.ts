@@ -9,5 +9,5 @@ export const getPaymentColor = (status: string) => {
 	if (status === "PENDING") return "blue";
 	if (status === "COMPLETED") return "green";
 	if (status === "FAILED") return "red";
-	if (status === "REFUNDED") return "ornage";
+	if (status === "REFUNDED") return "orange";
 };
