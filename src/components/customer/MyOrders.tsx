@@ -4,39 +4,95 @@ import {
 	Button,
 	Flex,
 	HStack,
+	IconButton,
 	Image,
+	Select,
 	Tag,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useGetMyOrdersQuery } from "../../app/features/order/orderApiSlice";
 import { useAppSelector } from "../../app/hooks";
+import { orderStatuses, paymentStatuses } from "../../utilities/data";
 import { getOrderColor, getPaymentColor } from "../../utilities/getColor";
 import { getStringDate } from "../../utilities/getStringDate";
 
 const MyOrders = () => {
+	const [orderStatusValue, setOrderStatusValue] = useState("");
+	const [paymentStatusValue, setPaymentStatusValue] = useState("");
+	const [sort, setSort] = useState("desc");
 	const { user } = useAppSelector((state) => state.auth);
 	const navigate = useNavigate();
+
+	const queryParams = {
+		orderStatus: orderStatusValue ?? undefined,
+		paymentStatus: paymentStatusValue ?? undefined,
+		sortOrder: sort ?? undefined,
+	};
 
 	const {
 		data: orders,
 		isLoading,
 		error,
-	} = useGetMyOrdersQuery(user?.token || "");
+	} = useGetMyOrdersQuery({ token: user?.token || "", query: queryParams });
 
 	return (
 		<Box flex={3} bg="white" p={3} borderRadius={5}>
 			<Text
 				textTransform="uppercase"
 				fontWeight="bold"
-				mb={7}
 				ml={3}
 				fontSize="lg"
 			>
 				My Orders
 			</Text>
+
+			<HStack my={7} px={3} align="end">
+				<Select
+					w="50%"
+					placeholder="Filter By Order Status"
+					value={orderStatusValue}
+					onChange={(e) => setOrderStatusValue(e.target.value)}
+				>
+					{/* <option value=""></option> */}
+					{orderStatuses.map((status) => (
+						<option key={status.name} value={status.value}>
+							{status.name}
+						</option>
+					))}
+				</Select>
+
+				<Select
+					w="50%"
+					placeholder="Filter By Payment Status"
+					value={paymentStatusValue}
+					onChange={(e) => setPaymentStatusValue(e.target.value)}
+				>
+					{paymentStatuses.map((status) => (
+						<option key={status.name} value={status.value}>
+							{status.name}
+						</option>
+					))}
+				</Select>
+
+				<IconButton
+					icon={
+						sort === "asc" ? (
+							<FaSortAmountUp />
+						) : (
+							<FaSortAmountDown />
+						)
+					}
+					aria-label="Sort"
+					onClick={() =>
+						sort === "asc" ? setSort("desc") : setSort("asc")
+					}
+				/>
+			</HStack>
 
 			<HStack
 				w="100%"
@@ -114,7 +170,11 @@ const MyOrders = () => {
 							gap={3}
 						>
 							{order.orderItems.map((orderItem) => (
-								<HStack align="start" w="200px">
+								<HStack
+									key={orderItem.id}
+									align="start"
+									w="180px"
+								>
 									<Image
 										w="50px"
 										h="60px"

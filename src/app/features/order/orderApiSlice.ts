@@ -2,15 +2,35 @@ import { apiSlice } from "../../apiSlice";
 import { ORDER_URL } from "../../constants";
 import { Order, OrderRequest } from "../../interfaces/order";
 
+interface QueryParams {
+	orderStatus?: string;
+	paymentStatus?: string;
+	sortOrder?: string;
+}
+
 export const orderApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		getMyOrders: builder.query<Order[], string>({
-			query: (token) => ({
-				url: `${ORDER_URL}/mine`,
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			}),
+		getMyOrders: builder.query<
+			Order[],
+			{ token: string; query: QueryParams }
+		>({
+			query: ({
+				token,
+				query: { orderStatus, paymentStatus, sortOrder },
+			}) => {
+				const params = new URLSearchParams();
+				if (orderStatus) params.append("orderStatus", orderStatus);
+				if (paymentStatus)
+					params.append("paymentStatus", paymentStatus);
+				if (sortOrder) params.append("sortOrder", sortOrder);
+
+				return {
+					url: `${ORDER_URL}/mine?${params.toString()}`,
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				};
+			},
 			providesTags: ["MyOrders"],
 		}),
 

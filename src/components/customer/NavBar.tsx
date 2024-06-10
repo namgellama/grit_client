@@ -11,10 +11,10 @@ import {
 } from "@chakra-ui/react";
 import { JSXElementConstructor, LegacyRef, ReactElement, useRef } from "react";
 import { useCookies } from "react-cookie";
-import { BiLogOut } from "react-icons/bi";
 import { FaShoppingBag, FaUserCircle } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
+import { MdLogout } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { CookieBagItemsDrawer, DBBagItemsDrawer } from "..";
 import { logout } from "../../app/features/auth/authSlice";
@@ -142,7 +142,7 @@ const NavBar = () => {
 
 							{user && (
 								<NavIcon
-									icon={<BiLogOut fontSize="larger" />}
+									icon={<MdLogout fontSize="larger" />}
 									label="Logout"
 									onClick={handleLogout}
 								/>
