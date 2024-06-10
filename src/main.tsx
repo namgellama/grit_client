@@ -10,6 +10,7 @@ import "./index.css";
 import {
 	AccountPage,
 	AdminCategoriesPage,
+	AdminOrderDetailPage,
 	AdminOrdersPage,
 	CategoryPage,
 	CheckoutPage,
@@ -69,6 +70,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 								<Route
 									path="/dashboard/orders"
 									element={<AdminOrdersPage />}
+								/>
+								<Route
+									path="/dashboard/orders/:id"
+									element={<AdminOrderDetailPage />}
 								/>
 							</Route>
 							<Route path="/login" element={<SignInPage />} />
