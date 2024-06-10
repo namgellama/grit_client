@@ -1,7 +1,9 @@
+import { Box } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { logout } from "./app/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
-import { NavBar } from "./components";
+import { AdminNavBar, NavBar } from "./components";
 
 function App() {
 	const { user } = useAppSelector((state) => state.auth);
@@ -9,18 +11,28 @@ function App() {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		if (user?.role === "Admin") navigate("/dashboard");
+	}, [user, navigate]);
+
 	const handleLogout = () => {
 		dispatch(logout());
 		navigate("/login");
 	};
 
 	return (
-		<>
-			<NavBar user={user} handleLogout={handleLogout} />
+		<Box display={user?.role === "Customer" ? "block" : "flex"}>
+			{user?.role == "Customer" && (
+				<NavBar user={user} handleLogout={handleLogout} />
+			)}
+			{user?.role == "Admin" && (
+				<AdminNavBar user={user} handleLogout={handleLogout} />
+			)}
+
 			<main>
 				<Outlet />
 			</main>
-		</>
+		</Box>
 	);
 }
 

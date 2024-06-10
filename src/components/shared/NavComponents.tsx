@@ -1,5 +1,5 @@
-import { IconButton, Text } from "@chakra-ui/react";
-import { LegacyRef, ReactElement, JSXElementConstructor } from "react";
+import { Button, Flex, IconButton, Text } from "@chakra-ui/react";
+import { JSXElementConstructor, LegacyRef, ReactElement } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export const NavLink = ({ path, name }: { path: string; name: string }) => (
@@ -54,5 +54,37 @@ export const NavLinkIcon = ({
 			_hover={{ background: "inherit" }}
 			onClick={() => navigate(link)}
 		/>
+	);
+};
+
+export const NavLinkButton = ({
+	path,
+	name,
+	icon,
+}: {
+	path: string;
+	name: string;
+	icon: ReactElement<any, string | JSXElementConstructor<any>>;
+}) => {
+	const navigate = useNavigate();
+
+	return (
+		<Flex
+			align="center"
+			w="100%"
+			transition="all 0.03s ease-in"
+			_hover={{ bg: "background.100" }}
+			pl={4}
+			borderRadius={5}
+		>
+			{icon}
+			<Button
+				variant="ghost"
+				onClick={() => navigate(path)}
+				_hover={{ bg: "inherit" }}
+			>
+				{name}
+			</Button>
+		</Flex>
 	);
 };

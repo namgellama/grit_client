@@ -16,6 +16,8 @@ export { default as ProductList } from "./customer/ProductList";
 export { default as SizeBox } from "./customer/SizeBox";
 export { default as Profile } from "./customer/Profile";
 
+export { default as AdminNavBar } from "./admin/AdminNavBar";
+
 export { default as ErrorMessage } from "./shared/ErrorMessage";
 export { default as InputErrorMessage } from "./shared/InputErrorMessage";
 export { default as MyContainer } from "./shared/MyContainer";
