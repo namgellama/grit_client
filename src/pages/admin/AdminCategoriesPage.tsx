@@ -14,13 +14,25 @@ import {
 	Tr,
 	useDisclosure,
 } from "@chakra-ui/react";
+import { useRef, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useGetCategoriesQuery } from "../../app/features/category/categoryApiSlice";
-import { CategoryModal } from "../../components";
+import { CategoryModal, DeleteAlert } from "../../components";
 
 const AdminCategoriesPage = () => {
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [id, setId] = useState("");
+	const {
+		isOpen: isModalOpen,
+		onOpen: onModalOpen,
+		onClose: onModalClose,
+	} = useDisclosure();
+	const {
+		isOpen: isAlertOpen,
+		onOpen: onAlertOpen,
+		onClose: onAlertClose,
+	} = useDisclosure();
+	const cancelRef = useRef(null);
 
 	const { data: categories, isLoading, error } = useGetCategoriesQuery();
 
@@ -39,13 +51,20 @@ const AdminCategoriesPage = () => {
 					colorScheme="messenger"
 					size="sm"
 					borderRadius={2}
-					onClick={onOpen}
+					onClick={onModalOpen}
 				>
 					Add Category
 				</Button>
 			</HStack>
 
-			<CategoryModal isOpen={isOpen} onClose={onClose} />
+			<CategoryModal isOpen={isModalOpen} onClose={onModalClose} />
+			<DeleteAlert
+				isOpen={isAlertOpen}
+				onClose={onAlertClose}
+				cancelRef={cancelRef}
+				type="Category"
+				id={id}
+			/>
 
 			<TableContainer bg="white">
 				<Table variant="simple">
@@ -86,6 +105,10 @@ const AdminCategoriesPage = () => {
 											variant="ghost"
 											borderRadius={50}
 											color="background.600"
+											onClick={() => {
+												onAlertOpen();
+												setId(category.id);
+											}}
 										/>
 									</HStack>
 								</Td>
