@@ -43,7 +43,7 @@ const Profile = () => {
 					textTransform="uppercase"
 					letterSpacing={0.5}
 				>
-					Address Book
+					Current Address
 				</Text>
 				<VStack align="start" mt={2} gap={0}>
 					<Text fontSize="sm">{address?.addressLine1}</Text>

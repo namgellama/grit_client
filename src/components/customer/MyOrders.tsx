@@ -4,27 +4,26 @@ import {
 	Button,
 	Flex,
 	HStack,
-	IconButton,
 	Image,
-	Select,
 	Tag,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useGetMyOrdersQuery } from "../../app/features/order/orderApiSlice";
 import { useAppSelector } from "../../app/hooks";
-import { orderStatuses, paymentStatuses } from "../../utilities/data";
 import { getOrderColor, getPaymentColor } from "../../utilities/getColor";
 import { getStringDate } from "../../utilities/getStringDate";
+import FilterSort from "./FilterSort";
+
+type SortOrder = "asc" | "desc";
 
 const MyOrders = () => {
 	const [orderStatusValue, setOrderStatusValue] = useState("");
 	const [paymentStatusValue, setPaymentStatusValue] = useState("");
-	const [sort, setSort] = useState("desc");
+	const [sort, setSort] = useState<SortOrder>("desc");
 	const { user } = useAppSelector((state) => state.auth);
 	const navigate = useNavigate();
 
@@ -51,48 +50,14 @@ const MyOrders = () => {
 				My Orders
 			</Text>
 
-			<HStack my={7} px={3} align="end">
-				<Select
-					w="50%"
-					placeholder="Filter By Order Status"
-					value={orderStatusValue}
-					onChange={(e) => setOrderStatusValue(e.target.value)}
-				>
-					{/* <option value=""></option> */}
-					{orderStatuses.map((status) => (
-						<option key={status.name} value={status.value}>
-							{status.name}
-						</option>
-					))}
-				</Select>
-
-				<Select
-					w="50%"
-					placeholder="Filter By Payment Status"
-					value={paymentStatusValue}
-					onChange={(e) => setPaymentStatusValue(e.target.value)}
-				>
-					{paymentStatuses.map((status) => (
-						<option key={status.name} value={status.value}>
-							{status.name}
-						</option>
-					))}
-				</Select>
-
-				<IconButton
-					icon={
-						sort === "asc" ? (
-							<FaSortAmountUp />
-						) : (
-							<FaSortAmountDown />
-						)
-					}
-					aria-label="Sort"
-					onClick={() =>
-						sort === "asc" ? setSort("desc") : setSort("asc")
-					}
-				/>
-			</HStack>
+			<FilterSort
+				orderStatusValue={orderStatusValue}
+				paymentStatusValue={paymentStatusValue}
+				setOrderStatusValue={setOrderStatusValue}
+				setPaymentStatusValue={setPaymentStatusValue}
+				setSort={setSort}
+				sort={sort}
+			/>
 
 			<HStack
 				w="100%"
