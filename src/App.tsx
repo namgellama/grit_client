@@ -34,9 +34,9 @@ function App() {
 				<AdminNavBar user={user} handleLogout={handleLogout} />
 			)}
 
-			<main>
+			<Box as="main" w="100%" h="100%">
 				<Outlet />
-			</main>
+			</Box>
 		</Box>
 	);
 }

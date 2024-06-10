@@ -47,7 +47,7 @@ const AdminNavBar = ({ user, handleLogout }: Props) => {
 	];
 
 	return (
-		<Box as="nav" bg="white" w="15%" h="100vh">
+		<Box as="nav" bg="white" w="20%" h="100vh">
 			<Center py={2}>
 				<Image src={logo} alt="Logo" boxSize="40px" />
 			</Center>
