@@ -4,26 +4,29 @@ import {
 	Container,
 	Flex,
 	HStack,
-	IconButton,
 	Image,
-	Text,
 	useDisclosure,
 } from "@chakra-ui/react";
-import { JSXElementConstructor, LegacyRef, ReactElement, useRef } from "react";
+import { useRef } from "react";
 import { useCookies } from "react-cookie";
 import { FaShoppingBag, FaUserCircle } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CookieBagItemsDrawer, DBBagItemsDrawer } from "..";
-import { logout } from "../../app/features/auth/authSlice";
 import { useGetBagItemsQuery } from "../../app/features/bagItem/bagItemApiSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { CurrentUser } from "../../app/interfaces/auth";
 import logo from "../../assets/logo.png";
 import { BagItem } from "../../interfaces";
+import { NavIcon, NavLink, NavLinkIcon } from "../shared/NavComponents";
 
-const NavBar = () => {
+interface Props {
+	user?: CurrentUser | null;
+	handleLogout: () => void;
+}
+
+const NavBar = ({ user, handleLogout }: Props) => {
 	const navLinks = [
 		{
 			name: "Men",
@@ -40,8 +43,6 @@ const NavBar = () => {
 		},
 	];
 
-	const { user } = useAppSelector((state) => state.auth);
-
 	const [cookies] = useCookies<
 		"bagItems",
 		{
@@ -53,13 +54,6 @@ const NavBar = () => {
 	const { data: dbBagItems } = useGetBagItemsQuery(user?.token ?? "", {
 		skip: user === null,
 	});
-	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
-
-	const handleLogout = () => {
-		dispatch(logout());
-		navigate("/login");
-	};
 
 	return (
 		<Box as="nav" position="sticky" top={0} zIndex={5}>
@@ -169,58 +163,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-const NavLink = ({ path, name }: { path: string; name: string }) => (
-	<Link to={path}>
-		<Text fontWeight="semibold" fontSize="small" letterSpacing={1}>
-			{name}
-		</Text>
-	</Link>
-);
-
-const NavIcon = ({
-	reference,
-	label,
-	icon,
-	onClick,
-}: {
-	reference?: LegacyRef<HTMLButtonElement>;
-	label: string;
-	icon: ReactElement<any, string | JSXElementConstructor<any>>;
-	onClick: any;
-}) => {
-	return (
-		<IconButton
-			ref={reference}
-			aria-label={label}
-			icon={icon}
-			variant="ghost"
-			borderRadius="100%"
-			_hover={{ background: "inherit" }}
-			onClick={onClick}
-		/>
-	);
-};
-
-const NavLinkIcon = ({
-	label,
-	icon,
-	link,
-}: {
-	label: string;
-	icon: ReactElement<any, string | JSXElementConstructor<any>>;
-	link: string;
-}) => {
-	const navigate = useNavigate();
-
-	return (
-		<IconButton
-			aria-label={label}
-			icon={icon}
-			variant="ghost"
-			borderRadius="100%"
-			_hover={{ background: "inherit" }}
-			onClick={() => navigate(link)}
-		/>
-	);
-};
