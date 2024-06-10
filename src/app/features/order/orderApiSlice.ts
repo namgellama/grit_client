@@ -22,6 +22,16 @@ export const orderApiSlice = apiSlice.injectEndpoints({
 			providesTags: ["Orders"],
 		}),
 
+		getOrder: builder.query<Order, { id: string; token: string }>({
+			query: ({ id, token }) => ({
+				url: `${ORDER_URL}/${id}`,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}),
+			providesTags: ["Order"],
+		}),
+
 		getMyOrders: builder.query<
 			Order[],
 			{ token: string; query: QueryParams }
@@ -75,6 +85,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
 
 export const {
 	useGetOrdersQuery,
+	useGetOrderQuery,
 	useGetMyOrdersQuery,
 	useGetMyOrderQuery,
 	useCreateOrderMutation,
