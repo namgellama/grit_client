@@ -1,3 +1,4 @@
+import { User } from "./auth";
 import { Product } from "./product";
 
 export interface OrderItem {
@@ -31,6 +32,7 @@ export interface Order {
 	createdAt: Date;
 	updatedAt: Date;
 	userId: string;
+	user: User;
 	orderItems: OrderItem[];
 	address?: Address;
 	payment: Payment;

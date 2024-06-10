@@ -41,7 +41,7 @@ const AdminNavBar = ({ user, handleLogout }: Props) => {
 		},
 		{
 			name: "Orders",
-			path: "/dashboard/ordersd",
+			path: "/dashboard/orders",
 			icon: <FaShoppingBag />,
 		},
 	];
