@@ -1,20 +1,16 @@
 import {
 	Flex,
 	HStack,
-	Text,
-	Button,
-	TableContainer,
 	Table,
-	Thead,
-	Tr,
-	Th,
+	TableContainer,
 	Tbody,
 	Td,
-	IconButton,
+	Text,
+	Th,
+	Thead,
+	Tr,
 } from "@chakra-ui/react";
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-import { CategoryModal, DeleteAlert } from "../../components";
+import { Link } from "react-router-dom";
 import { useGetOrdersQuery } from "../../app/features/order/orderApiSlice";
 import { useAppSelector } from "../../app/hooks";
 import { getStringDate } from "../../utilities/getStringDate";
@@ -46,13 +42,11 @@ const AdminOrdersPage = () => {
 						<Tr>
 							<Th>#</Th>
 							<Th>Customer Name</Th>
-							{/* <Th>Quantity</Th> */}
-							{/* <Th>Size | Color</Th> */}
 							<Th>Total Price</Th>
 							<Th>Order Status</Th>
 							<Th>Payment Method</Th>
 							<Th>Payment Status</Th>
-							<Th>Created</Th>
+							<Th>Date</Th>
 							<Th></Th>
 						</Tr>
 					</Thead>
@@ -68,17 +62,21 @@ const AdminOrdersPage = () => {
 								<Td>{getStringDate(order.createdAt)}</Td>
 
 								<Td>
-									<Button
-										size="sm"
-										bg="background.800"
-										color="white"
-										_hover={{
-											bg: "background.700",
-											color: "white",
-										}}
-									>
-										Details
-									</Button>
+									<Link to={`/dashboard/orders/${order.id}`}>
+										<Text
+											bg="background.800"
+											px={2}
+											py={1}
+											borderRadius={3}
+											color="white"
+											_hover={{
+												bg: "background.700",
+												color: "white",
+											}}
+										>
+											Details
+										</Text>
+									</Link>
 								</Td>
 							</Tr>
 						))}
