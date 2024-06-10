@@ -16,7 +16,25 @@ export const productApiSlice = apiSlice.injectEndpoints({
 			}),
 			providesTags: ["Category"],
 		}),
+		createCategory: builder.mutation<
+			Category,
+			{ data: Partial<Category>; token: string }
+		>({
+			query: ({ data, token }) => ({
+				url: CATEGORY_URL,
+				method: "POST",
+				body: data,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}),
+			invalidatesTags: ["Categories"],
+		}),
 	}),
 });
 
-export const { useGetCategoriesQuery, useGetCategoryQuery } = productApiSlice;
+export const {
+	useGetCategoriesQuery,
+	useGetCategoryQuery,
+	useCreateCategoryMutation,
+} = productApiSlice;
