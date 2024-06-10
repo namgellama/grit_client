@@ -9,6 +9,7 @@ import { store } from "./app/store.ts";
 import "./index.css";
 import {
 	AccountPage,
+	AdminCategoriesPage,
 	CategoryPage,
 	CheckoutPage,
 	DashboardPage,
@@ -59,6 +60,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 								<Route
 									path="/dashboard"
 									element={<DashboardPage />}
+								/>
+								<Route
+									path="/dashboard/categories"
+									element={<AdminCategoriesPage />}
 								/>
 							</Route>
 							<Route path="/login" element={<SignInPage />} />

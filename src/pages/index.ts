@@ -10,3 +10,4 @@ export { default as ProductDetailPage } from "./customer/ProductDetailPage";
 export { default as ProductPage } from "./customer/ProductPage";
 
 export { default as DashboardPage } from "./admin/DashboardPage";
+export { default as AdminCategoriesPage } from "./admin/AdminCategoriesPage";
