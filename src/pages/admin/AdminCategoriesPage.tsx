@@ -12,12 +12,16 @@ import {
 	Th,
 	Thead,
 	Tr,
+	useDisclosure,
 } from "@chakra-ui/react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useGetCategoriesQuery } from "../../app/features/category/categoryApiSlice";
+import { CategoryModal } from "../../components";
 
 const AdminCategoriesPage = () => {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+
 	const { data: categories, isLoading, error } = useGetCategoriesQuery();
 
 	return (
@@ -35,10 +39,13 @@ const AdminCategoriesPage = () => {
 					colorScheme="messenger"
 					size="sm"
 					borderRadius={2}
+					onClick={onOpen}
 				>
 					Add Category
 				</Button>
 			</HStack>
+
+			<CategoryModal isOpen={isOpen} onClose={onClose} />
 
 			<TableContainer bg="white">
 				<Table variant="simple">
