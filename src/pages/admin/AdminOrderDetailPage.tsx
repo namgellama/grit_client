@@ -7,18 +7,15 @@ import {
 	Flex,
 	Heading,
 	HStack,
+	Image,
 	Text,
 	VStack,
-	Image,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import {
-	useGetMyOrderQuery,
-	useGetOrderQuery,
-} from "../../app/features/order/orderApiSlice";
+import { useGetOrderQuery } from "../../app/features/order/orderApiSlice";
 import { useAppSelector } from "../../app/hooks";
-import { MyContainer } from "../../components";
 import { getOrderColor, getPaymentColor } from "../../utilities/getColor";
+import { getHeight } from "../../utilities/getHeight";
 import { getStringDateTime } from "../../utilities/getStringDate";
 
 const AdminOrderDetailPage = () => {
@@ -62,10 +59,10 @@ const AdminOrderDetailPage = () => {
 					<VStack
 						align="start"
 						gap={5}
-						h={order?.orderItems.length! > 4 ? "400px" : "100%"}
+						h={getHeight(order?.orderItems.length!)}
 						overflowY="scroll"
 						className="scrollbar"
-						pr={order?.orderItems.length! > 4 ? 4 : 0}
+						pr={order?.orderItems.length! >= 4 ? 4 : 0}
 					>
 						{order?.orderItems.map((orderItem) => (
 							<HStack key={orderItem.id} w="100%" align="start">
@@ -106,10 +103,9 @@ const AdminOrderDetailPage = () => {
 							</HStack>
 						))}
 					</VStack>
-				</CardBody>
-			</Card>
-			<Card flex={1.6} h="100%">
-				<CardBody>
+
+					<Divider borderColor="background.400" my={8} />
+
 					<Flex direction="column" gap={0.5}>
 						<Text
 							fontWeight="bold"
@@ -143,9 +139,10 @@ const AdminOrderDetailPage = () => {
 							</Text>
 						</HStack>
 					</Flex>
-
-					<Divider borderColor="background.400" my={8} />
-
+				</CardBody>
+			</Card>
+			<Card flex={1.6} h="100%">
+				<CardBody>
 					<HStack justify="space-between" align="start">
 						<Box>
 							<Text
