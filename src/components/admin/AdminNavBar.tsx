@@ -1,10 +1,11 @@
 import {
 	Box,
 	Button,
-	Center,
 	Divider,
 	Flex,
+	HStack,
 	Image,
+	Text,
 	VStack,
 } from "@chakra-ui/react";
 import { FaShoppingBag } from "react-icons/fa";
@@ -48,9 +49,10 @@ const AdminNavBar = ({ user, handleLogout }: Props) => {
 
 	return (
 		<Box as="nav" bg="white" w="20%" h="100vh">
-			<Center py={2}>
+			<HStack py={2} px={5} gap={4}>
 				<Image src={logo} alt="Logo" boxSize="40px" />
-			</Center>
+				<Text fontWeight="medium">Welcome Admin!</Text>
+			</HStack>
 			<Divider orientation="horizontal" borderColor="background.400" />
 
 			<VStack gap={10} mt={5} px={4}>

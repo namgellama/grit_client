@@ -1,4 +1,5 @@
 import {
+	Button,
 	Flex,
 	HStack,
 	Table,
@@ -10,13 +11,14 @@ import {
 	Thead,
 	Tr,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useGetOrdersQuery } from "../../app/features/order/orderApiSlice";
 import { useAppSelector } from "../../app/hooks";
 import { getStringDate } from "../../utilities/getStringDate";
 
 const AdminOrdersPage = () => {
 	const { user } = useAppSelector((state) => state.auth);
+	const navigate = useNavigate();
 
 	const {
 		data: orders,
@@ -62,21 +64,22 @@ const AdminOrdersPage = () => {
 								<Td>{getStringDate(order.createdAt)}</Td>
 
 								<Td>
-									<Link to={`/dashboard/orders/${order.id}`}>
-										<Text
-											bg="background.800"
-											px={2}
-											py={1}
-											borderRadius={3}
-											color="white"
-											_hover={{
-												bg: "background.700",
-												color: "white",
-											}}
-										>
-											Details
-										</Text>
-									</Link>
+									<Button
+										bg="background.800"
+										color="white"
+										_hover={{
+											bg: "background.700",
+											color: "white",
+										}}
+										size="sm"
+										onClick={() =>
+											navigate(
+												`/dashboard/orders/${order.id}`
+											)
+										}
+									>
+										Details
+									</Button>
 								</Td>
 							</Tr>
 						))}

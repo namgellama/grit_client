@@ -1,4 +1,4 @@
-import { Button, Flex, IconButton, Text } from "@chakra-ui/react";
+import { Flex, IconButton, Text } from "@chakra-ui/react";
 import { JSXElementConstructor, LegacyRef, ReactElement } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -72,19 +72,17 @@ export const NavLinkButton = ({
 		<Flex
 			align="center"
 			w="100%"
+			cursor="pointer"
 			transition="all 0.03s ease-in"
 			_hover={{ bg: "background.100" }}
 			pl={4}
 			borderRadius={5}
+			py={2}
+			gap={3}
+			onClick={() => navigate(path)}
 		>
 			{icon}
-			<Button
-				variant="ghost"
-				onClick={() => navigate(path)}
-				_hover={{ bg: "inherit" }}
-			>
-				{name}
-			</Button>
+			<Text>{name}</Text>
 		</Flex>
 	);
 };
