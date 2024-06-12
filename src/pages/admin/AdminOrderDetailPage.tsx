@@ -12,12 +12,12 @@ import {
 	Text,
 	VStack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
 	useGetOrderQuery,
 	useUpdateOrderMutation,
 } from "../../app/features/order/orderApiSlice";
+import { useUpdatePaymentMutation } from "../../app/features/payment/paymentApiSlice";
 import { useAppSelector } from "../../app/hooks";
 import { orderStatuses, paymentStatuses } from "../../utilities/data";
 import { getOrderColor, getPaymentColor } from "../../utilities/getColor";
@@ -34,18 +34,7 @@ const AdminOrderDetailPage = () => {
 	});
 
 	const [updateOrder] = useUpdateOrderMutation();
-
-	const [orderStatus, setOrderStatus] = useState(order?.status ?? "");
-	const [paymentStatus, setPaymentStatus] = useState(
-		order?.payment.status ?? ""
-	);
-
-	useEffect(() => {
-		if (order) {
-			setOrderStatus(order.status);
-			setPaymentStatus(order.status);
-		}
-	}, [order]);
+	const [updatePayment] = useUpdatePaymentMutation();
 
 	return (
 		<Flex px={3} my={2} gap={3}>
@@ -264,15 +253,14 @@ const AdminOrderDetailPage = () => {
 							<VStack align="start" gap={2} w="100%">
 								<Text>Update Order Status</Text>
 								<Select
-									value={orderStatus}
-									onChange={async (e) => {
-										setOrderStatus(e.target.value);
+									value={order?.status}
+									onChange={async (e) =>
 										await updateOrder({
 											id: order?.id ?? "",
 											data: { status: e.target.value },
 											token: user?.token ?? "",
-										}).unwrap();
-									}}
+										}).unwrap()
+									}
 								>
 									{orderStatuses.map((status) => (
 										<option
@@ -287,9 +275,13 @@ const AdminOrderDetailPage = () => {
 							<VStack align="start" gap={2} w="100%">
 								<Text>Update Payment Status</Text>
 								<Select
-									value={paymentStatus}
-									onChange={(e) =>
-										setPaymentStatus(e.target.value)
+									value={order?.payment.status}
+									onChange={async (e) =>
+										await updatePayment({
+											id: order?.id ?? "",
+											data: { status: e.target.value },
+											token: user?.token ?? "",
+										}).unwrap()
 									}
 								>
 									{paymentStatuses.map((status) => (
