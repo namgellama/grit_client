@@ -80,6 +80,21 @@ export const orderApiSlice = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ["MyOrders"],
 		}),
+
+		updateOrder: builder.mutation<
+			Order,
+			{ id: string; data: { status: string }; token: string }
+		>({
+			query: ({ id, data, token }) => ({
+				url: `${ORDER_URL}/${id}`,
+				method: "PATCH",
+				body: data,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}),
+			invalidatesTags: ["Order", "Orders", "MyOrder", "MyOrders"],
+		}),
 	}),
 });
 
@@ -89,4 +104,5 @@ export const {
 	useGetMyOrdersQuery,
 	useGetMyOrderQuery,
 	useCreateOrderMutation,
+	useUpdateOrderMutation,
 } = orderApiSlice;

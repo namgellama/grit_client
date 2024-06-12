@@ -7,5 +7,5 @@ export const getHeight = (length: number) => {
 		? "250px"
 		: length === 4
 		? "350px"
-		: "400px";
+		: "380px";
 };

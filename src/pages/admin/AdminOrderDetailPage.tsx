@@ -8,12 +8,18 @@ import {
 	Heading,
 	HStack,
 	Image,
+	Select,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGetOrderQuery } from "../../app/features/order/orderApiSlice";
+import {
+	useGetOrderQuery,
+	useUpdateOrderMutation,
+} from "../../app/features/order/orderApiSlice";
 import { useAppSelector } from "../../app/hooks";
+import { orderStatuses, paymentStatuses } from "../../utilities/data";
 import { getOrderColor, getPaymentColor } from "../../utilities/getColor";
 import { getHeight } from "../../utilities/getHeight";
 import { getStringDateTime } from "../../utilities/getStringDate";
@@ -26,6 +32,20 @@ const AdminOrderDetailPage = () => {
 		id: id ?? "",
 		token: user?.token ?? "",
 	});
+
+	const [updateOrder] = useUpdateOrderMutation();
+
+	const [orderStatus, setOrderStatus] = useState(order?.status ?? "");
+	const [paymentStatus, setPaymentStatus] = useState(
+		order?.payment.status ?? ""
+	);
+
+	useEffect(() => {
+		if (order) {
+			setOrderStatus(order.status);
+			setPaymentStatus(order.status);
+		}
+	}, [order]);
 
 	return (
 		<Flex px={3} my={2} gap={3}>
@@ -141,100 +161,151 @@ const AdminOrderDetailPage = () => {
 					</Flex>
 				</CardBody>
 			</Card>
-			<Card flex={1.6} h="100%">
-				<CardBody>
-					<HStack justify="space-between" align="start">
-						<Box>
-							<Text
-								fontWeight="bold"
-								mb={2}
-								textTransform="uppercase"
-							>
-								Payment
-							</Text>
-							<Text fontSize="sm" fontWeight="medium">
-								Method: {order?.payment.method}
-							</Text>
-							<Text fontSize="sm" fontWeight="medium">
-								Status:
-								<Badge
-									colorScheme={getPaymentColor(
-										order?.payment.status!
-									)}
-									ml={2}
-									fontSize="xxs"
+
+			<Flex direction="column" flex={1.6} gap={3}>
+				<Card>
+					<CardBody>
+						<HStack justify="space-between" align="start">
+							<Box>
+								<Text
+									fontWeight="bold"
+									mb={2}
+									textTransform="uppercase"
 								>
-									{order?.payment.status}
-								</Badge>
-							</Text>
-						</Box>
-						<Box>
+									Payment
+								</Text>
+								<Text fontSize="sm" fontWeight="medium">
+									Method: {order?.payment.method}
+								</Text>
+								<Text fontSize="sm" fontWeight="medium">
+									Status:
+									<Badge
+										colorScheme={getPaymentColor(
+											order?.payment.status!
+										)}
+										ml={2}
+										fontSize="xxs"
+									>
+										{order?.payment.status}
+									</Badge>
+								</Text>
+							</Box>
+							<Box>
+								<Text
+									fontWeight="bold"
+									mb={2}
+									textTransform="uppercase"
+									textAlign="end"
+								>
+									Delivery
+								</Text>
+								<Text
+									fontWeight="medium"
+									fontSize="sm"
+									textAlign="end"
+								>
+									{order?.address?.addressLine1},{" "}
+									{order?.address?.addressLine2}
+								</Text>
+								<Text
+									fontWeight="medium"
+									fontSize="sm"
+									textAlign="end"
+								>
+									{order?.address?.city},{" "}
+									{order?.address?.country}
+									{order?.address?.postalCode &&
+										` - ${order?.address?.postalCode}`}
+								</Text>
+							</Box>
+						</HStack>
+
+						<Divider borderColor="background.400" my={8} />
+
+						<Flex direction="column" gap={0.5}>
 							<Text
 								fontWeight="bold"
 								mb={2}
 								textTransform="uppercase"
-								textAlign="end"
 							>
-								Delivery
+								Customer
 							</Text>
-							<Text
-								fontWeight="medium"
-								fontSize="sm"
-								textAlign="end"
-							>
-								{order?.address?.addressLine1},{" "}
-								{order?.address?.addressLine2}
-							</Text>
-							<Text
-								fontWeight="medium"
-								fontSize="sm"
-								textAlign="end"
-							>
-								{order?.address?.city},{" "}
-								{order?.address?.country}
-								{order?.address?.postalCode &&
-									` - ${order?.address?.postalCode}`}
-							</Text>
-						</Box>
-					</HStack>
+							<HStack justify="space-between">
+								<Text fontSize="sm" fontWeight="medium">
+									Name
+								</Text>
+								<Text fontSize="sm" fontWeight="medium">
+									{order?.user.name}
+								</Text>
+							</HStack>
+							<HStack justify="space-between">
+								<Text fontSize="sm" fontWeight="medium">
+									Phone
+								</Text>
+								<Text fontSize="sm" fontWeight="medium">
+									{order?.user.phoneNumber}
+								</Text>
+							</HStack>
+							<HStack justify="space-between">
+								<Text fontSize="sm" fontWeight="medium">
+									Email
+								</Text>
+								<Text fontSize="sm" fontWeight="medium">
+									{order?.user.email}
+								</Text>
+							</HStack>
+						</Flex>
+					</CardBody>
+				</Card>
 
-					<Divider borderColor="background.400" my={8} />
-
-					<Flex direction="column" gap={0.5}>
-						<Text
-							fontWeight="bold"
-							mb={2}
-							textTransform="uppercase"
-						>
-							Customer
-						</Text>
-						<HStack justify="space-between">
-							<Text fontSize="sm" fontWeight="medium">
-								Name
-							</Text>
-							<Text fontSize="sm" fontWeight="medium">
-								{order?.user.name}
-							</Text>
-						</HStack>
-						<HStack justify="space-between">
-							<Text fontSize="sm" fontWeight="medium">
-								Phone
-							</Text>
-							<Text fontSize="sm" fontWeight="medium">
-								{order?.user.phoneNumber}
-							</Text>
-						</HStack>
-						<HStack justify="space-between">
-							<Text fontSize="sm" fontWeight="medium">
-								Email
-							</Text>
-							<Text fontSize="sm" fontWeight="medium">
-								{order?.user.email}
-							</Text>
-						</HStack>
-					</Flex>
-				</CardBody>
-			</Card>
+				<Card>
+					<CardBody>
+						<VStack align="start" gap={4}>
+							<VStack align="start" gap={2} w="100%">
+								<Text>Update Order Status</Text>
+								<Select
+									value={orderStatus}
+									onChange={async (e) => {
+										setOrderStatus(e.target.value);
+										await updateOrder({
+											id: order?.id ?? "",
+											data: { status: e.target.value },
+											token: user?.token ?? "",
+										}).unwrap();
+									}}
+								>
+									{orderStatuses.map((status) => (
+										<option
+											key={status.name}
+											value={status.value}
+										>
+											{status.name}
+										</option>
+									))}
+								</Select>
+							</VStack>
+							<VStack align="start" gap={2} w="100%">
+								<Text>Update Payment Status</Text>
+								<Select
+									value={paymentStatus}
+									onChange={(e) =>
+										setPaymentStatus(e.target.value)
+									}
+								>
+									{paymentStatuses.map((status) => (
+										<option
+											key={status.name}
+											value={status.value}
+										>
+											{status.name}
+										</option>
+									))}
+								</Select>
+							</VStack>
+						</VStack>
+					</CardBody>
+				</Card>
+			</Flex>
 		</Flex>
 	);
 };
