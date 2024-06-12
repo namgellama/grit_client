@@ -8,18 +8,13 @@ import {
 	Heading,
 	HStack,
 	Image,
-	Select,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import {
-	useGetOrderQuery,
-	useUpdateOrderMutation,
-} from "../../app/features/order/orderApiSlice";
-import { useUpdatePaymentMutation } from "../../app/features/payment/paymentApiSlice";
+import { useGetOrderQuery } from "../../app/features/order/orderApiSlice";
 import { useAppSelector } from "../../app/hooks";
-import { orderStatuses, paymentStatuses } from "../../utilities/data";
+import { UpdateOrder } from "../../components";
 import { getOrderColor, getPaymentColor } from "../../utilities/getColor";
 import { getHeight } from "../../utilities/getHeight";
 import { getStringDateTime } from "../../utilities/getStringDate";
@@ -32,9 +27,6 @@ const AdminOrderDetailPage = () => {
 		id: id ?? "",
 		token: user?.token ?? "",
 	});
-
-	const [updateOrder] = useUpdateOrderMutation();
-	const [updatePayment] = useUpdatePaymentMutation();
 
 	return (
 		<Flex px={3} my={2} gap={3}>
@@ -178,6 +170,17 @@ const AdminOrderDetailPage = () => {
 										{order?.payment.status}
 									</Badge>
 								</Text>
+
+								{order?.payment.status === "COMPLETED" && (
+									<Text fontSize="sm" fontWeight="medium">
+										Paid on:
+										<Text as="span" ml={2}>
+											{getStringDateTime(
+												order?.payment.updatedAt
+											)}
+										</Text>
+									</Text>
+								)}
 							</Box>
 							<Box>
 								<Text
@@ -247,56 +250,7 @@ const AdminOrderDetailPage = () => {
 					</CardBody>
 				</Card>
 
-				<Card>
-					<CardBody>
-						<VStack align="start" gap={4}>
-							<VStack align="start" gap={2} w="100%">
-								<Text>Update Order Status</Text>
-								<Select
-									value={order?.status}
-									onChange={async (e) =>
-										await updateOrder({
-											id: order?.id ?? "",
-											data: { status: e.target.value },
-											token: user?.token ?? "",
-										}).unwrap()
-									}
-								>
-									{orderStatuses.map((status) => (
-										<option
-											key={status.name}
-											value={status.value}
-										>
-											{status.name}
-										</option>
-									))}
-								</Select>
-							</VStack>
-							<VStack align="start" gap={2} w="100%">
-								<Text>Update Payment Status</Text>
-								<Select
-									value={order?.payment.status}
-									onChange={async (e) =>
-										await updatePayment({
-											id: order?.id ?? "",
-											data: { status: e.target.value },
-											token: user?.token ?? "",
-										}).unwrap()
-									}
-								>
-									{paymentStatuses.map((status) => (
-										<option
-											key={status.name}
-											value={status.value}
-										>
-											{status.name}
-										</option>
-									))}
-								</Select>
-							</VStack>
-						</VStack>
-					</CardBody>
-				</Card>
+				<UpdateOrder order={order} />
 			</Flex>
 		</Flex>
 	);
