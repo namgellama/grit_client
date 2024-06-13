@@ -10,6 +10,8 @@ export interface Product {
 	stock: number;
 	sizes: string[];
 	segment: string;
+	ageStatus: string;
+	saleStatus: string;
 	createdAt: Date;
 	updateAt: Date;
 	categoryId: string;
