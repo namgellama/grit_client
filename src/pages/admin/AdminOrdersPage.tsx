@@ -34,7 +34,7 @@ const AdminOrdersPage = () => {
 					textTransform="uppercase"
 					letterSpacing={0.5}
 				>
-					GRIT Categories
+					GRIT Orders
 				</Text>
 			</HStack>
 
@@ -46,9 +46,9 @@ const AdminOrdersPage = () => {
 							<Th>Customer Name</Th>
 							<Th>Total Price</Th>
 							<Th>Order Status</Th>
+							<Th>Date</Th>
 							<Th>Payment Method</Th>
 							<Th>Payment Status</Th>
-							<Th>Date</Th>
 							<Th></Th>
 						</Tr>
 					</Thead>
@@ -59,9 +59,9 @@ const AdminOrdersPage = () => {
 								<Td>{order.user.name}</Td>
 								<Td>Rs. {order.total}</Td>
 								<Td>{order.status}</Td>
+								<Td>{getStringDate(order.createdAt)}</Td>
 								<Td>{order.payment.method}</Td>
 								<Td>{order.payment.status}</Td>
-								<Td>{getStringDate(order.createdAt)}</Td>
 
 								<Td>
 									<Button

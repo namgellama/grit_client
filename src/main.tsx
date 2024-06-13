@@ -12,6 +12,7 @@ import {
 	AdminCategoriesPage,
 	AdminOrderDetailPage,
 	AdminOrdersPage,
+	AdminProductsPage,
 	CategoryPage,
 	CheckoutPage,
 	DashboardPage,
@@ -66,6 +67,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 								<Route
 									path="/dashboard/categories"
 									element={<AdminCategoriesPage />}
+								/>
+								<Route
+									path="/dashboard/products"
+									element={<AdminProductsPage />}
 								/>
 								<Route
 									path="/dashboard/orders"
