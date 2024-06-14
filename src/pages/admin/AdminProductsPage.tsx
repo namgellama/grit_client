@@ -1,5 +1,4 @@
 import {
-	Button,
 	Flex,
 	HStack,
 	Image,
@@ -12,6 +11,7 @@ import {
 	Thead,
 	Tr,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { useGetProductsQuery } from "../../app/features/product/productApiSlice";
 
 const AdminProductsPage = () => {
@@ -22,8 +22,8 @@ const AdminProductsPage = () => {
 	} = useGetProductsQuery({ ageStatus: undefined, segment: undefined });
 
 	return (
-		<Flex direction="column" w="100%" p={10} gap={5}>
-			<HStack justify="space-between" w="100%">
+		<Flex direction="column" p={10} gap={5}>
+			<HStack justify="space-between">
 				<Text
 					fontWeight="bold"
 					textTransform="uppercase"
@@ -41,15 +41,11 @@ const AdminProductsPage = () => {
 							<Th></Th>
 							<Th>Name</Th>
 							<Th>Price</Th>
+							<Th>Category</Th>
 							<Th>Segment</Th>
 							<Th>Sizes</Th>
 							<Th>Colors</Th>
 							<Th>Stock</Th>
-							<Th>Category</Th>
-							<Th>Age Status</Th>
-							<Th>Sale Status</Th>
-
-							<Th></Th>
 						</Tr>
 					</Thead>
 					<Tbody>
@@ -65,8 +61,15 @@ const AdminProductsPage = () => {
 										alt={product.name}
 									/>
 								</Td>
-								<Td>{product.name}</Td>
+								<Td>
+									<Link
+										to={`/dashboard/products/${product.id}`}
+									>
+										{product.name}
+									</Link>
+								</Td>
 								<Td>Rs. {product.price}</Td>
+								<Td>{product.category.name}</Td>
 								<Td>{product.segment}</Td>
 								<Td>{product.sizes.join(", ")}</Td>
 								<Td>
@@ -75,28 +78,6 @@ const AdminProductsPage = () => {
 										.join(", ")}
 								</Td>
 								<Td>{product.stock}</Td>
-								<Td>{product.category.name}</Td>
-								<Td>{product.ageStatus}</Td>
-								<Td>{product.saleStatus}</Td>
-
-								<Td>
-									<Button
-										bg="background.800"
-										color="white"
-										_hover={{
-											bg: "background.700",
-											color: "white",
-										}}
-										size="sm"
-										// onClick={() =>
-										// 	navigate(
-										// 		`/dashboard/orders/${order.id}`
-										// 	)
-										// }
-									>
-										Details
-									</Button>
-								</Td>
 							</Tr>
 						))}
 					</Tbody>
