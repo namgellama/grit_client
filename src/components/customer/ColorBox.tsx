@@ -1,26 +1,26 @@
 import { Box, Tooltip } from "@chakra-ui/react";
-import { Color } from "../../app/interfaces/product";
+import { Variant } from "../../app/interfaces/product";
 
 interface Props {
-	color: Color;
-	currentColorName: string;
-	handleColorChange: (image: string, currentColorName: string) => void;
+	variant: Variant;
+	currentColor: string;
+	handleColorChange: (image: string, currentColor: string) => void;
 }
 
-const ColorBox = ({ color, currentColorName, handleColorChange }: Props) => {
+const ColorBox = ({ variant, currentColor, handleColorChange }: Props) => {
 	return (
-		<Tooltip key={color.hexColor} label={color.colorName}>
+		<Tooltip key={variant.hexColor} label={variant.color}>
 			<Box
 				w={3}
 				h={3}
-				background={color.hexColor}
+				background={variant.hexColor}
 				cursor="pointer"
 				boxShadow={
-					color.colorName === currentColorName
-						? `0 0 0 2px #fff, 0 0 0 4px ${color.hexColor}`
+					variant.color === currentColor
+						? `0 0 0 2px #fff, 0 0 0 4px ${variant.hexColor}`
 						: "none"
 				}
-				onClick={() => handleColorChange(color.image, color.colorName)}
+				onClick={() => handleColorChange(variant.image, variant.color)}
 			></Box>
 		</Tooltip>
 	);

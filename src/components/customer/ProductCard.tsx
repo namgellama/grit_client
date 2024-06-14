@@ -5,20 +5,28 @@ import { ColorBox } from "..";
 import { Product } from "../../app/interfaces/product";
 
 interface Props {
-	product: Product;
+	product?: Product;
 	categoryName?: string;
 }
 
 const ProductCard = ({ product, categoryName }: Props) => {
-	const [currentImage, setCurrentImage] = useState(product.color[0].image);
-	const [currentColorName, setCurrentColorName] = useState(
-		product.color[0].colorName
+	const [currentImage, setCurrentImage] = useState(
+		product?.variants[0].image ?? ""
+	);
+	const [currentColor, setCurrentColor] = useState(
+		product?.variants[0].color ?? ""
 	);
 	const [isTransitioning, setIsTransitioning] = useState(false);
 
-	const handleColorChange = (image: string, colorName: string) => {
+	const uniqueColorVariants = Array.from(
+		new Map(
+			product?.variants.map((variant) => [variant.color, variant])
+		).values()
+	);
+
+	const handleColorChange = (image: string, color: string) => {
 		if (currentImage !== image) {
-			setCurrentColorName(colorName);
+			setCurrentColor(color);
 			setIsTransitioning(true);
 			setTimeout(() => {
 				setCurrentImage(image);
@@ -29,7 +37,7 @@ const ProductCard = ({ product, categoryName }: Props) => {
 
 	return (
 		<VStack align="start">
-			<Link to={`/products/${product.id}`}>
+			<Link to={`/products/${product?.id}`}>
 				<Box
 					_hover={{ transform: "scale(1.01)" }}
 					transition={"transform 0.1s ease-out"}
@@ -46,7 +54,7 @@ const ProductCard = ({ product, categoryName }: Props) => {
 				</Box>
 				<HStack justifyContent="space-between" w="100%" mt={4} px={1}>
 					<Text fontWeight="semibold" fontSize="sm">
-						{product.name}
+						{product?.name}
 					</Text>
 					<Badge
 						colorScheme="green"
@@ -62,14 +70,14 @@ const ProductCard = ({ product, categoryName }: Props) => {
 
 			<VStack px={1} align="start" spacing={3.5}>
 				<Text fontWeight="semibold" fontSize="sm" letterSpacing={0.5}>
-					Rs. {product.price}
+					Rs. {product?.price}
 				</Text>
 				<HStack justifyContent="start" spacing={3} px={1}>
-					{product.color.map((color) => (
+					{uniqueColorVariants.map((variant) => (
 						<ColorBox
-							key={color.hexColor}
-							color={color}
-							currentColorName={currentColorName}
+							key={variant.id}
+							variant={variant}
+							currentColor={currentColor}
 							handleColorChange={handleColorChange}
 						/>
 					))}

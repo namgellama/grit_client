@@ -6,7 +6,7 @@ import { Product } from "../../app/interfaces/product";
 
 interface Props {
 	error: FetchBaseQueryError | SerializedError | undefined;
-	products: Product[] | undefined;
+	products?: Product[];
 	isLoading: boolean;
 	categoryName?: string;
 }

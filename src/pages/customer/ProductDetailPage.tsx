@@ -29,7 +29,7 @@ const ProductDetailPage = () => {
 	const { data: product, isLoading, error } = useGetProductQuery(id ?? "");
 	const { user } = useAppSelector((state) => state.auth);
 	const [currentImage, setCurrentImage] = useState("");
-	const [currentColorName, setCurrentColorName] = useState("");
+	const [currentColor, setCurrentColor] = useState("");
 	const [selectedSize, setSelectedSize] = useState("");
 	const [isTransitioning, setIsTransitioning] = useState(false);
 	const [cookies, setCookie] = useCookies<
@@ -42,17 +42,29 @@ const ProductDetailPage = () => {
 	const [addToBag] = useCreateBagItemMutation();
 	const [updateBag] = useUpdateBagItemMutation();
 
+	const uniqueColorVariants = Array.from(
+		new Map(
+			product?.variants.map((variant) => [variant.color, variant])
+		).values()
+	);
+
+	const uniqueSizeVariants = Array.from(
+		new Map(
+			product?.variants.map((variant) => [variant.size, variant])
+		).values()
+	);
+
 	useEffect(() => {
 		if (product) {
-			setCurrentImage(product.color[0].image);
-			setCurrentColorName(product.color[0].colorName);
-			setSelectedSize(product.sizes[0]);
+			setCurrentColor(product.variants[0].color);
+			setCurrentImage(product.variants[0].image);
+			setSelectedSize(product.variants[0].size);
 		}
 	}, [product]);
 
-	const handleColorChange = (image: string, colorName: string) => {
+	const handleColorChange = (image: string, color: string) => {
 		if (currentImage !== image) {
-			setCurrentColorName(colorName);
+			setCurrentColor(color);
 			setIsTransitioning(true);
 			setTimeout(() => {
 				setCurrentImage(image);
@@ -67,7 +79,7 @@ const ProductDetailPage = () => {
 				productId: product?.id,
 				unitPrice: product?.price,
 				size: selectedSize,
-				color: currentColorName,
+				color: currentColor,
 				quantity: 1,
 				unitTotalPrice: product?.price,
 			};
@@ -105,31 +117,32 @@ const ProductDetailPage = () => {
 					position: "top",
 				});
 			}
-		} else {
-			const item = {
-				id,
-				price: product?.price,
-				size: selectedSize,
-				color: currentColorName,
-				image: currentImage,
-				stock: product?.stock,
-				quantity: 1,
-			};
-
-			let bagItems =
-				cookies.bagItems === undefined
-					? [item]
-					: cookies?.bagItems.find(
-							(x) =>
-								x.id === item.id &&
-								x.size === item.size &&
-								x.color === item.color
-					  )
-					? [...cookies.bagItems]
-					: [item, ...cookies.bagItems];
-
-			setCookie("bagItems", bagItems);
 		}
+		// } else {
+		// 	const item = {
+		// 		id,
+		// 		price: product?.price,
+		// 		size: selectedSize,
+		// 		color: currentColorName,
+		// 		image: currentImage,
+		// 		stock: product?.stock,
+		// 		quantity: 1,
+		// 	};
+
+		// 	let bagItems =
+		// 		cookies.bagItems === undefined
+		// 			? [item]
+		// 			: cookies?.bagItems.find(
+		// 					(x) =>
+		// 						x.id === item.id &&
+		// 						x.size === item.size &&
+		// 						x.color === item.color
+		// 			  )
+		// 			? [...cookies.bagItems]
+		// 			: [item, ...cookies.bagItems];
+
+		// 	setCookie("bagItems", bagItems);
+		// }
 	};
 
 	return (
@@ -185,11 +198,11 @@ const ProductDetailPage = () => {
 							px={1}
 							my={2}
 						>
-							{product?.color.map((color) => (
+							{uniqueColorVariants.map((variant) => (
 								<ColorBox
-									key={color.colorName}
-									color={color}
-									currentColorName={currentColorName ?? ""}
+									key={variant.id}
+									variant={variant}
+									currentColor={currentColor}
 									handleColorChange={handleColorChange}
 								/>
 							))}
@@ -200,10 +213,10 @@ const ProductDetailPage = () => {
 						<VStack align="start" spacing={5}>
 							<Text fontSize="sm">Select a size</Text>
 							<HStack spacing={5}>
-								{product?.sizes.map((size) => (
+								{uniqueSizeVariants.map((variant) => (
 									<SizeBox
-										key={size}
-										size={size}
+										key={variant.id}
+										size={variant.size}
 										selectedSize={selectedSize}
 										setSelectedSize={setSelectedSize}
 									/>
