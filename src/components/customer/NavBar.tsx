@@ -120,11 +120,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 								<NavLinkIcon
 									icon={<FaUserCircle fontSize="larger" />}
 									label="User"
-									link={
-										user.role === "Customer"
-											? "/account"
-											: "/dashboard"
-									}
+									link="/account"
 								/>
 							) : (
 								<NavLinkIcon
