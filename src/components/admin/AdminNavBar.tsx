@@ -13,16 +13,14 @@ import { IoHome } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { RiGiftFill } from "react-icons/ri";
 import { TbCategoryFilled } from "react-icons/tb";
-import { CurrentUser } from "../../app/interfaces/auth";
 import logo from "../../assets/logo.png";
 import { NavLinkButton } from "../shared/NavComponents";
 
 interface Props {
-	user?: CurrentUser | null;
 	handleLogout: () => void;
 }
 
-const AdminNavBar = ({ user, handleLogout }: Props) => {
+const AdminNavBar = ({ handleLogout }: Props) => {
 	const navLinks = [
 		{
 			name: "Home",
@@ -48,7 +46,7 @@ const AdminNavBar = ({ user, handleLogout }: Props) => {
 	];
 
 	return (
-		<Box as="nav" bg="white" w="20%" h="100vh">
+		<Box as="nav" w="18%" bg="white" h="100vh">
 			<HStack py={2} px={5} gap={4}>
 				<Image src={logo} alt="Logo" boxSize="40px" />
 				<Text fontWeight="medium">Welcome Admin!</Text>
