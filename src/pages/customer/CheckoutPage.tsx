@@ -147,7 +147,7 @@ const CheckoutPage = () => {
 				</VStack>
 
 				<BagItems
-					bagItems={bagItems ?? []}
+					bagItems={bagItems}
 					deliveryCharge={deliveryCharge}
 					total={total}
 				/>

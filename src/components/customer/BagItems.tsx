@@ -10,7 +10,7 @@ import {
 import { BagItem } from "../../app/interfaces/bagItem";
 
 interface Props {
-	bagItems: BagItem[];
+	bagItems?: BagItem[];
 	deliveryCharge: number;
 	total: number;
 }
@@ -23,8 +23,8 @@ const BagItems = ({ bagItems, deliveryCharge, total }: Props) => {
 					className="scrollbar"
 					direction="column"
 					gap={5}
-					pr={bagItems.length > 4 ? 5 : 0}
-					h={bagItems.length > 3 ? "50vh" : "30vh"}
+					pr={bagItems?.length! > 4 ? 5 : 0}
+					h={bagItems?.length! > 3 ? "50vh" : "30vh"}
 					overflowY="scroll"
 				>
 					{bagItems?.map((bagItem) => (
@@ -34,9 +34,9 @@ const BagItems = ({ bagItems, deliveryCharge, total }: Props) => {
 								h="70px"
 								objectFit="cover"
 								src={
-									bagItem.product.color.find(
-										(color) =>
-											color.colorName === bagItem.color
+									bagItem.product.variants.find(
+										(variant) =>
+											variant.color === bagItem.color
 									)?.image
 								}
 							/>
