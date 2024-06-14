@@ -84,8 +84,8 @@ const DBBagItems = ({ bagItems, user }: Props) => {
 							h="130px"
 							objectFit="cover"
 							src={
-								bagItem.product.color.find(
-									(color) => color.colorName === bagItem.color
+								bagItem.product.variants.find(
+									(variant) => variant.color === bagItem.color
 								)?.image
 							}
 						/>
@@ -117,7 +117,15 @@ const DBBagItems = ({ bagItems, user }: Props) => {
 									w="70px"
 								>
 									{[
-										...Array(bagItem.product.stock).keys(),
+										...Array(
+											bagItem.product.variants.find(
+												(variant) =>
+													variant.color ===
+														bagItem.color &&
+													variant.size ===
+														bagItem.size
+											)?.stock
+										).keys(),
 									].map((x) => (
 										<option key={x + 1} value={x + 1}>
 											{x + 1}
