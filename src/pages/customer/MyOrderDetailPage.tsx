@@ -68,9 +68,9 @@ const MyOrderDetailPage = () => {
 							<HStack key={orderItem.id} w="100%" align="start">
 								<Image
 									src={
-										orderItem.product.color.find(
-											(color) =>
-												color.colorName ===
+										orderItem.product.variants.find(
+											(variant) =>
+												variant.color ===
 												orderItem.color
 										)?.image
 									}

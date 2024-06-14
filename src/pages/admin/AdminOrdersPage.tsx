@@ -27,7 +27,7 @@ const AdminOrdersPage = () => {
 	} = useGetOrdersQuery({ token: user?.token ?? "" });
 
 	return (
-		<Flex direction="column" w="100%" p={10} gap={5}>
+		<Flex direction="column" w="100%" p={5} gap={5}>
 			<HStack justify="space-between" w="100%">
 				<Text
 					fontWeight="bold"

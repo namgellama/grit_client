@@ -145,9 +145,9 @@ const MyOrders = () => {
 										h="60px"
 										objectFit="cover"
 										src={
-											orderItem.product.color.find(
-												(color) =>
-													color.colorName ===
+											orderItem.product.variants.find(
+												(variant) =>
+													variant.color ===
 													orderItem.color
 											)?.image
 										}
