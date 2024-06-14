@@ -26,15 +26,16 @@ function App() {
 	};
 
 	return (
-		<Box display={user?.role === "Customer" ? "block" : "flex"}>
-			{user?.role == "Customer" && (
+		<Box display={user?.role === "Customer" ? "block" : "flex"} w="100%">
+			{user?.role === "Customer" && (
 				<NavBar user={user} handleLogout={handleLogout} />
 			)}
-			{user?.role == "Admin" && (
-				<AdminNavBar user={user} handleLogout={handleLogout} />
+
+			{user?.role === "Admin" && (
+				<AdminNavBar handleLogout={handleLogout} />
 			)}
 
-			<Box as="main" w="100%" h="100%">
+			<Box as="main" w={user?.role === "Admin" ? "80%" : "100%"} h="100%">
 				<Outlet />
 			</Box>
 		</Box>
