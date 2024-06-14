@@ -1,4 +1,5 @@
 import {
+	Button,
 	Flex,
 	HStack,
 	Image,
@@ -11,7 +12,7 @@ import {
 	Thead,
 	Tr,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGetProductsQuery } from "../../app/features/product/productApiSlice";
 
 const AdminProductsPage = () => {
@@ -20,6 +21,7 @@ const AdminProductsPage = () => {
 		isLoading,
 		error,
 	} = useGetProductsQuery({ ageStatus: undefined, segment: undefined });
+	const navigate = useNavigate();
 
 	return (
 		<Flex direction="column" p={10} gap={5}>
@@ -31,6 +33,16 @@ const AdminProductsPage = () => {
 				>
 					GRIT Products
 				</Text>
+
+				<Button
+					variant="solid"
+					colorScheme="messenger"
+					size="sm"
+					borderRadius={2}
+					onClick={() => navigate("/dashboard/products/new")}
+				>
+					Add Product
+				</Button>
 			</HStack>
 
 			<TableContainer bg="white">

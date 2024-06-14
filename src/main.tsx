@@ -18,6 +18,7 @@ import {
 	DashboardPage,
 	HomePage,
 	MyOrderDetailPage,
+	ProductAddPage,
 	ProductDetailPage,
 	ProductPage,
 	SignInPage,
@@ -79,6 +80,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 								<Route
 									path="/dashboard/orders/:id"
 									element={<AdminOrderDetailPage />}
+								/>
+								<Route
+									path="/dashboard/products/new"
+									element={<ProductAddPage />}
 								/>
 							</Route>
 							<Route path="/login" element={<SignInPage />} />
