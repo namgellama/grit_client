@@ -51,7 +51,7 @@ const SignUpForm = () => {
 			});
 	}, [errors.root]);
 
-	const onSubmit = async (body: Partial<RegisterRequestDTO>) => {
+	const onSubmit = async (body: FormFields) => {
 		const { name, phoneNumber, email, password, confirmPassword } = body;
 
 		if (password !== confirmPassword) {

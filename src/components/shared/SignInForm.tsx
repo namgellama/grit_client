@@ -46,7 +46,7 @@ const SignInForm = () => {
 			});
 	}, [errors.root]);
 
-	const onSubmit = async (body: Partial<User>) => {
+	const onSubmit = async (body: FormFields) => {
 		try {
 			const token = await login(body).unwrap();
 			dispatch(setUser(token));
