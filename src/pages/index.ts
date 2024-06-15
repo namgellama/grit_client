@@ -12,6 +12,7 @@ export { default as ProductPage } from "./customer/ProductPage";
 export { default as AdminCategoriesPage } from "./admin/AdminCategoriesPage";
 export { default as AdminOrderDetailPage } from "./admin/AdminOrderDetailPage";
 export { default as AdminOrdersPage } from "./admin/AdminOrdersPage";
+export { default as AdminProductDetailPage } from "./admin/AdminProductDetailPage";
 export { default as AdminProductsPage } from "./admin/AdminProductsPage";
 export { default as DashboardPage } from "./admin/DashboardPage";
 export { default as ProductAddPage } from "./admin/ProductAddPage";
