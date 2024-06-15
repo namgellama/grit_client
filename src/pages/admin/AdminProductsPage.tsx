@@ -1,4 +1,5 @@
 import {
+	Badge,
 	Button,
 	Flex,
 	HStack,
@@ -14,6 +15,10 @@ import {
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetProductsQuery } from "../../app/features/product/productApiSlice";
+import {
+	getAgeStatus,
+	getSaleStatus,
+} from "../../utilities/getProductStatuses";
 
 const AdminProductsPage = () => {
 	const {
@@ -55,9 +60,8 @@ const AdminProductsPage = () => {
 							<Th>Price</Th>
 							<Th>Category</Th>
 							<Th>Segment</Th>
-							<Th>Sizes</Th>
-							<Th>Colors</Th>
-							<Th>Stock</Th>
+							<Th>Sale Status</Th>
+							<Th>Age Status</Th>
 						</Tr>
 					</Thead>
 					<Tbody>
@@ -65,13 +69,17 @@ const AdminProductsPage = () => {
 							<Tr key={product.id}>
 								<Td>{index + 1}</Td>
 								<Td>
-									<Image
-										w="60px"
-										h="60px"
-										objectFit="cover"
-										src={product.color[0].image}
-										alt={product.name}
-									/>
+									<Link
+										to={`/dashboard/products/${product.id}`}
+									>
+										<Image
+											w="60px"
+											h="60px"
+											objectFit="cover"
+											src={product.image}
+											alt={product.name}
+										/>
+									</Link>
 								</Td>
 								<Td>
 									<Link
@@ -83,13 +91,26 @@ const AdminProductsPage = () => {
 								<Td>Rs. {product.price}</Td>
 								<Td>{product.category.name}</Td>
 								<Td>{product.segment}</Td>
-								<Td>{product.sizes.join(", ")}</Td>
 								<Td>
-									{product.color
-										.map((color) => color.colorName)
-										.join(", ")}
+									<Badge
+										variant="solid"
+										colorScheme={getSaleStatus(
+											product.saleStatus
+										)}
+									>
+										{product.saleStatus}
+									</Badge>
 								</Td>
-								<Td>{product.stock}</Td>
+								<Td>
+									<Badge
+										variant="solid"
+										colorScheme={getAgeStatus(
+											product.ageStatus
+										)}
+									>
+										{product.ageStatus}
+									</Badge>
+								</Td>
 							</Tr>
 						))}
 					</Tbody>
