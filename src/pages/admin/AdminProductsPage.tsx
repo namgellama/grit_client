@@ -15,10 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetProductsQuery } from "../../app/features/product/productApiSlice";
-import {
-	getAgeStatus,
-	getSaleStatus,
-} from "../../utilities/getProductStatuses";
+import { getProductStatus } from "../../utilities/getProductStatus";
 
 const AdminProductsPage = () => {
 	const {
@@ -94,21 +91,21 @@ const AdminProductsPage = () => {
 								<Td>
 									<Badge
 										variant="solid"
-										colorScheme={getSaleStatus(
-											product.saleStatus
+										colorScheme={getProductStatus(
+											product.onSale
 										)}
 									>
-										{product.saleStatus}
+										{product.onSale ? "On Sale" : "Normal"}
 									</Badge>
 								</Td>
 								<Td>
 									<Badge
 										variant="solid"
-										colorScheme={getAgeStatus(
-											product.ageStatus
+										colorScheme={getProductStatus(
+											product.isNew
 										)}
 									>
-										{product.ageStatus}
+										{product.isNew ? "New" : "Old"}
 									</Badge>
 								</Td>
 							</Tr>

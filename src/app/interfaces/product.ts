@@ -7,8 +7,8 @@ export interface Product {
 	image: string;
 	price: number;
 	segment: string;
-	ageStatus: string;
-	saleStatus: string;
+	isNew: boolean;
+	onSale: boolean;
 	createdAt: Date;
 	updateAt: Date;
 	categoryId: string;
