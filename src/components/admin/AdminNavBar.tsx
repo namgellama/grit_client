@@ -46,7 +46,7 @@ const AdminNavBar = ({ handleLogout }: Props) => {
 	];
 
 	return (
-		<Box as="nav" w="18%" bg="white" h="100vh">
+		<Box as="nav" w="18%" bg="white" h="100vh" position="sticky" top={0}>
 			<HStack py={2} px={5} gap={4}>
 				<Image src={logo} alt="Logo" boxSize="40px" />
 				<Text fontWeight="medium">Welcome Admin!</Text>
