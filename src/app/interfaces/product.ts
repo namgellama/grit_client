@@ -13,7 +13,7 @@ export interface Product {
 	updateAt: Date;
 	categoryId: string;
 	category: Category;
-	variants: Variant[];
+	variants: Partial<Variant>[];
 }
 
 export interface Variant {

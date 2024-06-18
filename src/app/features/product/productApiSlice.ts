@@ -7,9 +7,17 @@ interface QueryParams {
 	ageStatus?: string;
 }
 
+interface Image {
+	asset_id: string;
+	display_name: string;
+	secure_url: string;
+	url: string;
+	created_at: Date;
+}
+
 interface Response {
 	message: string;
-	image: string;
+	image: Image;
 }
 
 export const productApiSlice = apiSlice.injectEndpoints({
