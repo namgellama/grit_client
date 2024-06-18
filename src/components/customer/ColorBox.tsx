@@ -2,7 +2,7 @@ import { Box, Tooltip } from "@chakra-ui/react";
 import { Variant } from "../../app/interfaces/product";
 
 interface Props {
-	variant: Variant;
+	variant: Partial<Variant>;
 	currentColor: string;
 	handleColorChange: (image: string, currentColor: string) => void;
 }
@@ -20,7 +20,9 @@ const ColorBox = ({ variant, currentColor, handleColorChange }: Props) => {
 						? `0 0 0 2px #fff, 0 0 0 4px ${variant.hexColor}`
 						: "none"
 				}
-				onClick={() => handleColorChange(variant.image, variant.color)}
+				onClick={() =>
+					handleColorChange(variant?.image!, variant.color!)
+				}
 			></Box>
 		</Tooltip>
 	);
