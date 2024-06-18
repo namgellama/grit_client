@@ -25,3 +25,8 @@ export const paymentStatuses = [
 	{ name: "Payment Failed", value: "FAILED" },
 	{ name: "Payment Refunded", value: "REFUNDED" },
 ];
+
+export const segments = [
+	{ name: "Men", value: "MEN" },
+	{ name: "Women", value: "WOMEN" },
+];
