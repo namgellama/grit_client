@@ -4,7 +4,10 @@ import { Variant } from "../../app/interfaces/product";
 interface Props {
 	variant: Partial<Variant>;
 	currentColor: string;
-	handleColorChange: (image: string, currentColor: string) => void;
+	handleColorChange: (
+		image: string | undefined,
+		currentColor: string | undefined
+	) => void;
 }
 
 const ColorBox = ({ variant, currentColor, handleColorChange }: Props) => {
@@ -20,9 +23,7 @@ const ColorBox = ({ variant, currentColor, handleColorChange }: Props) => {
 						? `0 0 0 2px #fff, 0 0 0 4px ${variant.hexColor}`
 						: "none"
 				}
-				onClick={() =>
-					handleColorChange(variant?.image!, variant.color!)
-				}
+				onClick={() => handleColorChange(variant.image, variant.color)}
 			></Box>
 		</Tooltip>
 	);

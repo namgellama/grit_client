@@ -62,8 +62,6 @@ const ProductVariant = ({ setVariants }: Props) => {
 		}
 	};
 
-	console.log(color);
-
 	return (
 		<VStack gap={10} flex={1}>
 			{[...Array(variantNumber).keys()].map((x) => (

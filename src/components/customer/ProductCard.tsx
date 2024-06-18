@@ -24,16 +24,24 @@ const ProductCard = ({ product, categoryName }: Props) => {
 		).values()
 	);
 
-	const handleColorChange = (image: string, color: string) => {
-		if (currentImage !== image) {
-			setCurrentColor(color);
-			setIsTransitioning(true);
-			setTimeout(() => {
-				setCurrentImage(image);
-				setIsTransitioning(false);
-			}, 200);
-		}
+	const handleColorChange = (
+		image: string | undefined,
+		color: string | undefined
+	) => {
+		if (image && color)
+			if (currentImage !== image) {
+				setCurrentColor(color);
+				setIsTransitioning(true);
+				setTimeout(() => {
+					setCurrentImage(image);
+					setIsTransitioning(false);
+				}, 200);
+			}
 	};
+
+	console.log(uniqueColorVariants);
+
+	console.log(currentImage);
 
 	return (
 		<VStack align="start">
