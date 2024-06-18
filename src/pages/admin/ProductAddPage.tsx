@@ -68,7 +68,6 @@ const ProductAddPage = () => {
 	};
 
 	const onSubmit = async (body: FormFields) => {
-		console.log(body);
 		try {
 			await addProduct({
 				data: { ...body, variants },

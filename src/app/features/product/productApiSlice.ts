@@ -1,18 +1,10 @@
 import { apiSlice } from "../../apiSlice";
 import { PRODUCT_URL } from "../../constants";
-import { Product } from "../../interfaces/product";
+import { Product, ProductCreate, Image } from "../../interfaces/product";
 
 interface QueryParams {
 	segment?: string;
 	ageStatus?: string;
-}
-
-interface Image {
-	asset_id: string;
-	display_name: string;
-	secure_url: string;
-	url: string;
-	created_at: Date;
 }
 
 interface Response {
@@ -44,7 +36,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
 
 		addProduct: builder.mutation<
 			Product,
-			{ data: Partial<Product>; token: string }
+			{ data: Partial<ProductCreate>; token: string }
 		>({
 			query: ({ data, token }) => ({
 				url: PRODUCT_URL,

@@ -39,10 +39,6 @@ const ProductCard = ({ product, categoryName }: Props) => {
 			}
 	};
 
-	console.log(uniqueColorVariants);
-
-	console.log(currentImage);
-
 	return (
 		<VStack align="start">
 			<Link to={`/products/${product?.id}`}>
