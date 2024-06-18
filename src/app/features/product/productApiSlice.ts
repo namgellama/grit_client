@@ -7,6 +7,11 @@ interface QueryParams {
 	ageStatus?: string;
 }
 
+interface Response {
+	message: string;
+	image: string;
+}
+
 export const productApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getProducts: builder.query<Product[], QueryParams>({
@@ -28,7 +33,34 @@ export const productApiSlice = apiSlice.injectEndpoints({
 			}),
 			providesTags: ["Product"],
 		}),
+
+		addProduct: builder.mutation<
+			Product,
+			{ data: Partial<Product>; token: string }
+		>({
+			query: ({ data, token }) => ({
+				url: PRODUCT_URL,
+				method: "POST",
+				body: data,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}),
+		}),
+
+		uploadProductImage: builder.mutation<Response, FormData>({
+			query: (data) => ({
+				url: `/api/upload`,
+				method: "POST",
+				body: data,
+			}),
+		}),
 	}),
 });
 
-export const { useGetProductsQuery, useGetProductQuery } = productApiSlice;
+export const {
+	useGetProductsQuery,
+	useGetProductQuery,
+	useAddProductMutation,
+	useUploadProductImageMutation,
+} = productApiSlice;
