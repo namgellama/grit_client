@@ -1,9 +1,10 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import { RevenueByMonth } from "../../components";
+import { KPIData, MyContainer, RevenueByMonth } from "../../components";
 
 const DashboardPage = () => {
 	return (
-		<Box my={2} px={2}>
+		<MyContainer my={2}>
+			<KPIData />
 			<SimpleGrid columns={2} spacing={10}>
 				<Box>
 					<RevenueByMonth />
@@ -13,7 +14,7 @@ const DashboardPage = () => {
 				<Box></Box>
 				<Box></Box>
 			</SimpleGrid>
-		</Box>
+		</MyContainer>
 	);
 };
 
