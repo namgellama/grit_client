@@ -8,3 +8,10 @@ export interface KPI {
 	orderCount: number;
 	averageOrderValue: number;
 }
+
+export interface MostSoldProduct {
+	id: string;
+	name: string;
+	quantity: number;
+	amount: number;
+}

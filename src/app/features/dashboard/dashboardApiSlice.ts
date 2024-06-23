@@ -1,6 +1,10 @@
 import { apiSlice } from "../../apiSlice";
 import { DASHBOARD_URL } from "../../constants";
-import { KPI, RevenueByMonthResponse } from "../../interfaces/dashboard";
+import {
+	KPI,
+	MostSoldProduct,
+	RevenueByMonthResponse,
+} from "../../interfaces/dashboard";
 
 export const dashboardApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
@@ -23,7 +27,21 @@ export const dashboardApiSlice = apiSlice.injectEndpoints({
 			}),
 			providesTags: ["RevenueByMonth"],
 		}),
+
+		getMostSoldProducts: builder.query<MostSoldProduct[], string>({
+			query: (token) => ({
+				url: `${DASHBOARD_URL}/mostSoldProducts`,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}),
+			providesTags: ["MostSoldProducts"],
+		}),
 	}),
 });
 
-export const { useGetKPIQuery, useGetRevenueByMonthQuery } = dashboardApiSlice;
+export const {
+	useGetKPIQuery,
+	useGetRevenueByMonthQuery,
+	useGetMostSoldProductsQuery,
+} = dashboardApiSlice;
