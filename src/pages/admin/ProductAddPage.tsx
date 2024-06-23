@@ -50,7 +50,6 @@ const ProductAddPage = () => {
 	const { user } = useAppSelector((state) => state.auth);
 
 	const [variants, setVariants] = useState<Partial<Variant>[]>([]);
-	console.log(variants);
 
 	const uploadFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files) {

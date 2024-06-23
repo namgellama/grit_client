@@ -22,6 +22,7 @@ export { default as CategoryModal } from "./admin/CategoryModal";
 export { default as DeleteAlert } from "./admin/DeleteAlert";
 export { default as ProductVariant } from "./admin/ProductVariant";
 export { default as UpdateOrder } from "./admin/UpdateOrder";
+export { default as RevenueByMonth } from "./admin/RevenueByMonth";
 
 export { default as ErrorMessage } from "./shared/ErrorMessage";
 export { default as InputErrorMessage } from "./shared/InputErrorMessage";
