@@ -63,7 +63,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
 								{/* Admin Routes */}
 								<Route
-									path="/dashboard"
+									path="/dashboard/home"
 									element={<DashboardPage />}
 								/>
 								<Route

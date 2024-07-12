@@ -24,7 +24,7 @@ const AdminNavBar = ({ handleLogout }: Props) => {
 	const navLinks = [
 		{
 			name: "Home",
-			path: "/dashboard",
+			path: "/dashboard/home",
 			icon: <IoHome />,
 		},
 
@@ -46,10 +46,12 @@ const AdminNavBar = ({ handleLogout }: Props) => {
 	];
 
 	return (
-		<Box as="nav" w="18%" bg="white" h="100vh" position="sticky" top={0}>
+		<Box as="nav" w="16%" bg="white" h="100vh" position="sticky" top={0}>
 			<HStack py={2} px={5} gap={4}>
-				<Image src={logo} alt="Logo" boxSize="40px" />
-				<Text fontWeight="medium">Welcome Admin!</Text>
+				<Image src={logo} alt="Logo" boxSize="24px" />
+				<Text fontWeight="medium" fontSize="small">
+					Welcome Admin!
+				</Text>
 			</HStack>
 			<Divider orientation="horizontal" borderColor="background.400" />
 
@@ -73,11 +75,12 @@ const AdminNavBar = ({ handleLogout }: Props) => {
 					pl={4}
 					borderRadius={5}
 				>
-					<MdLogout fontSize="larger" />
+					<MdLogout fontSize="large" />
 					<Button
 						variant="ghost"
 						onClick={handleLogout}
 						_hover={{ bg: "inherit" }}
+						fontSize="small"
 					>
 						Logout
 					</Button>

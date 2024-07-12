@@ -1,6 +1,6 @@
 import { Flex, IconButton, Text } from "@chakra-ui/react";
 import { JSXElementConstructor, LegacyRef, ReactElement } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const NavLink = ({ path, name }: { path: string; name: string }) => (
 	<Link to={path}>
@@ -67,6 +67,7 @@ export const NavLinkButton = ({
 	icon: ReactElement<any, string | JSXElementConstructor<any>>;
 }) => {
 	const navigate = useNavigate();
+	const { pathname } = useLocation();
 
 	return (
 		<Flex
@@ -80,9 +81,12 @@ export const NavLinkButton = ({
 			py={2}
 			gap={3}
 			onClick={() => navigate(path)}
+			bg={pathname.includes(path) ? "lightgray" : "inherit"}
 		>
 			{icon}
-			<Text>{name}</Text>
+			<Text fontSize="small" fontWeight="semibold">
+				{name}
+			</Text>
 		</Flex>
 	);
 };

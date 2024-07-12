@@ -17,7 +17,7 @@ function App() {
 			user?.role === "Admin" &&
 			!location.pathname.startsWith("/dashboard")
 		)
-			navigate("/dashboard");
+			navigate("/dashboard/home");
 	}, [user, navigate, location]);
 
 	const handleLogout = () => {
