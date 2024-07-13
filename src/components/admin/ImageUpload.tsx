@@ -66,6 +66,7 @@ const ImageUpload = () => {
 										w="100%"
 										h="100%"
 										objectFit="cover"
+										borderRadius={5}
 									/>
 									<Box
 										position="absolute"
