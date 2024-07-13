@@ -1,6 +1,6 @@
 import {
 	Box,
-	Flex,
+	Grid,
 	IconButton,
 	Image,
 	Modal,
@@ -89,12 +89,12 @@ const VariantImageContainer = ({
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader fontSize="md">
+					<ModalHeader fontSize="md" p={3}>
 						Select Image | {variant?.color}/{variant?.size}
 					</ModalHeader>
 					<ModalCloseButton />
-					<ModalBody>
-						<Flex gap={2}>
+					<ModalBody p={3}>
+						<Grid gridTemplateColumns="repeat(4, 1fr)" gap={3}>
 							{images.map((image: string, index: number) => (
 								<button
 									key={index}
@@ -110,7 +110,7 @@ const VariantImageContainer = ({
 									/>
 								</button>
 							))}
-						</Flex>
+						</Grid>
 					</ModalBody>
 				</ModalContent>
 			</Modal>
