@@ -4,11 +4,13 @@ import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import "@mantine/dropzone/styles.css";
 import { IconPhotoPlus, IconUpload, IconX } from "@tabler/icons-react";
 import axios from "axios";
-import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { addImage, deleteImage } from "../../app/features/image/imageSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const ImageUpload = () => {
-	const [images, setImages] = useState<string[]>([]);
+	const images = useAppSelector((state) => state.images);
+	const dispatch = useAppDispatch();
 
 	const presetKey = import.meta.env.VITE_CLOUDINARY_PRESET_KEY;
 	const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
@@ -33,16 +35,7 @@ const ImageUpload = () => {
 		});
 
 		const uploadedImages = await Promise.all(uploadPromises);
-		setImages((prevImages) => [
-			...prevImages,
-			...uploadedImages.filter((url) => url !== null),
-		]);
-	};
-
-	const handleImageDelete = (image: string) => {
-		setImages((prevImages) =>
-			prevImages.filter((prevImage) => prevImage != image)
-		);
+		dispatch(addImage(uploadedImages.filter((url) => url !== null)));
 	};
 
 	return (
@@ -80,7 +73,9 @@ const ImageUpload = () => {
 										right={1}
 										bg="blueviolet"
 										cursor="pointer"
-										onClick={() => handleImageDelete(image)}
+										onClick={() =>
+											dispatch(deleteImage(image))
+										}
 									>
 										<RxCross2
 											color="white"
