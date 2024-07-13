@@ -20,7 +20,7 @@ const BagItems = ({ bagItems, deliveryCharge, total }: Props) => {
 		<Box flex={1} pl={5} bg="background.main" py={8} px={10}>
 			<Flex direction="column" h="100%" justify="space-between">
 				<Flex
-					className="scrollbar"
+					className="scrollbarY"
 					direction="column"
 					gap={5}
 					pr={bagItems?.length! > 4 ? 5 : 0}

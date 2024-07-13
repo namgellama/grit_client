@@ -130,7 +130,7 @@ const MyOrders = () => {
 							wrap="wrap"
 							justify="space-between"
 							overflowY="scroll"
-							className="scrollbar"
+							className="scrollbarY"
 							h="100px"
 							gap={3}
 						>

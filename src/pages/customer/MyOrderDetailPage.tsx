@@ -61,7 +61,7 @@ const MyOrderDetailPage = () => {
 						gap={5}
 						h={order?.orderItems.length! > 4 ? "400px" : "100%"}
 						overflowY="scroll"
-						className="scrollbar"
+						className="scrollbarY"
 						pr={order?.orderItems.length! > 4 ? 4 : 0}
 					>
 						{order?.orderItems.map((orderItem) => (

@@ -70,7 +70,7 @@ const DBBagItems = ({ bagItems, user }: Props) => {
 	return (
 		<Flex direction="column" h="100%" justify="space-between">
 			<Flex
-				className="scrollbar"
+				className="scrollbarY"
 				direction="column"
 				gap={7}
 				pr={5}

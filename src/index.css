@@ -1,8 +1,17 @@
-.scrollbar::-webkit-scrollbar {
+.scrollbarY::-webkit-scrollbar {
 	width: 0.2rem;
 }
 
-.scrollbar::-webkit-scrollbar-thumb {
+.scrollbarY::-webkit-scrollbar-thumb {
+	background: gray;
+	cursor: pointer;
+}
+
+.scrollbarX::-webkit-scrollbar {
+	height: 0.5rem;
+}
+
+.scrollbarX::-webkit-scrollbar-thumb {
 	background: gray;
 	cursor: pointer;
 }

@@ -62,7 +62,7 @@ const AdminOrderDetailPage = () => {
 						gap={5}
 						h={getHeight(order?.orderItems.length!)}
 						overflowY="scroll"
-						className="scrollbar"
+						className="scrollbarY"
 						pr={order?.orderItems.length! >= 4 ? 4 : 0}
 					>
 						{order?.orderItems.map((orderItem) => (
