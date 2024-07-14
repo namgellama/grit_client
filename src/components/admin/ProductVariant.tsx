@@ -1,151 +1,214 @@
 import {
-	Button,
+	Box,
 	Flex,
-	FormControl,
-	FormLabel,
-	HStack,
-	Input,
-	NumberDecrementStepper,
-	NumberIncrementStepper,
-	NumberInput,
-	NumberInputField,
-	NumberInputStepper,
-	VStack,
+	IconButton,
+	Table,
+	Tbody,
+	Td,
+	Text,
+	Th,
+	Thead,
+	Tr,
+	useDisclosure,
 } from "@chakra-ui/react";
-import { ChangeEvent, useState } from "react";
-import { IoIosAddCircle } from "react-icons/io";
-import { MdRemoveCircle } from "react-icons/md";
-import { useUploadProductImageMutation } from "../../app/features/product/productApiSlice";
-import { Variant } from "../../app/interfaces/product";
+import { MantineProvider, TagsInput } from "@mantine/core";
+import "@mantine/core/styles.css";
+import { useState } from "react";
+import { MdModeEdit } from "react-icons/md";
+import {
+	addVariant,
+	removeSizeVariant,
+	removeVariant,
+	updateVariantSize,
+	Variant,
+} from "../../app/features/variant/variantSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import photoPlaceholder from "../../assets/photo-placeholder.png";
+import {
+	toTitleCaseColor,
+	toTitleCaseSize,
+} from "../../utilities/getTitleCase";
+import EditVariantModal from "./EditVariantModal";
+import VariantImageContainer from "./VariantImageContainer";
 
-interface Props {
-	setVariants: React.Dispatch<React.SetStateAction<Partial<Variant>[]>>;
-}
+const ProductVariant = () => {
+	const variants = useAppSelector((state) => state.variants);
+	const dispatch = useAppDispatch();
+	const [variant, setVariant] = useState<Variant | null>(null);
+	const [colors, setColors] = useState<string[]>([]);
+	const [hexColors, setHexColors] = useState<string[]>([]);
+	const [sizes, setSizes] = useState<string[]>([]);
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [stock, setStock] = useState(10);
 
-const ProductVariant = ({ setVariants }: Props) => {
-	const [variantNumber, setVariantNumber] = useState<number>(1);
+	const handleAddColor = (newColor: string[]) => {
+		const addedColor = newColor
+			.map(toTitleCaseColor)
+			.filter((c) => !colors.includes(c));
 
-	const [color, setColor] = useState("");
-	const [hexColor, setHexColor] = useState("");
-	const [size, setSize] = useState("");
-	const [stock, setStock] = useState(0);
-	const [image, setImage] = useState("");
+		addedColor.forEach((c) => {
+			if (sizes.length > 0) {
+				sizes.forEach((s) => {
+					dispatch(
+						addVariant({
+							color: c,
+							size: s,
+							image: null,
+							stock,
+						})
+					);
+				});
+			} else {
+				dispatch(
+					addVariant({ color: c, size: null, image: null, stock })
+				);
+			}
+		});
 
-	const [
-		uploadProductImage,
-		// { isLoading: isProductLoading, error: productError },
-	] = useUploadProductImageMutation();
-
-	const handleAddVariant = () => {
-		const newVariant = {
-			color,
-			hexColor,
-			size,
-			stock,
-			image,
-		};
-		setVariants((prevVariant) => [...prevVariant, newVariant]);
+		setColors(newColor.map(toTitleCaseColor));
 	};
 
-	const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files) {
-			const formData = new FormData();
+	const handleAddHexColor = (newHexColors: string[]) => {};
 
-			formData.append("image", e.target.files[0]);
+	const handleAddSize = (newSize: string[]) => {
+		const addedSize = newSize
+			.map(toTitleCaseSize)
+			.filter((s) => !sizes.includes(s));
 
-			try {
-				const response = await uploadProductImage(formData).unwrap();
-				setImage(response.image.secure_url);
-			} catch (err) {
-				console.log(err);
+		addedSize.forEach((s) => {
+			if (colors.length > 0) {
+				colors.forEach((c) => {
+					dispatch(
+						updateVariantSize({
+							color: c,
+							size: s,
+							image: null,
+							stock,
+						})
+					);
+				});
+			} else {
+				dispatch(
+					addVariant({ color: null, size: s, image: null, stock })
+				);
 			}
+		});
+		setSizes(newSize.map(toTitleCaseSize));
+	};
+
+	const handleRemoveColor = (removedColor: string) => {
+		if (colors.length === 1) {
+			setSizes([]);
 		}
+
+		dispatch(removeVariant(removedColor));
+	};
+
+	const handleRemoveSize = (size: string) => {
+		dispatch(removeSizeVariant(size));
 	};
 
 	return (
-		<VStack gap={10} flex={1}>
-			{[...Array(variantNumber).keys()].map((x) => (
-				<Flex
-					key={x + 1}
-					gap={3}
-					direction="column"
-					bg="background.300"
-				>
-					<HStack align="space-between" gap={7}>
-						<FormControl>
-							<FormLabel>Color</FormLabel>
-							<Input
-								type="text"
-								variant="filled"
-								background="white"
-								onChange={(e) => setColor(e.target.value)}
-							/>
-						</FormControl>
-
-						<FormControl>
-							<FormLabel>Hex Color</FormLabel>
-							<Input
-								type="text"
-								variant="filled"
-								background="white"
-								onChange={(e) => setHexColor(e.target.value)}
-							/>
-						</FormControl>
-					</HStack>
-
-					<HStack align="space-between" gap={7}>
-						<FormControl>
-							<FormLabel>Size</FormLabel>
-							<Input
-								type="text"
-								variant="filled"
-								background="white"
-								onChange={(e) => setSize(e.target.value)}
-							/>
-						</FormControl>
-
-						<FormControl>
-							<FormLabel>Stock</FormLabel>
-							<NumberInput>
-								<NumberInputField
-									bg="white"
-									onChange={(e) =>
-										setStock(Number(e.target.value))
-									}
-								/>
-								<NumberInputStepper>
-									<NumberIncrementStepper />
-									<NumberDecrementStepper />
-								</NumberInputStepper>
-							</NumberInput>
-						</FormControl>
-					</HStack>
-
-					<FormControl>
-						<FormLabel>Image</FormLabel>
-						<Input
-							type="file"
-							variant="filled"
-							background="white"
-							multiple
-							onChange={handleImageUpload}
-						/>
-					</FormControl>
-
-					<Button onClick={handleAddVariant}>Add Variant</Button>
-				</Flex>
-			))}
-			<HStack>
-				<MdRemoveCircle
-					color="gray"
-					onClick={() => setVariantNumber(variantNumber - 1)}
+		<MantineProvider>
+			<Flex direction="column" gap={4} bg="white" p={4}>
+				<TagsInput
+					label="Color"
+					placeholder="eg. Red, Green"
+					data={[]}
+					value={colors}
+					onChange={handleAddColor}
+					onRemove={handleRemoveColor}
 				/>
-				<IoIosAddCircle
-					color="green"
-					onClick={() => setVariantNumber(variantNumber + 1)}
-				/>
-			</HStack>
-		</VStack>
+
+				{/* <TagsInput
+					label="Hex Color"
+					placeholder="eg. ##FF0000, #00FF00"
+					data={[]}
+					value={hexColors}
+					onChange={handleAddHexColor}
+				/> */}
+
+				{colors.length > 0 && (
+					<TagsInput
+						label="Size"
+						placeholder="eg. M, L"
+						data={[]}
+						value={sizes}
+						onChange={handleAddSize}
+						onRemove={handleRemoveSize}
+					/>
+				)}
+			</Flex>
+
+			{variants?.length > 0 && (
+				<Box bg="white" p={4}>
+					<Text fontSize="sm" fontWeight="semibold">
+						Product Variants
+					</Text>
+					<Table mt={2}>
+						<Thead>
+							<Tr>
+								<Th>Variant</Th>
+								<Th>Action</Th>
+							</Tr>
+						</Thead>
+						<Tbody>
+							{variants.map((variant, index) => (
+								<Tr key={index}>
+									<Td>
+										<Flex align="center" gap={7}>
+											{variant.image ? (
+												<VariantImageContainer
+													image={variant.image}
+													setVariant={setVariant}
+													variant={variant}
+												/>
+											) : (
+												<VariantImageContainer
+													image={photoPlaceholder}
+													setVariant={setVariant}
+													variant={variant}
+												/>
+											)}
+											<Text
+												fontSize="sm"
+												fontWeight="semibold"
+											>
+												{variant.size
+													? `${variant.color} / ${variant.size}`
+													: variant.color}
+											</Text>
+										</Flex>
+									</Td>
+									<Td>
+										<MdModeEdit color="white" />
+										<IconButton
+											variant="outline"
+											colorScheme="messenger"
+											aria-label="edit variant"
+											icon={<MdModeEdit />}
+											size="xs"
+											onClick={() => {
+												onOpen();
+												setVariant(variant);
+											}}
+										/>
+									</Td>
+								</Tr>
+							))}
+						</Tbody>
+					</Table>
+
+					<EditVariantModal
+						variant={variant}
+						stock={stock}
+						setStock={setStock}
+						isOpen={isOpen}
+						onClose={onClose}
+					/>
+				</Box>
+			)}
+		</MantineProvider>
 	);
 };
 
