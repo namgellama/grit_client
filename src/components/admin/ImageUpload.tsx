@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useAddImageMutation } from "../../app/features/image/imageApiSlice";
 import { addImage } from "../../app/features/image/imageSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useToast } from "@chakra-ui/react";
 
 const ImageUpload = ({
 	setIsLoading,
@@ -18,6 +19,7 @@ const ImageUpload = ({
 	const presetKey = import.meta.env.VITE_CLOUDINARY_PRESET_KEY;
 	const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 	const [addImageMutation, { isLoading }] = useAddImageMutation();
+	const toast = useToast();
 
 	useEffect(() => {
 		setIsLoading(isLoading);
@@ -33,9 +35,14 @@ const ImageUpload = ({
 			try {
 				const response = await addImageMutation(formData).unwrap();
 				return response.secure_url;
-			} catch (error) {
-				console.error("Error uploading image to Cloudinary", error);
-				return null;
+			} catch (error: any) {
+				toast({
+					title: error.error,
+					duration: 1200,
+					isClosable: true,
+					status: "error",
+					position: "top-right",
+				});
 			}
 		});
 
