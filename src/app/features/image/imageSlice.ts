@@ -11,7 +11,7 @@ const imageSlice = createSlice({
 		},
 
 		deleteImage: (state, action) => {
-			return state.filter((prevImage) => prevImage != action.payload);
+			return state.filter((prevImage) => prevImage !== action.payload);
 		},
 	},
 });
