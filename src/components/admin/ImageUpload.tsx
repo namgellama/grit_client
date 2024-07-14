@@ -1,11 +1,8 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { Group, MantineProvider, rem } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import "@mantine/dropzone/styles.css";
 import { IconPhotoPlus, IconUpload, IconX } from "@tabler/icons-react";
 import axios from "axios";
-import { RxCross2 } from "react-icons/rx";
-import { addImage, deleteImage } from "../../app/features/image/imageSlice";
+import { addImage } from "../../app/features/image/imageSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const ImageUpload = () => {
@@ -40,106 +37,54 @@ const ImageUpload = () => {
 
 	return (
 		<MantineProvider>
-			<Box bg="white" p={3}>
-				<Text fontSize="sm" fontWeight="semibold" mb={2}>
-					Product Images
-				</Text>
-
-				<Flex
-					align="center"
-					gap={2}
-					overflowX="scroll"
-					className="scrollbarX"
+			<Dropzone
+				onDrop={onDrop}
+				onReject={(files) => console.log("rejected files", files)}
+				maxSize={5 * 1024 ** 2}
+				accept={IMAGE_MIME_TYPE}
+				multiple={false}
+				style={{
+					width: images.length > 0 ? "120px" : "100%",
+					height: images.length > 0 ? "120px" : "100%",
+				}}
+			>
+				<Group
+					justify="center"
+					gap="xl"
+					mih={90}
+					style={{ pointerEvents: "none" }}
 				>
-					{images.length > 0 && (
-						<Flex gap={2}>
-							{images.map((image, index) => (
-								<Box
-									key={index}
-									width="120px"
-									height="120px"
-									position="relative"
-								>
-									<Image
-										src={image}
-										alt={`Uploaded Image ${index + 1}`}
-										w="100%"
-										h="100%"
-										objectFit="cover"
-										borderRadius={5}
-									/>
-									<Box
-										position="absolute"
-										top={1}
-										right={1}
-										bg="blueviolet"
-										cursor="pointer"
-										onClick={() =>
-											dispatch(deleteImage(image))
-										}
-									>
-										<RxCross2
-											color="white"
-											fontSize="20px"
-										/>
-									</Box>
-								</Box>
-							))}
-						</Flex>
-					)}
-
-					<Dropzone
-						onDrop={onDrop}
-						onReject={(files) =>
-							console.log("rejected files", files)
-						}
-						maxSize={5 * 1024 ** 2}
-						accept={IMAGE_MIME_TYPE}
-						multiple={false}
-						style={{
-							width: images.length > 0 ? "120px" : "100%",
-							height: images.length > 0 ? "120px" : "100%",
-						}}
-					>
-						<Group
-							justify="center"
-							gap="xl"
-							mih={90}
-							style={{ pointerEvents: "none" }}
-						>
-							<Dropzone.Accept>
-								<IconUpload
-									style={{
-										width: rem(52),
-										height: rem(52),
-										color: "var(--mantine-color-blue-6)",
-									}}
-									stroke={1.5}
-								/>
-							</Dropzone.Accept>
-							<Dropzone.Reject>
-								<IconX
-									style={{
-										width: rem(52),
-										height: rem(52),
-										color: "var(--mantine-color-red-6)",
-									}}
-									stroke={1.5}
-								/>
-							</Dropzone.Reject>
-							<Dropzone.Idle>
-								<IconPhotoPlus
-									style={{
-										width: rem(50),
-										height: rem(50),
-									}}
-									stroke={1.5}
-								/>
-							</Dropzone.Idle>
-						</Group>
-					</Dropzone>
-				</Flex>
-			</Box>
+					<Dropzone.Accept>
+						<IconUpload
+							style={{
+								width: rem(52),
+								height: rem(52),
+								color: "var(--mantine-color-blue-6)",
+							}}
+							stroke={1.5}
+						/>
+					</Dropzone.Accept>
+					<Dropzone.Reject>
+						<IconX
+							style={{
+								width: rem(52),
+								height: rem(52),
+								color: "var(--mantine-color-red-6)",
+							}}
+							stroke={1.5}
+						/>
+					</Dropzone.Reject>
+					<Dropzone.Idle>
+						<IconPhotoPlus
+							style={{
+								width: rem(50),
+								height: rem(50),
+							}}
+							stroke={1.5}
+						/>
+					</Dropzone.Idle>
+				</Group>
+			</Dropzone>
 		</MantineProvider>
 	);
 };

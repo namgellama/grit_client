@@ -1,49 +1,16 @@
-import {
-	Box,
-	Grid,
-	IconButton,
-	Image,
-	Modal,
-	ModalBody,
-	ModalCloseButton,
-	ModalContent,
-	ModalHeader,
-	ModalOverlay,
-	useDisclosure,
-} from "@chakra-ui/react";
-import { SetStateAction } from "react";
+import { Box, IconButton, Image, useDisclosure } from "@chakra-ui/react";
 import { MdModeEdit } from "react-icons/md";
-import { useAppSelector } from "../../app/hooks";
+import ImageSelectModal from "./ImageSelectModal";
 import { Variant } from "./ProductVariant";
 
 interface Props {
 	image: string;
 	setVariant: (variant: Variant) => void;
 	variant: Variant;
-	setVariants: (variant: SetStateAction<Variant[]>) => void;
 }
 
-const VariantImageContainer = ({
-	image,
-	setVariant,
-	variant,
-	setVariants,
-}: Props) => {
+const VariantImageContainer = ({ image, setVariant, variant }: Props) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const images = useAppSelector((state) => state.images);
-
-	const handleImageSelect = (image: string) => {
-		if (variant) {
-			setVariants((prevVariants) =>
-				prevVariants.map((v) =>
-					v.color === variant.color && v.size === variant.size
-						? { ...v, image }
-						: v
-				)
-			);
-			onClose();
-		}
-	};
 
 	return (
 		<>
@@ -86,34 +53,11 @@ const VariantImageContainer = ({
 				/>
 			</Box>
 
-			<Modal isOpen={isOpen} onClose={onClose}>
-				<ModalOverlay />
-				<ModalContent>
-					<ModalHeader fontSize="md" p={3}>
-						Select Image | {variant?.color}/{variant?.size}
-					</ModalHeader>
-					<ModalCloseButton />
-					<ModalBody p={3}>
-						<Grid gridTemplateColumns="repeat(4, 1fr)" gap={3}>
-							{images.map((image: string, index: number) => (
-								<button
-									key={index}
-									onClick={() => handleImageSelect(image)}
-								>
-									<Image
-										src={image}
-										alt={`Preview image ${index}`}
-										w="110px"
-										h="110px"
-										objectFit="cover"
-										borderRadius={5}
-									/>
-								</button>
-							))}
-						</Grid>
-					</ModalBody>
-				</ModalContent>
-			</Modal>
+			<ImageSelectModal
+				isOpen={isOpen}
+				onClose={onClose}
+				variant={variant}
+			/>
 		</>
 	);
 };
