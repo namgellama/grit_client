@@ -7,7 +7,9 @@ import {
 	ModalContent,
 	ModalHeader,
 	ModalOverlay,
+	Skeleton,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { updateVariantImage } from "../../app/features/variant/variantSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import ImageUpload from "./ImageUpload";
@@ -22,6 +24,7 @@ interface Props {
 const ImageSelectModal = ({ variant, isOpen, onClose }: Props) => {
 	const images = useAppSelector((state) => state.images);
 	const dispatch = useAppDispatch();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleImageSelect = (image: string) => {
 		if (variant) {
@@ -49,7 +52,7 @@ const ImageSelectModal = ({ variant, isOpen, onClose }: Props) => {
 				<ModalCloseButton />
 				<ModalBody p={3}>
 					<Grid gridTemplateColumns="repeat(7, 1fr)" gap={3}>
-						<ImageUpload />
+						<ImageUpload setIsLoading={setIsLoading} />
 
 						{images.map((image: string, index: number) => (
 							<button
@@ -66,6 +69,10 @@ const ImageSelectModal = ({ variant, isOpen, onClose }: Props) => {
 								/>
 							</button>
 						))}
+
+						{isLoading && (
+							<Skeleton width="120px" height="120px"></Skeleton>
+						)}
 					</Grid>
 				</ModalBody>
 			</ModalContent>

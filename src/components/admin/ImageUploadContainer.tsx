@@ -1,13 +1,14 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import "@mantine/dropzone/styles.css";
+import { Box, Flex, Image, Skeleton, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { deleteImage } from "../../app/features/image/imageSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import ImageUpload from "./ImageUpload";
 
 const ImageUploadContainer = () => {
-	const images = useAppSelector((state) => state.images);
+	const images: string[] = useAppSelector((state) => state.images);
 	const dispatch = useAppDispatch();
+	const [isLoading, setIsLoading] = useState(false);
 
 	return (
 		<Box bg="white" p={3}>
@@ -50,10 +51,14 @@ const ImageUploadContainer = () => {
 								</Box>
 							</Box>
 						))}
+
+						{isLoading && (
+							<Skeleton width="120px" height="120px"></Skeleton>
+						)}
 					</Flex>
 				)}
 
-				<ImageUpload />
+				<ImageUpload setIsLoading={setIsLoading} />
 			</Flex>
 		</Box>
 	);
