@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface Variant {
+	id?: string;
 	color: string;
 	size: string | null;
 	image: string | null;

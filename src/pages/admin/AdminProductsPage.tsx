@@ -57,7 +57,6 @@ const AdminProductsPage = () => {
 							<Th>Price</Th>
 							<Th>Category</Th>
 							<Th>Segment</Th>
-							<Th>Sale Status</Th>
 							<Th>Age Status</Th>
 						</Tr>
 					</Thead>
@@ -73,7 +72,7 @@ const AdminProductsPage = () => {
 											w="60px"
 											h="60px"
 											objectFit="cover"
-											src={product.image}
+											src={product.variants[0].image!}
 											alt={product.name}
 										/>
 									</Link>
@@ -85,19 +84,10 @@ const AdminProductsPage = () => {
 										{product.name}
 									</Link>
 								</Td>
-								<Td>Rs. {product.price}</Td>
+								<Td>Rs. {product.sellingPrice}</Td>
 								<Td>{product.category.name}</Td>
 								<Td>{product.segment}</Td>
-								<Td>
-									<Badge
-										variant="solid"
-										colorScheme={getProductStatus(
-											product.onSale
-										)}
-									>
-										{product.onSale ? "On Sale" : "Normal"}
-									</Badge>
-								</Td>
+
 								<Td>
 									<Badge
 										variant="solid"

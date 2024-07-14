@@ -1,15 +1,10 @@
 import { apiSlice } from "../../apiSlice";
 import { PRODUCT_URL } from "../../constants";
-import { Product, ProductCreate, Image } from "../../interfaces/product";
+import { Product, ProductCreate } from "../../interfaces/product";
 
 interface QueryParams {
 	segment?: string;
 	ageStatus?: string;
-}
-
-interface Response {
-	message: string;
-	image: Image;
 }
 
 export const productApiSlice = apiSlice.injectEndpoints({
@@ -47,14 +42,6 @@ export const productApiSlice = apiSlice.injectEndpoints({
 				},
 			}),
 		}),
-
-		uploadProductImage: builder.mutation<Response, FormData>({
-			query: (data) => ({
-				url: `/api/upload`,
-				method: "POST",
-				body: data,
-			}),
-		}),
 	}),
 });
 
@@ -62,5 +49,4 @@ export const {
 	useGetProductsQuery,
 	useGetProductQuery,
 	useAddProductMutation,
-	useUploadProductImageMutation,
 } = productApiSlice;
