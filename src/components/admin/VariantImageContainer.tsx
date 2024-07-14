@@ -1,7 +1,7 @@
 import { Box, IconButton, Image, useDisclosure } from "@chakra-ui/react";
 import { MdModeEdit } from "react-icons/md";
 import ImageSelectModal from "./ImageSelectModal";
-import { Variant } from "./ProductVariant";
+import { Variant } from "../../app/features/variant/variantSlice";
 
 interface Props {
 	image: string;
@@ -37,7 +37,7 @@ const VariantImageContainer = ({ image, setVariant, variant }: Props) => {
 					alt="Variant Image"
 				/>
 				<IconButton
-					aria-label="Search database"
+					aria-label="Edit image"
 					className="edit-button"
 					icon={<MdModeEdit color="white" />}
 					position="absolute"
@@ -48,8 +48,7 @@ const VariantImageContainer = ({ image, setVariant, variant }: Props) => {
 					opacity={0}
 					visibility="hidden"
 					transition="opacity 0.2s, visibility 0.2s"
-					bg="blue"
-					_hover={{ bg: "blue" }}
+					colorScheme="messenger"
 				/>
 			</Box>
 

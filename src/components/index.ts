@@ -20,6 +20,7 @@ export { default as AdminNavBar } from "./admin/AdminNavBar";
 export { default as CategoryForm } from "./admin/CategoryForm";
 export { default as CategoryModal } from "./admin/CategoryModal";
 export { default as DeleteAlert } from "./admin/DeleteAlert";
+export { default as EditVariantModal } from "./admin/EditVariantModal";
 export { default as HeaderText } from "./admin/HeaderText";
 export { default as ImageSelectModal } from "./admin/ImageSelectModal";
 export { default as ImageUpload } from "./admin/ImageUpload";

@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface Variant {
+export interface Variant {
 	color: string;
 	size: string | null;
 	image: string | null;
+	stock?: number;
 }
 
 const initialState: Variant[] = [];
@@ -62,6 +63,14 @@ const variantSlice = createSlice({
 				return state.filter((x) => x.size !== action.payload);
 			}
 		},
+
+		updateVariantStock: (state, action) => {
+			const { color, size, stock } = action.payload;
+			const variant = state.find(
+				(x) => x.color === color && x.size === size
+			);
+			if (variant) variant.stock = stock;
+		},
 	},
 });
 
@@ -71,6 +80,7 @@ export const {
 	updateVariantImage,
 	removeVariant,
 	removeSizeVariant,
+	updateVariantStock,
 } = variantSlice.actions;
 
 export default variantSlice.reducer;

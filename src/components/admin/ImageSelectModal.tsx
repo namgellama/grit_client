@@ -10,10 +10,12 @@ import {
 	Skeleton,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { updateVariantImage } from "../../app/features/variant/variantSlice";
+import {
+	updateVariantImage,
+	Variant,
+} from "../../app/features/variant/variantSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import ImageUpload from "./ImageUpload";
-import { Variant } from "./ProductVariant";
 
 interface Props {
 	variant: Variant;
