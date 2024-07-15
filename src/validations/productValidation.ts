@@ -4,6 +4,10 @@ const SEGMENT = ["MEN", "WOMEN", "UNISEX"] as const;
 
 const VARIANTS = z.object({
 	color: z.string().min(1, "Color is required"),
+	hexColor: z
+		.string()
+		.min(5, "Hex color is required")
+		.startsWith("#", "Hex color starts with #"),
 	size: z.string().min(1, "Size is required"),
 	image: z.string().min(1, "Image is required"),
 	stock: z.number({ message: "Stock is required" }),

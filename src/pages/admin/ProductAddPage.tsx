@@ -53,6 +53,16 @@ const ProductAddPage = () => {
 	useEffect(() => {
 		if (Array.isArray(errors.variants)) {
 			errors.variants.forEach((error) => {
+				if (error.hexColor) {
+					toast({
+						title: error?.hexColor?.message,
+						duration: 1200,
+						isClosable: true,
+						status: "error",
+						position: "top-right",
+					});
+				}
+
 				if (error.size) {
 					toast({
 						title: error?.size?.message,

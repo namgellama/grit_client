@@ -16,7 +16,7 @@ import "@mantine/core/styles.css";
 import { useState } from "react";
 import { MdModeEdit } from "react-icons/md";
 import {
-	addVariant,
+	addColorVariant,
 	removeSizeVariant,
 	removeVariant,
 	updateVariantSize,
@@ -49,8 +49,9 @@ const ProductVariant = () => {
 			if (sizes.length > 0) {
 				sizes.forEach((s) => {
 					dispatch(
-						addVariant({
-							color: c,
+						addColorVariant({
+							color: c.split(", ")[0],
+							hexColor: c.split(", ")[1],
 							size: s,
 							image: "",
 							stock,
@@ -58,7 +59,18 @@ const ProductVariant = () => {
 					);
 				});
 			} else {
-				dispatch(addVariant({ color: c, size: "", image: "", stock }));
+				dispatch(
+					addColorVariant({
+						color: c.split(", ")[0],
+						hexColor:
+							c.split(", ")[1] === undefined
+								? ""
+								: c.split(", ")[1],
+						size: "",
+						image: "",
+						stock,
+					})
+				);
 			}
 		});
 
@@ -71,20 +83,17 @@ const ProductVariant = () => {
 			.filter((s) => !sizes.includes(s));
 
 		addedSize.forEach((s) => {
-			if (colors.length > 0) {
-				colors.forEach((c) => {
-					dispatch(
-						updateVariantSize({
-							color: c,
-							size: s,
-							image: "",
-							stock,
-						})
-					);
-				});
-			} else {
-				dispatch(addVariant({ color: "", size: s, image: "", stock }));
-			}
+			colors.forEach((c) => {
+				dispatch(
+					updateVariantSize({
+						color: c.split(", ")[0],
+						hexColor: c.split(", ")[1],
+						size: s,
+						image: "",
+						stock,
+					})
+				);
+			});
 		});
 		setSizes(newSize.map(toTitleCaseSize));
 	};
@@ -107,19 +116,12 @@ const ProductVariant = () => {
 				<TagsInput
 					label="Color"
 					placeholder="eg. Red, Green"
+					splitChars={["|"]}
 					data={[]}
 					value={colors}
 					onChange={handleAddColor}
 					onRemove={handleRemoveColor}
 				/>
-
-				{/* <TagsInput
-					label="Hex Color"
-					placeholder="eg. ##FF0000, #00FF00"
-					data={[]}
-					value={hexColors}
-					onChange={handleAddHexColor}
-				/> */}
 
 				{colors.length > 0 && (
 					<TagsInput
@@ -168,8 +170,8 @@ const ProductVariant = () => {
 												fontWeight="semibold"
 											>
 												{variant.size
-													? `${variant.color} / ${variant.size}`
-													: variant.color}
+													? `${variant.color} (${variant.hexColor}) / ${variant.size}`
+													: `${variant.color}  (${variant.hexColor}) `}
 											</Text>
 										</Flex>
 									</Td>

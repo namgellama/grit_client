@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface Variant {
 	id?: string;
 	color: string;
+	hexColor: string;
 	size: string;
 	image: string;
 	stock: number;
@@ -14,7 +15,7 @@ const variantSlice = createSlice({
 	name: "variants",
 	initialState,
 	reducers: {
-		addVariant: (state, action) => {
+		addColorVariant: (state, action) => {
 			state.push(action.payload);
 		},
 
@@ -80,7 +81,7 @@ const variantSlice = createSlice({
 });
 
 export const {
-	addVariant,
+	addColorVariant,
 	updateVariantSize,
 	updateVariantImage,
 	removeVariant,
