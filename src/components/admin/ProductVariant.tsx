@@ -36,7 +36,6 @@ const ProductVariant = () => {
 	const dispatch = useAppDispatch();
 	const [variant, setVariant] = useState<Variant | null>(null);
 	const [colors, setColors] = useState<string[]>([]);
-	const [hexColors, setHexColors] = useState<string[]>([]);
 	const [sizes, setSizes] = useState<string[]>([]);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [stock, setStock] = useState(10);
@@ -53,22 +52,18 @@ const ProductVariant = () => {
 						addVariant({
 							color: c,
 							size: s,
-							image: null,
+							image: "",
 							stock,
 						})
 					);
 				});
 			} else {
-				dispatch(
-					addVariant({ color: c, size: null, image: null, stock })
-				);
+				dispatch(addVariant({ color: c, size: "", image: "", stock }));
 			}
 		});
 
 		setColors(newColor.map(toTitleCaseColor));
 	};
-
-	const handleAddHexColor = (newHexColors: string[]) => {};
 
 	const handleAddSize = (newSize: string[]) => {
 		const addedSize = newSize
@@ -82,15 +77,13 @@ const ProductVariant = () => {
 						updateVariantSize({
 							color: c,
 							size: s,
-							image: null,
+							image: "",
 							stock,
 						})
 					);
 				});
 			} else {
-				dispatch(
-					addVariant({ color: null, size: s, image: null, stock })
-				);
+				dispatch(addVariant({ color: "", size: s, image: "", stock }));
 			}
 		});
 		setSizes(newSize.map(toTitleCaseSize));
@@ -141,7 +134,7 @@ const ProductVariant = () => {
 			</Flex>
 
 			{variants?.length > 0 && (
-				<Box bg="white" p={4}>
+				<Box bg="white" p={4} height="454px" overflowY="scroll">
 					<Text fontSize="sm" fontWeight="semibold">
 						Product Variants
 					</Text>

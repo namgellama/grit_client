@@ -1,7 +1,7 @@
 import {
-	Box,
 	Button,
 	Checkbox,
+	Flex,
 	FormControl,
 	FormLabel,
 	HStack,
@@ -14,86 +14,133 @@ import {
 	Select,
 	Spinner,
 	Textarea,
+	useToast,
 	VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChangeEvent, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useGetCategoriesQuery } from "../../app/features/category/categoryApiSlice";
+import { useAddProductMutation } from "../../app/features/product/productApiSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
-	useAddProductMutation,
-	useUploadProductImageMutation,
-} from "../../app/features/product/productApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import { InputErrorMessage, ProductVariant } from "../../components";
+	ImageUploadContainer,
+	InputErrorMessage,
+	ProductVariant,
+} from "../../components";
 import { segments } from "../../utilities/data";
 import { FormFields, productSchema } from "../../validations/productValidation";
-import { Variant } from "../../app/interfaces/product";
+import { removeAllVariants } from "../../app/features/variant/variantSlice";
 
 const ProductAddPage = () => {
 	const {
 		register,
 		handleSubmit,
-		getValues,
-		setError,
 		setValue,
 		formState: { errors, isSubmitting },
 	} = useForm<FormFields>({
 		resolver: zodResolver(productSchema),
 	});
-	const { data: categories, isLoading, error } = useGetCategoriesQuery();
-	const [
-		uploadProductImage,
-		// { isLoading: isProductLoading, error: productError },
-	] = useUploadProductImageMutation();
+	const { data: categories } = useGetCategoriesQuery();
+	const variants = useAppSelector((state) => state.variants);
+	const toast = useToast();
 	const [addProduct] = useAddProductMutation();
 	const { user } = useAppSelector((state) => state.auth);
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
-	const [variants, setVariants] = useState<Partial<Variant>[]>([]);
+	useEffect(() => {
+		if (Array.isArray(errors.variants)) {
+			errors.variants.forEach((error) => {
+				if (error.size) {
+					toast({
+						title: error?.size?.message,
+						duration: 1200,
+						isClosable: true,
+						status: "error",
+						position: "top-right",
+					});
+				}
 
-	const uploadFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files) {
-			const formData = new FormData();
+				if (error.image) {
+					toast({
+						title: error?.image?.message,
+						duration: 1200,
+						isClosable: true,
+						status: "error",
+						position: "top-right",
+					});
+				}
+			});
 
-			formData.append("image", e.target.files[0]);
-
-			try {
-				const response = await uploadProductImage(formData).unwrap();
-				setValue("image", response.image.secure_url);
-			} catch (err) {
-				console.log(err);
-			}
+			return;
 		}
-	};
+
+		if (errors.variants)
+			toast({
+				title: errors.variants.message,
+				duration: 1200,
+				isClosable: true,
+				status: "error",
+				position: "top-right",
+			});
+	}, [errors, toast]);
+
+	useEffect(() => {
+		if (variants.length > 0) setValue("variants", variants);
+	}, [variants]);
 
 	const onSubmit = async (body: FormFields) => {
 		try {
-			await addProduct({
+			const data = await addProduct({
 				data: { ...body, variants },
 				token: user?.token ?? "",
 			}).unwrap();
+			if (data) {
+				dispatch(removeAllVariants());
+				navigate("/dashboard/products");
+			}
 		} catch (err) {
-			console.log(err);
+			toast({
+				title: "An error occrred",
+				duration: 1200,
+				isClosable: true,
+				status: "error",
+				position: "top",
+			});
 		}
 	};
 
 	return (
-		<Box w="100%">
-			<HStack align="start" p={8} gap={10}>
+		<Flex
+			w="100%"
+			direction="column"
+			as="form"
+			onSubmit={handleSubmit(onSubmit)}
+			p={8}
+			gap={5}
+		>
+			<HStack align="start" gap={10} w="100%">
 				<VStack
-					as="form"
 					spacing={3}
 					flex={1}
 					align="start"
-					onSubmit={handleSubmit(onSubmit)}
+					bg="white"
+					p={5}
+					borderRadius={5}
 				>
 					<FormControl>
-						<FormLabel>Name</FormLabel>
+						<FormLabel fontSize="sm">Name*</FormLabel>
 						<Input
 							type="text"
 							variant="filled"
-							background="white"
 							{...register("name")}
+							autoComplete="off"
+							bg="white"
+							borderColor="#ced4da"
+							borderWidth={1}
+							_hover={{ bg: "white", borderWidth: 2 }}
 						/>
 						{errors.name && (
 							<InputErrorMessage>
@@ -103,50 +150,15 @@ const ProductAddPage = () => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel>Image</FormLabel>
-						<Input
-							type="file"
-							accept="image/"
-							variant="filled"
-							background="white"
-							onChange={uploadFileHandler}
-							// {...register("image")}
-						/>
-
-						{errors.image && (
-							<InputErrorMessage>
-								{errors.image.message}
-							</InputErrorMessage>
-						)}
-					</FormControl>
-
-					<FormControl>
-						<FormLabel>Category</FormLabel>
-						<Select
-							variant="filled"
-							bg="white"
-							{...register("categoryId")}
-						>
-							<option value=""></option>
-							{categories?.map((category) => (
-								<option key={category.id} value={category.id}>
-									{category.name}
-								</option>
-							))}
-						</Select>
-						{errors.categoryId && (
-							<InputErrorMessage>
-								{errors.categoryId.message}
-							</InputErrorMessage>
-						)}
-					</FormControl>
-
-					<FormControl>
-						<FormLabel>Description</FormLabel>
+						<FormLabel fontSize="sm">Description*</FormLabel>
 						<Textarea
 							variant="filled"
-							bg="white"
 							{...register("description")}
+							bg="white"
+							borderColor="#CED4DA"
+							borderWidth={1}
+							_hover={{ bg: "white", borderWidth: 2 }}
+							height="15.6rem"
 						/>
 						{errors.description && (
 							<InputErrorMessage>
@@ -156,20 +168,26 @@ const ProductAddPage = () => {
 					</FormControl>
 
 					<FormControl>
-						<FormLabel>Price</FormLabel>
-						<NumberInput>
-							<NumberInputField
-								bg="white"
-								{...register("price", { valueAsNumber: true })}
-							/>
-							<NumberInputStepper>
-								<NumberIncrementStepper />
-								<NumberDecrementStepper />
-							</NumberInputStepper>
-						</NumberInput>
-						{errors.price && (
+						<FormLabel>Category</FormLabel>
+						<Select
+							variant="filled"
+							{...register("categoryId")}
+							bg="white"
+							borderColor="#CED4DA"
+							borderWidth={1}
+							_hover={{ bg: "white", borderWidth: 2 }}
+						>
+							<option value=""></option>
+							{categories?.map((category) => (
+								<option key={category.id} value={category.id}>
+									{category.name}
+								</option>
+							))}
+						</Select>
+
+						{errors.categoryId && (
 							<InputErrorMessage>
-								{errors.price.message}
+								{errors.categoryId.message}
 							</InputErrorMessage>
 						)}
 					</FormControl>
@@ -178,8 +196,11 @@ const ProductAddPage = () => {
 						<FormLabel>Segment</FormLabel>
 						<Select
 							variant="filled"
-							bg="white"
 							{...register("segment")}
+							bg="white"
+							borderColor="#CED4DA"
+							borderWidth={1}
+							_hover={{ bg: "white", borderWidth: 2 }}
 						>
 							{segments.map((segment) => (
 								<option
@@ -197,26 +218,100 @@ const ProductAddPage = () => {
 						)}
 					</FormControl>
 
-					<Checkbox defaultChecked {...register("onSale")}>
-						On Sale
-					</Checkbox>
+					<FormControl>
+						<FormLabel fontSize="sm">Selling Price*</FormLabel>
+						<NumberInput defaultValue={0}>
+							<NumberInputField
+								{...register("sellingPrice", {
+									valueAsNumber: true,
+								})}
+								bg="white"
+								borderColor="#CED4DA"
+								borderWidth={1}
+								_hover={{ bg: "white", borderWidth: 2 }}
+							/>
+							<NumberInputStepper>
+								<NumberIncrementStepper />
+								<NumberDecrementStepper />
+							</NumberInputStepper>
+						</NumberInput>
+						{errors.sellingPrice && (
+							<InputErrorMessage>
+								{errors.sellingPrice.message}
+							</InputErrorMessage>
+						)}
+					</FormControl>
+
+					<FormControl>
+						<FormLabel fontSize="sm" textDecoration="line-through">
+							Crossed Price
+						</FormLabel>
+						<NumberInput defaultValue={0}>
+							<NumberInputField
+								{...register("crossedPrice", {
+									valueAsNumber: true,
+								})}
+								bg="white"
+								borderColor="#CED4DA"
+								borderWidth={1}
+								_hover={{ bg: "white", borderWidth: 2 }}
+							/>
+							<NumberInputStepper>
+								<NumberIncrementStepper />
+								<NumberDecrementStepper />
+							</NumberInputStepper>
+						</NumberInput>
+						{errors.crossedPrice && (
+							<InputErrorMessage>
+								{errors.crossedPrice.message}
+							</InputErrorMessage>
+						)}
+					</FormControl>
+
+					<FormControl>
+						<FormLabel fontSize="sm">Cost per item</FormLabel>
+						<NumberInput defaultValue={0}>
+							<NumberInputField
+								{...register("costPerItem", {
+									valueAsNumber: true,
+								})}
+								bg="white"
+								borderColor="#CED4DA"
+								borderWidth={1}
+								_hover={{ bg: "white", borderWidth: 2 }}
+							/>
+							<NumberInputStepper>
+								<NumberIncrementStepper />
+								<NumberDecrementStepper />
+							</NumberInputStepper>
+						</NumberInput>
+						{errors.costPerItem && (
+							<InputErrorMessage>
+								{errors.costPerItem.message}
+							</InputErrorMessage>
+						)}
+					</FormControl>
+
 					<Checkbox defaultChecked {...register("isNew")}>
 						Is New
 					</Checkbox>
-
-					<Button
-						type="submit"
-						variant="solid"
-						colorScheme="messenger"
-						w="full"
-						disabled={isSubmitting}
-					>
-						{isSubmitting ? <Spinner /> : "Submit"}
-					</Button>
 				</VStack>
-				<ProductVariant setVariants={setVariants} />
+
+				<Flex direction="column" gap={5} w="50%">
+					<ImageUploadContainer />
+					<ProductVariant />
+				</Flex>
 			</HStack>
-		</Box>
+			<Button
+				type="submit"
+				variant="solid"
+				colorScheme="messenger"
+				w="12%"
+				disabled={isSubmitting}
+			>
+				{isSubmitting ? <Spinner /> : "Save Product"}
+			</Button>
+		</Flex>
 	);
 };
 
