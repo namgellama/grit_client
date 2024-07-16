@@ -77,11 +77,11 @@ const ProductDetailPage = () => {
 		if (user) {
 			const item = {
 				productId: product?.id,
-				unitPrice: product?.price,
+				unitPrice: product?.sellingPrice,
 				size: selectedSize,
 				color: currentColor,
 				quantity: 1,
-				unitTotalPrice: product?.price,
+				unitTotalPrice: product?.sellingPrice,
 			};
 
 			try {
@@ -186,7 +186,7 @@ const ProductDetailPage = () => {
 								{product?.name}
 							</Text>
 							<Text fontWeight="medium">
-								Rs. {product?.price}
+								Rs. {product?.sellingPrice}
 							</Text>
 						</VStack>
 
