@@ -145,17 +145,17 @@ const MyOrders = () => {
 										h="60px"
 										objectFit="cover"
 										src={
-											orderItem.product.variants.find(
+											orderItem?.product?.variants.find(
 												(variant) =>
 													variant.color ===
 													orderItem.color
 											)?.image
 										}
-										alt={orderItem.product.name}
+										alt={orderItem?.product?.name}
 									/>
 									<VStack align="start" gap={0}>
 										<Text fontSize="sm">
-											{orderItem.product.name}
+											{orderItem?.product?.name}
 										</Text>
 										<Text fontSize="sm">
 											{orderItem.size} | {orderItem.color}
