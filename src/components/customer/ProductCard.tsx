@@ -74,7 +74,7 @@ const ProductCard = ({ product, categoryName }: Props) => {
 
 			<VStack px={1} align="start" spacing={3.5}>
 				<Text fontWeight="semibold" fontSize="sm" letterSpacing={0.5}>
-					Rs. {product?.price}
+					Rs. {product?.sellingPrice}
 				</Text>
 				<HStack justifyContent="start" spacing={3} px={1}>
 					{uniqueColorVariants.map((variant) => (
