@@ -55,12 +55,12 @@ const variantSlice = createSlice({
 			);
 
 			if (state.length <= 1) {
-				filteredState.map((x) => x.size.length < 1);
+				filteredState.map((x) => (x.size = ""));
 			} else if (
 				filteredState.length > 1 &&
 				exceptActionPayload.length < 1
 			) {
-				filteredState.map((x) => x.size.length < 1);
+				filteredState.map((x) => (x.size = ""));
 			} else {
 				return state.filter((x) => x.size !== action.payload);
 			}
