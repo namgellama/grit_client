@@ -46,12 +46,14 @@ const ProductVariant = () => {
 			.filter((c) => !colors.includes(c));
 
 		addedColor.forEach((c) => {
+			const [color, hexColor] = c.split(", ");
+
 			if (sizes.length > 0) {
 				sizes.forEach((s) => {
 					dispatch(
 						addColorVariant({
-							color: c.split(", ")[0],
-							hexColor: c.split(", ")[1],
+							color,
+							hexColor,
 							size: s,
 							image: "",
 							stock,
@@ -61,11 +63,8 @@ const ProductVariant = () => {
 			} else {
 				dispatch(
 					addColorVariant({
-						color: c.split(", ")[0],
-						hexColor:
-							c.split(", ")[1] === undefined
-								? ""
-								: c.split(", ")[1],
+						color,
+						hexColor: hexColor === undefined ? "" : hexColor,
 						size: "",
 						image: "",
 						stock,
@@ -84,10 +83,11 @@ const ProductVariant = () => {
 
 		addedSize.forEach((s) => {
 			colors.forEach((c) => {
+				const [color, hexColor] = c.split(", ");
 				dispatch(
 					updateVariantSize({
-						color: c.split(", ")[0],
-						hexColor: c.split(", ")[1],
+						color,
+						hexColor,
 						size: s,
 						image: "",
 						stock,
@@ -95,6 +95,7 @@ const ProductVariant = () => {
 				);
 			});
 		});
+
 		setSizes(newSize.map(toTitleCaseSize));
 	};
 
@@ -103,7 +104,9 @@ const ProductVariant = () => {
 			setSizes([]);
 		}
 
-		dispatch(removeVariant(removedColor));
+		const color = removedColor.split(", ")[0];
+
+		dispatch(removeVariant(color));
 	};
 
 	const handleRemoveSize = (size: string) => {
