@@ -23,7 +23,7 @@ const ProductPage = () => {
 			{products?.length === 0 ? (
 				<Alert status="info" variant="solid">
 					<AlertIcon />
-					<AlertTitle>Could not find any products</AlertTitle>
+					<AlertTitle>No products available</AlertTitle>
 				</Alert>
 			) : (
 				<MyHeading
