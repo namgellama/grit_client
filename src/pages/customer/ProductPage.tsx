@@ -43,6 +43,7 @@ const ProductPage = () => {
 				products={products}
 				error={error}
 				isLoading={isLoading}
+				show={true}
 			/>
 		</MyContainer>
 	);

@@ -9,11 +9,26 @@ interface Props {
 	products?: Product[];
 	isLoading: boolean;
 	categoryName?: string;
+	show: boolean;
 }
 
-const ProductList = ({ error, products, isLoading, categoryName }: Props) => {
+const ProductList = ({
+	error,
+	products,
+	isLoading,
+	categoryName,
+	show,
+}: Props) => {
 	return (
-		<Flex flexWrap={"wrap"} my={10} gap={20}>
+		<Flex
+			my={10}
+			wrap={show ? "wrap" : "nowrap"}
+			justify={show ? "space-between" : "normal"}
+			gap={20}
+			overflowX={show ? "auto" : "scroll"}
+			className="scrollbarX"
+			pb={show ? 0 : 5}
+		>
 			{error ? (
 				<ErrorMessage>Something went wrong</ErrorMessage>
 			) : (
@@ -22,6 +37,7 @@ const ProductList = ({ error, products, isLoading, categoryName }: Props) => {
 						<ProductCard
 							product={product}
 							categoryName={categoryName}
+							show={show}
 						/>
 					</Skeleton>
 				))

@@ -15,9 +15,10 @@ import { Product } from "../../app/interfaces/product";
 interface Props {
 	product?: Product;
 	categoryName?: string;
+	show: boolean;
 }
 
-const ProductCard = ({ product, categoryName }: Props) => {
+const ProductCard = ({ product, categoryName, show }: Props) => {
 	const [currentImage, setCurrentImage] = useState(
 		product?.variants[0].image ?? ""
 	);
@@ -48,7 +49,7 @@ const ProductCard = ({ product, categoryName }: Props) => {
 	};
 
 	return (
-		<VStack align="start">
+		<VStack align="start" w="280px" h={show ? "100%" : "390px"} py={2}>
 			<Link to={`/products/${product?.id}`}>
 				<Box
 					_hover={{ transform: "scale(1.01)" }}
@@ -91,17 +92,19 @@ const ProductCard = ({ product, categoryName }: Props) => {
 				<Text fontWeight="semibold" fontSize="sm" letterSpacing={1}>
 					Rs. {product?.sellingPrice}
 				</Text>
-				<HStack justifyContent="start" spacing={3} px={1} mt={2.5}>
-					{uniqueColorVariants.map((variant) => (
-						<ColorBox
-							key={variant.id}
-							variant={variant}
-							currentColor={currentColor}
-							handleColorChange={handleColorChange}
-							small={true}
-						/>
-					))}
-				</HStack>
+				{show && (
+					<HStack justifyContent="start" spacing={3} px={1} mt={2.5}>
+						{uniqueColorVariants.map((variant) => (
+							<ColorBox
+								key={variant.id}
+								variant={variant}
+								currentColor={currentColor}
+								handleColorChange={handleColorChange}
+								small={show}
+							/>
+						))}
+					</HStack>
+				)}
 			</VStack>
 		</VStack>
 	);
