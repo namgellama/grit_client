@@ -8,3 +8,4 @@ export const ORDER_URL = "/api/orders";
 export const ADDRESS_URL = "/api/addresses";
 export const PAYMENT_URL = "/api/payments";
 export const DASHBOARD_URL = "/api/dashboard";
+export const SEARCH_URL = "/api/search";

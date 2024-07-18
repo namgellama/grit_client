@@ -27,6 +27,7 @@ export const apiSlice = createApi({
 		"RevenueByMonth",
 		"KPI",
 		"MostSoldProducts",
+		"SearchProducts",
 	],
 	endpoints: () => ({}),
 });
