@@ -22,7 +22,9 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useGetCategoriesQuery } from "../../app/features/category/categoryApiSlice";
+import { removeAllImages } from "../../app/features/image/imageSlice";
 import { useAddProductMutation } from "../../app/features/product/productApiSlice";
+import { removeAllVariants } from "../../app/features/variant/variantSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
 	ImageUploadContainer,
@@ -31,7 +33,6 @@ import {
 } from "../../components";
 import { segments } from "../../utilities/data";
 import { FormFields, productSchema } from "../../validations/productValidation";
-import { removeAllVariants } from "../../app/features/variant/variantSlice";
 
 const ProductAddPage = () => {
 	const {
@@ -109,6 +110,7 @@ const ProductAddPage = () => {
 			}).unwrap();
 			if (data) {
 				dispatch(removeAllVariants());
+				dispatch(removeAllImages());
 				navigate("/dashboard/products");
 			}
 		} catch (err) {

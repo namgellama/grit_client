@@ -13,9 +13,13 @@ const imageSlice = createSlice({
 		deleteImage: (state, action) => {
 			return state.filter((prevImage) => prevImage !== action.payload);
 		},
+
+		removeAllImages: () => {
+			return [];
+		},
 	},
 });
 
-export const { addImage, deleteImage } = imageSlice.actions;
+export const { addImage, deleteImage, removeAllImages } = imageSlice.actions;
 
 export default imageSlice.reducer;
