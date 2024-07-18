@@ -1,4 +1,12 @@
-import { Badge, Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
+import {
+	Badge,
+	Box,
+	Flex,
+	HStack,
+	Image,
+	Text,
+	VStack,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ColorBox } from "..";
@@ -56,27 +64,34 @@ const ProductCard = ({ product, categoryName }: Props) => {
 						transition="opacity 0.2s ease-in-out"
 					/>
 				</Box>
-				<HStack justifyContent="space-between" w="100%" mt={4} px={1}>
-					<Text fontWeight="semibold" fontSize="sm">
-						{product?.name}
-					</Text>
-					<Badge
-						colorScheme="green"
-						fontSize="xxs"
-						fontWeight="medium"
-						letterSpacing={0.5}
-						textTransform="capitalize"
-					>
-						{product?.category?.name ?? categoryName}
-					</Badge>
-				</HStack>
 			</Link>
 
-			<VStack px={1} align="start" spacing={3.5}>
+			<VStack align="start" spacing={0.5} w="100%">
+				<Link to={`/products/${product?.id}`} style={{ width: "100%" }}>
+					<Flex justifyContent="space-between" w="100%">
+						<Text
+							fontWeight="semibold"
+							letterSpacing={1}
+							fontSize="sm"
+						>
+							{product?.name}
+						</Text>
+						<Badge
+							colorScheme="green"
+							fontSize="xxs"
+							fontWeight="medium"
+							letterSpacing={0.5}
+							textTransform="capitalize"
+						>
+							{product?.category?.name ?? categoryName}
+						</Badge>
+					</Flex>
+				</Link>
+
 				<Text fontWeight="semibold" fontSize="sm" letterSpacing={0.5}>
 					Rs. {product?.sellingPrice}
 				</Text>
-				<HStack justifyContent="start" spacing={3} px={1}>
+				<HStack justifyContent="start" spacing={3} px={1} mt={2.5}>
 					{uniqueColorVariants.map((variant) => (
 						<ColorBox
 							key={variant.id}
