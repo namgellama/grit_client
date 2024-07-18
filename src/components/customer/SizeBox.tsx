@@ -1,22 +1,22 @@
 import { Flex } from "@chakra-ui/react";
 
 interface Props {
-	selectedSize: string;
+	currentSize: string;
 	size: string;
-	setSelectedSize: (size: string) => void;
+	setCurrentSize: (size: string) => void;
 }
 
-const SizeBox = ({ selectedSize, size, setSelectedSize }: Props) => {
+const SizeBox = ({ currentSize, size, setCurrentSize }: Props) => {
 	return (
 		<Flex
-			border={`2px solid ${selectedSize === size ? "gray" : "darkgrey"}`}
+			border={`2px solid ${currentSize === size ? "gray" : "darkgrey"}`}
 			cursor="pointer"
 			justify="center"
 			align="center"
 			w="45px"
 			h="40px"
 			borderRadius={5}
-			onClick={() => setSelectedSize(size)}
+			onClick={() => setCurrentSize(size)}
 		>
 			{size}
 		</Flex>

@@ -80,7 +80,7 @@ const ProductCard = ({ product, categoryName }: Props) => {
 							colorScheme="green"
 							fontSize="xxs"
 							fontWeight="medium"
-							letterSpacing={0.5}
+							letterSpacing={1}
 							textTransform="capitalize"
 						>
 							{product?.category?.name ?? categoryName}

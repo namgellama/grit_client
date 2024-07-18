@@ -1,5 +1,6 @@
 import { Box, Tooltip } from "@chakra-ui/react";
-import { Variant } from "../../app/interfaces/product";
+import { useParams } from "react-router-dom";
+import { Variant } from "../../app/features/variant/variantSlice";
 
 interface Props {
 	variant: Variant;
@@ -8,11 +9,13 @@ interface Props {
 }
 
 const ColorBox = ({ variant, currentColor, handleColorChange }: Props) => {
+	const { id } = useParams();
+
 	return (
 		<Tooltip key={variant.hexColor} label={variant.color}>
 			<Box
-				w={3}
-				h={3}
+				w={id ? 7 : 3}
+				h={id ? 7 : 3}
 				background={variant.hexColor}
 				cursor="pointer"
 				boxShadow={

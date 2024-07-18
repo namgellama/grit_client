@@ -30,7 +30,7 @@ const ProductDetailPage = () => {
 	const { user } = useAppSelector((state) => state.auth);
 	const [currentImage, setCurrentImage] = useState("");
 	const [currentColor, setCurrentColor] = useState("");
-	const [selectedSize, setSelectedSize] = useState("");
+	const [currentSize, setCurrentSize] = useState("");
 	const [isTransitioning, setIsTransitioning] = useState(false);
 	const [cookies, setCookie] = useCookies<
 		"bagItems",
@@ -58,7 +58,7 @@ const ProductDetailPage = () => {
 		if (product) {
 			setCurrentColor(product.variants[0].color);
 			setCurrentImage(product.variants[0].image);
-			setSelectedSize(product.variants[0].size);
+			setCurrentSize(product.variants[0].size);
 		}
 	}, [product]);
 
@@ -78,7 +78,7 @@ const ProductDetailPage = () => {
 			const item = {
 				productId: product?.id,
 				unitPrice: product?.sellingPrice,
-				size: selectedSize,
+				size: currentSize,
 				color: currentColor,
 				quantity: 1,
 				unitTotalPrice: product?.sellingPrice,
@@ -181,48 +181,55 @@ const ProductDetailPage = () => {
 							<Text
 								fontSize="xl"
 								fontWeight="semibold"
-								letterSpacing={0.5}
+								letterSpacing={1}
 							>
 								{product?.name}
 							</Text>
-							<Text fontWeight="medium">
+							<Text fontWeight="medium" letterSpacing={1}>
 								Rs. {product?.sellingPrice}
 							</Text>
 						</VStack>
 
 						<Divider borderColor="darkgray" />
 
-						<HStack
-							justifyContent="start"
-							spacing={3}
-							px={1}
-							my={2}
-						>
-							{uniqueColorVariants.map((variant) => (
-								<ColorBox
-									key={variant.id}
-									variant={variant}
-									currentColor={currentColor}
-									handleColorChange={handleColorChange}
-								/>
-							))}
-						</HStack>
+						<Flex direction="column" gap={2}>
+							<Text fontSize="sm" letterSpacing={0.7}>
+								Color: {currentColor}
+							</Text>
+							<HStack
+								justifyContent="start"
+								spacing={3}
+								px={1}
+								my={2}
+							>
+								{uniqueColorVariants.map((variant) => (
+									<ColorBox
+										key={variant.id}
+										variant={variant}
+										currentColor={currentColor}
+										handleColorChange={handleColorChange}
+									/>
+								))}
+							</HStack>
+						</Flex>
 
 						<Divider borderColor="darkgray" />
 
-						<VStack align="start" spacing={5}>
-							<Text fontSize="sm">Select a size</Text>
+						<Flex direction="column" gap={2}>
+							<Text fontSize="sm" letterSpacing={0.7}>
+								Size: {currentSize}
+							</Text>
 							<HStack spacing={5}>
 								{uniqueSizeVariants.map((variant) => (
 									<SizeBox
 										key={variant.id}
 										size={variant.size}
-										selectedSize={selectedSize}
-										setSelectedSize={setSelectedSize}
+										currentSize={currentSize}
+										setCurrentSize={setCurrentSize}
 									/>
 								))}
 							</HStack>
-						</VStack>
+						</Flex>
 
 						<Divider borderColor="darkgray" />
 
