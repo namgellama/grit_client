@@ -208,6 +208,7 @@ const ProductDetailPage = () => {
 										variant={variant}
 										currentColor={currentColor}
 										handleColorChange={handleColorChange}
+										small={false}
 									/>
 								))}
 							</HStack>

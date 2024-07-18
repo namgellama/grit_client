@@ -98,6 +98,7 @@ const ProductCard = ({ product, categoryName }: Props) => {
 							variant={variant}
 							currentColor={currentColor}
 							handleColorChange={handleColorChange}
+							small={true}
 						/>
 					))}
 				</HStack>
