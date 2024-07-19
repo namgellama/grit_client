@@ -1,4 +1,4 @@
-import { Flex, Skeleton } from "@chakra-ui/react";
+import { Box, Grid, Skeleton } from "@chakra-ui/react";
 import { SerializedError } from "@reduxjs/toolkit";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { ErrorMessage, ProductCard } from "..";
@@ -20,29 +20,23 @@ const ProductList = ({
 	show,
 }: Props) => {
 	return (
-		<Flex
-			my={10}
-			wrap={show ? "wrap" : "nowrap"}
-			justify={show ? "space-between" : "normal"}
-			gap={20}
-			overflowX={show ? "auto" : "scroll"}
-			className="scrollbarX"
-			pb={show ? 0 : 5}
-		>
+		<Grid my={10} gap={20} templateColumns="repeat(3, 1fr)">
 			{error ? (
 				<ErrorMessage>Something went wrong</ErrorMessage>
 			) : (
 				products?.map((product) => (
-					<Skeleton key={product.id} isLoaded={!isLoading}>
-						<ProductCard
-							product={product}
-							categoryName={categoryName}
-							show={show}
-						/>
-					</Skeleton>
+					<Box key={product.id} justifySelf="center">
+						<Skeleton isLoaded={!isLoading}>
+							<ProductCard
+								product={product}
+								categoryName={categoryName}
+								show={show}
+							/>
+						</Skeleton>
+					</Box>
 				))
 			)}
-		</Flex>
+		</Grid>
 	);
 };
 
