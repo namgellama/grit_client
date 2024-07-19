@@ -21,7 +21,7 @@ const MyHeading = ({
 	size = "2xl",
 }: Props) => {
 	return (
-		<Skeleton isLoaded={!isLoading} width="400px">
+		<Skeleton isLoaded={!isLoading} width="310px">
 			<Heading
 				fontSize={size}
 				textAlign="left"
