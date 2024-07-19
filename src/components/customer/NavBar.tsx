@@ -39,8 +39,8 @@ const NavBar = ({ user, handleLogout }: Props) => {
 			path: "/products?segment=WOMEN",
 		},
 		{
-			name: "New Arrivals",
-			path: "/products?ageStatus=New",
+			name: "Unisex",
+			path: "/products?segment=UNISEX",
 		},
 	];
 

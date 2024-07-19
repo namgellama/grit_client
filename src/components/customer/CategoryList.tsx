@@ -10,7 +10,12 @@ const CategoryList = () => {
 			<MyHeading isLoading={isLoading} error={error} showCount={false}>
 				Shop by Category
 			</MyHeading>
-			<HStack spacing={10} mt={8}>
+			<HStack
+				spacing={10}
+				mt={8}
+				overflowX="scroll"
+				className="scrollbarX"
+			>
 				{error ? (
 					<ErrorMessage>Something went wrong</ErrorMessage>
 				) : (
