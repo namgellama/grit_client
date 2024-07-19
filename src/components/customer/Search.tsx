@@ -9,7 +9,7 @@ import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { useGetSearchProductsQuery } from "../../app/features/search/searchApiSlice";
-import ProductList from "./ProductList";
+import SearchList from "./SearchList";
 
 interface Props {
 	setShowSearch: React.Dispatch<React.SetStateAction<boolean>>;
@@ -57,11 +57,10 @@ const Search = ({ setShowSearch }: Props) => {
 						setSearch(undefined);
 					}}
 				>
-					<ProductList
+					<SearchList
 						error={error}
 						products={searchProducts}
 						isLoading={isLoading}
-						show={false}
 					/>
 				</Box>
 			)}
