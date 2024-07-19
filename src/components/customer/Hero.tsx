@@ -6,8 +6,8 @@ import heroImg2 from "../../assets/hero2.jpg";
 
 const Hero = () => {
 	return (
-		<Box minHeight="80vh" overflow="hidden">
-			<Grid templateColumns="repeat(3, 1fr)" height="80vh" gap={2}>
+		<Box minHeight="100vh">
+			<Grid templateColumns="repeat(3, 1fr)" gap={1}>
 				<Image
 					src={heroImg1}
 					width="100%"
