@@ -5,10 +5,6 @@ import {
 	Flex,
 	HStack,
 	Image,
-	Input,
-	InputGroup,
-	InputLeftElement,
-	InputRightElement,
 	useDisclosure,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
@@ -18,20 +14,13 @@ import { FaUser } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
-import {
-	CookieBagItemsDrawer,
-	DBBagItemsDrawer,
-	ProductCard,
-	ProductList,
-} from "..";
+import { CookieBagItemsDrawer, DBBagItemsDrawer } from "..";
 import { useGetBagItemsQuery } from "../../app/features/bagItem/bagItemApiSlice";
 import { CurrentUser } from "../../app/interfaces/auth";
 import logo from "../../assets/logo.png";
 import { BagItem } from "../../interfaces";
 import { NavIcon, NavLink, NavLinkIcon } from "../shared/NavComponents";
-import { RxCross2 } from "react-icons/rx";
-import { useGetProductsQuery } from "../../app/features/product/productApiSlice";
-import { useGetSearchProductsQuery } from "../../app/features/search/searchApiSlice";
+import Search from "./Search";
 
 interface Props {
 	user?: CurrentUser | null;
@@ -67,19 +56,10 @@ const NavBar = ({ user, handleLogout }: Props) => {
 		skip: user === null,
 	});
 	const [showSearch, setShowSearch] = useState(false);
-	const [search, setSearch] = useState<string | undefined>(undefined);
-
-	const {
-		data: searchProducts,
-		isLoading,
-		error,
-	} = useGetSearchProductsQuery({
-		name: search,
-	});
 
 	return (
-		<Box as="nav" position="sticky" top={0} zIndex={5}>
-			<Box bg="white" py={2}>
+		<Box as="nav" position="sticky" top={0} zIndex={5} minW="100%">
+			<Box bg="white" py={2} minW="100%">
 				<Container maxW="7xl">
 					<HStack justify="space-between">
 						<HStack spacing={5} flex={1}>
@@ -161,46 +141,21 @@ const NavBar = ({ user, handleLogout }: Props) => {
 							)}
 						</HStack>
 					</HStack>
-
-					{showSearch && (
-						<InputGroup bg="#F5F5F5" mt={4} mb={1}>
-							<InputLeftElement pointerEvents="none">
-								<IoSearch color="gray.300" />
-							</InputLeftElement>
-							<Input
-								type="text"
-								placeholder="Search..."
-								variant="flushed"
-								onChange={(e) => setSearch(e.target.value)}
-							/>
-
-							<InputRightElement
-								cursor="pointer"
-								onClick={() => {
-									setShowSearch(false);
-									setSearch(undefined);
-								}}
-							>
-								<RxCross2 color="gray.300" />
-							</InputRightElement>
-						</InputGroup>
-					)}
-
-					{searchProducts?.length! > 0 && (
-						<Box
-							onClick={() => {
-								setShowSearch(false);
-								setSearch(undefined);
-							}}
-						>
-							<ProductList
-								error={error}
-								products={searchProducts}
-								isLoading={isLoading}
-							/>
-						</Box>
-					)}
 				</Container>
+
+				{showSearch && (
+					<Box
+						bg="white"
+						position="absolute"
+						top="100%"
+						left={0}
+						right={0}
+						zIndex={4}
+						px={20}
+					>
+						<Search setShowSearch={setShowSearch} />
+					</Box>
+				)}
 
 				{user ? (
 					<DBBagItemsDrawer
