@@ -1,7 +1,8 @@
-import { Box, Flex, HStack, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, Skeleton, Text } from "@chakra-ui/react";
 import { BsHandbagFill } from "react-icons/bs";
 import { GiTwoCoins } from "react-icons/gi";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
+import { ErrorMessage } from "..";
 import { useGetKPIQuery } from "../../app/features/dashboard/dashboardApiSlice";
 import { useAppSelector } from "../../app/hooks";
 
@@ -23,30 +24,29 @@ const KPIData = () => {
 		{
 			icon: <GiTwoCoins style={{ fontSize: "40px" }} />,
 			name: "Average Order Value",
-			data: `Rs. ${kpi?.averageOrderValue}`,
+			data: `Rs. ${kpi?.averageOrderValue.toFixed(2)}`,
 		},
 	];
 
 	return (
 		<HStack w="100%" gap={5} mt={5} mb={10}>
-			{kpiData.map((kpi) => (
-				<Flex
-					key={kpi.name}
-					direction="column"
-					bg="white"
-					p={4}
-					flex={1}
-					gap={3}
-				>
-					{kpi.icon}
-					<Box>
-						<Text fontWeight="semibold">{kpi.name}</Text>
-						<Text fontWeight="bold" fontSize="lg">
-							{kpi.data}
-						</Text>
-					</Box>
-				</Flex>
-			))}
+			{error ? (
+				<ErrorMessage>Something went wrong</ErrorMessage>
+			) : (
+				kpiData.map((kpi) => (
+					<Skeleton key={kpi.name} isLoaded={!isLoading} flex={1}>
+						<Flex direction="column" bg="white" p={4} gap={3}>
+							{kpi.icon}
+							<Box>
+								<Text fontWeight="semibold">{kpi.name}</Text>
+								<Text fontWeight="bold" fontSize="lg">
+									{kpi.data}
+								</Text>
+							</Box>
+						</Flex>
+					</Skeleton>
+				))
+			)}
 		</HStack>
 	);
 };

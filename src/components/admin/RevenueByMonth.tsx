@@ -1,3 +1,4 @@
+import { Card, CardBody, CardHeader, Skeleton } from "@chakra-ui/react";
 import { useMemo } from "react";
 import {
 	Bar,
@@ -8,9 +9,9 @@ import {
 	XAxis,
 	YAxis,
 } from "recharts";
+import { ErrorMessage } from "..";
 import { useGetRevenueByMonthQuery } from "../../app/features/dashboard/dashboardApiSlice";
 import { useAppSelector } from "../../app/hooks";
-import { Card, CardBody, CardHeader, Text } from "@chakra-ui/react";
 import HeaderText from "./HeaderText";
 
 const RevenueByMonth = () => {
@@ -51,35 +52,43 @@ const RevenueByMonth = () => {
 	return (
 		<Card>
 			<CardHeader>
-				<HeaderText
-					heading={`Revenue Month by Month of ${currentYear}`}
-					description="Graph representing the revenue month by month"
-				/>
+				<Skeleton isLoaded={!isLoading} w="70%">
+					<HeaderText
+						heading={`Revenue Month by Month of ${currentYear}`}
+						description="Graph representing the revenue month by month"
+					/>
+				</Skeleton>
 			</CardHeader>
 			<CardBody>
-				<ResponsiveContainer width="100%" height={400}>
-					<BarChart
-						width={500}
-						height={300}
-						data={revenue}
-						margin={{
-							top: 17,
-							right: 15,
-							left: -5,
-							bottom: 8,
-						}}
-					>
-						<CartesianGrid vertical={false} />
-						<XAxis
-							dataKey="name"
-							axisLine={false}
-							tickLine={false}
-						/>
-						<YAxis axisLine={false} tickLine={false} />
-						<Tooltip />
-						<Bar dataKey="revenue" fill="#4188ff" />
-					</BarChart>
-				</ResponsiveContainer>
+				{error ? (
+					<ErrorMessage>Something went wrong</ErrorMessage>
+				) : (
+					<Skeleton isLoaded={!isLoading}>
+						<ResponsiveContainer width="100%" height={400}>
+							<BarChart
+								width={500}
+								height={300}
+								data={revenue}
+								margin={{
+									top: 17,
+									right: 15,
+									left: -5,
+									bottom: 8,
+								}}
+							>
+								<CartesianGrid vertical={false} />
+								<XAxis
+									dataKey="name"
+									axisLine={false}
+									tickLine={false}
+								/>
+								<YAxis axisLine={false} tickLine={false} />
+								<Tooltip />
+								<Bar dataKey="revenue" fill="#4188ff" />
+							</BarChart>
+						</ResponsiveContainer>
+					</Skeleton>
+				)}
 			</CardBody>
 		</Card>
 	);
