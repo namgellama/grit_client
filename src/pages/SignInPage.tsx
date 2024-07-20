@@ -2,7 +2,8 @@ import { Container, HStack, Image, VStack } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
-import logo from "../assets/hero-img.png";
+import signInImg from "../assets/sign-in.jpg";
+// import logo from "../assets/hero-img.png";
 import { SignInForm, SignInHeader } from "../components";
 
 const SignInPage = () => {
@@ -21,7 +22,7 @@ const SignInPage = () => {
 
 	return (
 		<HStack>
-			<Image src={logo} w="50%" h="100vh" objectFit="cover" />
+			<Image src={signInImg} w="50%" h="100vh" objectFit="cover" />
 			<Container w="50%" centerContent>
 				<VStack spacing={8} w="400px" alignItems="start">
 					<SignInHeader />
