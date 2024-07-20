@@ -26,6 +26,8 @@ import {
 	SignUpPage,
 } from "./pages";
 import theme from "./theme.ts";
+import PrivateRoute from "./components/shared/PrivateRoute.tsx";
+import AdminRoute from "./components/shared/AdminRoute.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
@@ -48,48 +50,54 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 									path="/categories/:id"
 									element={<CategoryPage />}
 								/>
-								<Route
-									path="/checkout"
-									element={<CheckoutPage />}
-								/>
-								<Route
-									path="/orders/mine/:id"
-									element={<MyOrderDetailPage />}
-								/>
-								<Route
-									path="/account"
-									element={<AccountPage />}
-								/>
+
+								<Route path="" element={<PrivateRoute />}>
+									<Route
+										path="/checkout"
+										element={<CheckoutPage />}
+									/>
+									<Route
+										path="/orders/mine/:id"
+										element={<MyOrderDetailPage />}
+									/>
+									<Route
+										path="/account"
+										element={<AccountPage />}
+									/>
+								</Route>
 
 								{/* Admin Routes */}
-								<Route
-									path="/dashboard/home"
-									element={<DashboardPage />}
-								/>
-								<Route
-									path="/dashboard/categories"
-									element={<AdminCategoriesPage />}
-								/>
-								<Route
-									path="/dashboard/products"
-									element={<AdminProductsPage />}
-								/>
-								<Route
-									path="/dashboard/products/:id"
-									element={<AdminProductDetailPage />}
-								/>
-								<Route
-									path="/dashboard/orders"
-									element={<AdminOrdersPage />}
-								/>
-								<Route
-									path="/dashboard/orders/:id"
-									element={<AdminOrderDetailPage />}
-								/>
-								<Route
-									path="/dashboard/products/new"
-									element={<ProductAddPage />}
-								/>
+
+								<Route path="" element={<AdminRoute />}>
+									<Route
+										path="/dashboard/home"
+										element={<DashboardPage />}
+									/>
+									<Route
+										path="/dashboard/categories"
+										element={<AdminCategoriesPage />}
+									/>
+									<Route
+										path="/dashboard/products"
+										element={<AdminProductsPage />}
+									/>
+									<Route
+										path="/dashboard/products/:id"
+										element={<AdminProductDetailPage />}
+									/>
+									<Route
+										path="/dashboard/orders"
+										element={<AdminOrdersPage />}
+									/>
+									<Route
+										path="/dashboard/orders/:id"
+										element={<AdminOrderDetailPage />}
+									/>
+									<Route
+										path="/dashboard/products/new"
+										element={<ProductAddPage />}
+									/>
+								</Route>
 							</Route>
 							<Route path="/login" element={<SignInPage />} />
 							<Route path="/register" element={<SignUpPage />} />
