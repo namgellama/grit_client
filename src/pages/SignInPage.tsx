@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import signInImg from "../assets/sign-in.jpg";
-// import logo from "../assets/hero-img.png";
 import { SignInForm, SignInHeader } from "../components";
 
 const SignInPage = () => {
@@ -12,7 +11,8 @@ const SignInPage = () => {
 
 	const { search } = useLocation();
 	const sp = new URLSearchParams(search);
-	const redirect = sp.get("redirect") || "/";
+	const redirect =
+		sp.get("redirect") || user?.role === "Admin" ? "/dashboard/home" : "/";
 
 	useEffect(() => {
 		if (user) {

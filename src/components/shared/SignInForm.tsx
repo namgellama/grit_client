@@ -17,7 +17,6 @@ import { InputErrorMessage } from "..";
 import { useLoginMutation } from "../../app/features/auth/authApiSlice";
 import { setUser } from "../../app/features/auth/authSlice";
 import { useAppDispatch } from "../../app/hooks";
-import { User } from "../../app/interfaces/auth";
 import { FormFields, loginSchema } from "../../validations/loginValidation";
 
 const SignInForm = () => {
@@ -48,8 +47,8 @@ const SignInForm = () => {
 
 	const onSubmit = async (body: FormFields) => {
 		try {
-			const token = await login(body).unwrap();
-			dispatch(setUser(token));
+			const user = await login(body).unwrap();
+			dispatch(setUser(user));
 		} catch (error) {
 			setError("root", {
 				message: "Invalid phone number or password",
