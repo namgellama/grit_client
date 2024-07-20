@@ -118,11 +118,17 @@ const NavBar = ({ user, handleLogout }: Props) => {
 									</Badge>
 								)}
 							</Flex>
-							{user ? (
+							{user && user.role === "Customer" ? (
 								<NavLinkIcon
 									icon={<FaUserCircle fontSize="larger" />}
 									label="User"
 									link="/account"
+								/>
+							) : user && user.role === "Admin" ? (
+								<NavLinkIcon
+									icon={<FaUserCircle fontSize="larger" />}
+									label="User"
+									link="/dashboard/home"
 								/>
 							) : (
 								<NavLinkIcon
