@@ -1,6 +1,6 @@
 import { HStack, Skeleton } from "@chakra-ui/react";
-import { useGetCategoriesQuery } from "../../app/features/category/categoryApiSlice";
 import { CategoryCard, ErrorMessage, MyContainer, MyHeading } from "..";
+import { useGetCategoriesQuery } from "../../app/features/category/categoryApiSlice";
 
 const CategoryList = () => {
 	const { data: categories, isLoading, error } = useGetCategoriesQuery();
@@ -10,12 +10,7 @@ const CategoryList = () => {
 			<MyHeading isLoading={isLoading} error={error} showCount={false}>
 				Shop by Category
 			</MyHeading>
-			<HStack
-				spacing={10}
-				mt={8}
-				overflowX="scroll"
-				className="scrollbarX"
-			>
+			<HStack spacing={10} mt={8}>
 				{error ? (
 					<ErrorMessage>Something went wrong</ErrorMessage>
 				) : (
