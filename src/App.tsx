@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "./app/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { AdminNavBar, NavBar } from "./components";
+import Footer from "./components/customer/Footer";
 
 function App() {
 	const { user } = useAppSelector((state) => state.auth);
@@ -35,6 +36,8 @@ function App() {
 			>
 				<Outlet />
 			</Box>
+
+			{!location.pathname.startsWith("/dashboard") && <Footer />}
 		</Box>
 	);
 }
