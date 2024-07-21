@@ -5,6 +5,7 @@ import {
 	IconButton,
 	Image,
 	Select,
+	Skeleton,
 	Text,
 	useToast,
 } from "@chakra-ui/react";
@@ -14,15 +15,16 @@ import {
 	useDeleteBagItemMutation,
 	useUpdateBagItemMutation,
 } from "../../app/features/bagItem/bagItemApiSlice";
-import { BagItem } from "../../app/interfaces/bagItem";
 import { CurrentUser } from "../../app/interfaces/auth";
+import { BagItem } from "../../app/interfaces/bagItem";
 
 interface Props {
-	bagItems: BagItem[];
+	bagItems: BagItem[] | undefined;
 	user: CurrentUser | null;
+	isLoading: boolean;
 }
 
-const DBBagItems = ({ bagItems, user }: Props) => {
+const DBBagItems = ({ bagItems, user, isLoading }: Props) => {
 	const [updateBagItem] = useUpdateBagItemMutation();
 	const [deleteBagItem] = useDeleteBagItemMutation();
 	const toast = useToast();
@@ -68,81 +70,87 @@ const DBBagItems = ({ bagItems, user }: Props) => {
 	};
 
 	return (
-		<Flex direction="column" h="100%" justify="space-between">
+		<Flex direction="column" h="100%" w="100%">
 			<Flex
 				className="scrollbarY"
 				direction="column"
 				gap={7}
-				pr={5}
 				h="100%"
+				pr={2}
 				overflowY="scroll"
+				align="stretch"
 			>
 				{bagItems?.map((bagItem) => (
-					<Flex key={bagItem.id} gap={5}>
-						<Image
-							w="160px"
-							h="130px"
-							objectFit="cover"
-							src={
-								bagItem.product.variants.find(
-									(variant) => variant.color === bagItem.color
-								)?.image
-							}
-						/>
-						<Flex
-							direction="column"
-							justify="space-between"
-							w="100%"
-						>
-							<Flex direction="column" gap={0.4}>
-								<Text fontSize="sm" fontWeight="medium">
-									{bagItem.product.name}
-								</Text>
-								<Text fontSize="xs" color="background.500">
-									{bagItem.color} | {bagItem.size}
-								</Text>
-								<Text
-									fontSize="xs"
-									fontWeight="
+					<Skeleton isLoaded={!isLoading}>
+						<Flex key={bagItem.id} gap={5}>
+							<Image
+								w="160px"
+								h="130px"
+								objectFit="cover"
+								src={
+									bagItem.product.variants.find(
+										(variant) =>
+											variant.color === bagItem.color
+									)?.image
+								}
+							/>
+							<Flex
+								direction="column"
+								justify="space-between"
+								w="100%"
+							>
+								<Flex direction="column" gap={0.4}>
+									<Text fontSize="sm" fontWeight="medium">
+										{bagItem.product.name}
+									</Text>
+									<Text fontSize="xs" color="background.500">
+										{bagItem.color} | {bagItem.size}
+									</Text>
+									<Text
+										fontSize="xs"
+										fontWeight="
 								medium"
-								>
-									Rs. {bagItem.unitPrice}
-								</Text>
+									>
+										Rs. {bagItem.unitPrice}
+									</Text>
+								</Flex>
+								<HStack pb={3} justify="space-between">
+									<Select
+										value={bagItem.quantity}
+										onChange={(e) =>
+											handleQuantity(bagItem, e)
+										}
+										size="sm"
+										w="70px"
+									>
+										{[
+											...Array(
+												bagItem.product.variants.find(
+													(variant) =>
+														variant.color ===
+															bagItem.color &&
+														variant.size ===
+															bagItem.size
+												)?.stock
+											).keys(),
+										].map((x) => (
+											<option key={x + 1} value={x + 1}>
+												{x + 1}
+											</option>
+										))}
+									</Select>
+									<IconButton
+										aria-label="Delete item"
+										isRound={true}
+										icon={<MdDelete />}
+										onClick={() =>
+											handleDeleteBagItem(bagItem.id)
+										}
+									/>
+								</HStack>
 							</Flex>
-							<HStack pb={3} justify="space-between">
-								<Select
-									value={bagItem.quantity}
-									onChange={(e) => handleQuantity(bagItem, e)}
-									size="sm"
-									w="70px"
-								>
-									{[
-										...Array(
-											bagItem.product.variants.find(
-												(variant) =>
-													variant.color ===
-														bagItem.color &&
-													variant.size ===
-														bagItem.size
-											)?.stock
-										).keys(),
-									].map((x) => (
-										<option key={x + 1} value={x + 1}>
-											{x + 1}
-										</option>
-									))}
-								</Select>
-								<IconButton
-									aria-label="Delete item"
-									isRound={true}
-									icon={<MdDelete />}
-									onClick={() =>
-										handleDeleteBagItem(bagItem.id)
-									}
-								/>
-							</HStack>
 						</Flex>
-					</Flex>
+					</Skeleton>
 				))}
 			</Flex>
 			<Box pt={5}>

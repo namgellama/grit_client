@@ -7,11 +7,13 @@ import {
 	DrawerFooter,
 	DrawerHeader,
 	DrawerOverlay,
+	Spinner,
 } from "@chakra-ui/react";
 import { RefObject } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetBagItemsQuery } from "../../app/features/bagItem/bagItemApiSlice";
 import { useAppSelector } from "../../app/hooks";
+import ErrorMessage from "../shared/ErrorMessage";
 import DBBagItems from "./DBBagItems";
 import DBEmptyBagItems from "./DBEmptyBagItems";
 
@@ -24,7 +26,11 @@ interface Props {
 const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 	const { user } = useAppSelector((state) => state.auth);
 	const navigate = useNavigate();
-	const { data: bagItems } = useGetBagItemsQuery(user?.token ?? "");
+	const {
+		data: bagItems,
+		isLoading,
+		error,
+	} = useGetBagItemsQuery(user?.token ?? "");
 
 	return (
 		<Drawer
@@ -46,10 +52,13 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 				</DrawerHeader>
 
 				<DrawerBody>
-					{bagItems?.length! > 0 ? (
+					{error ? (
+						<ErrorMessage>Something went wrong</ErrorMessage>
+					) : bagItems?.length! > 0 ? (
 						<DBBagItems
 							bagItems={bagItems || []}
 							user={user || null}
+							isLoading={isLoading}
 						/>
 					) : (
 						<DBEmptyBagItems onClose={onClose} />
@@ -66,8 +75,9 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 								navigate("/checkout");
 								onClose();
 							}}
+							isDisabled={isLoading}
 						>
-							Checkout
+							{isLoading ? <Spinner /> : "Checkout"}
 						</Button>
 					</DrawerFooter>
 				)}

@@ -150,6 +150,8 @@ const CheckoutPage = () => {
 					bagItems={bagItems}
 					deliveryCharge={deliveryCharge}
 					total={total}
+					isLoading={isLoading}
+					error={error}
 				/>
 			</HStack>
 		</MyContainer>
