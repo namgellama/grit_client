@@ -2,13 +2,15 @@ import {
 	Button,
 	FormControl,
 	FormLabel,
+	Image,
 	Input,
+	Skeleton,
 	Spinner,
 	useToast,
 	VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateCategoryMutation } from "../../app/features/category/categoryApiSlice";
 import { useAppSelector } from "../../app/hooks";
@@ -17,19 +19,28 @@ import {
 	FormFields,
 } from "../../validations/categoryValidation";
 import InputErrorMessage from "../shared/InputErrorMessage";
+import CategoryImageUpload from "./CategoryImageUpload";
 
-const CategoryForm = ({ onClose }: { onClose: () => void }) => {
+interface Props {
+	onClose: () => void;
+	setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const CategoryForm = ({ onClose, setIsEdit }: Props) => {
 	const toast = useToast();
 	const {
 		register,
 		handleSubmit,
 		setError,
+		setValue,
+		getValues,
 		formState: { errors, isSubmitting },
 	} = useForm<FormFields>({
 		resolver: zodResolver(categorySchema),
 	});
 	const [createCategory] = useCreateCategoryMutation();
 	const { user } = useAppSelector((state) => state.auth);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		if (errors.root?.message)
@@ -54,7 +65,9 @@ const CategoryForm = ({ onClose }: { onClose: () => void }) => {
 				message: "Something went wrong",
 			});
 		}
+		setIsEdit(false);
 	};
+	console.log(getValues("image"));
 
 	return (
 		<VStack
@@ -79,13 +92,29 @@ const CategoryForm = ({ onClose }: { onClose: () => void }) => {
 
 			<FormControl>
 				<FormLabel>Image</FormLabel>
-				<Input
-					type="text"
-					variant="filled"
-					background="white"
-					placeholder="Enter image"
-					{...register("image")}
+				<CategoryImageUpload
+					setValue={setValue}
+					setIsLoading={setIsLoading}
 				/>
+				{isLoading && (
+					<Skeleton
+						mt={5}
+						width="250px"
+						height="250px"
+						isLoaded={!isLoading}
+					></Skeleton>
+				)}
+				{getValues("image") && (
+					<Image
+						mt={5}
+						width="250px"
+						height="250px"
+						objectFit="cover"
+						src={getValues("image")}
+						alt="Category Image"
+					/>
+				)}
+
 				{errors.image && (
 					<InputErrorMessage>
 						{errors.image.message}

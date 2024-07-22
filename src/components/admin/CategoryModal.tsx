@@ -1,10 +1,8 @@
 import {
-	Button,
 	Modal,
 	ModalBody,
 	ModalCloseButton,
 	ModalContent,
-	ModalFooter,
 	ModalHeader,
 	ModalOverlay,
 } from "@chakra-ui/react";
@@ -13,24 +11,20 @@ import CategoryForm from "./CategoryForm";
 interface Props {
 	isOpen: boolean;
 	onClose: () => void;
+	isEdit: boolean;
+	setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CategoryModal = ({ isOpen, onClose }: Props) => {
+const CategoryModal = ({ isOpen, onClose, isEdit, setIsEdit }: Props) => {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
 			<ModalOverlay />
 			<ModalContent>
-				<ModalHeader>Add Category</ModalHeader>
+				<ModalHeader>{isEdit ? "Edit" : "Add"} Category</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody>
-					<CategoryForm onClose={onClose} />
+					<CategoryForm onClose={onClose} setIsEdit={setIsEdit} />
 				</ModalBody>
-
-				<ModalFooter>
-					<Button colorScheme="blue" mr={3} onClick={onClose}>
-						Close
-					</Button>
-				</ModalFooter>
 			</ModalContent>
 		</Modal>
 	);
