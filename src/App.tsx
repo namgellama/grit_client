@@ -4,9 +4,12 @@ import { logout } from "./app/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { AdminNavBar, NavBar } from "./components";
 import Footer from "./components/customer/Footer";
+import { CurrentUser } from "./app/interfaces/auth";
 
 function App() {
-	const { user } = useAppSelector((state) => state.auth);
+	const user: CurrentUser | null | undefined = useAppSelector(
+		(state) => state.auth.user
+	);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -32,7 +35,7 @@ function App() {
 			<Box
 				as="main"
 				w={location.pathname.startsWith("/dashboard") ? "80%" : "100%"}
-				h="100%"
+				h="80vh"
 			>
 				<Outlet />
 			</Box>

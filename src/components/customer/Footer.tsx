@@ -9,18 +9,20 @@ const Footer = () => {
 		<Flex
 			as="footer"
 			bg="white"
-			py={5}
+			py={6}
 			px={10}
-			justify="space-between"
 			align="center"
+			justify="center"
 		>
-			<Text fontSize="sm">
+			<Text fontSize="sm" textAlign="center" w="100%">
 				&copy; {currentYear} | Grit | Relentless drive to achieve | All
 				Rights Reserved
 			</Text>
-			<Link to="https://www.instagram.com/grit_np" target="_blank">
-				<AiFillInstagram fontSize="20px" />
-			</Link>
+			<Text justifySelf="end">
+				<Link to="https://www.instagram.com/grit_np" target="_blank">
+					<AiFillInstagram fontSize="25px" />
+				</Link>
+			</Text>
 		</Flex>
 	);
 };
