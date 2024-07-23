@@ -7,7 +7,9 @@ import {
 	AlertDialogOverlay,
 	Button,
 	Spinner,
+	useToast,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { useDeleteCategoryMutation } from "../../app/features/category/categoryApiSlice";
 import { useAppSelector } from "../../app/hooks";
 
@@ -22,11 +24,23 @@ interface Props {
 const DeleteAlert = ({ isOpen, onClose, cancelRef, type, id }: Props) => {
 	const { user } = useAppSelector((state) => state.auth);
 	const [deleteCategory, { isLoading, error }] = useDeleteCategoryMutation();
+	const toast = useToast();
 
 	const handleDelete = async () => {
 		deleteCategory({ id, token: user?.token ?? "" });
 		onClose();
 	};
+
+	useEffect(() => {
+		if (error)
+			toast({
+				title: "Something went wrong",
+				duration: 1200,
+				isClosable: true,
+				status: "error",
+				position: "top-right",
+			});
+	}, [error]);
 
 	return (
 		<AlertDialog
