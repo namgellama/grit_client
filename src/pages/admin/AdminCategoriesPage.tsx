@@ -35,7 +35,6 @@ const AdminCategoriesPage = () => {
 	} = useDisclosure();
 	const cancelRef = useRef(null);
 	const [isEdit, setIsEdit] = useState(false);
-
 	const { data: categories, isLoading, error } = useGetCategoriesQuery();
 
 	return (
@@ -53,7 +52,10 @@ const AdminCategoriesPage = () => {
 					colorScheme="messenger"
 					size="sm"
 					borderRadius={2}
-					onClick={onModalOpen}
+					onClick={() => {
+						onModalOpen();
+						setIsEdit(false);
+					}}
 				>
 					Add Category
 				</Button>
@@ -101,6 +103,7 @@ const AdminCategoriesPage = () => {
 												onClick={() => {
 													onModalOpen();
 													setIsEdit(true);
+													setId(category.id);
 												}}
 											/>
 											<IconButton
@@ -128,6 +131,7 @@ const AdminCategoriesPage = () => {
 				onClose={onModalClose}
 				isEdit={isEdit}
 				setIsEdit={setIsEdit}
+				id={id}
 			/>
 			<DeleteAlert
 				isOpen={isAlertOpen}

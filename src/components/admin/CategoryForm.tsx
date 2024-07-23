@@ -12,8 +12,12 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useCreateCategoryMutation } from "../../app/features/category/categoryApiSlice";
+import {
+	useCreateCategoryMutation,
+	useUpdateCategoryMutation,
+} from "../../app/features/category/categoryApiSlice";
 import { useAppSelector } from "../../app/hooks";
+import { Category } from "../../app/interfaces/category";
 import {
 	categorySchema,
 	FormFields,
@@ -22,11 +26,13 @@ import InputErrorMessage from "../shared/InputErrorMessage";
 import CategoryImageUpload from "./CategoryImageUpload";
 
 interface Props {
+	isEdit: boolean;
+	category?: Category;
 	onClose: () => void;
 	setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CategoryForm = ({ onClose, setIsEdit }: Props) => {
+const CategoryForm = ({ isEdit, onClose, setIsEdit, category }: Props) => {
 	const toast = useToast();
 	const {
 		register,
@@ -34,13 +40,26 @@ const CategoryForm = ({ onClose, setIsEdit }: Props) => {
 		setError,
 		setValue,
 		getValues,
+		reset,
 		formState: { errors, isSubmitting },
 	} = useForm<FormFields>({
 		resolver: zodResolver(categorySchema),
 	});
 	const [createCategory] = useCreateCategoryMutation();
+	const [updateCategory] = useUpdateCategoryMutation();
 	const { user } = useAppSelector((state) => state.auth);
 	const [isLoading, setIsLoading] = useState(false);
+	const [image, setImage] = useState<string | undefined>(category?.image);
+
+	useEffect(() => {
+		if (isEdit && category) {
+			setValue("name", category.name);
+			setImage(category.image);
+			setValue("image", category.image);
+		} else {
+			setImage("");
+		}
+	}, [category, isEdit]);
 
 	useEffect(() => {
 		if (errors.root?.message)
@@ -54,20 +73,34 @@ const CategoryForm = ({ onClose, setIsEdit }: Props) => {
 	}, [errors.root]);
 
 	const onSubmit = async (body: FormFields) => {
-		try {
-			await createCategory({
-				data: body,
-				token: user?.token ?? "",
-			}).unwrap();
-			onClose();
-		} catch (error) {
-			setError("root", {
-				message: "Something went wrong",
-			});
+		if (isEdit) {
+			try {
+				await updateCategory({
+					categoryId: category?.id!,
+					data: body,
+					token: user?.token ?? "",
+				}).unwrap();
+				onClose();
+			} catch (error) {
+				setError("root", {
+					message: "Something went wrong",
+				});
+			}
+			setIsEdit(false);
+		} else {
+			try {
+				await createCategory({
+					data: body,
+					token: user?.token ?? "",
+				}).unwrap();
+				onClose();
+			} catch (error) {
+				setError("root", {
+					message: "Something went wrong",
+				});
+			}
 		}
-		setIsEdit(false);
 	};
-	console.log(getValues("image"));
 
 	return (
 		<VStack
@@ -93,24 +126,26 @@ const CategoryForm = ({ onClose, setIsEdit }: Props) => {
 			<FormControl>
 				<FormLabel>Image</FormLabel>
 				<CategoryImageUpload
-					setValue={setValue}
+					setImage={setImage}
 					setIsLoading={setIsLoading}
+					setValue={setValue}
 				/>
-				{isLoading && (
-					<Skeleton
-						mt={5}
-						width="250px"
-						height="250px"
-						isLoaded={!isLoading}
-					></Skeleton>
-				)}
-				{getValues("image") && (
+
+				<Skeleton
+					display={isLoading ? "block" : "none"}
+					mt={5}
+					width="250px"
+					height="250px"
+					isLoaded={!isLoading}
+				></Skeleton>
+
+				{!isLoading && image && (
 					<Image
 						mt={5}
 						width="250px"
 						height="250px"
 						objectFit="cover"
-						src={getValues("image")}
+						src={image}
 						alt="Category Image"
 					/>
 				)}

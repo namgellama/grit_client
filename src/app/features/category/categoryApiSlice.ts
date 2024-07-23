@@ -33,6 +33,21 @@ export const productApiSlice = apiSlice.injectEndpoints({
 			invalidatesTags: ["Categories"],
 		}),
 
+		updateCategory: builder.mutation<
+			Category,
+			{ data: Partial<Category>; token: string; categoryId: string }
+		>({
+			query: ({ data, token, categoryId }) => ({
+				url: `${CATEGORY_URL}/${categoryId}`,
+				method: "PUT",
+				body: data,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}),
+			invalidatesTags: ["Categories", "Category"],
+		}),
+
 		deleteCategory: builder.mutation<null, { id: string; token: string }>({
 			query: ({ id, token }) => ({
 				url: `${CATEGORY_URL}/${id}`,
@@ -51,4 +66,5 @@ export const {
 	useGetCategoryQuery,
 	useCreateCategoryMutation,
 	useDeleteCategoryMutation,
+	useUpdateCategoryMutation,
 } = productApiSlice;

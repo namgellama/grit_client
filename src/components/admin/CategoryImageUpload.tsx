@@ -9,11 +9,12 @@ import { useAppSelector } from "../../app/hooks";
 import { FormFields } from "../../validations/categoryValidation";
 
 interface Props {
-	setValue: UseFormSetValue<FormFields>;
+	setImage: React.Dispatch<React.SetStateAction<string | undefined>>;
 	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+	setValue: UseFormSetValue<FormFields>;
 }
 
-const CategoryImageUpload = ({ setValue, setIsLoading }: Props) => {
+const CategoryImageUpload = ({ setImage, setIsLoading, setValue }: Props) => {
 	const images = useAppSelector((state) => state.images);
 
 	const presetKey = import.meta.env.VITE_CLOUDINARY_PRESET_KEY;
@@ -33,6 +34,7 @@ const CategoryImageUpload = ({ setValue, setIsLoading }: Props) => {
 
 		try {
 			const response = await addImageMutation(formData).unwrap();
+			setImage(response.secure_url);
 			setValue("image", response.secure_url);
 		} catch (error: any) {
 			toast({

@@ -35,7 +35,6 @@ function App() {
 			<Box
 				as="main"
 				w={location.pathname.startsWith("/dashboard") ? "80%" : "100%"}
-				h="80vh"
 			>
 				<Outlet />
 			</Box>
