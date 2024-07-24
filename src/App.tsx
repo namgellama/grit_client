@@ -1,15 +1,12 @@
+import { logout } from "@/app/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { AdminNavBar, NavBar } from "@/components";
+import Footer from "@/components/customer/Footer";
 import { Box } from "@chakra-ui/react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { logout } from "./app/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "./app/hooks";
-import { AdminNavBar, NavBar } from "./components";
-import Footer from "./components/customer/Footer";
-import { CurrentUser } from "./app/interfaces/auth";
 
 function App() {
-	const user: CurrentUser | null | undefined = useAppSelector(
-		(state) => state.auth.user
-	);
+	const { user } = useAppSelector((state) => state.auth);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();

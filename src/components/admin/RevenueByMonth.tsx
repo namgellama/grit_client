@@ -1,3 +1,6 @@
+import { useGetRevenueByMonthQuery } from "@/app/features/dashboard/dashboardApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { ErrorMessage, HeaderText } from "@/components";
 import { Card, CardBody, CardHeader, Skeleton } from "@chakra-ui/react";
 import { useMemo } from "react";
 import {
@@ -9,10 +12,6 @@ import {
 	XAxis,
 	YAxis,
 } from "recharts";
-import { ErrorMessage } from "..";
-import { useGetRevenueByMonthQuery } from "../../app/features/dashboard/dashboardApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import HeaderText from "./HeaderText";
 
 const RevenueByMonth = () => {
 	const { user } = useAppSelector((state) => state.auth);

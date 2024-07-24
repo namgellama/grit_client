@@ -1,3 +1,5 @@
+import { Product } from "@/app/interfaces/product";
+import { ColorBox } from "@/components";
 import {
 	Badge,
 	Box,
@@ -9,8 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ColorBox } from "..";
-import { Product } from "../../app/interfaces/product";
 
 interface Props {
 	product?: Product;

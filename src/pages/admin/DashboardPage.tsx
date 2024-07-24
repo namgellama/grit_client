@@ -1,10 +1,10 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
 import {
 	KPIData,
 	MostSoldProducts,
 	MyContainer,
 	RevenueByMonth,
-} from "../../components";
+} from "@/components";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 
 const DashboardPage = () => {
 	return (

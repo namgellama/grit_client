@@ -1,8 +1,8 @@
+import { InputErrorMessage } from "@/components";
+import { paymentMethods } from "@/utilities/data";
+import { FormFields } from "@/validations/checkoutValidation";
 import { Flex, Heading, Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { InputErrorMessage } from "..";
-import { paymentMethods } from "../../utilities/data";
-import { FormFields } from "../../validations/checkoutValidation";
 
 interface Props {
 	register: UseFormRegister<FormFields>;

@@ -1,4 +1,12 @@
 import {
+	useCreateCategoryMutation,
+	useUpdateCategoryMutation,
+} from "@/app/features/category/categoryApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { Category } from "@/app/interfaces/category";
+import { CategoryImageUpload, InputErrorMessage } from "@/components";
+import { categorySchema, FormFields } from "@/validations/categoryValidation";
+import {
 	Button,
 	FormControl,
 	FormLabel,
@@ -12,18 +20,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-	useCreateCategoryMutation,
-	useUpdateCategoryMutation,
-} from "../../app/features/category/categoryApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import { Category } from "../../app/interfaces/category";
-import {
-	categorySchema,
-	FormFields,
-} from "../../validations/categoryValidation";
-import InputErrorMessage from "../shared/InputErrorMessage";
-import CategoryImageUpload from "./CategoryImageUpload";
 
 interface Props {
 	isEdit: boolean;

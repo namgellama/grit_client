@@ -1,4 +1,10 @@
 import {
+	useDeleteBagItemMutation,
+	useUpdateBagItemMutation,
+} from "@/app/features/bagItem/bagItemApiSlice";
+import { CurrentUser } from "@/app/interfaces/auth";
+import { BagItem } from "@/app/interfaces/bagItem";
+import {
 	Box,
 	Flex,
 	HStack,
@@ -11,12 +17,6 @@ import {
 } from "@chakra-ui/react";
 import { ChangeEvent } from "react";
 import { MdDelete } from "react-icons/md";
-import {
-	useDeleteBagItemMutation,
-	useUpdateBagItemMutation,
-} from "../../app/features/bagItem/bagItemApiSlice";
-import { CurrentUser } from "../../app/interfaces/auth";
-import { BagItem } from "../../app/interfaces/bagItem";
 
 interface Props {
 	bagItems: BagItem[] | undefined;

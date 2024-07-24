@@ -1,5 +1,4 @@
-import { Hero, CategoryList } from "../../components";
-import NewArrivals from "./NewArrivals";
+import { CategoryList, Hero, NewArrivals } from "@/components";
 
 const HomePage = () => {
 	return (

@@ -1,25 +1,25 @@
 import {
-	Modal,
-	ModalOverlay,
-	ModalContent,
-	ModalHeader,
-	ModalCloseButton,
-	ModalBody,
+	updateVariantStock,
+	Variant,
+} from "@/app/features/variant/variantSlice";
+import { useAppDispatch } from "@/app/hooks";
+import {
+	Button,
 	FormControl,
 	FormLabel,
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	ModalOverlay,
+	NumberDecrementStepper,
+	NumberIncrementStepper,
 	NumberInput,
 	NumberInputField,
 	NumberInputStepper,
-	NumberIncrementStepper,
-	NumberDecrementStepper,
-	ModalFooter,
-	Button,
 } from "@chakra-ui/react";
-import {
-	updateVariantStock,
-	Variant,
-} from "../../app/features/variant/variantSlice";
-import { useAppDispatch } from "../../app/hooks";
 
 interface Props {
 	variant: Variant | null;

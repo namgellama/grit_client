@@ -1,3 +1,8 @@
+import { useGetMyOrdersQuery } from "@/app/features/order/orderApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { ErrorMessage, FilterSort } from "@/components";
+import { getOrderColor, getPaymentColor } from "@/utilities/getColor";
+import { getStringDate } from "@/utilities/getStringDate";
 import {
 	Badge,
 	Box,
@@ -13,12 +18,6 @@ import {
 import { useState } from "react";
 import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { useGetMyOrdersQuery } from "../../app/features/order/orderApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import { getOrderColor, getPaymentColor } from "../../utilities/getColor";
-import { getStringDate } from "../../utilities/getStringDate";
-import ErrorMessage from "../shared/ErrorMessage";
-import FilterSort from "./FilterSort";
 
 type SortOrder = "asc" | "desc";
 

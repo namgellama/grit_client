@@ -1,3 +1,5 @@
+import { BagItem } from "@/app/interfaces/bagItem";
+import { ErrorMessage } from "@/components";
 import {
 	Box,
 	Center,
@@ -10,8 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { SerializedError } from "@reduxjs/toolkit";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { BagItem } from "../../app/interfaces/bagItem";
-import ErrorMessage from "../shared/ErrorMessage";
 
 interface Props {
 	isLoading: boolean;

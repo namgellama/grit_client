@@ -1,4 +1,4 @@
-import { Heading, Box, Text } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const SignInHeader = () => {

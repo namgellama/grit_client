@@ -1,25 +1,22 @@
-import { Button, HStack, Spinner, useToast, VStack } from "@chakra-ui/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import {
 	useDeleteBagItemsMutation,
 	useGetBagItemsQuery,
-} from "../../app/features/bagItem/bagItemApiSlice";
-import { useCreateOrderMutation } from "../../app/features/order/orderApiSlice";
-import { useAppSelector } from "../../app/hooks";
+} from "@/app/features/bagItem/bagItemApiSlice";
+import { useCreateOrderMutation } from "@/app/features/order/orderApiSlice";
+import { useAppSelector } from "@/app/hooks";
 import {
 	BagItems,
 	DeliveryForm,
 	MyContainer,
 	PaymentMethods,
-} from "../../components";
-import { cities } from "../../utilities/data";
-import {
-	checkoutSchema,
-	FormFields,
-} from "../../validations/checkoutValidation";
+} from "@/components";
+import { cities } from "@/utilities/data";
+import { checkoutSchema, FormFields } from "@/validations/checkoutValidation";
+import { Button, HStack, Spinner, useToast, VStack } from "@chakra-ui/react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutPage = () => {
 	const [subTotal, setSubTotal] = useState(0);

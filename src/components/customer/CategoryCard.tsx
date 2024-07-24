@@ -1,6 +1,6 @@
+import { Category } from "@/app/interfaces/category";
 import { Box, Image, Text, VStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { Category } from "../../app/interfaces/category";
 
 const CategoryCard = ({ category }: { category: Category }) => {
 	return (

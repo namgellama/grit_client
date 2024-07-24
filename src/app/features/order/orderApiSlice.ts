@@ -1,6 +1,6 @@
-import { apiSlice } from "../../apiSlice";
-import { ORDER_URL } from "../../constants";
-import { Order, OrderRequest } from "../../interfaces/order";
+import { apiSlice } from "@/app/apiSlice";
+import { ORDER_URL } from "@/app/constants";
+import { Order, OrderRequest } from "@/app/interfaces/order";
 
 interface QueryParams {
 	orderStatus?: string;

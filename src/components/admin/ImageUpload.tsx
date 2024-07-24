@@ -1,12 +1,12 @@
+import { useAddImageMutation } from "@/app/features/image/imageApiSlice";
+import { addImage } from "@/app/features/image/imageSlice";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useToast } from "@chakra-ui/react";
 import { Group, MantineProvider, rem } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import "@mantine/dropzone/styles.css";
 import { IconPhotoPlus, IconUpload, IconX } from "@tabler/icons-react";
 import { useEffect } from "react";
-import { useAddImageMutation } from "../../app/features/image/imageApiSlice";
-import { addImage } from "../../app/features/image/imageSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { useToast } from "@chakra-ui/react";
 
 const ImageUpload = ({
 	setIsLoading,

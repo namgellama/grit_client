@@ -1,5 +1,5 @@
+import { Variant } from "@/app/features/variant/variantSlice";
 import { Box, Tooltip } from "@chakra-ui/react";
-import { Variant } from "../../app/features/variant/variantSlice";
 
 interface Props {
 	variant: Variant;

@@ -1,6 +1,11 @@
+import { useGetCategoriesQuery } from "@/app/features/category/categoryApiSlice";
+import {
+	CategoryCard,
+	ErrorMessage,
+	MyContainer,
+	MyHeading,
+} from "@/components";
 import { Flex, Skeleton } from "@chakra-ui/react";
-import { CategoryCard, ErrorMessage, MyContainer, MyHeading } from "..";
-import { useGetCategoriesQuery } from "../../app/features/category/categoryApiSlice";
 
 const CategoryList = () => {
 	const { data: categories, isLoading, error } = useGetCategoriesQuery();

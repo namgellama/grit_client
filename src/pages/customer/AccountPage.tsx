@@ -1,5 +1,5 @@
+import { MyContainer, MyOrders, Profile } from "@/components";
 import { HStack } from "@chakra-ui/react";
-import { MyContainer, MyOrders, Profile } from "../../components";
 
 const AccountPage = () => {
 	return (

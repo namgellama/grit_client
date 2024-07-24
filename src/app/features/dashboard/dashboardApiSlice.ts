@@ -1,10 +1,10 @@
-import { apiSlice } from "../../apiSlice";
-import { DASHBOARD_URL } from "../../constants";
+import { apiSlice } from "@/app/apiSlice";
+import { DASHBOARD_URL } from "@/app/constants";
 import {
 	KPI,
 	MostSoldProduct,
 	RevenueByMonthResponse,
-} from "../../interfaces/dashboard";
+} from "@/app/interfaces/dashboard";
 
 export const dashboardApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({

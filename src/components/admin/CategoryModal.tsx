@@ -1,3 +1,5 @@
+import { useGetCategoryQuery } from "@/app/features/category/categoryApiSlice";
+import { CategoryForm } from "@/components";
 import {
 	Modal,
 	ModalBody,
@@ -6,8 +8,6 @@ import {
 	ModalHeader,
 	ModalOverlay,
 } from "@chakra-ui/react";
-import { useGetCategoryQuery } from "../../app/features/category/categoryApiSlice";
-import CategoryForm from "./CategoryForm";
 
 interface Props {
 	id: string;

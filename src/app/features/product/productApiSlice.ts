@@ -1,6 +1,6 @@
-import { apiSlice } from "../../apiSlice";
-import { PRODUCT_URL } from "../../constants";
-import { Product, ProductCreate } from "../../interfaces/product";
+import { apiSlice } from "@/app/apiSlice";
+import { PRODUCT_URL } from "@/app/constants";
+import { Product, ProductCreate } from "@/app/interfaces/product";
 
 interface QueryParams {
 	segment?: string;

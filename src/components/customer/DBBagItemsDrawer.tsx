@@ -1,3 +1,6 @@
+import { useGetBagItemsQuery } from "@/app/features/bagItem/bagItemApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { DBBagItems, DBEmptyBagItems, ErrorMessage } from "@/components";
 import {
 	Button,
 	Drawer,
@@ -11,11 +14,6 @@ import {
 } from "@chakra-ui/react";
 import { RefObject } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetBagItemsQuery } from "../../app/features/bagItem/bagItemApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import ErrorMessage from "../shared/ErrorMessage";
-import DBBagItems from "./DBBagItems";
-import DBEmptyBagItems from "./DBEmptyBagItems";
 
 interface Props {
 	isOpen: boolean;

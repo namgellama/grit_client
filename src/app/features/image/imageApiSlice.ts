@@ -1,5 +1,5 @@
-import { apiSlice } from "../../apiSlice";
-import { Image } from "../../interfaces/image";
+import { apiSlice } from "@/app/apiSlice";
+import { Image } from "@/app/interfaces/image";
 
 export const imageApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({

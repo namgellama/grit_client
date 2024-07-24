@@ -1,4 +1,10 @@
 import {
+	updateVariantImage,
+	Variant,
+} from "@/app/features/variant/variantSlice";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { ImageUpload } from "@/components";
+import {
 	Grid,
 	Image,
 	Modal,
@@ -10,12 +16,6 @@ import {
 	Skeleton,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import {
-	updateVariantImage,
-	Variant,
-} from "../../app/features/variant/variantSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import ImageUpload from "./ImageUpload";
 
 interface Props {
 	variant: Variant;

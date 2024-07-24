@@ -1,7 +1,7 @@
+import { useGetMyCurrentAddressQuery } from "@/app/features/address/addressApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { ErrorMessage } from "@/components";
 import { Avatar, Box, HStack, Skeleton, Text, VStack } from "@chakra-ui/react";
-import { useGetMyCurrentAddressQuery } from "../../app/features/address/addressApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import ErrorMessage from "../shared/ErrorMessage";
 
 const Profile = () => {
 	const { user } = useAppSelector((state) => state.auth);

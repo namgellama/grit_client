@@ -1,3 +1,9 @@
+import { useGetOrderQuery } from "@/app/features/order/orderApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { UpdateOrder } from "@/components";
+import { getOrderColor, getPaymentColor } from "@/utilities/getColor";
+import { getHeight } from "@/utilities/getHeight";
+import { getStringDateTime } from "@/utilities/getStringDate";
 import {
 	Badge,
 	Box,
@@ -12,12 +18,6 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import { useGetOrderQuery } from "../../app/features/order/orderApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import { UpdateOrder } from "../../components";
-import { getOrderColor, getPaymentColor } from "../../utilities/getColor";
-import { getHeight } from "../../utilities/getHeight";
-import { getStringDateTime } from "../../utilities/getStringDate";
 
 const AdminOrderDetailPage = () => {
 	const { id } = useParams();

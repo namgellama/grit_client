@@ -1,5 +1,5 @@
-import { Outlet, Navigate } from "react-router-dom";
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "@/app/hooks";
+import { Navigate, Outlet } from "react-router-dom";
 
 const AdminRoute = () => {
 	const { user } = useAppSelector((state) => state.auth);

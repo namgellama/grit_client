@@ -1,3 +1,6 @@
+import { useRegisterMutation } from "@/app/features/auth/authApiSlice";
+import { InputErrorMessage } from "@/components";
+import { FormFields, registerSchema } from "@/validations/registerValidation";
 import {
 	Button,
 	FormControl,
@@ -14,13 +17,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { useRegisterMutation } from "../../app/features/auth/authApiSlice";
-import { RegisterRequestDTO } from "../../app/interfaces/auth";
-import {
-	FormFields,
-	registerSchema,
-} from "../../validations/registerValidation";
-import InputErrorMessage from "./InputErrorMessage";
 
 const SignUpForm = () => {
 	const [showPassword, setShowPassword] = useState(false);

@@ -1,3 +1,6 @@
+import { useGetOrdersQuery } from "@/app/features/order/orderApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { getStringDate } from "@/utilities/getStringDate";
 import {
 	Button,
 	Flex,
@@ -12,9 +15,6 @@ import {
 	Tr,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { useGetOrdersQuery } from "../../app/features/order/orderApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import { getStringDate } from "../../utilities/getStringDate";
 
 const AdminOrdersPage = () => {
 	const { user } = useAppSelector((state) => state.auth);

@@ -1,6 +1,6 @@
-import { apiSlice } from "../../apiSlice";
-import { AUTH_URL } from "../../constants";
-import { CurrentUser, RegisterRequestDTO, User } from "../../interfaces/auth";
+import { apiSlice } from "@/app/apiSlice";
+import { AUTH_URL } from "@/app/constants";
+import { CurrentUser, RegisterRequestDTO, User } from "@/app/interfaces/auth";
 
 export const authApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({

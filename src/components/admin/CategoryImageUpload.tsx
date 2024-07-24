@@ -1,12 +1,12 @@
+import { useAddImageMutation } from "@/app/features/image/imageApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { FormFields } from "@/validations/categoryValidation";
 import { useToast } from "@chakra-ui/react";
 import { Group, MantineProvider, rem } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { IconPhotoPlus, IconUpload, IconX } from "@tabler/icons-react";
 import { useEffect } from "react";
 import { UseFormSetValue } from "react-hook-form";
-import { useAddImageMutation } from "../../app/features/image/imageApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import { FormFields } from "../../validations/categoryValidation";
 
 interface Props {
 	setImage: React.Dispatch<React.SetStateAction<string | undefined>>;

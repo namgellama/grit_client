@@ -1,8 +1,8 @@
 import { HStack, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useGetProductsQuery } from "../../app/features/product/productApiSlice";
-import { MyContainer, MyHeading } from "../../components";
-import SearchList from "../../components/customer/SearchList";
+import { MyContainer, MyHeading } from "..";
+import SearchList from "./SearchList";
 
 const NewArrivals = () => {
 	const queryParams = {

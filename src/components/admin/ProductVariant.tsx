@@ -1,4 +1,15 @@
 import {
+	addColorVariant,
+	removeSizeVariant,
+	removeVariant,
+	updateVariantSize,
+	Variant,
+} from "@/app/features/variant/variantSlice";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { PhotoPlaceholderImg } from "@/assets";
+import { EditVariantModal, VariantImageContainer } from "@/components";
+import { toTitleCaseColor, toTitleCaseSize } from "@/utilities/getTitleCase";
+import {
 	Box,
 	Flex,
 	IconButton,
@@ -15,21 +26,6 @@ import { MantineProvider, TagsInput } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { useState } from "react";
 import { MdModeEdit } from "react-icons/md";
-import {
-	addColorVariant,
-	removeSizeVariant,
-	removeVariant,
-	updateVariantSize,
-	Variant,
-} from "../../app/features/variant/variantSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import photoPlaceholder from "../../assets/photo-placeholder.png";
-import {
-	toTitleCaseColor,
-	toTitleCaseSize,
-} from "../../utilities/getTitleCase";
-import EditVariantModal from "./EditVariantModal";
-import VariantImageContainer from "./VariantImageContainer";
 
 const ProductVariant = () => {
 	const variants = useAppSelector((state) => state.variants);
@@ -163,7 +159,7 @@ const ProductVariant = () => {
 												/>
 											) : (
 												<VariantImageContainer
-													image={photoPlaceholder}
+													image={PhotoPlaceholderImg}
 													setVariant={setVariant}
 													variant={variant}
 												/>

@@ -1,3 +1,5 @@
+import { useGetSearchProductsQuery } from "@/app/features/search/searchApiSlice";
+import { SearchList } from "@/components";
 import {
 	Box,
 	Input,
@@ -8,8 +10,6 @@ import {
 import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
-import { useGetSearchProductsQuery } from "../../app/features/search/searchApiSlice";
-import SearchList from "./SearchList";
 
 interface Props {
 	setShowSearch: React.Dispatch<React.SetStateAction<boolean>>;

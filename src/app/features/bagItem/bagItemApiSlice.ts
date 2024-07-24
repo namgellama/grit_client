@@ -1,6 +1,6 @@
-import { apiSlice } from "../../apiSlice";
-import { BAG_ITEM_URL } from "../../constants";
-import { BagItem } from "../../interfaces/bagItem";
+import { apiSlice } from "@/app/apiSlice";
+import { BAG_ITEM_URL } from "@/app/constants";
+import { BagItem } from "@/app/interfaces/bagItem";
 
 export const bagItemApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({

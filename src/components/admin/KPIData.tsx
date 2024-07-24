@@ -1,10 +1,10 @@
+import { useGetKPIQuery } from "@/app/features/dashboard/dashboardApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { ErrorMessage } from "@/components";
 import { Box, Flex, HStack, Skeleton, Text } from "@chakra-ui/react";
 import { BsHandbagFill } from "react-icons/bs";
 import { GiTwoCoins } from "react-icons/gi";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
-import { ErrorMessage } from "..";
-import { useGetKPIQuery } from "../../app/features/dashboard/dashboardApiSlice";
-import { useAppSelector } from "../../app/hooks";
 
 const KPIData = () => {
 	const { user } = useAppSelector((state) => state.auth);

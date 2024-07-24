@@ -1,6 +1,6 @@
-import { apiSlice } from "../../apiSlice";
-import { PAYMENT_URL } from "../../constants";
-import { Payment } from "../../interfaces/order";
+import { apiSlice } from "@/app/apiSlice";
+import { PAYMENT_URL } from "@/app/constants";
+import { Payment } from "@/app/interfaces/order";
 
 export const paymentApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({

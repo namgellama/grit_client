@@ -1,7 +1,7 @@
+import { Variant } from "@/app/features/variant/variantSlice";
+import { ImageSelectModal } from "@/components";
 import { Box, IconButton, Image, useDisclosure } from "@chakra-ui/react";
 import { MdModeEdit } from "react-icons/md";
-import ImageSelectModal from "./ImageSelectModal";
-import { Variant } from "../../app/features/variant/variantSlice";
 
 interface Props {
 	image: string;

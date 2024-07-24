@@ -1,8 +1,8 @@
+import { Product } from "@/app/interfaces/product";
+import { ErrorMessage, ProductCard } from "@/components";
 import { Box, Grid, Skeleton } from "@chakra-ui/react";
 import { SerializedError } from "@reduxjs/toolkit";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { ErrorMessage, ProductCard } from "..";
-import { Product } from "../../app/interfaces/product";
 
 interface Props {
 	error: FetchBaseQueryError | SerializedError | undefined;

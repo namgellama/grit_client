@@ -1,3 +1,8 @@
+import { useGetCategoriesQuery } from "@/app/features/category/categoryApiSlice";
+import { removeAllImages } from "@/app/features/image/imageSlice";
+import { useAddProductMutation } from "@/app/features/product/productApiSlice";
+import { removeAllVariants } from "@/app/features/variant/variantSlice";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import {
 	Button,
 	Checkbox,
@@ -21,11 +26,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useGetCategoriesQuery } from "../../app/features/category/categoryApiSlice";
-import { removeAllImages } from "../../app/features/image/imageSlice";
-import { useAddProductMutation } from "../../app/features/product/productApiSlice";
-import { removeAllVariants } from "../../app/features/variant/variantSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
 	ImageUploadContainer,
 	InputErrorMessage,

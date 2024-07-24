@@ -1,4 +1,13 @@
 import {
+	useCreateBagItemMutation,
+	useGetBagItemsQuery,
+	useUpdateBagItemMutation,
+} from "@/app/features/bagItem/bagItemApiSlice";
+import { useGetProductQuery } from "@/app/features/product/productApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "@/components";
+import { BagItem } from "@/interfaces";
+import {
 	Box,
 	Button,
 	Divider,
@@ -13,15 +22,6 @@ import {
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
-import {
-	useCreateBagItemMutation,
-	useGetBagItemsQuery,
-	useUpdateBagItemMutation,
-} from "../../app/features/bagItem/bagItemApiSlice";
-import { useGetProductQuery } from "../../app/features/product/productApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "../../components";
-import { BagItem } from "../../interfaces";
 
 const ProductDetailPage = () => {
 	const { id } = useParams();

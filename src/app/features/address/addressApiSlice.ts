@@ -1,6 +1,6 @@
-import { apiSlice } from "../../apiSlice";
-import { ADDRESS_URL } from "../../constants";
-import { Address } from "../../interfaces/order";
+import { apiSlice } from "@/app/apiSlice";
+import { ADDRESS_URL } from "@/app/constants";
+import { Address } from "@/app/interfaces/order";
 
 export const addressApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({

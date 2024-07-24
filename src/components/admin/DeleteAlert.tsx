@@ -1,3 +1,5 @@
+import { useDeleteCategoryMutation } from "@/app/features/category/categoryApiSlice";
+import { useAppSelector } from "@/app/hooks";
 import {
 	AlertDialog,
 	AlertDialogBody,
@@ -10,8 +12,6 @@ import {
 	useToast,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { useDeleteCategoryMutation } from "../../app/features/category/categoryApiSlice";
-import { useAppSelector } from "../../app/hooks";
 
 interface Props {
 	isOpen: boolean;

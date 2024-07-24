@@ -1,6 +1,6 @@
+import { orderStatuses, paymentStatuses } from "@/utilities/data";
 import { HStack, IconButton, Select } from "@chakra-ui/react";
 import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
-import { orderStatuses, paymentStatuses } from "../../utilities/data";
 
 interface Props {
 	orderStatusValue: string;

@@ -1,3 +1,6 @@
+import { InputErrorMessage } from "@/components";
+import { cities, countries } from "@/utilities/data";
+import { FormFields } from "@/validations/checkoutValidation";
 import {
 	Flex,
 	FormControl,
@@ -8,9 +11,6 @@ import {
 	Select,
 } from "@chakra-ui/react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { cities, countries } from "../../utilities/data";
-import { FormFields } from "../../validations/checkoutValidation";
-import InputErrorMessage from "../shared/InputErrorMessage";
 
 interface Props {
 	register: UseFormRegister<FormFields>;

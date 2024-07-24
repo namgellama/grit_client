@@ -1,3 +1,5 @@
+import { useAppSelector } from "@/app/hooks";
+import { BagItem } from "@/interfaces";
 import {
 	Button,
 	Drawer,
@@ -15,8 +17,6 @@ import {
 } from "@chakra-ui/react";
 import { ChangeEvent, RefObject, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { useAppSelector } from "../../app/hooks";
-import { BagItem } from "../../interfaces";
 
 interface Props {
 	isOpen: boolean;

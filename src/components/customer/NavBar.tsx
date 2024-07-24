@@ -1,3 +1,13 @@
+import { useGetBagItemsQuery } from "@/app/features/bagItem/bagItemApiSlice";
+import { CurrentUser } from "@/app/interfaces/auth";
+import { Logo } from "@/assets";
+import { CookieBagItemsDrawer, DBBagItemsDrawer, Search } from "@/components";
+import {
+	NavIcon,
+	NavLink,
+	NavLinkIcon,
+} from "@/components/shared/NavComponents";
+import { BagItem } from "@/interfaces";
 import {
 	Badge,
 	Box,
@@ -9,18 +19,10 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { useCookies } from "react-cookie";
-import { FaShoppingBag, FaUserCircle } from "react-icons/fa";
-import { FaUser } from "react-icons/fa6";
+import { FaShoppingBag, FaUser, FaUserCircle } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { CookieBagItemsDrawer, DBBagItemsDrawer } from "..";
-import { useGetBagItemsQuery } from "../../app/features/bagItem/bagItemApiSlice";
-import { CurrentUser } from "../../app/interfaces/auth";
-import logo from "../../assets/logo.png";
-import { BagItem } from "../../interfaces";
-import { NavIcon, NavLink, NavLinkIcon } from "../shared/NavComponents";
-import Search from "./Search";
 
 interface Props {
 	user?: CurrentUser | null;
@@ -73,7 +75,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 						</HStack>
 						<HStack flex={1} justifyContent="center">
 							<Link to="/">
-								<Image src={logo} boxSize="40px" />
+								<Image src={Logo} boxSize="40px" />
 							</Link>
 						</HStack>
 						<HStack flex={1} justifyContent="end">

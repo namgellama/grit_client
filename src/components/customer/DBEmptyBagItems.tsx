@@ -1,6 +1,6 @@
+import { EmptyBagImg } from "@/assets";
 import { Button, Image, Text, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import emptyBagImage from "../../assets/empty-bag.png";
 
 interface Props {
 	onClose: () => void;
@@ -11,7 +11,7 @@ const DBEmptyBagItems = ({ onClose }: Props) => {
 
 	return (
 		<VStack h="100%" justify="center">
-			<Image src={emptyBagImage} alt="Empty bag" w="150px" />
+			<Image src={EmptyBagImg} alt="Empty bag" w="150px" />
 			<Text
 				fontSize="xs"
 				fontWeight="semibold"

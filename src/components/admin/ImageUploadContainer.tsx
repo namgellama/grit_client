@@ -1,9 +1,9 @@
+import { deleteImage } from "@/app/features/image/imageSlice";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { ImageUpload } from "@/components";
 import { Box, Flex, Image, Skeleton, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-import { deleteImage } from "../../app/features/image/imageSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import ImageUpload from "./ImageUpload";
 
 const ImageUploadContainer = () => {
 	const images: string[] = useAppSelector((state) => state.images);

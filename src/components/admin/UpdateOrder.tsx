@@ -1,9 +1,9 @@
+import { useUpdateOrderMutation } from "@/app/features/order/orderApiSlice";
+import { useUpdatePaymentMutation } from "@/app/features/payment/paymentApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { Order } from "@/app/interfaces/order";
+import { orderStatuses, paymentStatuses } from "@/utilities/data";
 import { Card, CardBody, Select, Text, VStack } from "@chakra-ui/react";
-import { useUpdateOrderMutation } from "../../app/features/order/orderApiSlice";
-import { useUpdatePaymentMutation } from "../../app/features/payment/paymentApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import { Order } from "../../app/interfaces/order";
-import { orderStatuses, paymentStatuses } from "../../utilities/data";
 
 const UpdateOrder = ({ order }: { order?: Order }) => {
 	const [updateOrder] = useUpdateOrderMutation();

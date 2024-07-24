@@ -1,3 +1,5 @@
+import { useGetCategoriesQuery } from "@/app/features/category/categoryApiSlice";
+import { CategoryModal, DeleteAlert, ErrorMessage } from "@/components";
 import {
 	Button,
 	Flex,
@@ -18,8 +20,6 @@ import {
 import { useRef, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { useGetCategoriesQuery } from "../../app/features/category/categoryApiSlice";
-import { CategoryModal, DeleteAlert, ErrorMessage } from "../../components";
 
 const AdminCategoriesPage = () => {
 	const [id, setId] = useState("");

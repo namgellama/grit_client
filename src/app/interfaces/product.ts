@@ -1,4 +1,4 @@
-import { Variant } from "../features/variant/variantSlice";
+import { Variant } from "@/app/features/variant/variantSlice";
 import { Category } from "./category";
 
 export interface Product {

@@ -1,3 +1,5 @@
+import { Product } from "@/app/interfaces/product";
+import { ErrorMessage } from "@/components";
 import {
 	Badge,
 	Box,
@@ -10,8 +12,6 @@ import {
 import { SerializedError } from "@reduxjs/toolkit";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { Link } from "react-router-dom";
-import { Product } from "../../app/interfaces/product";
-import ErrorMessage from "../shared/ErrorMessage";
 
 interface Props {
 	error: FetchBaseQueryError | SerializedError | undefined;

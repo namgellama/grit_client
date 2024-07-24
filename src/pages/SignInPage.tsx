@@ -1,9 +1,9 @@
+import { useAppSelector } from "@/app/hooks";
+import { SignInImg } from "@/assets";
+import { SignInForm, SignInHeader } from "@/components";
 import { Container, HStack, Image, VStack } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../app/hooks";
-import signInImg from "../assets/sign-in.jpg";
-import { SignInForm, SignInHeader } from "../components";
 
 const SignInPage = () => {
 	const { user } = useAppSelector((state) => state.auth);
@@ -22,7 +22,7 @@ const SignInPage = () => {
 
 	return (
 		<HStack>
-			<Image src={signInImg} w="50%" h="100vh" objectFit="cover" />
+			<Image src={SignInImg} w="50%" h="100vh" objectFit="cover" />
 			<Container w="50%" centerContent>
 				<VStack spacing={8} w="400px" alignItems="start">
 					<SignInHeader />

@@ -1,3 +1,6 @@
+import { useGetMostSoldProductsQuery } from "@/app/features/dashboard/dashboardApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { ErrorMessage, HeaderText } from "@/components";
 import {
 	Box,
 	Flex,
@@ -11,10 +14,6 @@ import {
 	Tr,
 } from "@chakra-ui/react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
-import { ErrorMessage } from "..";
-import { useGetMostSoldProductsQuery } from "../../app/features/dashboard/dashboardApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import HeaderText from "./HeaderText";
 
 const MostSoldProducts = () => {
 	const { user } = useAppSelector((state) => state.auth);

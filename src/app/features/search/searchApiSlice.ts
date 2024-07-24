@@ -1,6 +1,6 @@
-import { apiSlice } from "../../apiSlice";
-import { SEARCH_URL } from "../../constants";
-import { Product } from "../../interfaces/product";
+import { apiSlice } from "@/app/apiSlice";
+import { SEARCH_URL } from "@/app/constants";
+import { Product } from "@/app/interfaces/product";
 
 interface QueryParams {
 	name?: string;

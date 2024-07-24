@@ -1,3 +1,8 @@
+import { useLoginMutation } from "@/app/features/auth/authApiSlice";
+import { setUser } from "@/app/features/auth/authSlice";
+import { useAppDispatch } from "@/app/hooks";
+import { InputErrorMessage } from "@/components";
+import { FormFields, loginSchema } from "@/validations/loginValidation";
 import {
 	Button,
 	FormControl,
@@ -13,11 +18,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { InputErrorMessage } from "..";
-import { useLoginMutation } from "../../app/features/auth/authApiSlice";
-import { setUser } from "../../app/features/auth/authSlice";
-import { useAppDispatch } from "../../app/hooks";
-import { FormFields, loginSchema } from "../../validations/loginValidation";
 
 const SignInForm = () => {
 	const [show, setShow] = useState(false);

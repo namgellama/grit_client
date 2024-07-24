@@ -1,3 +1,8 @@
+import { useGetMyOrderQuery } from "@/app/features/order/orderApiSlice";
+import { useAppSelector } from "@/app/hooks";
+import { ErrorMessage, MyContainer } from "@/components";
+import { getOrderColor, getPaymentColor } from "@/utilities/getColor";
+import { getStringDateTime } from "@/utilities/getStringDate";
 import {
 	Badge,
 	Box,
@@ -13,11 +18,6 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import { useGetMyOrderQuery } from "../../app/features/order/orderApiSlice";
-import { useAppSelector } from "../../app/hooks";
-import { ErrorMessage, MyContainer } from "../../components";
-import { getOrderColor, getPaymentColor } from "../../utilities/getColor";
-import { getStringDateTime } from "../../utilities/getStringDate";
 
 const MyOrderDetailPage = () => {
 	const { id } = useParams();

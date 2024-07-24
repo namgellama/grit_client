@@ -1,3 +1,5 @@
+import { useGetProductsQuery } from "@/app/features/product/productApiSlice";
+import { getProductStatus } from "@/utilities/getProductStatus";
 import {
 	Badge,
 	Button,
@@ -22,8 +24,6 @@ import { FiEdit } from "react-icons/fi";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
-import { useGetProductsQuery } from "../../app/features/product/productApiSlice";
-import { getProductStatus } from "../../utilities/getProductStatus";
 
 const AdminProductsPage = () => {
 	const {

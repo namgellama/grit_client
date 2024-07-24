@@ -1,3 +1,5 @@
+import { Logo } from "@/assets";
+import { NavLinkButton } from "@/components/shared/NavComponents";
 import {
 	Box,
 	Button,
@@ -16,8 +18,6 @@ import { MdLogout } from "react-icons/md";
 import { RiGiftFill } from "react-icons/ri";
 import { TbCategoryFilled } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png";
-import { NavLinkButton } from "../shared/NavComponents";
 
 interface Props {
 	handleLogout: () => void;
@@ -53,7 +53,7 @@ const AdminNavBar = ({ handleLogout }: Props) => {
 	return (
 		<Box as="nav" w="16%" bg="white" h="100vh" position="sticky" top={0}>
 			<HStack py={2} px={5} gap={4}>
-				<Image src={logo} alt="Logo" boxSize="24px" />
+				<Image src={Logo} alt="Logo" boxSize="24px" />
 				<Text fontWeight="medium" fontSize="small">
 					Welcome Admin!
 				</Text>
