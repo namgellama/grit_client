@@ -29,6 +29,19 @@ export const productApiSlice = apiSlice.injectEndpoints({
 			providesTags: ["Product"],
 		}),
 
+		getProductAdmin: builder.query<
+			Product,
+			{ productId: string; token: string }
+		>({
+			query: ({ productId, token }) => ({
+				url: `${PRODUCT_URL}/${productId}/admin`,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}),
+			providesTags: ["AdminProduct"],
+		}),
+
 		addProduct: builder.mutation<
 			Product,
 			{ data: Partial<ProductCreate>; token: string }
@@ -48,5 +61,6 @@ export const productApiSlice = apiSlice.injectEndpoints({
 export const {
 	useGetProductsQuery,
 	useGetProductQuery,
+	useGetProductAdminQuery,
 	useAddProductMutation,
 } = productApiSlice;
