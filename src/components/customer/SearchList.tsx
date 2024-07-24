@@ -42,17 +42,9 @@ const SearchList = ({ error, products, isLoading }: Props) => {
 										transition="opacity 0.2s ease-in-out"
 									/>
 								</Box>
-							</Link>
 
-							<VStack align="start" spacing={0.5} w="100%">
-								<Link
-									to={`/products/${product?.id}`}
-									style={{ width: "100%" }}
-								>
-									<Flex
-										justifyContent="space-between"
-										w="100%"
-									>
+								<Flex direction="column" gap={0.5} mt={2}>
+									<Flex justifyContent="space-between">
 										<Text
 											fontWeight="semibold"
 											letterSpacing={1}
@@ -70,16 +62,15 @@ const SearchList = ({ error, products, isLoading }: Props) => {
 											{product?.category?.name}
 										</Badge>
 									</Flex>
-								</Link>
-
-								<Text
-									fontWeight="semibold"
-									fontSize="sm"
-									letterSpacing={1}
-								>
-									Rs. {product?.sellingPrice}
-								</Text>
-							</VStack>
+									<Text
+										fontWeight="semibold"
+										fontSize="sm"
+										letterSpacing={1}
+									>
+										Rs. {product?.sellingPrice}
+									</Text>
+								</Flex>
+							</Link>
 						</VStack>
 					</Skeleton>
 				))

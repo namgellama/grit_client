@@ -1,4 +1,4 @@
-import { HStack, Skeleton } from "@chakra-ui/react";
+import { Flex, Skeleton } from "@chakra-ui/react";
 import { CategoryCard, ErrorMessage, MyContainer, MyHeading } from "..";
 import { useGetCategoriesQuery } from "../../app/features/category/categoryApiSlice";
 
@@ -10,7 +10,7 @@ const CategoryList = () => {
 			<MyHeading isLoading={isLoading} error={error} showCount={false}>
 				Shop by Category
 			</MyHeading>
-			<HStack spacing={10} mt={8}>
+			<Flex mt={8} gap={20} overflowX="scroll" className="scrollbarX">
 				{error ? (
 					<ErrorMessage>Something went wrong</ErrorMessage>
 				) : (
@@ -20,7 +20,7 @@ const CategoryList = () => {
 						</Skeleton>
 					))
 				)}
-			</HStack>
+			</Flex>
 		</MyContainer>
 	);
 };
