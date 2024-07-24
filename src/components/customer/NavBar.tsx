@@ -40,10 +40,6 @@ const NavBar = ({ user, handleLogout }: Props) => {
 			name: "Women",
 			path: "/products?segment=WOMEN",
 		},
-		{
-			name: "Unisex",
-			path: "/products?segment=UNISEX",
-		},
 	];
 
 	const [cookies] = useCookies<

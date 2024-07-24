@@ -28,6 +28,5 @@ export const paymentStatuses = [
 
 export const segments = [
 	{ name: "Men", value: "MEN" },
-	{ name: "Unisex", value: "UNISEX" },
 	{ name: "Women", value: "WOMEN" },
 ];
