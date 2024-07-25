@@ -1,18 +1,13 @@
 import { Variant } from "@/app/features/variant/variantSlice";
 import { Category } from "./category";
 
-export enum Segment {
-	MEN,
-	WOMEN,
-}
-
 export interface Product {
 	id: string;
 	name: string;
 	description: string;
 	sellingPrice: number;
 	crossedPrice: number;
-	segment: Segment;
+	segment: "MEN" | "WOMEN";
 	isNew: boolean;
 	createdAt: Date;
 	updateAt: Date;
