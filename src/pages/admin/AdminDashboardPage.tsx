@@ -6,7 +6,7 @@ import {
 } from "@/components";
 import { Box, SimpleGrid } from "@chakra-ui/react";
 
-const DashboardPage = () => {
+const AdminDashboardPage = () => {
 	return (
 		<MyContainer my={2}>
 			<KPIData />
@@ -22,4 +22,4 @@ const DashboardPage = () => {
 	);
 };
 
-export default DashboardPage;
+export default AdminDashboardPage;

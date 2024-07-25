@@ -5,16 +5,15 @@ import "@/index.css";
 import {
 	AccountPage,
 	AdminCategoriesPage,
+	AdminDashboardPage,
 	AdminOrderDetailPage,
 	AdminOrdersPage,
-	AdminProductEditPage,
+	AdminProductAddPage,
 	AdminProductsPage,
 	CategoryPage,
 	CheckoutPage,
-	DashboardPage,
 	HomePage,
 	MyOrderDetailPage,
-	ProductAddPage,
 	ProductDetailPage,
 	ProductPage,
 	SignInPage,
@@ -70,7 +69,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 								<Route path="" element={<AdminRoute />}>
 									<Route
 										path="/dashboard/home"
-										element={<DashboardPage />}
+										element={<AdminDashboardPage />}
 									/>
 									<Route
 										path="/dashboard/categories"
@@ -82,7 +81,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 									/>
 									<Route
 										path="/dashboard/products/:id"
-										element={<AdminProductEditPage />}
+										element={<AdminProductAddPage />}
 									/>
 									<Route
 										path="/dashboard/orders"
@@ -94,7 +93,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 									/>
 									<Route
 										path="/dashboard/products/new"
-										element={<ProductAddPage />}
+										element={<AdminProductAddPage />}
 									/>
 								</Route>
 							</Route>
