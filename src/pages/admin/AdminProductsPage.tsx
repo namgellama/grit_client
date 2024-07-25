@@ -1,4 +1,8 @@
-import { useGetProductsQuery } from "@/app/features/product/productApiSlice";
+import {
+	useDeleteProductMutation,
+	useGetProductsQuery,
+} from "@/app/features/product/productApiSlice";
+import { useAppSelector } from "@/app/hooks";
 import { ErrorMessage } from "@/components";
 import { getProductStatus } from "@/utilities/getProductStatus";
 import {
@@ -34,6 +38,8 @@ const AdminProductsPage = () => {
 		error,
 	} = useGetProductsQuery({ ageStatus: undefined, segment: undefined });
 	const navigate = useNavigate();
+	const [deleteProduct] = useDeleteProductMutation();
+	const { user } = useAppSelector((state) => state.auth);
 
 	return (
 		<Flex direction="column" p={10} gap={5}>
@@ -179,7 +185,16 @@ const AdminProductsPage = () => {
 														Edit Product
 													</Flex>
 												</MenuItem>
-												<MenuItem fontSize="sm">
+												<MenuItem
+													fontSize="sm"
+													onClick={async () =>
+														await deleteProduct({
+															productId:
+																product.id,
+															token: user?.token!,
+														})
+													}
+												>
 													<Flex
 														align="center"
 														gap={3}
