@@ -1,11 +1,14 @@
 import {
 	addColorVariant,
+	addVariants,
+	removeAllVariants,
 	removeSizeVariant,
 	removeVariant,
 	updateVariantSize,
 	Variant,
 } from "@/app/features/variant/variantSlice";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { Product } from "@/app/interfaces/product";
 import { PhotoPlaceholderImg } from "@/assets";
 import { EditVariantModal, VariantImageContainer } from "@/components";
 import { toTitleCaseColor, toTitleCaseSize } from "@/utilities/getTitleCase";
@@ -24,10 +27,10 @@ import {
 } from "@chakra-ui/react";
 import { MantineProvider, TagsInput } from "@mantine/core";
 import "@mantine/core/styles.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdModeEdit } from "react-icons/md";
 
-const ProductVariant = () => {
+const ProductVariant = ({ product }: { product?: Product }) => {
 	const variants = useAppSelector((state) => state.variants);
 	const dispatch = useAppDispatch();
 	const [variant, setVariant] = useState<Variant | null>(null);
@@ -35,6 +38,21 @@ const ProductVariant = () => {
 	const [sizes, setSizes] = useState<string[]>([]);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [stock, setStock] = useState(10);
+
+	useEffect(() => {
+		dispatch(removeAllVariants());
+		if (product) {
+			const uniqueColors = new Set(
+				product.variants.map((x) => `${x.color}, ${x.hexColor}`)
+			);
+			const productColors = Array.from(uniqueColors);
+			const uniqueSizes = new Set(product.variants.map((x) => x.size));
+			const productSizes = Array.from(uniqueSizes);
+			setColors(productColors);
+			setSizes(productSizes);
+			dispatch(addVariants(product.variants));
+		}
+	}, [product]);
 
 	const handleAddColor = (newColor: string[]) => {
 		const addedColor = newColor

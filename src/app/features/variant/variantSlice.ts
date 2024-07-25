@@ -15,6 +15,10 @@ const variantSlice = createSlice({
 	name: "variants",
 	initialState,
 	reducers: {
+		addVariants: (state, action) => {
+			state.push(...action.payload);
+		},
+
 		addColorVariant: (state, action) => {
 			state.push(action.payload);
 		},
@@ -81,6 +85,7 @@ const variantSlice = createSlice({
 });
 
 export const {
+	addVariants,
 	addColorVariant,
 	updateVariantSize,
 	updateVariantImage,

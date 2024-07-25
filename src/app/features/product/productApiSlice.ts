@@ -57,6 +57,21 @@ export const productApiSlice = apiSlice.injectEndpoints({
 			invalidatesTags: ["Products"],
 		}),
 
+		updateProduct: builder.mutation<
+			Product,
+			{ productId: string; data: Partial<ProductCreate>; token: string }
+		>({
+			query: ({ productId, data, token }) => ({
+				url: `${PRODUCT_URL}/${productId}`,
+				method: "PUT",
+				body: data,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}),
+			invalidatesTags: ["Products", "Product", "AdminProduct"],
+		}),
+
 		deleteProduct: builder.mutation<
 			null,
 			{ productId: string; token: string }
@@ -78,5 +93,6 @@ export const {
 	useGetProductQuery,
 	useGetProductAdminQuery,
 	useAddProductMutation,
+	useUpdateProductMutation,
 	useDeleteProductMutation,
 } = productApiSlice;

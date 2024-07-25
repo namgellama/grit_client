@@ -1,14 +1,27 @@
-import { deleteImage } from "@/app/features/image/imageSlice";
+import {
+	addImage,
+	deleteImage,
+	removeAllImages,
+} from "@/app/features/image/imageSlice";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { Product } from "@/app/interfaces/product";
 import { ImageUpload } from "@/components";
 import { Box, Flex, Image, Skeleton, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 
-const ImageUploadContainer = () => {
+const ImageUploadContainer = ({ product }: { product?: Product }) => {
 	const images: string[] = useAppSelector((state) => state.images);
 	const dispatch = useAppDispatch();
 	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		dispatch(removeAllImages());
+		if (product) {
+			const productImages = new Set(product.variants.map((x) => x.image));
+			dispatch(addImage(productImages));
+		}
+	}, [product]);
 
 	return (
 		<Box bg="white" p={3}>
