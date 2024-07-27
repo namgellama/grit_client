@@ -69,29 +69,50 @@ const ProductCard = ({ product, categoryName, show }: Props) => {
 
 			<VStack align="start" spacing={0.5} w="100%">
 				<Link to={`/products/${product?.id}`} style={{ width: "100%" }}>
-					<Flex justifyContent="space-between" w="100%">
-						<Text
-							fontWeight="semibold"
-							letterSpacing={1}
-							fontSize="sm"
-						>
-							{product?.name}
-						</Text>
-						<Badge
-							colorScheme="green"
-							fontSize="xxs"
-							fontWeight="medium"
-							letterSpacing={1}
-							textTransform="capitalize"
-						>
-							{product?.category?.name ?? categoryName}
-						</Badge>
-					</Flex>
+					<Text fontWeight="semibold" letterSpacing={1} fontSize="sm">
+						{product?.name}
+					</Text>
 				</Link>
 
-				<Text fontWeight="semibold" fontSize="sm" letterSpacing={1}>
-					Rs. {product?.sellingPrice}
-				</Text>
+				<Flex align="center" justify="space-between" w="100%">
+					<Flex align="center" gap={3}>
+						{product &&
+							product?.crossedPrice > product?.sellingPrice && (
+								<Text
+									fontWeight="semibold"
+									fontSize="sm"
+									textDecoration="line-through"
+								>
+									Rs. {product?.crossedPrice}
+								</Text>
+							)}
+
+						<Text
+							fontWeight="semibold"
+							fontSize="sm"
+							letterSpacing={1}
+						>
+							Rs. {product?.sellingPrice}
+						</Text>
+					</Flex>
+
+					{product &&
+						product?.crossedPrice > product?.sellingPrice && (
+							<Badge
+								variant="solid"
+								colorScheme="green"
+								borderRadius={10}
+								px={3}
+							>
+								{product &&
+									((product.crossedPrice -
+										product.sellingPrice) /
+										product.crossedPrice) *
+										100}{" "}
+								% OFF
+							</Badge>
+						)}
+				</Flex>
 				{show && (
 					<HStack justifyContent="start" spacing={3} px={1} mt={2.5}>
 						{uniqueColorVariants.map((variant) => (

@@ -8,6 +8,7 @@ import { useAppSelector } from "@/app/hooks";
 import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "@/components";
 import { BagItem } from "@/interfaces";
 import {
+	Badge,
 	Box,
 	Button,
 	Divider,
@@ -185,9 +186,43 @@ const ProductDetailPage = () => {
 							>
 								{product?.name}
 							</Text>
-							<Text fontWeight="medium" letterSpacing={1}>
-								Rs. {product?.sellingPrice}
-							</Text>
+
+							<Flex direction="column" align="start" gap={1}>
+								<Flex align="center" gap={3}>
+									{product &&
+										product?.crossedPrice >
+											product?.sellingPrice && (
+											<Text
+												fontWeight="medium"
+												textDecoration="line-through"
+											>
+												Rs. {product?.crossedPrice}
+											</Text>
+										)}
+
+									<Text fontWeight="medium" letterSpacing={1}>
+										Rs. {product?.sellingPrice}
+									</Text>
+								</Flex>
+
+								{product &&
+									product?.crossedPrice >
+										product?.sellingPrice && (
+										<Badge
+											variant="solid"
+											colorScheme="green"
+											borderRadius={10}
+											px={3}
+										>
+											{product &&
+												((product.crossedPrice -
+													product.sellingPrice) /
+													product.crossedPrice) *
+													100}{" "}
+											% OFF
+										</Badge>
+									)}
+							</Flex>
 						</VStack>
 
 						<Divider borderColor="darkgray" />
