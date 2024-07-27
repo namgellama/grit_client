@@ -14,11 +14,10 @@ import { Link } from "react-router-dom";
 
 interface Props {
 	product?: Product;
-	categoryName?: string;
 	show: boolean;
 }
 
-const ProductCard = ({ product, categoryName, show }: Props) => {
+const ProductCard = ({ product, show }: Props) => {
 	const [currentImage, setCurrentImage] = useState(
 		product?.variants[0].image ?? ""
 	);

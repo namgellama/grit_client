@@ -8,17 +8,10 @@ interface Props {
 	error: FetchBaseQueryError | SerializedError | undefined;
 	products?: Product[];
 	isLoading: boolean;
-	categoryName?: string;
 	show: boolean;
 }
 
-const ProductList = ({
-	error,
-	products,
-	isLoading,
-	categoryName,
-	show,
-}: Props) => {
+const ProductList = ({ error, products, isLoading, show }: Props) => {
 	return (
 		<Grid my={10} gap={20} templateColumns="repeat(3, 1fr)">
 			{error ? (
@@ -27,11 +20,7 @@ const ProductList = ({
 				products?.map((product) => (
 					<Box key={product.id} justifySelf="center">
 						<Skeleton isLoaded={!isLoading}>
-							<ProductCard
-								product={product}
-								categoryName={categoryName}
-								show={show}
-							/>
+							<ProductCard product={product} show={show} />
 						</Skeleton>
 					</Box>
 				))

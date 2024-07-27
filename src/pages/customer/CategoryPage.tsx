@@ -21,7 +21,6 @@ const CategoryPage = () => {
 				products={products}
 				error={error}
 				isLoading={isLoading}
-				categoryName={category?.name}
 				show={true}
 			/>
 		</MyContainer>
