@@ -11,7 +11,7 @@ const CategoryList = () => {
 	const { data: categories, isLoading, error } = useGetCategoriesQuery();
 
 	return (
-		<MyContainer>
+		<MyContainer my="4rem">
 			<Skeleton isLoaded={!isLoading} width="200px">
 				<MyHeading error={error} showCount={false}>
 					Shop by Category
