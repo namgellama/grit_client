@@ -6,6 +6,7 @@ import {
 	Flex,
 	HStack,
 	Image,
+	Skeleton,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
@@ -15,9 +16,10 @@ import { Link } from "react-router-dom";
 interface Props {
 	product?: Product;
 	show: boolean;
+	isLoading: boolean;
 }
 
-const ProductCard = ({ product, show }: Props) => {
+const ProductCard = ({ product, show, isLoading }: Props) => {
 	const [currentImage, setCurrentImage] = useState(
 		product?.variants[0].image ?? ""
 	);
@@ -48,84 +50,92 @@ const ProductCard = ({ product, show }: Props) => {
 	};
 
 	return (
-		<VStack align="start" w="280px" h={show ? "100%" : "390px"} py={2}>
-			<Link to={`/products/${product?.id}`}>
-				<Box
-					_hover={{ transform: "scale(1.01)" }}
-					transition={"transform 0.1s ease-out"}
-				>
-					<Image
-						src={currentImage}
-						alt={product?.name}
-						w="280px"
-						h="330px"
-						objectFit="cover"
-						opacity={isTransitioning ? 0 : 1}
-						transition="opacity 0.2s ease-in-out"
-					/>
-				</Box>
-			</Link>
-
-			<VStack align="start" spacing={0.5} w="100%">
-				<Link to={`/products/${product?.id}`} style={{ width: "100%" }}>
-					<Text fontWeight="semibold" letterSpacing={1} fontSize="sm">
-						{product?.name}
-					</Text>
+		<VStack align="start" py={2}>
+			<Skeleton isLoaded={!isLoading}>
+				<Link to={`/products/${product?.id}`}>
+					<Box
+						_hover={{ transform: "scale(1.01)" }}
+						transition={"transform 0.1s ease-out"}
+					>
+						<Image
+							src={currentImage}
+							alt={product?.name}
+							w="100%"
+							h="100%"
+							objectFit="cover"
+							opacity={isTransitioning ? 0 : 1}
+							transition="opacity 0.2s ease-in-out"
+						/>
+					</Box>
 				</Link>
+			</Skeleton>
 
-				<Flex align="center" justify="space-between" w="100%">
-					<Flex align="center" gap={3}>
+			<Skeleton isLoaded={!isLoading} w="100%">
+				<VStack align="start" spacing={0}>
+					<Link
+						to={`/products/${product?.id}`}
+						style={{ width: "100%" }}
+					>
+						<Text fontWeight="semibold" letterSpacing={1}>
+							{product?.name}
+						</Text>
+					</Link>
+
+					<Flex align="center" justify="space-between" w="100%">
+						<Flex align="center" gap={3}>
+							{product &&
+								product?.crossedPrice >
+									product?.sellingPrice && (
+									<Text
+										fontWeight="semibold"
+										textDecoration="line-through"
+									>
+										Rs. {product?.crossedPrice}
+									</Text>
+								)}
+
+							<Text fontWeight="semibold" letterSpacing={1}>
+								Rs. {product?.sellingPrice}
+							</Text>
+						</Flex>
+
 						{product &&
 							product?.crossedPrice > product?.sellingPrice && (
-								<Text
-									fontWeight="semibold"
-									fontSize="sm"
-									textDecoration="line-through"
+								<Badge
+									variant="solid"
+									colorScheme="green"
+									borderRadius={10}
+									px={3}
 								>
-									Rs. {product?.crossedPrice}
-								</Text>
+									{product &&
+										((product.crossedPrice -
+											product.sellingPrice) /
+											product.crossedPrice) *
+											100}{" "}
+									% OFF
+								</Badge>
 							)}
-
-						<Text
-							fontWeight="semibold"
-							fontSize="sm"
-							letterSpacing={1}
-						>
-							Rs. {product?.sellingPrice}
-						</Text>
 					</Flex>
-
-					{product &&
-						product?.crossedPrice > product?.sellingPrice && (
-							<Badge
-								variant="solid"
-								colorScheme="green"
-								borderRadius={10}
-								px={3}
-							>
-								{product &&
-									((product.crossedPrice -
-										product.sellingPrice) /
-										product.crossedPrice) *
-										100}{" "}
-								% OFF
-							</Badge>
-						)}
-				</Flex>
-				{show && (
-					<HStack justifyContent="start" spacing={3} px={1} mt={2.5}>
-						{uniqueColorVariants.map((variant) => (
-							<ColorBox
-								key={variant.id}
-								variant={variant}
-								currentColor={currentColor}
-								handleColorChange={handleColorChange}
-								small={show}
-							/>
-						))}
-					</HStack>
-				)}
-			</VStack>
+					{show && (
+						<HStack
+							justifyContent="start"
+							spacing={3}
+							px={1}
+							mt={2.5}
+						>
+							{uniqueColorVariants.map((variant) => (
+								<ColorBox
+									key={variant.id}
+									variant={variant}
+									currentColor={currentColor}
+									handleColorChange={handleColorChange}
+									small={show}
+								/>
+							))}
+						</HStack>
+					)}
+				</VStack>
+			</Skeleton>
 		</VStack>
 	);
 };

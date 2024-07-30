@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 
 const Hero = () => {
 	return (
-		<Box minHeight="100vh">
+		<Box>
 			<Grid templateColumns="repeat(3, 1fr)" gap={1}>
 				<Image
 					src={Hero1Img}

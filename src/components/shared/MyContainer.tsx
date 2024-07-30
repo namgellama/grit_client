@@ -7,7 +7,7 @@ interface Props {
 	my?: string | number;
 }
 
-const MyContainer = ({ children, width = "6xl", my = "4rem" }: Props) => {
+const MyContainer = ({ children, width = "6xl", my = "3rem" }: Props) => {
 	return (
 		<Container my={my} maxW={width}>
 			{children}

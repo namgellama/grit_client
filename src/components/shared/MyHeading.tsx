@@ -1,36 +1,26 @@
-import { Heading, Skeleton, Text } from "@chakra-ui/react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import { SerializedError } from "@reduxjs/toolkit";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { ReactNode } from "react";
 
 interface Props {
-	isLoading: boolean;
 	error: FetchBaseQueryError | SerializedError | undefined;
 	children: ReactNode;
 	count?: number;
 	showCount: boolean;
-	size?: string;
 }
 
-const MyHeading = ({
-	isLoading,
-	error,
-	children,
-	count,
-	showCount,
-	size = "2xl",
-}: Props) => {
+const MyHeading = ({ error, children, count, showCount }: Props) => {
 	return (
-		<Skeleton isLoaded={!isLoading} width="310px">
+		<Flex>
 			<Heading
-				fontSize={size}
-				textAlign="left"
+				fontSize="lg"
 				fontWeight="bold"
 				display={error ? "none" : "flex"}
 				textTransform="uppercase"
 				letterSpacing={2}
 				alignItems="center"
-				gap={5}
+				gap={3}
 			>
 				{children}{" "}
 				{showCount && (
@@ -39,7 +29,7 @@ const MyHeading = ({
 					</Text>
 				)}
 			</Heading>
-		</Skeleton>
+		</Flex>
 	);
 };
 

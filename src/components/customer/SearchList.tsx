@@ -21,7 +21,14 @@ interface Props {
 
 const SearchList = ({ error, products, isLoading }: Props) => {
 	return (
-		<Flex my={10} gap={20} overflowX="scroll" className="scrollbarX" pb={5}>
+		<Flex
+			my={10}
+			gap={{ base: 10, md: 16 }}
+			justify="space-between"
+			overflowX="scroll"
+			className="scrollbarX"
+			pb={5}
+		>
 			{error ? (
 				<ErrorMessage>Something went wrong</ErrorMessage>
 			) : (
