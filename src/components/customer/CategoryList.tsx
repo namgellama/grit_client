@@ -12,10 +12,17 @@ const CategoryList = () => {
 
 	return (
 		<MyContainer>
-			<MyHeading isLoading={isLoading} error={error} showCount={false}>
-				Shop by Category
-			</MyHeading>
-			<Flex mt={8} gap={20} overflowX="scroll" className="scrollbarX">
+			<Skeleton isLoaded={!isLoading} width="200px">
+				<MyHeading error={error} showCount={false}>
+					Shop by Category
+				</MyHeading>
+			</Skeleton>
+			<Flex
+				mt={8}
+				gap={{ base: 10, md: 16 }}
+				overflowX="scroll"
+				className="scrollbarX"
+			>
 				{error ? (
 					<ErrorMessage>Something went wrong</ErrorMessage>
 				) : (
