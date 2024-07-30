@@ -74,7 +74,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 								<Image src={Logo} boxSize="40px" />
 							</Link>
 						</HStack>
-						<HStack flex={1} justifyContent="end">
+						<Flex flex={1} justifyContent="end">
 							<NavIcon
 								icon={<IoSearch />}
 								label="Search products"
@@ -116,6 +116,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 									</Badge>
 								)}
 							</Flex>
+
 							{user && user.role === "Customer" ? (
 								<NavLinkIcon
 									icon={<FaUserCircle fontSize="larger" />}
@@ -143,7 +144,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 									onClick={handleLogout}
 								/>
 							)}
-						</HStack>
+						</Flex>
 					</HStack>
 				</Container>
 
