@@ -155,28 +155,32 @@ const ProductDetailPage = () => {
 						: "Something went wrong."}
 				</ErrorMessage>
 			) : (
-				<Flex gap={10}>
-					<Box w="50%">
+				<Flex
+					gap={{ base: 5, md: 0, lg: 5 }}
+					direction={{ base: "column", md: "row" }}
+				>
+					<Box w={{ base: "100%", md: "50%" }}>
 						<Skeleton isLoaded={!isLoading}>
 							<Image
 								src={currentImage}
 								alt={product?.name}
-								w="500px"
-								h="600px"
-								objectFit="cover"
 								opacity={isTransitioning ? 0 : 1}
 								transition="opacity 0.2s ease-in-out"
 							/>
 						</Skeleton>
 					</Box>
+
 					<VStack
-						w="50%"
+						w={{ base: "100%", md: "50%" }}
 						alignItems="start"
 						justify="space-between"
-						px={10}
+						px={{ base: 0, md: 10 }}
 					>
 						<VStack alignItems="start">
-							<Text fontSize="sm" fontWeight="medium">
+							<Text
+								fontSize={{ base: "md", md: "sm" }}
+								fontWeight="medium"
+							>
 								{product?.category.name} | {product?.segment}
 							</Text>
 							<Text
@@ -187,7 +191,7 @@ const ProductDetailPage = () => {
 								{product?.name}
 							</Text>
 
-							<Flex direction="column" align="start" gap={1}>
+							<Flex direction="column" align="start" gap={2}>
 								<Flex align="center" gap={3}>
 									{product &&
 										product?.crossedPrice >
