@@ -1,6 +1,6 @@
 import { useGetProductsQuery } from "@/app/features/product/productApiSlice";
 import { MyContainer, MyHeading, ProductList } from "@/components";
-import { Alert, AlertIcon, AlertTitle } from "@chakra-ui/react";
+import { Alert, AlertIcon, AlertTitle, Skeleton } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
 
 const ProductPage = () => {
@@ -26,18 +26,19 @@ const ProductPage = () => {
 					<AlertTitle>No products available</AlertTitle>
 				</Alert>
 			) : (
-				<MyHeading
-					isLoading={isLoading}
-					error={error}
-					count={products?.length}
-					showCount={true}
-				>
-					{segment
-						? segment
-						: ageStatus === "New"
-						? "New Arrivals"
-						: "All Products"}
-				</MyHeading>
+				<Skeleton isLoaded={!isLoading}>
+					<MyHeading
+						error={error}
+						count={products?.length}
+						showCount={true}
+					>
+						{segment
+							? segment
+							: ageStatus === "New"
+							? "New Arrivals"
+							: "All Products"}
+					</MyHeading>
+				</Skeleton>
 			)}
 			<ProductList
 				products={products}

@@ -12,9 +12,9 @@ interface Props {
 
 const MyHeading = ({ error, children, count, showCount }: Props) => {
 	return (
-		<Flex justify={{ base: "center", md: "left" }}>
+		<Flex>
 			<Heading
-				fontSize={{ base: "md", md: "lg" }}
+				fontSize="lg"
 				fontWeight="bold"
 				display={error ? "none" : "flex"}
 				textTransform="uppercase"
