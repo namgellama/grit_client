@@ -120,7 +120,7 @@ const DBBagItems = ({ bagItems, user, isLoading }: Props) => {
 										onChange={(e) =>
 											handleQuantity(bagItem, e)
 										}
-										size="sm"
+										size="xs"
 										w="70px"
 									>
 										{[

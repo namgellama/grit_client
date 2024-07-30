@@ -43,7 +43,7 @@ const DBBagItemsDrawer = ({ isOpen, onClose, btnRef }: Props) => {
 				<DrawerCloseButton />
 				<DrawerHeader
 					textAlign="center"
-					fontSize="small"
+					fontSize="sm"
 					textTransform="uppercase"
 				>
 					Your Bag
