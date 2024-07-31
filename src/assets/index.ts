@@ -4,5 +4,4 @@ export { default as Hero1Img } from "./hero1.jpg";
 export { default as Hero2Img } from "./hero2.jpg";
 export { default as Logo } from "./logo.png";
 export { default as PhotoPlaceholderImg } from "./photo-placeholder.png";
-export { default as SignInImg } from "./sign-in.jpg";
-export { default as SignUpImg } from "./sign-up.jpg";
+export { default as AuthImg } from "./auth.jpg";

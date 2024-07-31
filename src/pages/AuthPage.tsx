@@ -1,24 +1,18 @@
 import { useAppSelector } from "@/app/hooks";
-import { SignInImg } from "@/assets";
-import { SignInForm, SignInHeader, SignUpForm } from "@/components";
+import { AuthImg, Logo } from "@/assets";
+import { SignInForm, SignUpForm } from "@/components";
 import {
-	Box,
 	Container,
 	Flex,
-	Heading,
-	HStack,
 	Image,
-	Switch,
 	Tab,
 	TabList,
 	TabPanel,
 	TabPanels,
 	Tabs,
-	VStack,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Logo from "@/assets/logo.png";
 
 const AuthPage = () => {
 	const { user } = useAppSelector((state) => state.auth);
@@ -38,8 +32,8 @@ const AuthPage = () => {
 	return (
 		<Flex bg="white" align="center">
 			<Image
-				src={SignInImg}
-				alt="Sign In / Sign up Image"
+				src={AuthImg}
+				alt="Auth Image"
 				w="50%"
 				h="100vh"
 				objectFit="cover"
