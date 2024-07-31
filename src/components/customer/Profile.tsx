@@ -1,7 +1,15 @@
 import { useGetMyCurrentAddressQuery } from "@/app/features/address/addressApiSlice";
 import { useAppSelector } from "@/app/hooks";
 import { ErrorMessage } from "@/components";
-import { Avatar, Box, HStack, Skeleton, Text, VStack } from "@chakra-ui/react";
+import {
+	Avatar,
+	Box,
+	Flex,
+	HStack,
+	Skeleton,
+	Text,
+	VStack,
+} from "@chakra-ui/react";
 
 const Profile = () => {
 	const { user } = useAppSelector((state) => state.auth);
@@ -16,9 +24,17 @@ const Profile = () => {
 			{error ? (
 				<ErrorMessage>Something went wrong</ErrorMessage>
 			) : (
-				<>
-					<Skeleton isLoaded={!isLoading}>
-						<HStack gap={4} bg="white" p={3} borderRadius={5}>
+				<Flex
+					direction={{ base: "column", md: "row", xl: "column" }}
+					gap={5}
+				>
+					<Skeleton
+						isLoaded={!isLoading}
+						w="100%"
+						h={{ base: "100%", md: "140px", xl: "100%" }}
+						bg="white"
+					>
+						<HStack gap={4} p={3} borderRadius={5}>
 							<Avatar name={user?.name} src="" bg="black" />
 							<VStack align="start" gap={1}>
 								<Text
@@ -44,16 +60,20 @@ const Profile = () => {
 						</HStack>
 					</Skeleton>
 
-					<Box my={3} bg="white" p={3} borderRadius={5}>
-						<Text
-							fontWeight="bold"
-							textTransform="uppercase"
-							letterSpacing={0.5}
-						>
-							Current Address
-						</Text>
-						<Skeleton isLoaded={!isLoading}>
-							<VStack align="start" mt={2} gap={0}>
+					<Skeleton
+						isLoaded={!isLoading}
+						w="100%"
+						h={{ base: "100%", md: "140px", xl: "100%" }}
+					>
+						<Box bg="white" p={3} borderRadius={5}>
+							<Text
+								fontWeight="bold"
+								textTransform="uppercase"
+								letterSpacing={0.5}
+							>
+								Current Address
+							</Text>
+							<Flex direction="column" mt={2} gap={0}>
 								<Text fontSize="sm">
 									{address?.addressLine1}
 								</Text>
@@ -66,10 +86,10 @@ const Profile = () => {
 									{address?.postalCode &&
 										`- ${address?.postalCode}`}
 								</Text>
-							</VStack>
-						</Skeleton>
-					</Box>
-				</>
+							</Flex>
+						</Box>
+					</Skeleton>
+				</Flex>
 			)}
 		</Box>
 	);

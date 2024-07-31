@@ -67,7 +67,7 @@ const MyOrders = () => {
 			) : error ? (
 				<ErrorMessage>Something went wrong</ErrorMessage>
 			) : (
-				<HStack
+				<Flex
 					w="100%"
 					flexWrap="wrap"
 					justify="space-between"
@@ -77,42 +77,64 @@ const MyOrders = () => {
 					{orders?.map((order) => (
 						<Box
 							key={order.id}
-							w="48.5%"
+							w={{ base: "100%", lg: "48.5%" }}
 							bg="background.main"
 							borderRadius={8}
 							boxShadow="0 4px 8px #0000001a, 0 2px 8px #0000001a"
 						>
 							<Box p={4}>
-								<VStack align="start" gap={4}>
-									<HStack justify="space-between" w="100%">
+								<Flex direction="column" gap={4}>
+									<Flex
+										direction={{
+											base: "column",
+											md: "row",
+										}}
+										justify="space-between"
+										w="100%"
+									>
 										<Text
 											fontSize="small"
 											fontWeight="medium"
 										>
 											Order ID: {order.id}
 										</Text>
-										<Badge
-											colorScheme={getOrderColor(
-												order.status
-											)}
-											fontSize="x-small"
-										>
-											ORDER {order.status}
-										</Badge>
-									</HStack>
+										<Text>
+											<Badge
+												colorScheme={getOrderColor(
+													order.status
+												)}
+												fontSize="x-small"
+											>
+												ORDER {order.status}
+											</Badge>
+										</Text>
+									</Flex>
 
-									<HStack justify="space-between" w="100%">
-										<Tag fontSize="small">
-											{getStringDate(order.createdAt)}
-										</Tag>
-										<Tag>
-											<Flex align="center" gap={1}>
-												<MdLocationOn fontSize="medium" />
+									<Flex
+										direction={{
+											base: "column",
+											md: "row",
+										}}
+										justify="space-between"
+										gap={2}
+										w="100%"
+									>
+										<Text>
+											<Tag fontSize="small">
+												{getStringDate(order.createdAt)}
+											</Tag>
+										</Text>
 
-												<Text fontSize="small">{`${order.address?.addressLine1}, ${order.address?.city}, ${order.address?.country}`}</Text>
-											</Flex>
-										</Tag>
-									</HStack>
+										<Text>
+											<Tag>
+												<Flex align="center" gap={1}>
+													<MdLocationOn fontSize="medium" />
+
+													<Text fontSize="small">{`${order.address?.addressLine1}, ${order.address?.city}, ${order.address?.country}`}</Text>
+												</Flex>
+											</Tag>
+										</Text>
+									</Flex>
 
 									<HStack gap={3}>
 										<Badge
@@ -132,7 +154,7 @@ const MyOrders = () => {
 											PAYMENT {order.payment.status}
 										</Badge>
 									</HStack>
-								</VStack>
+								</Flex>
 							</Box>
 
 							<HStack
@@ -142,7 +164,7 @@ const MyOrders = () => {
 								justify="space-between"
 								overflowY="scroll"
 								className="scrollbarY"
-								h="100px"
+								h={{ base: "160px", md: "100px" }}
 								gap={3}
 							>
 								{order.orderItems.map((orderItem) => (
@@ -219,7 +241,7 @@ const MyOrders = () => {
 							</Box>
 						</Box>
 					))}
-				</HStack>
+				</Flex>
 			)}
 		</Box>
 	);

@@ -1,13 +1,13 @@
 import { MyContainer, MyOrders, Profile } from "@/components";
-import { HStack } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 const AccountPage = () => {
 	return (
 		<MyContainer width="8xl" my={3}>
-			<HStack align="start" gap={5} px={2}>
+			<Flex direction={{ base: "column", xl: "row" }} gap={5}>
 				<Profile />
 				<MyOrders />
-			</HStack>
+			</Flex>
 		</MyContainer>
 	);
 };
