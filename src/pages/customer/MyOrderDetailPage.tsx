@@ -39,8 +39,11 @@ const MyOrderDetailPage = () => {
 					<ErrorMessage>Something went wrong</ErrorMessage>
 				) : (
 					<CardBody>
-						<Skeleton isLoaded={!isLoading} w="60%">
-							<Flex direction="column" gap={4}>
+						<Skeleton
+							isLoaded={!isLoading}
+							w={{ base: "100%", md: "60%" }}
+						>
+							<Flex direction="column" gap={2}>
 								<Heading
 									fontSize="md"
 									textTransform="uppercase"
@@ -70,7 +73,7 @@ const MyOrderDetailPage = () => {
 							</Flex>
 						</Skeleton>
 
-						<Divider borderColor="background.400" my={8} />
+						<Divider borderColor="background.400" my={6} />
 
 						<Skeleton isLoaded={!isLoading}>
 							<VStack
@@ -143,7 +146,7 @@ const MyOrderDetailPage = () => {
 							</VStack>
 						</Skeleton>
 
-						<Divider borderColor="background.400" my={8} />
+						<Divider borderColor="background.400" my={6} />
 
 						<Skeleton isLoaded={!isLoading}>
 							<Flex direction="column" gap={0.5}>
@@ -155,89 +158,138 @@ const MyOrderDetailPage = () => {
 									Order Summary
 								</Text>
 								<HStack justify="space-between">
-									<Text fontSize="sm" fontWeight="medium">
+									<Text
+										fontSize={{
+											base: "md",
+											md: "sm",
+										}}
+										fontWeight="medium"
+									>
 										Subtotal
 									</Text>
-									<Text fontSize="sm" fontWeight="medium">
+									<Text
+										fontSize={{
+											base: "md",
+											md: "sm",
+										}}
+										fontWeight="medium"
+									>
 										Rs. {order?.subTotal}
 									</Text>
 								</HStack>
 								<HStack justify="space-between">
-									<Text fontSize="sm" fontWeight="medium">
+									<Text
+										fontSize={{
+											base: "md",
+											md: "sm",
+										}}
+										fontWeight="medium"
+									>
 										Delivery
 									</Text>
-									<Text fontSize="sm" fontWeight="medium">
+									<Text
+										fontSize={{
+											base: "md",
+											md: "sm",
+										}}
+										fontWeight="medium"
+									>
 										Rs. {order?.deliveryCharge}
 									</Text>
 								</HStack>
 								<HStack justify="space-between">
-									<Text fontSize="sm" fontWeight="bold">
+									<Text
+										fontSize={{
+											base: "md",
+											md: "sm",
+										}}
+										fontWeight="bold"
+									>
 										Total
 									</Text>
-									<Text fontSize="sm" fontWeight="bold">
+									<Text
+										fontSize={{
+											base: "md",
+											md: "sm",
+										}}
+										fontWeight="bold"
+									>
 										Rs. {order?.total}
 									</Text>
 								</HStack>
 							</Flex>
 						</Skeleton>
 
-						<Divider borderColor="background.400" my={8} />
+						<Divider borderColor="background.400" my={6} />
 
 						<Skeleton isLoaded={!isLoading}>
-							<HStack justify="space-between" align="start">
-								<Box>
+							<Flex
+								direction={{ base: "column", md: "row" }}
+								gap={5}
+								justify="space-between"
+							>
+								<Flex direction="column">
 									<Text
 										fontWeight="bold"
-										mb={2}
 										textTransform="uppercase"
 									>
 										Payment
 									</Text>
-									<Text fontSize="sm" fontWeight="medium">
-										Method: {order?.payment.method}
-									</Text>
-									<Text fontSize="sm" fontWeight="medium">
-										Status:
-										<Badge
-											colorScheme={getPaymentColor(
-												order?.payment.status!
-											)}
-											ml={2}
-											fontSize="xxs"
+									<Box>
+										<Text
+											fontSize={{ base: "md", md: "sm" }}
+											fontWeight="medium"
 										>
-											{order?.payment.status}
-										</Badge>
-									</Text>
-								</Box>
-								<Box>
+											Method: {order?.payment.method}
+										</Text>
+										<Text
+											fontSize={{ base: "md", md: "sm" }}
+											fontWeight="medium"
+										>
+											Status:
+											<Badge
+												colorScheme={getPaymentColor(
+													order?.payment.status!
+												)}
+												ml={2}
+												fontSize={{
+													base: "sm",
+													md: "xxs",
+												}}
+											>
+												{order?.payment.status}
+											</Badge>
+										</Text>
+									</Box>
+								</Flex>
+								<Flex direction="column">
 									<Text
 										fontWeight="bold"
-										mb={2}
 										textTransform="uppercase"
-										textAlign="end"
+										textAlign={{ base: "left", md: "end" }}
 									>
 										Delivery
 									</Text>
 									<Text
 										fontWeight="medium"
-										fontSize="sm"
-										textAlign="end"
+										fontSize={{ base: "md", md: "sm" }}
+										textAlign={{ base: "left", md: "end" }}
 									>
 										{order?.address?.addressLine1},{" "}
 										{order?.address?.addressLine2}
 									</Text>
 									<Text
 										fontWeight="medium"
-										fontSize="sm"
-										textAlign="end"
+										fontSize={{ base: "md", md: "sm" }}
+										textAlign={{ base: "left", md: "end" }}
 									>
 										{order?.address?.city},{" "}
 										{order?.address?.country}
 										{order?.address?.postalCode &&
 											` - ${order?.address?.postalCode}`}
 									</Text>
-								</Box>
-							</HStack>
+								</Flex>
+							</Flex>
 						</Skeleton>
 					</CardBody>
 				)}

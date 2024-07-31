@@ -9,7 +9,7 @@ export const countries = ["Nepal"];
 
 export const paymentMethods = [
 	{ name: "Cash", value: "CASH" },
-	{ name: "Esewa", value: "ESEWA" },
+	// { name: "Esewa", value: "ESEWA" },
 ];
 
 export const orderStatuses = [
