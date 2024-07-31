@@ -6,7 +6,6 @@ import {
 	FormControl,
 	FormLabel,
 	Heading,
-	HStack,
 	Input,
 	Select,
 } from "@chakra-ui/react";
@@ -76,7 +75,7 @@ const DeliveryForm = ({ register, errors, setDeliveryCharge }: Props) => {
 				)}
 			</FormControl>
 
-			<HStack gap={4}>
+			<Flex direction={{ base: "column", md: "row" }} gap={4}>
 				<FormControl flex={2}>
 					<FormLabel>Country*</FormLabel>
 					<Select
@@ -108,7 +107,7 @@ const DeliveryForm = ({ register, errors, setDeliveryCharge }: Props) => {
 						</InputErrorMessage>
 					)}
 				</FormControl>
-			</HStack>
+			</Flex>
 		</Flex>
 	);
 };

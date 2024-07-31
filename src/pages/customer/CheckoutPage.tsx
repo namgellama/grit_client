@@ -12,7 +12,7 @@ import {
 } from "@/components";
 import { cities } from "@/utilities/data";
 import { checkoutSchema, FormFields } from "@/validations/checkoutValidation";
-import { Button, HStack, Spinner, useToast, VStack } from "@chakra-ui/react";
+import { Button, Flex, Spinner, useToast, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -113,7 +113,13 @@ const CheckoutPage = () => {
 
 	return (
 		<MyContainer width="5xl">
-			<HStack justify="space-between" spacing={10} align="start" h="100%">
+			<Flex
+				justify="space-between"
+				direction={{ base: "column", md: "row" }}
+				gap={10}
+				align={{ base: "normal", md: "start" }}
+				h="100%"
+			>
 				<VStack
 					as="form"
 					flex={1}
@@ -121,7 +127,7 @@ const CheckoutPage = () => {
 					align="start"
 					bg="background.main"
 					py={8}
-					px={10}
+					px={{ base: 3, lg: 10 }}
 					borderRadius={5}
 					onSubmit={handleSubmit(onSubmit)}
 				>
@@ -150,7 +156,7 @@ const CheckoutPage = () => {
 					isLoading={isLoading}
 					error={error}
 				/>
-			</HStack>
+			</Flex>
 		</MyContainer>
 	);
 };

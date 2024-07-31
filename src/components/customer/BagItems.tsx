@@ -29,7 +29,14 @@ const BagItems = ({
 	error,
 }: Props) => {
 	return (
-		<Box flex={1} pl={5} bg="background.main" py={8} px={10}>
+		<Box
+			flex={1}
+			pl={5}
+			bg="background.main"
+			py={8}
+			px={{ base: 3, lg: 10 }}
+			w="100%"
+		>
 			{error ? (
 				<ErrorMessage>Something went wrong</ErrorMessage>
 			) : (
@@ -37,14 +44,20 @@ const BagItems = ({
 					<Flex
 						className="scrollbarY"
 						direction="column"
-						gap={5}
-						pr={bagItems?.length! > 4 ? 5 : 0}
-						h={bagItems?.length! > 3 ? "50vh" : "30vh"}
+						pr={{
+							base: bagItems?.length! >= 4 ? 5 : 0,
+							lg: bagItems?.length! > 4 ? 5 : 0,
+						}}
+						h={{
+							base: bagItems?.length! >= 3 ? "30vh" : "20vh",
+							md: "28vh",
+							lg: bagItems?.length! > 3 ? "50vh" : "30vh",
+						}}
 						overflowY="scroll"
 					>
 						<Skeleton isLoaded={!isLoading}>
 							{bagItems?.map((bagItem) => (
-								<Flex key={bagItem.id} gap={5}>
+								<Flex key={bagItem.id} gap={5} mb={2}>
 									<Image
 										w="50px"
 										h="70px"
@@ -79,7 +92,7 @@ const BagItems = ({
 										</Box>
 									</Flex>
 									<Text
-										w="30%"
+										w="35%"
 										fontSize="small"
 										fontWeight="semibold"
 										textAlign="right"
