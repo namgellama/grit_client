@@ -51,7 +51,7 @@ const BagItems = ({
 						h={{
 							base: bagItems?.length! >= 3 ? "30vh" : "20vh",
 							md: "28vh",
-							lg: bagItems?.length! > 3 ? "50vh" : "30vh",
+							xl: bagItems?.length! > 3 ? "50vh" : "30vh",
 						}}
 						overflowY="scroll"
 					>
