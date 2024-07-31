@@ -1,7 +1,12 @@
 import { useGetBagItemsQuery } from "@/app/features/bagItem/bagItemApiSlice";
 import { CurrentUser } from "@/app/interfaces/auth";
 import { Logo } from "@/assets";
-import { CookieBagItemsDrawer, DBBagItemsDrawer, Search } from "@/components";
+import {
+	CookieBagItemsDrawer,
+	DBBagItemsDrawer,
+	MobileNavBar,
+	Search,
+} from "@/components";
 import {
 	NavIcon,
 	NavLink,
@@ -11,18 +16,25 @@ import { BagItem } from "@/interfaces";
 import {
 	Badge,
 	Box,
+	Button,
 	Container,
 	Flex,
 	HStack,
+	IconButton,
 	Image,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
 	useDisclosure,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
+import { AiOutlineMenu } from "react-icons/ai";
 import { FaShoppingBag, FaUser, FaUserCircle } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Props {
 	user?: CurrentUser | null;
@@ -35,10 +47,13 @@ const NavBar = ({ user, handleLogout }: Props) => {
 			name: "Men",
 			path: "/products?segment=MEN",
 		},
-
 		{
 			name: "Women",
 			path: "/products?segment=WOMEN",
+		},
+		{
+			name: "Unisex",
+			path: "/products?segment=UNISEX",
 		},
 	];
 
@@ -54,13 +69,46 @@ const NavBar = ({ user, handleLogout }: Props) => {
 		skip: user === null,
 	});
 	const [showSearch, setShowSearch] = useState(false);
+	const {
+		isOpen: isNavBarOpen,
+		onOpen: onNavBarOpen,
+		onClose: onNavBarClose,
+	} = useDisclosure();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth >= 768) {
+				onNavBarClose();
+			}
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, [onNavBarClose]);
 
 	return (
 		<Box as="nav" position="sticky" top={0} zIndex={5} minW="100%">
 			<Box bg="white" py={2} minW="100%">
 				<Container maxW="7xl">
 					<HStack justify="space-between">
-						<HStack spacing={5} flex={1}>
+						<IconButton
+							flex={1}
+							icon={<AiOutlineMenu />}
+							aria-label="Open menu"
+							bg="inherit"
+							display={{ base: "block", md: "none" }}
+							ml={6}
+							onClick={onNavBarOpen}
+						/>
+
+						<HStack
+							spacing={5}
+							flex={1}
+							display={{ base: "none", md: "flex" }}
+						>
 							{navLinks.map((link) => (
 								<NavLink
 									key={link.name}
@@ -74,7 +122,11 @@ const NavBar = ({ user, handleLogout }: Props) => {
 								<Image src={Logo} boxSize="40px" />
 							</Link>
 						</HStack>
-						<Flex flex={1} justifyContent="end">
+						<Flex
+							flex={1}
+							justifyContent="end"
+							gap={{ base: 0, md: 1 }}
+						>
 							<NavIcon
 								icon={<IoSearch />}
 								label="Search products"
@@ -117,31 +169,53 @@ const NavBar = ({ user, handleLogout }: Props) => {
 								)}
 							</Flex>
 
-							{user && user.role === "Customer" ? (
-								<NavLinkIcon
-									icon={<FaUserCircle fontSize="larger" />}
-									label="User"
-									link="/account"
-								/>
-							) : user && user.role === "Admin" ? (
-								<NavLinkIcon
-									icon={<FaUserCircle fontSize="larger" />}
-									label="User"
-									link="/dashboard/home"
-								/>
+							{user ? (
+								<Menu>
+									<MenuButton
+										as={IconButton}
+										aria-label="User"
+										icon={
+											<FaUserCircle fontSize="larger" />
+										}
+										variant="ghost"
+										borderRadius="100%"
+										_hover={{ background: "inherit" }}
+										onClick={() => setShowSearch(false)}
+									/>
+									<MenuList>
+										{user.role === "Admin" ? (
+											<MenuItem
+												onClick={() =>
+													navigate("/dashboard/home")
+												}
+											>
+												Dashboard
+											</MenuItem>
+										) : (
+											<MenuItem
+												onClick={() =>
+													navigate("/account")
+												}
+											>
+												<Flex align="center" gap={3}>
+													<FaUser />
+													Profile
+												</Flex>
+											</MenuItem>
+										)}
+										<MenuItem onClick={handleLogout}>
+											<Flex align="center" gap={3}>
+												<MdLogout />
+												Logout
+											</Flex>
+										</MenuItem>
+									</MenuList>
+								</Menu>
 							) : (
 								<NavLinkIcon
 									icon={<FaUser />}
 									label="User"
 									link="/login"
-								/>
-							)}
-
-							{user && (
-								<NavIcon
-									icon={<MdLogout fontSize="larger" />}
-									label="Logout"
-									onClick={handleLogout}
 								/>
 							)}
 						</Flex>
@@ -156,7 +230,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 						left={0}
 						right={0}
 						zIndex={4}
-						px={20}
+						px={{ base: 5, md: 20 }}
 					>
 						<Search setShowSearch={setShowSearch} />
 					</Box>
@@ -175,6 +249,12 @@ const NavBar = ({ user, handleLogout }: Props) => {
 						btnRef={btnRef}
 					/>
 				)}
+
+				<MobileNavBar
+					isNavBarOpen={isNavBarOpen}
+					onNavBarClose={onNavBarClose}
+					navLinks={navLinks}
+				/>
 			</Box>
 		</Box>
 	);

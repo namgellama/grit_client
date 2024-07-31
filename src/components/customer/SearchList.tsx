@@ -28,23 +28,26 @@ const SearchList = ({ error, products, isLoading }: Props) => {
 			overflowX="scroll"
 			className="scrollbarX"
 			pb={5}
+			h={{ base: "390px", md: "100%" }}
 		>
 			{error ? (
 				<ErrorMessage>Something went wrong</ErrorMessage>
 			) : (
 				products?.map((product) => (
 					<Skeleton key={product.id} isLoaded={!isLoading}>
-						<VStack align="start" w="280px" h="390px" py={2}>
+						<VStack align="start" py={2}>
 							<Link to={`/products/${product?.id}`}>
 								<Box
 									_hover={{ transform: "scale(1.01)" }}
 									transition={"transform 0.1s ease-out"}
+									w={{ base: "230px", md: "280px" }}
+									h={{ base: "300px", md: "330px" }}
 								>
 									<Image
 										src={product.variants[0].image}
 										alt={product?.name}
-										w="280px"
-										h="330px"
+										w="100%"
+										h="100%"
 										objectFit="cover"
 										transition="opacity 0.2s ease-in-out"
 									/>

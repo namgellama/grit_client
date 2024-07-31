@@ -27,15 +27,16 @@ export { default as DeliveryForm } from "./customer/DeliveryForm";
 export { default as FilterSort } from "./customer/FilterSort";
 export { default as Footer } from "./customer/Footer";
 export { default as Hero } from "./customer/Hero";
+export { default as MobileNavBar } from "./customer/MobileNavBar";
 export { default as MyOrders } from "./customer/MyOrders";
 export { default as NavBar } from "./customer/NavBar";
+export { default as NewArrivals } from "./customer/NewArrivals";
 export { default as PaymentMethods } from "./customer/PaymentMethods";
 export { default as ProductCard } from "./customer/ProductCard";
 export { default as ProductList } from "./customer/ProductList";
 export { default as Profile } from "./customer/Profile";
 export { default as Search } from "./customer/Search";
 export { default as SearchList } from "./customer/SearchList";
-export { default as NewArrivals } from "./customer/NewArrivals";
 export { default as SizeBox } from "./customer/SizeBox";
 
 export { default as AdminRoute } from "./shared/AdminRoute";
