@@ -21,7 +21,6 @@ import {
 	Flex,
 	FormControl,
 	FormLabel,
-	HStack,
 	Input,
 	NumberDecrementStepper,
 	NumberIncrementStepper,
@@ -193,7 +192,11 @@ const AdminProductAddPage = () => {
 					p={8}
 					gap={5}
 				>
-					<HStack align="start" gap={10} w="100%">
+					<Flex
+						direction={{ base: "column", md: "row" }}
+						gap={10}
+						w="100%"
+					>
 						<VStack
 							spacing={3}
 							flex={1}
@@ -387,16 +390,20 @@ const AdminProductAddPage = () => {
 							</Checkbox>
 						</VStack>
 
-						<Flex direction="column" gap={5} w="50%">
+						<Flex
+							direction="column"
+							gap={5}
+							w={{ base: "100%", md: "50%" }}
+						>
 							<ImageUploadContainer product={product} />
 							<ProductVariant product={product} />
 						</Flex>
-					</HStack>
+					</Flex>
 					<Button
 						type="submit"
 						variant="solid"
 						colorScheme="messenger"
-						w="12%"
+						w={{ base: "100%", md: "40%", xl: "12%" }}
 						disabled={isSubmitting}
 					>
 						{isSubmitting ? <Spinner /> : "Save Product"}

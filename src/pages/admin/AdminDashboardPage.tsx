@@ -10,7 +10,7 @@ const AdminDashboardPage = () => {
 	return (
 		<MyContainer my={2}>
 			<KPIData />
-			<SimpleGrid columns={2} spacing={10}>
+			<SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
 				<Box>
 					<RevenueByMonth />
 				</Box>

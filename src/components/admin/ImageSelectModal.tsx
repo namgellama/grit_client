@@ -53,7 +53,13 @@ const ImageSelectModal = ({ variant, isOpen, onClose }: Props) => {
 				</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody p={3}>
-					<Grid gridTemplateColumns="repeat(7, 1fr)" gap={3}>
+					<Grid
+						gridTemplateColumns={{
+							base: "repeat(3, 1fr)",
+							md: "repeat(7, 1fr)",
+						}}
+						gap={3}
+					>
 						<ImageUpload setIsLoading={setIsLoading} />
 
 						{images.map((image: string, index: number) => (

@@ -1,7 +1,7 @@
 import { useGetKPIQuery } from "@/app/features/dashboard/dashboardApiSlice";
 import { useAppSelector } from "@/app/hooks";
 import { ErrorMessage } from "@/components";
-import { Box, Flex, HStack, Skeleton, Text } from "@chakra-ui/react";
+import { Box, Flex, Skeleton, Text } from "@chakra-ui/react";
 import { BsHandbagFill } from "react-icons/bs";
 import { GiTwoCoins } from "react-icons/gi";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
@@ -29,12 +29,23 @@ const KPIData = () => {
 	];
 
 	return (
-		<HStack w="100%" gap={5} mt={5} mb={10}>
+		<Flex
+			direction={{ base: "column", md: "row" }}
+			w="100%"
+			gap={5}
+			mt={5}
+			mb={10}
+		>
 			{error ? (
 				<ErrorMessage>Something went wrong</ErrorMessage>
 			) : (
 				kpiData.map((kpi) => (
-					<Skeleton key={kpi.name} isLoaded={!isLoading} flex={1}>
+					<Skeleton
+						key={kpi.name}
+						isLoaded={!isLoading}
+						flex={1}
+						w="100%"
+					>
 						<Flex direction="column" bg="white" p={4} gap={3}>
 							{kpi.icon}
 							<Box>
@@ -47,7 +58,7 @@ const KPIData = () => {
 					</Skeleton>
 				))
 			)}
-		</HStack>
+		</Flex>
 	);
 };
 
