@@ -1,7 +1,7 @@
 import { MyContainer, MyOrders, Profile } from "@/components";
 import { Flex } from "@chakra-ui/react";
 
-const AccountPage = () => {
+const ProfilePage = () => {
 	return (
 		<MyContainer width="8xl" my={3}>
 			<Flex direction={{ base: "column", xl: "row" }} gap={5}>
@@ -12,4 +12,4 @@ const AccountPage = () => {
 	);
 };
 
-export default AccountPage;
+export default ProfilePage;

@@ -3,7 +3,6 @@ import { store } from "@/app/store.ts";
 import { AdminRoute, PrivateRoute } from "@/components";
 import "@/index.css";
 import {
-	AccountPage,
 	AdminCategoriesPage,
 	AdminDashboardPage,
 	AdminOrderDetailPage,
@@ -16,6 +15,7 @@ import {
 	MyOrderDetailPage,
 	ProductDetailPage,
 	ProductPage,
+	ProfilePage,
 	SignInPage,
 	SignUpPage,
 } from "@/pages";
@@ -59,8 +59,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 										element={<MyOrderDetailPage />}
 									/>
 									<Route
-										path="/account"
-										element={<AccountPage />}
+										path="/profile"
+										element={<ProfilePage />}
 									/>
 								</Route>
 

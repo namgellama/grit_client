@@ -16,7 +16,6 @@ import { BagItem } from "@/interfaces";
 import {
 	Badge,
 	Box,
-	Button,
 	Container,
 	Flex,
 	HStack,
@@ -33,7 +32,7 @@ import { useCookies } from "react-cookie";
 import { AiOutlineMenu } from "react-icons/ai";
 import { FaShoppingBag, FaUser, FaUserCircle } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
-import { MdLogout } from "react-icons/md";
+import { MdDashboard, MdLogout } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 
 interface Props {
@@ -189,12 +188,15 @@ const NavBar = ({ user, handleLogout }: Props) => {
 													navigate("/dashboard/home")
 												}
 											>
-												Dashboard
+												<Flex align="center" gap={3}>
+													<MdDashboard />
+													Dashboard
+												</Flex>
 											</MenuItem>
 										) : (
 											<MenuItem
 												onClick={() =>
-													navigate("/account")
+													navigate("/profile")
 												}
 											>
 												<Flex align="center" gap={3}>
