@@ -1,5 +1,10 @@
-import { Flex, IconButton, Text } from "@chakra-ui/react";
-import { JSXElementConstructor, LegacyRef, ReactElement } from "react";
+import { Button, Flex, IconButton, Text } from "@chakra-ui/react";
+import {
+	JSXElementConstructor,
+	LegacyRef,
+	ReactElement,
+	ReactNode,
+} from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const NavLink = ({ path, name }: { path: string; name: string }) => (
@@ -61,10 +66,12 @@ export const NavLinkButton = ({
 	path,
 	name,
 	icon,
+	onClose,
 }: {
 	path: string;
 	name: string;
 	icon: ReactElement<any, string | JSXElementConstructor<any>>;
+	onClose: () => void;
 }) => {
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
@@ -80,7 +87,10 @@ export const NavLinkButton = ({
 			borderRadius={5}
 			py={2}
 			gap={3}
-			onClick={() => navigate(path)}
+			onClick={() => {
+				navigate(path);
+				onClose();
+			}}
 			bg={pathname.includes(path) ? "lightgray" : "inherit"}
 		>
 			{icon}
@@ -90,3 +100,31 @@ export const NavLinkButton = ({
 		</Flex>
 	);
 };
+
+export const ButtonLink = ({
+	icon,
+	text,
+	action,
+}: {
+	icon: ReactNode;
+	text: string;
+	action: React.MouseEventHandler<HTMLButtonElement> | undefined;
+}) => (
+	<Flex
+		align="center"
+		transition="all 0.03s ease-in"
+		_hover={{ bg: "background.100" }}
+		pl={4}
+		borderRadius={5}
+	>
+		{icon}
+		<Button
+			variant="ghost"
+			onClick={action}
+			_hover={{ bg: "inherit" }}
+			fontSize="small"
+		>
+			{text}
+		</Button>
+	</Flex>
+);

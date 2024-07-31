@@ -9,6 +9,7 @@ export { default as ImageSelectModal } from "./admin/ImageSelectModal";
 export { default as ImageUpload } from "./admin/ImageUpload";
 export { default as ImageUploadContainer } from "./admin/ImageUploadContainer";
 export { default as KPIData } from "./admin/KPIData";
+export { default as MobileAdminNavBar } from "./admin/MobileAdminNavBar";
 export { default as MostSoldProducts } from "./admin/MostSoldProducts";
 export { default as ProductVariant } from "./admin/ProductVariant";
 export { default as RevenueByMonth } from "./admin/RevenueByMonth";

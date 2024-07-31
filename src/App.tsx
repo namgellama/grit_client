@@ -3,11 +3,9 @@ import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { AdminNavBar, NavBar } from "@/components";
 import Footer from "@/components/customer/Footer";
 import { Flex } from "@chakra-ui/react";
-import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 function App() {
-	const [showAdminNavBar, setShowAdminNavBar] = useState(true);
 	const { user } = useAppSelector((state) => state.auth);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -29,11 +27,7 @@ function App() {
 			}
 		>
 			{location.pathname.startsWith("/dashboard") ? (
-				<AdminNavBar
-					handleLogout={handleLogout}
-					showAdminNavBar={showAdminNavBar}
-					setShowAdminNavBar={setShowAdminNavBar}
-				/>
+				<AdminNavBar handleLogout={handleLogout} />
 			) : (
 				<NavBar user={user} handleLogout={handleLogout} />
 			)}
