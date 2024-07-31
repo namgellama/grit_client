@@ -16,8 +16,7 @@ import {
 	ProductDetailPage,
 	ProductPage,
 	ProfilePage,
-	SignInPage,
-	SignUpPage,
+	AuthPage,
 } from "@/pages";
 import theme from "@/theme.ts";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -97,8 +96,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 									/>
 								</Route>
 							</Route>
-							<Route path="/login" element={<SignInPage />} />
-							<Route path="/register" element={<SignUpPage />} />
+							<Route path="/auth" element={<AuthPage />} />
 						</Routes>
 					</Router>
 				</ChakraProvider>

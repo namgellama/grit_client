@@ -68,7 +68,9 @@ const SignUpForm = () => {
 			};
 			const newUser = await registerUser(userData).unwrap();
 
-			if (newUser) navigate("/login");
+			if (newUser) {
+				window.location.reload();
+			}
 		} catch (err: any) {
 			setError("root", {
 				message: err.data.message ?? "Something went wrong.",
@@ -84,41 +86,10 @@ const SignUpForm = () => {
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<FormControl>
-				<FormLabel>Name*</FormLabel>
-				<Input
-					type="text"
-					variant="filled"
-					background="white"
-					placeholder="Enter your phone number"
-					{...register("name")}
-				/>
-				{errors.name && (
-					<InputErrorMessage>{errors.name.message}</InputErrorMessage>
-				)}
-			</FormControl>
-
-			<FormControl>
-				<FormLabel>Phone Number*</FormLabel>
-				<Input
-					type="text"
-					variant="filled"
-					background="white"
-					placeholder="Enter your phone number"
-					{...register("phoneNumber")}
-				/>
-				{errors.phoneNumber && (
-					<InputErrorMessage>
-						{errors.phoneNumber.message}
-					</InputErrorMessage>
-				)}
-			</FormControl>
-
-			<FormControl>
-				<FormLabel>Email</FormLabel>
+				<FormLabel>Email*</FormLabel>
 				<Input
 					type="email"
-					variant="filled"
-					background="white"
+					variant="flushed"
 					placeholder="Enter your email"
 					{...register("email")}
 				/>
@@ -130,12 +101,37 @@ const SignUpForm = () => {
 			</FormControl>
 
 			<FormControl>
+				<FormLabel>Full Name*</FormLabel>
+				<Input
+					type="text"
+					variant="flushed"
+					placeholder="Enter your full name"
+					{...register("name")}
+				/>
+				{errors.name && (
+					<InputErrorMessage>{errors.name.message}</InputErrorMessage>
+				)}
+			</FormControl>
+
+			<FormControl>
+				<FormLabel>Phone*</FormLabel>
+				<Input
+					type="text"
+					variant="flushed"
+					placeholder="Enter your full name"
+					{...register("phoneNumber")}
+				/>
+				{errors.name && (
+					<InputErrorMessage>{errors.name.message}</InputErrorMessage>
+				)}
+			</FormControl>
+
+			<FormControl>
 				<FormLabel>Password*</FormLabel>
 				<InputGroup>
 					<Input
 						type={showPassword ? "text" : "password"}
-						variant="filled"
-						background="white"
+						variant="flushed"
 						placeholder="Enter your password"
 						{...register("password")}
 					/>
@@ -158,8 +154,7 @@ const SignUpForm = () => {
 				<InputGroup>
 					<Input
 						type={showConfirmPassword ? "text" : "password"}
-						variant="filled"
-						background="white"
+						variant="flushed"
 						placeholder="Enter your password"
 						{...register("confirmPassword")}
 					/>

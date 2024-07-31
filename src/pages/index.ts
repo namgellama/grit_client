@@ -13,5 +13,4 @@ export { default as ProductDetailPage } from "./customer/ProductDetailPage";
 export { default as ProductPage } from "./customer/ProductPage";
 export { default as ProfilePage } from "./customer/ProfilePage";
 
-export { default as SignInPage } from "./SignInPage";
-export { default as SignUpPage } from "./SignUpPage";
+export { default as AuthPage } from "./AuthPage";

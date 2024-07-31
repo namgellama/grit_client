@@ -217,7 +217,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 								<NavLinkIcon
 									icon={<FaUser />}
 									label="User"
-									link="/login"
+									link="/auth"
 								/>
 							)}
 						</Flex>

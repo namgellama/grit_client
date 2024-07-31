@@ -67,8 +67,7 @@ const SignInForm = () => {
 				<FormLabel>Phone Number*</FormLabel>
 				<Input
 					type="text"
-					variant="filled"
-					background="white"
+					variant="flushed"
 					placeholder="Enter your phone number"
 					{...register("phoneNumber")}
 				/>
@@ -84,7 +83,7 @@ const SignInForm = () => {
 				<InputGroup>
 					<Input
 						type={show ? "text" : "password"}
-						variant="filled"
+						variant="flushed"
 						background="white"
 						placeholder="Enter your password"
 						{...register("password")}

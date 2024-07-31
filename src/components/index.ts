@@ -47,6 +47,4 @@ export { default as MyContainer } from "./shared/MyContainer";
 export { default as MyHeading } from "./shared/MyHeading";
 export { default as PrivateRoute } from "./shared/PrivateRoute";
 export { default as SignInForm } from "./shared/SignInForm";
-export { default as SignInHeader } from "./shared/SignInHeader";
 export { default as SignUpForm } from "./shared/SignUpForm";
-export { default as SignUpHeader } from "./shared/SignUpHeader";

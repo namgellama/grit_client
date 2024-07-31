@@ -13,7 +13,7 @@ function App() {
 
 	const handleLogout = () => {
 		dispatch(logout());
-		navigate("/login");
+		navigate("/auth");
 	};
 
 	return (
