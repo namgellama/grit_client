@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const SEGMENT = ["MEN", "WOMEN"] as const;
+export const SEGMENT = ["Men", "Women", "Unisex"] as const;
 
 const VARIANTS = z.object({
 	color: z.string().min(1, "Color is required"),

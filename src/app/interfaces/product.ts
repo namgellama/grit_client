@@ -7,7 +7,7 @@ export interface Product {
 	description: string;
 	sellingPrice: number;
 	crossedPrice: number;
-	segment: "MEN" | "WOMEN";
+	segment: "Men" | "Women" | "Unisex";
 	isNew: boolean;
 	createdAt: Date;
 	updateAt: Date;

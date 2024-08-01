@@ -16,7 +16,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -34,7 +33,6 @@ const SignUpForm = () => {
 		resolver: zodResolver(registerSchema),
 	});
 	const [registerUser] = useRegisterMutation();
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (errors.root?.message)

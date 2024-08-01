@@ -8,25 +8,26 @@ export const cities = [
 export const countries = ["Nepal"];
 
 export const paymentMethods = [
-	{ name: "Cash", value: "CASH" },
+	{ name: "Cash", value: "Cash" },
 	// { name: "Esewa", value: "ESEWA" },
 ];
 
 export const orderStatuses = [
-	{ name: "Order Pending", value: "PENDING" },
-	{ name: "Order Shipped", value: "SHIPPED" },
-	{ name: "Order Delivered", value: "DELIVERED" },
-	{ name: "Order Cancelled", value: "CANCELLED" },
+	{ name: "Order Pending", value: "Pending" },
+	{ name: "Order Shipped", value: "Shipped" },
+	{ name: "Order Delivered", value: "Delivered" },
+	{ name: "Order Cancelled", value: "Cancelled" },
 ];
 
 export const paymentStatuses = [
-	{ name: "Payment Pending", value: "PENDING" },
-	{ name: "Payment Completed", value: "COMPLETED" },
-	{ name: "Payment Failed", value: "FAILED" },
-	{ name: "Payment Refunded", value: "REFUNDED" },
+	{ name: "Payment Pending", value: "Pending" },
+	{ name: "Payment Completed", value: "Completed" },
+	{ name: "Payment Failed", value: "Failed" },
+	{ name: "Payment Refunded", value: "Refunded" },
 ];
 
 export const segments = [
-	{ name: "Men", value: "MEN" },
-	{ name: "Women", value: "WOMEN" },
+	{ name: "Men", value: "Men" },
+	{ name: "Women", value: "Women" },
+	{ name: "Unisex", value: "Unisex" },
 ];

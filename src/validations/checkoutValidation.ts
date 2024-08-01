@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const VALUES = ["CASH", "ESEWA"] as const;
+const VALUES = ["Cash", "Esewa"] as const;
 
 export const checkoutSchema = z.object({
 	addressLine1: z.string().min(1, "Address line 1 is required."),

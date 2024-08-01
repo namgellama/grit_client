@@ -1,13 +1,13 @@
 export const getOrderColor = (status: string) => {
-	if (status === "PENDING") return "blue";
-	if (status === "SHIPPED") return "yellow";
-	if (status === "DELIVERED") return "green";
-	if (status === "CANCELLED") return "red";
+	if (status === "Pending") return "blue";
+	if (status === "Shippped") return "yellow";
+	if (status === "Delivered") return "green";
+	if (status === "Cancelled") return "red";
 };
 
 export const getPaymentColor = (status: string) => {
-	if (status === "PENDING") return "blue";
-	if (status === "COMPLETED") return "green";
-	if (status === "FAILED") return "red";
-	if (status === "REFUNDED") return "orange";
+	if (status === "Pending") return "blue";
+	if (status === "Completed") return "green";
+	if (status === "Failed") return "red";
+	if (status === "Refunded") return "orange";
 };

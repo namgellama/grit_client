@@ -44,15 +44,15 @@ const NavBar = ({ user, handleLogout }: Props) => {
 	const navLinks = [
 		{
 			name: "Men",
-			path: "/products?segment=MEN",
+			path: "/products?segment=Men",
 		},
 		{
 			name: "Women",
-			path: "/products?segment=WOMEN",
+			path: "/products?segment=Women",
 		},
 		{
 			name: "Unisex",
-			path: "/products?segment=UNISEX",
+			path: "/products?segment=Unisex",
 		},
 	];
 

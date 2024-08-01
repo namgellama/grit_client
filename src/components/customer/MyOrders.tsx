@@ -4,6 +4,9 @@ import { ErrorMessage, FilterSort } from "@/components";
 import { getOrderColor, getPaymentColor } from "@/utilities/getColor";
 import { getStringDate } from "@/utilities/getStringDate";
 import {
+	Alert,
+	AlertDescription,
+	AlertIcon,
 	Badge,
 	Box,
 	Button,
@@ -66,6 +69,11 @@ const MyOrders = () => {
 				</Flex>
 			) : error ? (
 				<ErrorMessage>Something went wrong</ErrorMessage>
+			) : orders?.length === 0 ? (
+				<Alert status="info" variant="solid">
+					<AlertIcon />
+					<AlertDescription>No Orders yet</AlertDescription>
+				</Alert>
 			) : (
 				<Flex
 					w="100%"

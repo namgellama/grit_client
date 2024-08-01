@@ -35,7 +35,12 @@ const Profile = () => {
 						bg="white"
 					>
 						<HStack gap={4} p={3} borderRadius={5}>
-							<Avatar name={user?.name} src="" bg="black" />
+							<Avatar
+								name={user?.name}
+								src=""
+								bg="black"
+								color="white"
+							/>
 							<VStack align="start" gap={1}>
 								<Text
 									textTransform="uppercase"
@@ -57,11 +62,7 @@ const Profile = () => {
 						</HStack>
 					</Skeleton>
 
-					<Skeleton
-						isLoaded={!isLoading}
-						w="100%"
-						h={{ base: "100%", md: "140px", xl: "100%" }}
-					>
+					{address && (
 						<Box bg="white" p={3} borderRadius={5}>
 							<Text
 								fontWeight="bold"
@@ -88,7 +89,7 @@ const Profile = () => {
 								</Text>
 							</Flex>
 						</Box>
-					</Skeleton>
+					)}
 				</Flex>
 			)}
 		</Box>

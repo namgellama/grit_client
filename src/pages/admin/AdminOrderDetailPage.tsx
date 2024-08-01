@@ -171,7 +171,7 @@ const AdminOrderDetailPage = () => {
 									</Badge>
 								</Text>
 
-								{order?.payment.status === "COMPLETED" && (
+								{order?.payment.status === "Completed" && (
 									<Text fontSize="sm" fontWeight="medium">
 										Paid on:
 										<Text as="span" ml={2}>

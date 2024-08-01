@@ -32,7 +32,7 @@ const DBEmptyBagItems = ({ onClose }: Props) => {
 					borderRadius={20}
 					_hover={{ bg: "background.800" }}
 					onClick={() => {
-						navigate("/products?segment=MEN");
+						navigate("/products?segment=Men");
 						onClose();
 					}}
 				>
@@ -46,11 +46,25 @@ const DBEmptyBagItems = ({ onClose }: Props) => {
 					borderRadius={20}
 					_hover={{ bg: "background.800" }}
 					onClick={() => {
-						navigate("/products?segment=WOMEN");
+						navigate("/products?segment=Women");
 						onClose();
 					}}
 				>
 					Shop Women
+				</Button>
+				<Button
+					w="100%"
+					bg="background.900"
+					color="white"
+					fontWeight="normal"
+					borderRadius={20}
+					_hover={{ bg: "background.800" }}
+					onClick={() => {
+						navigate("/products?segment=Unisex");
+						onClose();
+					}}
+				>
+					Shop Unisex
 				</Button>
 			</VStack>
 		</VStack>
