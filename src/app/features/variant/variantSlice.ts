@@ -49,12 +49,6 @@ const variantSlice = createSlice({
 			return state.filter((x) => x.color !== action.payload);
 		},
 
-		removeVariant: (state, action) => {
-			const { color, size } = action.payload;
-
-			return state.filter((x) => !(x.color === color && x.size === size));
-		},
-
 		removeSizeVariant: (state, action) => {
 			const filteredState = state.filter(
 				(x) => x.size === action.payload
@@ -97,7 +91,6 @@ export const {
 	updateVariantImage,
 	removeColorVariant,
 	removeSizeVariant,
-	removeVariant,
 	updateVariantStock,
 	removeAllVariants,
 } = variantSlice.actions;
