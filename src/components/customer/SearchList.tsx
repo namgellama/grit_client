@@ -24,7 +24,6 @@ const SearchList = ({ error, products, isLoading }: Props) => {
 		<Flex
 			my={10}
 			gap={{ base: 10, md: 16 }}
-			justify="space-between"
 			overflowX="scroll"
 			className="scrollbarX"
 			pb={5}
