@@ -1,8 +1,7 @@
 export interface User {
 	id: string;
 	name: string;
-	phoneNumber: string;
-	email?: string;
+	email: string;
 	role: string;
 	createdAt: string;
 	updatedAt: string;
@@ -14,8 +13,7 @@ export interface CurrentUser extends User {
 
 export interface RegisterRequestDTO {
 	name: string;
-	phoneNumber: string;
-	email?: string;
+	email: string;
 	password: string;
 	confirmPassword: string;
 }

@@ -1,10 +1,7 @@
 import { z } from "zod";
 
 export const loginSchema = z.object({
-	phoneNumber: z
-		.string()
-		.min(1, "Phone number must be 10 digits.")
-		.max(10, "Phone number must be 10 digits."),
+	email: z.string().min(1, "Email is required"),
 	password: z.string().min(1, "Password is required."),
 });
 
