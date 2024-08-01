@@ -81,8 +81,8 @@ const DBBagItems = ({ bagItems, user, isLoading }: Props) => {
 				align="stretch"
 			>
 				{bagItems?.map((bagItem) => (
-					<Skeleton isLoaded={!isLoading}>
-						<Flex key={bagItem.id} gap={5}>
+					<Skeleton isLoaded={!isLoading} key={bagItem.id}>
+						<Flex gap={5}>
 							<Image
 								w="160px"
 								h="130px"

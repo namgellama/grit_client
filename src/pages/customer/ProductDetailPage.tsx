@@ -20,7 +20,7 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProductDetailPage = () => {
 	const { id } = useParams();
@@ -34,6 +34,7 @@ const ProductDetailPage = () => {
 	const { data: bagItems } = useGetBagItemsQuery(user?.token ?? "");
 	const [addToBag] = useCreateBagItemMutation();
 	const [updateBag] = useUpdateBagItemMutation();
+	const navigate = useNavigate();
 
 	const uniqueColorVariants = Array.from(
 		new Map(
@@ -110,6 +111,8 @@ const ProductDetailPage = () => {
 					position: "top",
 				});
 			}
+		} else {
+			navigate("/auth");
 		}
 	};
 
