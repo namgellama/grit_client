@@ -2,6 +2,7 @@ import {
 	addColorVariant,
 	addVariants,
 	removeAllVariants,
+	removeColorVariant,
 	removeSizeVariant,
 	removeVariant,
 	updateVariantSize,
@@ -28,7 +29,7 @@ import {
 import { MantineProvider, TagsInput } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { useEffect, useState } from "react";
-import { MdModeEdit } from "react-icons/md";
+import { MdDeleteOutline, MdModeEdit } from "react-icons/md";
 
 const ProductVariant = ({ product }: { product?: Product }) => {
 	const variants = useAppSelector((state) => state.variants);
@@ -120,7 +121,7 @@ const ProductVariant = ({ product }: { product?: Product }) => {
 
 		const color = removedColor.split(", ")[0];
 
-		dispatch(removeVariant(color));
+		dispatch(removeColorVariant(color));
 	};
 
 	const handleRemoveSize = (size: string) => {
@@ -193,7 +194,6 @@ const ProductVariant = ({ product }: { product?: Product }) => {
 										</Flex>
 									</Td>
 									<Td>
-										<MdModeEdit color="white" />
 										<IconButton
 											variant="outline"
 											colorScheme="messenger"
@@ -203,6 +203,18 @@ const ProductVariant = ({ product }: { product?: Product }) => {
 											onClick={() => {
 												onOpen();
 												setVariant(variant);
+											}}
+										/>
+										<IconButton
+											variant="outline"
+											colorScheme="red"
+											aria-label="delete variant"
+											icon={<MdDeleteOutline />}
+											size="xs"
+											onClick={() => {
+												dispatch(
+													removeVariant(variant)
+												);
 											}}
 										/>
 									</Td>
