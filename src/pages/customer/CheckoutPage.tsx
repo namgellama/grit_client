@@ -87,6 +87,7 @@ const CheckoutPage = () => {
 				city: order.city,
 				postalCode: order.postalCode,
 				country: order.country,
+				phoneNumber: order.phoneNumber,
 			},
 			payment: {
 				amount: total,

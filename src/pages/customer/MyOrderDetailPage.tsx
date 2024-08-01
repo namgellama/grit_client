@@ -286,7 +286,7 @@ const MyOrderDetailPage = () => {
 										{order?.address?.city},{" "}
 										{order?.address?.country}
 										{order?.address?.postalCode &&
-											` - ${order?.address?.postalCode}`}
+											` - ${order?.address?.postalCode} {${order?.address?.phoneNumber}}`}
 									</Text>
 								</Flex>
 							</Flex>

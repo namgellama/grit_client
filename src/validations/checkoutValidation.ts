@@ -8,6 +8,10 @@ export const checkoutSchema = z.object({
 	city: z.string().min(1, "Address line 2 is required."),
 	postalCode: z.string().optional(),
 	country: z.string().min(1, "Country is required"),
+	phoneNumber: z
+		.string()
+		.min(10, "Phone number must be 10 digits")
+		.max(10, "Phone number must be 10 digits"),
 	paymentMethod: z.enum(VALUES, { message: "Invalid value" }),
 });
 

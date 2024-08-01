@@ -108,6 +108,20 @@ const DeliveryForm = ({ register, errors, setDeliveryCharge }: Props) => {
 					)}
 				</FormControl>
 			</Flex>
+
+			<FormControl>
+				<FormLabel>Phone Number*</FormLabel>
+				<Input
+					type="text"
+					variant="filled"
+					{...register("phoneNumber")}
+				/>
+				{errors.phoneNumber && (
+					<InputErrorMessage>
+						{errors.phoneNumber.message}
+					</InputErrorMessage>
+				)}
+			</FormControl>
 		</Flex>
 	);
 };

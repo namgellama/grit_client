@@ -1,8 +1,8 @@
 export const cities = [
 	{ name: "Kathmandu", value: 100 },
-	{ name: "Lalitpur", value: 120 },
-	{ name: "Bhaktapur", value: 130 },
-	{ name: "Others", value: 150 },
+	{ name: "Lalitpur", value: 100 },
+	{ name: "Bhaktapur", value: 100 },
+	{ name: "Others", value: 120 },
 ];
 
 export const countries = ["Nepal"];
