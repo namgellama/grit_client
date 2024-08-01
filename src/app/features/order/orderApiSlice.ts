@@ -93,7 +93,15 @@ export const orderApiSlice = apiSlice.injectEndpoints({
 					Authorization: `Bearer ${token}`,
 				},
 			}),
-			invalidatesTags: ["Order", "Orders", "MyOrder", "MyOrders"],
+			invalidatesTags: [
+				"Order",
+				"Orders",
+				"MyOrder",
+				"MyOrders",
+				"KPI",
+				"MostSoldProducts",
+				"RevenueByMonth",
+			],
 		}),
 	}),
 });
