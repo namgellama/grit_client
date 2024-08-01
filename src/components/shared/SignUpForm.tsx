@@ -48,7 +48,7 @@ const SignUpForm = () => {
 	}, [errors.root]);
 
 	const onSubmit = async (body: FormFields) => {
-		const { name, phoneNumber, email, password, confirmPassword } = body;
+		const { name, email, password, confirmPassword } = body;
 
 		if (password !== confirmPassword) {
 			setError("password", {
@@ -62,7 +62,6 @@ const SignUpForm = () => {
 		try {
 			const userData = {
 				name,
-				phoneNumber,
 				email,
 				password,
 			};
@@ -107,19 +106,6 @@ const SignUpForm = () => {
 					variant="flushed"
 					placeholder="Enter your full name"
 					{...register("name")}
-				/>
-				{errors.name && (
-					<InputErrorMessage>{errors.name.message}</InputErrorMessage>
-				)}
-			</FormControl>
-
-			<FormControl>
-				<FormLabel>Phone*</FormLabel>
-				<Input
-					type="text"
-					variant="flushed"
-					placeholder="Enter your full name"
-					{...register("phoneNumber")}
 				/>
 				{errors.name && (
 					<InputErrorMessage>{errors.name.message}</InputErrorMessage>

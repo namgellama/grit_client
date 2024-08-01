@@ -235,7 +235,7 @@ const AdminOrderDetailPage = () => {
 									Phone
 								</Text>
 								<Text fontSize="sm" fontWeight="medium">
-									{order?.user.phoneNumber}
+									{order?.address?.phoneNumber}
 								</Text>
 							</HStack>
 							<HStack justify="space-between">

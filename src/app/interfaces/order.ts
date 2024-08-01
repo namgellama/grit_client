@@ -21,6 +21,7 @@ export interface Address {
 	city: string;
 	postalCode?: string;
 	country: string;
+	phoneNumber: string;
 }
 
 export interface Order {

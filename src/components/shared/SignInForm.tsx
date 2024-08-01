@@ -51,7 +51,7 @@ const SignInForm = () => {
 			dispatch(setUser(user));
 		} catch (error) {
 			setError("root", {
-				message: "Invalid phone number or password",
+				message: "Invalid email or password",
 			});
 		}
 	};
@@ -64,16 +64,16 @@ const SignInForm = () => {
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<FormControl>
-				<FormLabel>Phone Number*</FormLabel>
+				<FormLabel>Email*</FormLabel>
 				<Input
 					type="text"
 					variant="flushed"
-					placeholder="Enter your phone number"
-					{...register("phoneNumber")}
+					placeholder="Enter your email"
+					{...register("email")}
 				/>
-				{errors.phoneNumber && (
+				{errors.email && (
 					<InputErrorMessage>
-						{errors.phoneNumber.message}
+						{errors.email.message}
 					</InputErrorMessage>
 				)}
 			</FormControl>

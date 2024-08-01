@@ -53,9 +53,6 @@ const Profile = () => {
 								>
 									{user?.email}
 								</Text>
-								<Text fontWeight="medium" fontSize="sm">
-									{user?.phoneNumber}
-								</Text>
 							</VStack>
 						</HStack>
 					</Skeleton>
@@ -85,6 +82,9 @@ const Profile = () => {
 									{address?.country}{" "}
 									{address?.postalCode &&
 										`- ${address?.postalCode}`}
+								</Text>
+								<Text fontSize="sm">
+									{address?.phoneNumber}
 								</Text>
 							</Flex>
 						</Box>
