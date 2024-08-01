@@ -1,18 +1,12 @@
 import { useGetBagItemsQuery } from "@/app/features/bagItem/bagItemApiSlice";
 import { CurrentUser } from "@/app/interfaces/auth";
 import { Logo } from "@/assets";
-import {
-	CookieBagItemsDrawer,
-	DBBagItemsDrawer,
-	MobileNavBar,
-	Search,
-} from "@/components";
+import { DBBagItemsDrawer, MobileNavBar, Search } from "@/components";
 import {
 	NavIcon,
 	NavLink,
 	NavLinkIcon,
 } from "@/components/shared/NavComponents";
-import { BagItem } from "@/interfaces";
 import {
 	Badge,
 	Box,
@@ -28,7 +22,6 @@ import {
 	useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
-import { useCookies } from "react-cookie";
 import { AiOutlineMenu } from "react-icons/ai";
 import { FaShoppingBag, FaUser, FaUserCircle } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
@@ -56,12 +49,6 @@ const NavBar = ({ user, handleLogout }: Props) => {
 		},
 	];
 
-	const [cookies] = useCookies<
-		"bagItems",
-		{
-			bagItems?: BagItem[];
-		}
-	>(["bagItems"]);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const btnRef = useRef<HTMLButtonElement>(null);
 	const { data: dbBagItems } = useGetBagItemsQuery(user?.token ?? "", {
@@ -136,22 +123,10 @@ const NavBar = ({ user, handleLogout }: Props) => {
 									reference={btnRef}
 									icon={<FaShoppingBag />}
 									label="Shopping Bag"
-									onClick={onOpen}
+									onClick={() => {
+										user ? onOpen() : navigate("/auth");
+									}}
 								/>
-
-								{cookies.bagItems?.length && (
-									<Badge
-										position="absolute"
-										bottom={4}
-										left={6}
-										borderRadius={50}
-										bg="gold"
-										fontSize="xx-small"
-										as="span"
-									>
-										{cookies.bagItems?.length}
-									</Badge>
-								)}
 
 								{dbBagItems?.length! > 0 && (
 									<Badge
@@ -238,19 +213,11 @@ const NavBar = ({ user, handleLogout }: Props) => {
 					</Box>
 				)}
 
-				{user ? (
-					<DBBagItemsDrawer
-						isOpen={isOpen}
-						onClose={onClose}
-						btnRef={btnRef}
-					/>
-				) : (
-					<CookieBagItemsDrawer
-						isOpen={isOpen}
-						onClose={onClose}
-						btnRef={btnRef}
-					/>
-				)}
+				<DBBagItemsDrawer
+					isOpen={isOpen}
+					onClose={onClose}
+					btnRef={btnRef}
+				/>
 
 				<MobileNavBar
 					isNavBarOpen={isNavBarOpen}

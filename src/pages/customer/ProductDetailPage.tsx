@@ -6,7 +6,6 @@ import {
 import { useGetProductQuery } from "@/app/features/product/productApiSlice";
 import { useAppSelector } from "@/app/hooks";
 import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "@/components";
-import { BagItem } from "@/interfaces";
 import {
 	Badge,
 	Box,
@@ -21,7 +20,6 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import { useParams } from "react-router-dom";
 
 const ProductDetailPage = () => {
@@ -33,12 +31,6 @@ const ProductDetailPage = () => {
 	const [currentColor, setCurrentColor] = useState("");
 	const [currentSize, setCurrentSize] = useState("");
 	const [isTransitioning, setIsTransitioning] = useState(false);
-	const [cookies, setCookie] = useCookies<
-		"bagItems",
-		{
-			bagItems: BagItem[];
-		}
-	>(["bagItems"]);
 	const { data: bagItems } = useGetBagItemsQuery(user?.token ?? "");
 	const [addToBag] = useCreateBagItemMutation();
 	const [updateBag] = useUpdateBagItemMutation();
@@ -119,31 +111,6 @@ const ProductDetailPage = () => {
 				});
 			}
 		}
-		// } else {
-		// 	const item = {
-		// 		id,
-		// 		price: product?.price,
-		// 		size: selectedSize,
-		// 		color: currentColorName,
-		// 		image: currentImage,
-		// 		stock: product?.stock,
-		// 		quantity: 1,
-		// 	};
-
-		// 	let bagItems =
-		// 		cookies.bagItems === undefined
-		// 			? [item]
-		// 			: cookies?.bagItems.find(
-		// 					(x) =>
-		// 						x.id === item.id &&
-		// 						x.size === item.size &&
-		// 						x.color === item.color
-		// 			  )
-		// 			? [...cookies.bagItems]
-		// 			: [item, ...cookies.bagItems];
-
-		// 	setCookie("bagItems", bagItems);
-		// }
 	};
 
 	return (

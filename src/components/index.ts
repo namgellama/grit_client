@@ -20,7 +20,6 @@ export { default as BagItems } from "./customer/BagItems";
 export { default as CategoryCard } from "./customer/CategoryCard";
 export { default as CategoryList } from "./customer/CategoryList";
 export { default as ColorBox } from "./customer/ColorBox";
-export { default as CookieBagItemsDrawer } from "./customer/CookieBagItemsDrawer";
 export { default as DBBagItems } from "./customer/DBBagItems";
 export { default as DBBagItemsDrawer } from "./customer/DBBagItemsDrawer";
 export { default as DBEmptyBagItems } from "./customer/DBEmptyBagItems";
