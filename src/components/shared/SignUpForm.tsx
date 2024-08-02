@@ -17,7 +17,11 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 
-const SignUpForm = () => {
+const SignUpForm = ({
+	setTabIndex,
+}: {
+	setTabIndex: React.Dispatch<React.SetStateAction<number>>;
+}) => {
 	const [showPassword, setShowPassword] = useState(false);
 	const handleShowPassword = () => setShowPassword(!showPassword);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -28,6 +32,7 @@ const SignUpForm = () => {
 		register,
 		handleSubmit,
 		setError,
+		reset,
 		formState: { errors, isSubmitting },
 	} = useForm<FormFields>({
 		resolver: zodResolver(registerSchema),
@@ -66,7 +71,8 @@ const SignUpForm = () => {
 			const newUser = await registerUser(userData).unwrap();
 
 			if (newUser) {
-				window.location.reload();
+				setTabIndex(0);
+				reset();
 			}
 		} catch (err: any) {
 			setError("root", {

@@ -11,10 +11,11 @@ import {
 	TabPanels,
 	Tabs,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
+	const [tabIndex, setTabIndex] = useState(0);
 	const { user } = useAppSelector((state) => state.auth);
 	const navigate = useNavigate();
 
@@ -48,6 +49,8 @@ const AuthPage = () => {
 						align="center"
 						isFitted
 						mt={5}
+						onChange={(index) => setTabIndex(index)}
+						index={tabIndex}
 					>
 						<TabList
 							bg="lightgray"
@@ -81,7 +84,7 @@ const AuthPage = () => {
 								<SignInForm />
 							</TabPanel>
 							<TabPanel>
-								<SignUpForm />
+								<SignUpForm setTabIndex={setTabIndex} />
 							</TabPanel>
 						</TabPanels>
 					</Tabs>
