@@ -80,7 +80,7 @@ const MostSoldProducts = () => {
 									paddingAngle={2}
 									dataKey="quantity"
 								>
-									{products?.map((entry, index) => (
+									{products?.map((_, index) => (
 										<Cell
 											key={`cell-${index}`}
 											fill={COLORS[index % COLORS.length]}

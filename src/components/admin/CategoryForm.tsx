@@ -35,8 +35,6 @@ const CategoryForm = ({ isEdit, onClose, setIsEdit, category }: Props) => {
 		handleSubmit,
 		setError,
 		setValue,
-		getValues,
-		reset,
 		formState: { errors, isSubmitting },
 	} = useForm<FormFields>({
 		resolver: zodResolver(categorySchema),
