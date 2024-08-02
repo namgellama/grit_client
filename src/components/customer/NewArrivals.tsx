@@ -26,7 +26,7 @@ const NewArrivals = () => {
 					isLoaded={!isLoading}
 					width={{ base: "100%", md: "240px" }}
 				>
-					<Flex justify="center" gap={3}>
+					<Flex justify="center" gap={3} align="center">
 						<Heading
 							fontSize="lg"
 							fontWeight="bold"
@@ -39,7 +39,7 @@ const NewArrivals = () => {
 							New Arrivals
 						</Heading>
 
-						<Text as="span" fontSize="lg" fontWeight="semibold">
+						<Text as="span" fontSize="lg" fontWeight="medium">
 							({products?.length}{" "}
 							{products?.length !== 1 ? "items" : "item"})
 						</Text>
