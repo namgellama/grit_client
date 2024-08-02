@@ -1,6 +1,6 @@
 import App from "@/App.tsx";
 import { store } from "@/app/store.ts";
-import { AdminRoute, PrivateRoute } from "@/components";
+import { AdminRoute, PrivateRoute, ScrollToTop } from "@/components";
 import "@/index.css";
 import {
 	AdminCategoriesPage,
@@ -9,6 +9,7 @@ import {
 	AdminOrdersPage,
 	AdminProductAddPage,
 	AdminProductsPage,
+	AuthPage,
 	CategoryPage,
 	CheckoutPage,
 	HomePage,
@@ -16,16 +17,15 @@ import {
 	ProductDetailPage,
 	ProductPage,
 	ProfilePage,
-	AuthPage,
 } from "@/pages";
 import theme from "@/theme.ts";
 import { ChakraProvider } from "@chakra-ui/react";
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 import React from "react";
 import { CookiesProvider } from "react-cookie";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
 if (import.meta.env.MODE === "production") {
 	disableReactDevTools();
@@ -37,6 +37,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 			<Provider store={store}>
 				<ChakraProvider theme={theme}>
 					<Router>
+						<ScrollToTop />
 						<Routes>
 							<Route path="/" element={<App />}>
 								<Route path="/" element={<HomePage />} />

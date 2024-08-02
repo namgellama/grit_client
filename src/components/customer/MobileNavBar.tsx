@@ -24,14 +24,17 @@ const MobileNavBar = ({ isNavBarOpen, onNavBarClose, navLinks }: Props) => {
 			<DrawerOverlay />
 			<DrawerContent>
 				<DrawerCloseButton />
-				<DrawerHeader>SHOP</DrawerHeader>
+				<DrawerHeader fontWeight="normal">SHOP</DrawerHeader>
 
 				<DrawerBody>
 					<Flex direction="column">
 						{navLinks.map((link) => (
 							<Text
 								key={link.name}
-								fontWeight="semibold"
+								fontWeight={{
+									base: "normal",
+									md: "semibold",
+								}}
 								fontSize="lg"
 								letterSpacing={1}
 								py={1}

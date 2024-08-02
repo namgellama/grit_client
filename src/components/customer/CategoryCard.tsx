@@ -19,7 +19,15 @@ const CategoryCard = ({ category }: { category: Category }) => {
 						transition="opacity 0.2s ease-in-out"
 					/>
 				</Box>
-				<Text pt={2} size="sm" fontWeight="semibold" textAlign="center">
+				<Text
+					pt={2}
+					size="sm"
+					fontWeight={{
+						base: "normal",
+						md: "semibold",
+					}}
+					textAlign="center"
+				>
 					{category.name}
 				</Text>
 			</Link>

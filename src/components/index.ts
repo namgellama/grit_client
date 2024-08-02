@@ -45,5 +45,6 @@ export { default as InputErrorMessage } from "./shared/InputErrorMessage";
 export { default as MyContainer } from "./shared/MyContainer";
 export { default as MyHeading } from "./shared/MyHeading";
 export { default as PrivateRoute } from "./shared/PrivateRoute";
+export { default as ScrollToTop } from "./shared/ScrollToTop";
 export { default as SignInForm } from "./shared/SignInForm";
 export { default as SignUpForm } from "./shared/SignUpForm";

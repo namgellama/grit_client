@@ -76,7 +76,13 @@ const ProductCard = ({ product, show, isLoading }: Props) => {
 						to={`/products/${product?.id}`}
 						style={{ width: "100%" }}
 					>
-						<Text fontWeight="semibold" letterSpacing={1}>
+						<Text
+							fontWeight={{
+								base: "normal",
+								md: "semibold",
+							}}
+							letterSpacing={1}
+						>
 							{product?.name}
 						</Text>
 					</Link>
@@ -87,14 +93,23 @@ const ProductCard = ({ product, show, isLoading }: Props) => {
 								product?.crossedPrice >
 									product?.sellingPrice && (
 									<Text
-										fontWeight="semibold"
+										fontWeight={{
+											base: "normal",
+											md: "semibold",
+										}}
 										textDecoration="line-through"
 									>
 										Rs. {product?.crossedPrice}
 									</Text>
 								)}
 
-							<Text fontWeight="semibold" letterSpacing={1}>
+							<Text
+								fontWeight={{
+									base: "normal",
+									md: "semibold",
+								}}
+								letterSpacing={1}
+							>
 								Rs. {product?.sellingPrice}
 							</Text>
 						</Flex>
@@ -105,7 +120,11 @@ const ProductCard = ({ product, show, isLoading }: Props) => {
 									variant="solid"
 									colorScheme="green"
 									borderRadius={10}
-									px={3}
+									px={2}
+									fontWeight={{
+										base: "normal",
+										md: "semibold",
+									}}
 								>
 									{product &&
 										((product.crossedPrice -

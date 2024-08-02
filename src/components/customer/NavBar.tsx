@@ -80,15 +80,16 @@ const NavBar = ({ user, handleLogout }: Props) => {
 			<Box bg="white" py={2} minW="100%">
 				<Container maxW="7xl">
 					<HStack justify="space-between">
-						<IconButton
-							flex={1}
-							icon={<AiOutlineMenu />}
-							aria-label="Open menu"
-							bg="inherit"
-							display={{ base: "block", md: "none" }}
-							ml={6}
-							onClick={onNavBarOpen}
-						/>
+						<Box flex={1}>
+							<IconButton
+								icon={<AiOutlineMenu />}
+								aria-label="Open menu"
+								bg="inherit"
+								display={{ base: "block", md: "none" }}
+								ml={6}
+								onClick={onNavBarOpen}
+							/>
+						</Box>
 
 						<HStack
 							spacing={5}

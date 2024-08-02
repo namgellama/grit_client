@@ -18,19 +18,16 @@ const ProductList = ({ error, products, isLoading, show }: Props) => {
 			gap={20}
 			templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
 		>
-			{error ? (
-				<ErrorMessage>Something went wrong</ErrorMessage>
-			) : (
-				products?.map((product) => (
-					<Box key={product.id} justifySelf="center">
-						<ProductCard
-							product={product}
-							show={show}
-							isLoading={isLoading}
-						/>
-					</Box>
-				))
-			)}
+			{error && <ErrorMessage>Something went wrong</ErrorMessage>}{" "}
+			{products?.map((product) => (
+				<Box key={product.id} justifySelf="center">
+					<ProductCard
+						product={product}
+						show={show}
+						isLoading={isLoading}
+					/>
+				</Box>
+			))}
 		</Grid>
 	);
 };
