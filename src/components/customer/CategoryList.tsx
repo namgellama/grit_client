@@ -6,7 +6,7 @@ const CategoryList = () => {
 	const { data: categories, isLoading, error } = useGetCategoriesQuery();
 
 	return (
-		<MyContainer my="4rem">
+		<MyContainer my="1rem">
 			<Skeleton
 				isLoaded={!isLoading}
 				width={{ base: "100%", md: "200px" }}
