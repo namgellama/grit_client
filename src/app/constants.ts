@@ -1,7 +1,4 @@
-export const BASE_URL =
-	import.meta.env.VITE_APP_ENV === "development"
-		? "http://localhost:3000"
-		: import.meta.env.VITE_BASE_URL;
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const PRODUCT_URL = "/api/products";
 export const CATEGORY_URL = "/api/categories";
