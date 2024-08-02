@@ -1,11 +1,10 @@
-import { GritVideo, Hero1Img, Hero2Img } from "@/assets";
+import { Hero1Img, Hero2Img } from "@/assets";
 import { Box, Grid, Image } from "@chakra-ui/react";
-import ReactPlayer from "react-player";
 
 const Hero = () => {
 	return (
 		<Box>
-			<Grid templateColumns="repeat(3, 1fr)" gap={1}>
+			<Grid templateColumns="repeat(2, 1fr)" gap={1}>
 				<Image
 					src={Hero1Img}
 					width="100%"
@@ -13,14 +12,7 @@ const Hero = () => {
 					objectFit="cover"
 					alt="Hero Image"
 				/>
-				<ReactPlayer
-					url={GritVideo}
-					playing
-					width="100%"
-					height="100%"
-					loop
-					muted
-				/>
+
 				<Image
 					src={Hero2Img}
 					width="100%"

@@ -1,6 +1,6 @@
-import { Flex, Skeleton, Text } from "@chakra-ui/react";
+import { Flex, Heading, Skeleton, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { MyContainer, MyHeading } from "..";
+import { MyContainer } from "..";
 import { useGetProductsQuery } from "../../app/features/product/productApiSlice";
 import SearchList from "./SearchList";
 
@@ -22,14 +22,28 @@ const NewArrivals = () => {
 				direction={{ base: "column", md: "row" }}
 				gap={{ base: 2, md: 4 }}
 			>
-				<Skeleton isLoaded={!isLoading} width="240px">
-					<MyHeading
-						error={error}
-						count={products?.length}
-						showCount={true}
-					>
-						New Arrivals
-					</MyHeading>
+				<Skeleton
+					isLoaded={!isLoading}
+					width={{ base: "100%", md: "240px" }}
+				>
+					<Flex justify="center" gap={3}>
+						<Heading
+							fontSize="lg"
+							fontWeight="bold"
+							display={error ? "none" : "block"}
+							textTransform="uppercase"
+							letterSpacing={2}
+							alignItems="center"
+							gap={3}
+						>
+							New Arrivals
+						</Heading>
+
+						<Text as="span" fontSize="lg" fontWeight="semibold">
+							({products?.length}{" "}
+							{products?.length !== 1 ? "items" : "item"})
+						</Text>
+					</Flex>
 				</Skeleton>
 
 				<Skeleton isLoaded={!isLoading}>

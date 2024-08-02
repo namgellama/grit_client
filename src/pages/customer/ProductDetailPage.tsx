@@ -118,34 +118,36 @@ const ProductDetailPage = () => {
 
 	return (
 		<MyContainer>
-			{error ? (
+			{error && (
 				<ErrorMessage>
 					{error && "status" in error && error?.status == 404
 						? "Product not found."
 						: "Something went wrong."}
 				</ErrorMessage>
-			) : (
-				<Flex
-					gap={{ base: 5, md: 0, lg: 5 }}
-					direction={{ base: "column", md: "row" }}
-				>
-					<Box w={{ base: "100%", md: "50%" }}>
-						<Skeleton isLoaded={!isLoading}>
-							<Image
-								src={currentImage}
-								alt={product?.name}
-								opacity={isTransitioning ? 0 : 1}
-								transition="opacity 0.2s ease-in-out"
-							/>
-						</Skeleton>
-					</Box>
+			)}
 
-					<VStack
-						w={{ base: "100%", md: "50%" }}
-						alignItems="start"
-						justify="space-between"
-						px={{ base: 0, md: 10 }}
-					>
+			<Flex
+				gap={{ base: 5, md: 0, lg: 5 }}
+				direction={{ base: "column", md: "row" }}
+			>
+				<Box w={{ base: "100%", md: "50%" }}>
+					<Skeleton isLoaded={!isLoading}>
+						<Image
+							src={currentImage}
+							alt={product?.name}
+							opacity={isTransitioning ? 0 : 1}
+							transition="opacity 0.2s ease-in-out"
+						/>
+					</Skeleton>
+				</Box>
+
+				<VStack
+					w={{ base: "100%", md: "50%" }}
+					alignItems="start"
+					justify="space-between"
+					px={{ base: 0, md: 10 }}
+				>
+					<Skeleton w="100%" isLoaded={!isLoading}>
 						<VStack alignItems="start">
 							<Text
 								fontSize={{ base: "md", md: "sm" }}
@@ -198,9 +200,11 @@ const ProductDetailPage = () => {
 									)}
 							</Flex>
 						</VStack>
+					</Skeleton>
 
-						<Divider borderColor="darkgray" />
+					<Divider borderColor="darkgray" />
 
+					<Skeleton w="100%" isLoaded={!isLoading}>
 						<Flex direction="column" gap={2}>
 							<Text fontSize="sm" letterSpacing={0.7}>
 								Color: {currentColor}
@@ -222,9 +226,11 @@ const ProductDetailPage = () => {
 								))}
 							</HStack>
 						</Flex>
+					</Skeleton>
 
-						<Divider borderColor="darkgray" />
+					<Divider borderColor="darkgray" />
 
+					<Skeleton w="100%" isLoaded={!isLoading}>
 						<Flex direction="column" gap={2}>
 							<Text fontSize="sm" letterSpacing={0.7}>
 								Size: {currentSize}
@@ -240,9 +246,11 @@ const ProductDetailPage = () => {
 								))}
 							</HStack>
 						</Flex>
+					</Skeleton>
 
-						<Divider borderColor="darkgray" />
+					<Divider borderColor="darkgray" />
 
+					<Skeleton w="100%" isLoaded={!isLoading}>
 						<VStack align="start">
 							<Text
 								fontSize="lg"
@@ -265,9 +273,9 @@ const ProductDetailPage = () => {
 						>
 							Add to Bag
 						</Button>
-					</VStack>
-				</Flex>
-			)}
+					</Skeleton>
+				</VStack>
+			</Flex>
 		</MyContainer>
 	);
 };
