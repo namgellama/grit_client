@@ -18,11 +18,11 @@ export { default as VariantImageContainer } from "./admin/VariantImageContainer"
 
 export { default as BagItems } from "./customer/BagItems";
 export { default as BasicProductCard } from "./customer/BasicProductCard";
-export { default as BasicProductCardSkeleton } from "./customer/BasicProductCardSkeleton";
+export { default as BasicCardSkeleton } from "./customer/BasicCardSkeleton";
 export { default as BasicProductContainer } from "./customer/BasicProductContainer";
 export { default as BasicProductList } from "./customer/BasicProductList";
 export { default as CategoryCard } from "./customer/CategoryCard";
-export { default as CategoryList } from "./customer/CategoryList";
+export { default as ShopByCategory } from "./customer/ShopByCategory";
 export { default as ColorBox } from "./customer/ColorBox";
 export { default as DBBagItems } from "./customer/DBBagItems";
 export { default as DBBagItemsDrawer } from "./customer/DBBagItemsDrawer";

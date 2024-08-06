@@ -1,6 +1,6 @@
 import { Box, Card, CardBody, Skeleton, SkeletonText } from "@chakra-ui/react";
 
-const BasicProductCardSkeleton = () => {
+const BasicCardSkeleton = ({ noOfLines }: { noOfLines: number }) => {
 	return (
 		<Card>
 			<Box
@@ -10,10 +10,10 @@ const BasicProductCardSkeleton = () => {
 				<Skeleton w="100%" h="100%" />
 			</Box>
 			<CardBody py={5} px={3}>
-				<SkeletonText noOfLines={2} />
+				<SkeletonText noOfLines={noOfLines} />
 			</CardBody>
 		</Card>
 	);
 };
 
-export default BasicProductCardSkeleton;
+export default BasicCardSkeleton;

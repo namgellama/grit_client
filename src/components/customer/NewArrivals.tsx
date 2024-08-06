@@ -1,8 +1,7 @@
 import { useGetProductsQuery } from "@/app/features/product/productApiSlice";
+import { BasicProductList, MyContainer } from "@/components";
 import { Flex, Heading, Skeleton, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { MyContainer } from "..";
-import SearchList from "./BasicProductList";
 
 const NewArrivals = () => {
 	const queryParams = {
@@ -52,7 +51,7 @@ const NewArrivals = () => {
 					</Text>
 				</Skeleton>
 			</Flex>
-			<SearchList
+			<BasicProductList
 				products={products}
 				error={error}
 				isLoading={isLoading}

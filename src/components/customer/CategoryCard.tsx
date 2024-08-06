@@ -1,26 +1,27 @@
 import { Category } from "@/app/interfaces/category";
-import { Box, Image, Text, VStack } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Box, Card, CardBody, Image, Text } from "@chakra-ui/react";
 
 const CategoryCard = ({ category }: { category: Category }) => {
 	return (
-		<VStack align="start" w="280px" h="390px" py={2}>
-			<Link to={`/categories/${category.id}`}>
-				<Box
-					_hover={{ transform: "scale(1.01)" }}
-					transition={"transform 0.1s ease-out"}
-				>
-					<Image
-						src={category.image}
-						alt={category.name}
-						w="280px"
-						h="330px"
-						objectFit="cover"
-						transition="opacity 0.2s ease-in-out"
-					/>
-				</Box>
+		<Card>
+			<Box
+				_hover={{ transform: "scale(1.01)" }}
+				transition={"transform 0.1s ease-out"}
+				w="280px"
+				h="330px"
+			>
+				<Image
+					src={category.image}
+					alt={category.name}
+					w="100%"
+					h="100%"
+					objectFit="cover"
+					transition="opacity 0.2s ease-in-out"
+				/>
+			</Box>
+
+			<CardBody py={1.5}>
 				<Text
-					pt={2}
 					size="sm"
 					fontWeight={{
 						base: "normal",
@@ -30,8 +31,8 @@ const CategoryCard = ({ category }: { category: Category }) => {
 				>
 					{category.name}
 				</Text>
-			</Link>
-		</VStack>
+			</CardBody>
+		</Card>
 	);
 };
 

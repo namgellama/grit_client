@@ -1,7 +1,7 @@
 import { Product } from "@/app/interfaces/product";
 import {
 	BasicProductCard,
-	BasicProductCardSkeleton,
+	BasicCardSkeleton,
 	BasicProductContainer,
 	ErrorMessage,
 } from "@/components";
@@ -27,7 +27,7 @@ const BasicProductList = ({ error, products, isLoading }: Props) => {
 			{isLoading &&
 				skeletons.map((skeleton) => (
 					<Box key={skeleton}>
-						<BasicProductCardSkeleton />
+						<BasicCardSkeleton noOfLines={2} />
 					</Box>
 				))}
 

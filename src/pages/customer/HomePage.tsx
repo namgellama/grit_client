@@ -1,11 +1,11 @@
-import { CategoryList, Hero, NewArrivals } from "@/components";
+import { Hero, NewArrivals, ShopByCategory } from "@/components";
 
 const HomePage = () => {
 	return (
 		<>
 			<Hero />
 			<NewArrivals />
-			<CategoryList />
+			<ShopByCategory />
 		</>
 	);
 };
