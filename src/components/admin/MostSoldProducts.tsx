@@ -69,7 +69,7 @@ const MostSoldProducts = () => {
 				{error ? (
 					<ErrorMessage>Something went wrong</ErrorMessage>
 				) : (
-					<Skeleton isLoaded={!isLoading} h="100%">
+					<Skeleton isLoaded={!isLoading} h="300px">
 						<ResponsiveContainer width="100%" height="100%">
 							<PieChart width={400} height={400}>
 								<Pie

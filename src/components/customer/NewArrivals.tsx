@@ -1,7 +1,7 @@
 import { Flex, Heading, Skeleton, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { MyContainer } from "..";
-import { useGetProductsQuery } from "../../app/features/product/productApiSlice";
+import { useGetProductsQuery } from "@/app/features/product/productApiSlice";
 import SearchList from "./SearchList";
 
 const NewArrivals = () => {
