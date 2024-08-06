@@ -80,7 +80,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 			<Box bg="white" py={2} minW="100%">
 				<Container maxW="7xl">
 					<HStack justify="space-between">
-						<Box flex={1}>
+						<Box flex={{ base: 1, md: 0 }}>
 							<IconButton
 								icon={<AiOutlineMenu />}
 								aria-label="Open menu"
