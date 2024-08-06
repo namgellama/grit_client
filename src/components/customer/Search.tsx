@@ -1,5 +1,5 @@
 import { useGetSearchProductsQuery } from "@/app/features/search/searchApiSlice";
-import { SearchList } from "@/components";
+import { BasicProductList } from "@/components";
 import {
 	Box,
 	Input,
@@ -57,7 +57,7 @@ const Search = ({ setShowSearch }: Props) => {
 						setSearch(undefined);
 					}}
 				>
-					<SearchList
+					<BasicProductList
 						error={error}
 						products={searchProducts}
 						isLoading={isLoading}

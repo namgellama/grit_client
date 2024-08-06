@@ -1,8 +1,8 @@
+import { useGetProductsQuery } from "@/app/features/product/productApiSlice";
 import { Flex, Heading, Skeleton, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { MyContainer } from "..";
-import { useGetProductsQuery } from "@/app/features/product/productApiSlice";
-import SearchList from "./SearchList";
+import SearchList from "./BasicProductList";
 
 const NewArrivals = () => {
 	const queryParams = {

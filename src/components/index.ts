@@ -17,6 +17,10 @@ export { default as UpdateOrder } from "./admin/UpdateOrder";
 export { default as VariantImageContainer } from "./admin/VariantImageContainer";
 
 export { default as BagItems } from "./customer/BagItems";
+export { default as BasicProductCard } from "./customer/BasicProductCard";
+export { default as BasicProductCardSkeleton } from "./customer/BasicProductCardSkeleton";
+export { default as BasicProductContainer } from "./customer/BasicProductContainer";
+export { default as BasicProductList } from "./customer/BasicProductList";
 export { default as CategoryCard } from "./customer/CategoryCard";
 export { default as CategoryList } from "./customer/CategoryList";
 export { default as ColorBox } from "./customer/ColorBox";
@@ -36,7 +40,6 @@ export { default as ProductCard } from "./customer/ProductCard";
 export { default as ProductList } from "./customer/ProductList";
 export { default as Profile } from "./customer/Profile";
 export { default as Search } from "./customer/Search";
-export { default as SearchList } from "./customer/SearchList";
 export { default as SizeBox } from "./customer/SizeBox";
 
 export { default as AdminRoute } from "./shared/AdminRoute";
