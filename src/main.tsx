@@ -15,7 +15,7 @@ import {
 	HomePage,
 	MyOrderDetailPage,
 	ProductDetailPage,
-	ProductPage,
+	ProductsPage,
 	ProfilePage,
 } from "@/pages";
 import theme from "@/theme.ts";
@@ -43,7 +43,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 								<Route path="/" element={<HomePage />} />
 								<Route
 									path="/products"
-									element={<ProductPage />}
+									element={<ProductsPage />}
 								/>
 								<Route
 									path="/products/:id"

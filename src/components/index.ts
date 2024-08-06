@@ -17,12 +17,11 @@ export { default as UpdateOrder } from "./admin/UpdateOrder";
 export { default as VariantImageContainer } from "./admin/VariantImageContainer";
 
 export { default as BagItems } from "./customer/BagItems";
-export { default as BasicProductCard } from "./customer/BasicProductCard";
 export { default as BasicCardSkeleton } from "./customer/BasicCardSkeleton";
+export { default as BasicProductCard } from "./customer/BasicProductCard";
 export { default as BasicProductContainer } from "./customer/BasicProductContainer";
 export { default as BasicProductList } from "./customer/BasicProductList";
 export { default as CategoryCard } from "./customer/CategoryCard";
-export { default as ShopByCategory } from "./customer/ShopByCategory";
 export { default as ColorBox } from "./customer/ColorBox";
 export { default as DBBagItems } from "./customer/DBBagItems";
 export { default as DBBagItemsDrawer } from "./customer/DBBagItemsDrawer";
@@ -37,9 +36,11 @@ export { default as NavBar } from "./customer/NavBar";
 export { default as NewArrivals } from "./customer/NewArrivals";
 export { default as PaymentMethods } from "./customer/PaymentMethods";
 export { default as ProductCard } from "./customer/ProductCard";
+export { default as ProductCardSkeleton } from "./customer/ProductCardSkeleton";
 export { default as ProductList } from "./customer/ProductList";
 export { default as Profile } from "./customer/Profile";
 export { default as Search } from "./customer/Search";
+export { default as ShopByCategory } from "./customer/ShopByCategory";
 export { default as SizeBox } from "./customer/SizeBox";
 
 export { default as AdminRoute } from "./shared/AdminRoute";

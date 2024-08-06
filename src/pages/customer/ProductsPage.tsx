@@ -3,7 +3,7 @@ import { MyContainer, MyHeading, ProductList } from "@/components";
 import { Alert, AlertIcon, AlertTitle, Skeleton } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
 
-const ProductPage = () => {
+const ProductsPage = () => {
 	const [searchParams] = useSearchParams();
 	const segment = searchParams.get("segment");
 	const ageStatus = searchParams.get("ageStatus");
@@ -26,7 +26,7 @@ const ProductPage = () => {
 					<AlertTitle>No products available</AlertTitle>
 				</Alert>
 			) : (
-				<Skeleton isLoaded={!isLoading}>
+				<Skeleton isLoaded={!isLoading} w="300px">
 					<MyHeading
 						error={error}
 						count={products?.length}
@@ -50,4 +50,4 @@ const ProductPage = () => {
 	);
 };
 
-export default ProductPage;
+export default ProductsPage;
