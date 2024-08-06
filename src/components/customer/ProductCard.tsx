@@ -6,7 +6,6 @@ import {
 	Flex,
 	HStack,
 	Image,
-	Skeleton,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
@@ -16,10 +15,9 @@ import { Link } from "react-router-dom";
 interface Props {
 	product?: Product;
 	show: boolean;
-	isLoading: boolean;
 }
 
-const ProductCard = ({ product, show, isLoading }: Props) => {
+const ProductCard = ({ product, show }: Props) => {
 	const [currentImage, setCurrentImage] = useState(
 		product?.variants[0].image ?? ""
 	);

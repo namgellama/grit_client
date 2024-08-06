@@ -1,10 +1,5 @@
 import { Product } from "@/app/interfaces/product";
-import {
-	BasicCardSkeleton,
-	ErrorMessage,
-	ProductCard,
-	ProductCardSkeleton,
-} from "@/components";
+import { ErrorMessage, ProductCard, ProductCardSkeleton } from "@/components";
 import { Box, Grid } from "@chakra-ui/react";
 import { SerializedError } from "@reduxjs/toolkit";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
@@ -36,11 +31,7 @@ const ProductList = ({ error, products, isLoading, show }: Props) => {
 
 			{products?.map((product) => (
 				<Box key={product.id} justifySelf="center">
-					<ProductCard
-						product={product}
-						show={show}
-						isLoading={isLoading}
-					/>
+					<ProductCard product={product} show={show} />
 				</Box>
 			))}
 		</Grid>
