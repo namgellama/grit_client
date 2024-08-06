@@ -7,8 +7,8 @@ const CategoryCard = ({ category }: { category: Category }) => {
 			<Box
 				_hover={{ transform: "scale(1.01)" }}
 				transition={"transform 0.1s ease-out"}
-				w="280px"
-				h="330px"
+				w={{ base: "230px", md: "280px" }}
+				h={{ base: "300px", md: "330px" }}
 			>
 				<Image
 					src={category.image}

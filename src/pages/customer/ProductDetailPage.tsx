@@ -8,7 +8,6 @@ import { useAppSelector } from "@/app/hooks";
 import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "@/components";
 import {
 	Badge,
-	Box,
 	Button,
 	Divider,
 	Flex,
@@ -130,16 +129,21 @@ const ProductDetailPage = () => {
 				gap={{ base: 5, md: 0, lg: 5 }}
 				direction={{ base: "column", md: "row" }}
 			>
-				<Box w={{ base: "100%", md: "50%" }}>
-					<Skeleton isLoaded={!isLoading}>
-						<Image
-							src={currentImage}
-							alt={product?.name}
-							opacity={isTransitioning ? 0 : 1}
-							transition="opacity 0.2s ease-in-out"
-						/>
-					</Skeleton>
-				</Box>
+				<Skeleton
+					isLoaded={!isLoading}
+					w={{ base: "100%", md: "500px" }}
+					h={{ base: "550px", md: "600px" }}
+				>
+					<Image
+						src={currentImage}
+						alt={product?.name}
+						opacity={isTransitioning ? 0 : 1}
+						transition="opacity 0.2s ease-in-out"
+						w="100%"
+						h="100%"
+						objectFit="cover"
+					/>
+				</Skeleton>
 
 				<VStack
 					w={{ base: "100%", md: "50%" }}
