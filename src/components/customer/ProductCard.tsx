@@ -3,11 +3,12 @@ import { ColorBox } from "@/components";
 import {
 	Badge,
 	Box,
+	Card,
+	CardBody,
 	Flex,
 	HStack,
 	Image,
 	Text,
-	VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -48,7 +49,7 @@ const ProductCard = ({ product, show }: Props) => {
 	};
 
 	return (
-		<VStack align="start" py={2}>
+		<Card>
 			<Link to={`/products/${product?.id}`}>
 				<Box
 					_hover={{ transform: "scale(1.01)" }}
@@ -68,7 +69,7 @@ const ProductCard = ({ product, show }: Props) => {
 				</Box>
 			</Link>
 
-			<VStack align="start" spacing={0}>
+			<CardBody px={3} pt={3} pb={5}>
 				<Link to={`/products/${product?.id}`} style={{ width: "100%" }}>
 					<Text
 						fontWeight={{
@@ -81,7 +82,7 @@ const ProductCard = ({ product, show }: Props) => {
 					</Text>
 				</Link>
 
-				<Flex align="center" justify="space-between" w="100%">
+				<Flex align="center" justify="space-between">
 					<Flex align="center" gap={3}>
 						{product &&
 							product?.crossedPrice > product?.sellingPrice && (
@@ -141,8 +142,8 @@ const ProductCard = ({ product, show }: Props) => {
 						))}
 					</HStack>
 				)}
-			</VStack>
-		</VStack>
+			</CardBody>
+		</Card>
 	);
 };
 
