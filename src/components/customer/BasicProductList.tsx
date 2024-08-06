@@ -34,6 +34,7 @@ const BasicProductList = ({ error, products, isLoading }: Props) => {
 			{products?.map((product) => (
 				<Box
 					key={product.id}
+					cursor="pointer"
 					onClick={() => navigate(`/products/${product.id}`)}
 				>
 					<BasicProductCard product={product} />

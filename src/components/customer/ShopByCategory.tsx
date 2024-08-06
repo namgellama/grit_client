@@ -47,6 +47,7 @@ const ShopByCategory = () => {
 				{categories?.map((category) => (
 					<Box
 						key={category.id}
+						cursor="pointer"
 						onClick={() => navigate(`/categories/${category.id}`)}
 					>
 						<CategoryCard category={category} />
