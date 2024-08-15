@@ -17,10 +17,9 @@ interface Props {
 }
 
 const CookieBagItems = ({ bagItems }: Props) => {
-	const [cookies, setCookie] = useCookies<
+	const [_, setCookie] = useCookies<"bagItems", { bagItems: BagItem[] }>([
 		"bagItems",
-		{ bagItems: BagItem[] }
-	>(["bagItems"]);
+	]);
 
 	const handleQuantity = async (
 		bagItem: BagItem,

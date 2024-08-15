@@ -25,7 +25,7 @@ const CheckoutPage = () => {
 	const [createOrder] = useCreateOrderMutation();
 	const navigate = useNavigate();
 	const toast = useToast();
-	const [cookies, setCookie, removeCookie] = useCookies<
+	const [cookies, _, removeCookie] = useCookies<
 		"bagItems",
 		{ bagItems: BagItem[] }
 	>(["bagItems"]);
