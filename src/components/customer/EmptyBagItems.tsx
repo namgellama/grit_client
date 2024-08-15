@@ -6,7 +6,7 @@ interface Props {
 	onClose: () => void;
 }
 
-const DBEmptyBagItems = ({ onClose }: Props) => {
+const EmptyBagItems = ({ onClose }: Props) => {
 	const navigate = useNavigate();
 
 	return (
@@ -71,4 +71,4 @@ const DBEmptyBagItems = ({ onClose }: Props) => {
 	);
 };
 
-export default DBEmptyBagItems;
+export default EmptyBagItems;

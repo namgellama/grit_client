@@ -21,8 +21,8 @@ const AuthPage = () => {
 
 	const { search } = useLocation();
 	const sp = new URLSearchParams(search);
-	const redirect =
-		sp.get("redirect") || user?.role === "Admin" ? "/dashboard/home" : "/";
+
+	const redirect = sp.get("redirect") ? `/${sp.get("redirect")}` : "/";
 
 	useEffect(() => {
 		if (user) {
@@ -39,10 +39,19 @@ const AuthPage = () => {
 				h="100vh"
 				objectFit="cover"
 				display={{ base: "none", xl: "block" }}
+				cursor="pointer"
+				onClick={() => navigate("/")}
 			/>
 			<Container w={{ base: "100%", xl: "50%" }} h="100vh">
 				<Flex direction="column" h="100%" justify="center">
-					<Image src={Logo} alt="Logo" w={12} alignSelf="center" />
+					<Image
+						src={Logo}
+						alt="Logo"
+						w={12}
+						alignSelf="center"
+						cursor="pointer"
+						onClick={() => navigate("/")}
+					/>
 					<Tabs
 						variant="solid-rounded"
 						colorScheme="blue"

@@ -1,9 +1,7 @@
-import {
-	useDeleteBagItemsMutation,
-	useGetBagItemsQuery,
-} from "@/app/features/bagItem/bagItemApiSlice";
 import { useCreateOrderMutation } from "@/app/features/order/orderApiSlice";
 import { useAppSelector } from "@/app/hooks";
+import { BagItem } from "@/app/interfaces/bagItem";
+import { OrderItemRequest } from "@/app/interfaces/order";
 import {
 	BagItems,
 	DeliveryForm,
@@ -15,6 +13,7 @@ import { checkoutSchema, FormFields } from "@/validations/checkoutValidation";
 import { Button, Flex, Spinner, useToast, VStack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -23,15 +22,13 @@ const CheckoutPage = () => {
 	const [deliveryCharge, setDeliveryCharge] = useState(0);
 	const [total, setTotal] = useState(0);
 	const { user } = useAppSelector((state) => state.auth);
-	const {
-		data: bagItems,
-		isLoading,
-		error,
-	} = useGetBagItemsQuery(user?.token ?? "");
 	const [createOrder] = useCreateOrderMutation();
-	const [deleteBagItems] = useDeleteBagItemsMutation();
 	const navigate = useNavigate();
 	const toast = useToast();
+	const [cookies, setCookie, removeCookie] = useCookies<
+		"bagItems",
+		{ bagItems: BagItem[] }
+	>(["bagItems"]);
 	const {
 		register,
 		handleSubmit,
@@ -43,16 +40,16 @@ const CheckoutPage = () => {
 	});
 
 	useEffect(() => {
-		if (bagItems?.length === 0) navigate("/");
-	}, [bagItems, navigate]);
+		if (cookies.bagItems?.length === 0) navigate("/");
+	}, [cookies.bagItems, navigate]);
 
 	useEffect(() => {
-		const result = bagItems?.reduce(
+		const result = cookies.bagItems?.reduce(
 			(acc, curr) => (acc += curr.unitTotalPrice),
 			0
 		);
 		setSubTotal(result!);
-	}, [bagItems]);
+	}, [cookies.bagItems]);
 
 	useEffect(() => {
 		const cityName = getValues("city");
@@ -76,8 +73,17 @@ const CheckoutPage = () => {
 	}, [errors.root]);
 
 	const onSubmit = async (order: FormFields) => {
+		const orderItems: OrderItemRequest[] = cookies.bagItems.map((x) => ({
+			productId: x.id,
+			quantity: x.quantity,
+			unitPrice: x.unitPrice,
+			unitTotalPrice: x.unitTotalPrice,
+			size: x.size,
+			color: x.color,
+		}));
+
 		const data = {
-			orderItems: bagItems!,
+			orderItems,
 			subTotal,
 			deliveryCharge,
 			total,
@@ -102,7 +108,7 @@ const CheckoutPage = () => {
 					token: user?.token,
 				}).unwrap();
 
-				await deleteBagItems(user?.token).unwrap();
+				removeCookie("bagItems");
 				navigate(`/orders/mine/${result.id}`);
 			}
 		} catch (error) {
@@ -151,11 +157,9 @@ const CheckoutPage = () => {
 				</VStack>
 
 				<BagItems
-					bagItems={bagItems}
+					bagItems={cookies.bagItems}
 					deliveryCharge={deliveryCharge}
 					total={total}
-					isLoading={isLoading}
-					error={error}
 				/>
 			</Flex>
 		</MyContainer>

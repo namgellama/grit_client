@@ -14,6 +14,15 @@ export interface OrderItem {
 	product: Product;
 }
 
+export interface OrderItemRequest {
+	quantity: number;
+	unitPrice: number;
+	unitTotalPrice: number;
+	size: string;
+	color: string;
+	productId: string;
+}
+
 export interface Address {
 	id: string;
 	addressLine1: string;
@@ -50,7 +59,7 @@ export interface Payment {
 }
 
 export interface OrderRequest {
-	orderItems: OrderItem[];
+	orderItems: OrderItemRequest[];
 	subTotal: number;
 	deliveryCharge: number;
 	total: number;

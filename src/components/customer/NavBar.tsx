@@ -1,7 +1,6 @@
-import { useGetBagItemsQuery } from "@/app/features/bagItem/bagItemApiSlice";
 import { CurrentUser } from "@/app/interfaces/auth";
 import { Logo } from "@/assets";
-import { DBBagItemsDrawer, MobileNavBar, Search } from "@/components";
+import { BagItemsDrawer, MobileNavBar, Search } from "@/components";
 import {
 	NavIcon,
 	NavLink,
@@ -22,6 +21,7 @@ import {
 	useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
+import { useCookies } from "react-cookie";
 import { AiOutlineMenu } from "react-icons/ai";
 import { FaShoppingBag, FaUser, FaUserCircle } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
@@ -51,9 +51,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const btnRef = useRef<HTMLButtonElement>(null);
-	const { data: dbBagItems } = useGetBagItemsQuery(user?.token ?? "", {
-		skip: user === null,
-	});
+
 	const [showSearch, setShowSearch] = useState(false);
 	const {
 		isOpen: isNavBarOpen,
@@ -61,6 +59,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 		onClose: onNavBarClose,
 	} = useDisclosure();
 	const navigate = useNavigate();
+	const [cookies] = useCookies(["bagItems"]);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -124,12 +123,10 @@ const NavBar = ({ user, handleLogout }: Props) => {
 									reference={btnRef}
 									icon={<FaShoppingBag />}
 									label="Shopping Bag"
-									onClick={() => {
-										user ? onOpen() : navigate("/auth");
-									}}
+									onClick={onOpen}
 								/>
 
-								{dbBagItems?.length! > 0 && (
+								{cookies.bagItems?.length! > 0 && (
 									<Badge
 										position="absolute"
 										bottom={4}
@@ -139,7 +136,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 										fontSize="xx-small"
 										as="span"
 									>
-										{dbBagItems?.length}
+										{cookies.bagItems?.length}
 									</Badge>
 								)}
 							</Flex>
@@ -214,7 +211,7 @@ const NavBar = ({ user, handleLogout }: Props) => {
 					</Box>
 				)}
 
-				<DBBagItemsDrawer
+				<BagItemsDrawer
 					isOpen={isOpen}
 					onClose={onClose}
 					btnRef={btnRef}

@@ -1,10 +1,5 @@
-import {
-	useCreateBagItemMutation,
-	useGetBagItemsQuery,
-	useUpdateBagItemMutation,
-} from "@/app/features/bagItem/bagItemApiSlice";
 import { useGetProductQuery } from "@/app/features/product/productApiSlice";
-import { useAppSelector } from "@/app/hooks";
+import { BagItem } from "@/app/interfaces/bagItem";
 import { ColorBox, ErrorMessage, MyContainer, SizeBox } from "@/components";
 import {
 	Badge,
@@ -15,25 +10,23 @@ import {
 	Image,
 	Skeleton,
 	Text,
-	useToast,
 	VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useParams } from "react-router-dom";
 
 const ProductDetailPage = () => {
 	const { id } = useParams();
-	const toast = useToast();
 	const { data: product, isLoading, error } = useGetProductQuery(id ?? "");
-	const { user } = useAppSelector((state) => state.auth);
 	const [currentImage, setCurrentImage] = useState("");
 	const [currentColor, setCurrentColor] = useState("");
 	const [currentSize, setCurrentSize] = useState("");
 	const [isTransitioning, setIsTransitioning] = useState(false);
-	const { data: bagItems } = useGetBagItemsQuery(user?.token ?? "");
-	const [addToBag] = useCreateBagItemMutation();
-	const [updateBag] = useUpdateBagItemMutation();
-	const navigate = useNavigate();
+	const [cookies, setCookie] = useCookies<
+		"bagItems",
+		{ bagItems: BagItem[] }
+	>(["bagItems"]);
 
 	const uniqueColorVariants = Array.from(
 		new Map(
@@ -67,52 +60,39 @@ const ProductDetailPage = () => {
 	};
 
 	const handleAddToBag = async () => {
-		if (user) {
-			const item = {
-				productId: product?.id,
-				unitPrice: product?.sellingPrice,
-				size: currentSize,
-				color: currentColor,
-				quantity: 1,
-				unitTotalPrice: product?.sellingPrice,
-			};
+		const item = {
+			id: product?.id ?? "",
+			name: product?.name ?? "",
+			unitPrice: product?.sellingPrice ?? 0,
+			size: currentSize,
+			color: currentColor,
+			quantity: 1,
+			image: currentImage,
+			unitTotalPrice: product?.sellingPrice ?? 0,
+			stock:
+				product?.variants.find(
+					(variant) =>
+						variant.color === currentColor &&
+						variant.size === currentSize
+				)?.stock ?? 0,
+		};
 
-			try {
-				const bagItem = bagItems?.find(
-					(bagItem) =>
-						bagItem.productId === item.productId &&
-						bagItem.size === item.size &&
-						bagItem.color === item.color
-				);
+		const currentBagItems = cookies.bagItems || [];
 
-				if (bagItem) {
-					await updateBag({
-						id: bagItem.id,
-						data: {
-							quantity: bagItem.quantity + 1,
-							unitTotalPrice:
-								bagItem.unitPrice * (bagItem.quantity + 1),
-						},
-						token: user?.token ?? "",
-					}).unwrap();
-				} else {
-					await addToBag({
-						data: item,
-						token: user?.token ?? "",
-					}).unwrap();
-				}
-			} catch (error: any) {
-				toast({
-					title: "Something went wrong",
-					duration: 1200,
-					isClosable: true,
-					status: "error",
-					position: "top",
-				});
-			}
+		const existingItemIndex = currentBagItems.findIndex(
+			(bagItem) =>
+				bagItem.id === item.id &&
+				bagItem.size === item.size &&
+				bagItem.color === item.color
+		);
+
+		if (existingItemIndex !== -1) {
+			currentBagItems[existingItemIndex] = item;
 		} else {
-			navigate("/auth");
+			currentBagItems.push(item);
 		}
+
+		setCookie("bagItems", currentBagItems, { path: "/" });
 	};
 
 	return (
