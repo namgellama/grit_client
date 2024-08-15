@@ -78,7 +78,12 @@ export const orderApiSlice = apiSlice.injectEndpoints({
 					Authorization: `Bearer ${token}`,
 				},
 			}),
-			invalidatesTags: ["MyOrders"],
+			invalidatesTags: [
+				"MyOrders",
+				"Product",
+				"Products",
+				"AdminProduct",
+			],
 		}),
 
 		updateOrder: builder.mutation<
